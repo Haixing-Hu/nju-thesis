@@ -36,15 +36,15 @@
 % 导师所在学校或机构，此属性可选，默认值为``南京大学''。
 \supervisorinstitute{南京大学}
 % 答辩委员会主席
-\chairman{张三丰\hspace{1em}教授}
+\chairman{张三丰~~教授}
 % 第一位评阅人
-\reviewera{阳顶天\hspace{1em}教授}
+\reviewera{阳顶天~~教授}
 % 第二位评阅人
-\reviewerb{张无忌\hspace{1em}副教授}
+\reviewerb{张无忌~~副教授}
 % 第三位评阅人
-\reviewerc{黄裳\hspace{1em}教授}
+\reviewerc{黄裳~~教授}
 % 第四位评阅人
-\reviewerd{郭靖\hspace{1em}研究员}
+\reviewerd{郭靖~~研究员}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -61,7 +61,7 @@
 % 论文作者入学年份（年级）
 \grade{2010}
 % 导师姓名职称
-\supervisor{陈近南\hspace{2em}教授}
+\supervisor{陈近南~~教授}
 % 论文作者的学科与专业方向
 \major{计算机软件与理论}
 % 论文作者的研究方向
@@ -107,6 +107,7 @@ Based on the Small World Theory}
 
 % 制作封面命令
 \maketitle
+
 % 制作英文封面命令
 \makeenglishtitle
 
@@ -119,11 +120,15 @@ Based on the Small World Theory}
 
 % 中文摘要
 \begin{abstract}
-这里是中文摘要。这里是中文摘要。这里是中文摘要。这里是中文摘要。这里是中文摘要。
-这里是中文摘要。这里是中文摘要。这里是中文摘要。这里是中文摘要。
+% 中文摘要首行必须为空行，否则第一段不能首行缩进两字符
 
-这里是中文摘要。这里是中文摘要。这里是中文摘要。这里是中文摘要。这里是中文摘要。
-这里是中文摘要。这里是中文摘要。这里是中文摘要。
+复杂网络的研究可上溯到20世纪60年代对ER网络的研究。90年后代随着Internet
+的发展，以及对人类社会、通信网络、生物网络、社交网络等各领域研究的深入，
+发现了小世界网络和无尺度现象等普适现象与方法。对复杂网络的定性定量的科
+学理解和分析，已成为如今网络时代科学研究的一个重点课题。
+
+在此背景下，由于云计算时代的到来，本文针对面向云计算的数据中心网络基础
+设施设计中的若干问题，进行了几方面的研究。………………
 
 % 中文关键词。关键词之间用中文全角分号隔开，末尾无标点符号。
 \keywords{小世界理论；网络模型；数据中心}
@@ -131,6 +136,7 @@ Based on the Small World Theory}
 
 % 英文摘要
 \begin{englishabstract}
+% 英文摘要首行必须为空行，否则第一段不能首行缩进两字符
 
 This is English abstract. This is English abstract. This is English
 abstract. This is English abstract.This is English abstract. This is English
@@ -158,386 +164,331 @@ abstract. This is English abstract. This is English abstract.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \mainmatter
 
-\chapter{基本使用帮助}\label{C:intro}
+\chapter{绪论}\label{chapter_introduction}
+
+\section{研究背景}
+
+在分布式网络领域，沿着高性能集群、普世计算、网格计算的方向，现已走入云
+计算时代。
+
+云计算对信息技术架构造成了越来越大的影响。例如，借助Amazon EC2云平台，
+用户借助其基础设施，可以十分方便的部署各类应用，以支持企业服务需求。用
+户可以按需购买计算资源，网络带宽，存储空间等各类资源以支持他们的业务需
+求，并在业务完成之后迅速的归还这些资源。通过云技术，用户可以集中在他们
+擅长的核心业务之中，而不会被诸如硬件购买、安装系统、网络设置、备份和安
+全等等问题干扰。
+
+\section{研究目的与意义}
+
+\subsection{现有解决方法}
+
+在工程实践领域，目前在面向云计算的实际应用中，很少有在网络模型上有所突
+破的实际案例。以Amazon EC2，Google等云计算实现通常的解决方案为采购现有
+的成熟网络设备，以常规方法去组建网络，在底层网络、服务器节点、操作系统
+中都不做任何特殊处理。通过降低单个硬件成本，在单元资金投入的情况下采购
+更多的硬件，以数量获取性能，以冗余换取可靠性。
+
+根据Google早期披露的数据中心信息，Google以集装箱为标准单位，一个集装箱
+内容纳1160台服务器，一个数据中心将容纳数万服务器节点。在运行的第一年中，
+有1千台机器故障；数千块硬盘损坏；一个PDU损坏导致500-1000台服务器下线6小
+时；一次网络重连导致5\%的节点下线2天；20个机柜故障导致40-80台节点下线；
+大量的小问题导致30秒左右的卡顿等等\cite{Dean2009}。
+
+另一方面，在学术领域，在这方面有许多相关研究。大致上可分为两派，其一以
+改良为主，如针对扩展性问题，Fat-tree\cite{al2008scalable}通过增加交换机
+的聚合端口，创造更多的上层交换节点，从而拓宽了聚合带宽，缓解了扩展的瓶
+颈问题；针对动态性问题，VL2\cite{greenberg2009vl2}提出了双层虚拟网络结
+构，允许虚拟机在保持网络配置不变的情况下，在物理节点中迁移；针对安全性
+问题，Amazon EC2\cite{varia2010architecting} \cite{hu2011review}通过
+Security Group概念，以网络虚拟化的形式实现网络的物理隔离；针对广域网中
+面向海量用户所导致的流量激增与路由膨胀问题，通过
+CDN\cite{pallis2006insight}，以大量部署基础设施缓存数据来提高服务质量。
+
+另一派则以革新为主要目的，以OpenFlow为代表，以重新设计整个网络协议为出
+发点。在实现上主要有基于CPU的软件仿真实现，如
+Click\cite{kohler2000click}，Quagga\cite{QUAGGA}，VDE\cite{VDE},基于
+FPGA可编程虚拟网络设备，如RouteBricks\cite{dobrescu2009routebricks}，
+NetFPGA\cite{lockwood2007netfpga}，以及GPU等特殊硬件，如
+PacketShader\cite{han2010packetshader}等。
+
+\subsection{现有问题与不足}
+
+从工程实现的角度去看，现有的实施方案依然以传统模式构建底层网络，存在难
+以满足廉价、高可靠性、高可用性、灵活性等需求的问题，只能以应用层冗余的
+形式进行缓解，难以彻底解决：
+
+\begin{enumerate}
+\item 网络结构中存在许多单点节点，对性能、扩展性造成瓶颈，同时单点故障
+  会引起大面积的网络故障。
+\item 网络结构的扩展性需要付出子网隔离的代价，造成管理复杂，并且与灵活
+  性冲突。
+\item 网络上层存在高聚合带宽，需要高端网络设备，因而随着网络规模的增大，
+  组网成本也会指数上升。
+\end{enumerate}
+
+虽然以大量设备去缓存复用等各种措施可以缓解上述问题。但解决问题的出发点
+并不是立足于问题本身，而是堆积资源强行绕开问题的一直规避手段。站在工程
+实践的角度而言，措施是有效的、风险和问题是可控的，但本文认为其核心问题
+存在改善的空间，针对其改进是更有意义的改善方式。
+
+\subsection{中心观点与思想}
+
+云计算在概念上通常被分为IaaS、PaaS、SaaS几个层面。但透过分类去理解其本
+质，可认为是上世纪70年代基于大型计算机的中心控制型瘦客户端终端模式，在
+如今技术水平上的一种新的表达，是在技术发展道路中，螺旋上升的结果。
+
+与瘦客户端相比，云计算在设计结构上存在一定的相似性。
+
+\begin{enumerate}
+\item 中心控制的模式：通过中心的大规模硬件提供统一的计算，可大大降低管理成本，提
+  高硬件资源利用率，同时降低客户端的硬件成本需求。例如Nvidia推出Georce GRID平台
+  \cite{NVIDIAGRID}，推出了GaaS\footnote{Gaming as a Service}概念。将
+  GPU放置在云端，使得用户不需要再不断购买升级显卡，并可在更为广泛的终端（包括手机、
+  平板、智能电视）和地点体验最新的游戏。
+\item 数据集中：由于瘦客户端的关系，数据都集中存储在中心，可对数据提供
+  可靠的保护，并且通过按需调用的实现方式，降低对网络带宽的需求。
+\end{enumerate}
+
+在设计思路上，两者都为了降低管理成本和硬件成本、以低能耗、高弹性等需求
+为设计目标。随着技术的进步，云计算在具体实现形态上与传统的大型机也有很
+大的不同：
+
+一方面，云中心不再是传统的一台大型机，而是用大量廉价计算节点的互联来提
+供海量资源。云计算更强调资源规模的无缝、平滑扩展，以及高可靠性，无单点
+故障问题。另一方面，云计算时代的终端，也具备相当计算能力。随着web2.0的
+整合，还有向胖客户端和智能终端发展的趋势。
+
+总而言之，云计算在大框架中是传统的中心控制／终端的模式，但在中心与终端
+两方面，都引入分布式技术加以改良。核心的思路是在低成本的前提下做到高可
+靠性、高灵活性和高伸缩性。因此，云计算并不仅仅以数量换性能的表象，本质
+上为低成本高性能，追求高能效比，并在实现层面讲究可实现性和可操作性。
+
+\section{研究的应用背景}
+
+云计算作为分布式技术的当前表现形式，通过将众多节点资源整合，以冗余、去
+中心化的分布式模式，实现传统技术中需要大型机才能解决的海量信息问题。一
+言而概之，“人多力量大”。
+
+但随着节点数目的增多，问题的重点将逐步转换为如何对大量节点进行高效互联。图
+\ref{fig:traditional_network}所示为传统IaaS云中心网络结构的一部分。通过BR边界路
+由器，AR接入路由器构建数据中心的主干；核心交换机和接入交换机S，构成二层交换网络
+层，大量的服务器节点通过二层交换机被最终接入整个网络。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width= 0.7\textwidth]{njulogo.eps}\\
+  \caption{传统网络结构}\label{fig:traditional_network}
+\end{figure}
+
+在上述传统网络中，当节点总数达到数千乃至万数量级时，上层链路的聚合带宽
+将不断提高，从而对核心交换机、接入路由器、边界路由器的指标提出了极高的
+要求。以至于少数核心网络设备，成为整个网络中的高价格、高性能单点。一方
+面与原本追求低成本、分布化、去中心化的云技术设计理念背道而驰，另一方面
+也降低了网络的健壮性。因而本文所做工作对数据中心的网络基础设施而言，具
+有较大应用价值。
+
+\chapter{基于小世界模型的网络模型实现:SIDN}\label{chapter_smallworld}
+
+\section{小世界现象}
+
+生活中，常出现初次见面的陌生人却拥有双方都认识的共同熟人，于是大家时常
+会感叹：“这世界真小！”。这种现象被称为``小世界现象''，后又称为``六度
+分割理论''。
+
+1909年，现代无线电之父Guglielmo Marconi在其诺贝尔奖致辞中讨论了覆盖整个地球所需
+的无线电中继站数目，并根据他的实验结果计算出平均需要$5.83$（近似为$6$）个中继站
+\cite{marconi1909nobel}。这个结论，被认为是``六度分割理论''中的常数$6$的最早出处
+\cite{barabasi2003linked}。
+
+1929年，匈牙利作家Frigyes Karinthy发表了一部短篇小说集《Everything is
+  Different》。其中一篇名为《Chain-Links》的小说以抽象的、概念性的和虚
+构的方式研究了网络理论领域的很多问题，而这些问题使得未来几代的数学家、
+社会学家和物理学家都为之着迷\cite{newman2006structure,
+  barabasi2003linked}。Karinthy认为，随着通讯技术和交通技术的发展，人际
+关系网会变得越来越来大，扩张得越来越远，整个世界将因此而``缩小''。他认
+为，虽然人类个体之间的物理距离可能很远，但人类社交网络密度的增加使得人
+类个体之间的社会性距离变得非常小。根据这个假设，Karinthy的小说的主角相
+信：``任何两个人之间可以通过不超过五个中间人相联系''。Karinthy的想法直
+接或间接地影响了早期的社交网络理论的研究，他被认为是六度分隔(six
+degrees of separation)理论的最早提出者\cite{barabasi2003linked}。
+
+1961年，Michael Gurevich在社会学家Ithiel de Sola Pool的指导下完成了他的
+博士论文，对社交网络进行了实验性的研究。随后，数学家Manfred Kochen与
+Sola Pool一道在他们的手稿《Contacts and Influences》中对这些实验结果做
+了分析，发现在美国人口中，任意两个人之间通常只需不超过两个中间人即可互
+相联系\cite{pool1978}。1973年他们又利用计算机，基于Gurevich的数据，用
+Monte Carlo法做了模拟，并证实了该结论\cite{pool1978}，从而为心理学家
+Stanley Milgram后来的发现打下了基础。
+
+
+\section{网络结构的重要指标}
+
+在刻画复杂网络结构的统计特性上有三个重要的指标：平均路径长度（average
+  path length）、聚类系数（clustering coefficient）和度分布（degree
+  distribution）。事实上，Watts和Strogatz提出小世界网络模型的初衷，就是
+想建立一个既具有类似随机图的较小的平均路径长度，又具有类似规则网络的较
+大的聚类系数的网络模型。
+
+\subsection{平均路径长度}
+
+\begin{definition}[节点之间的距离]
+网络中两个节点$i$和$j$之间的距离(distance)$d_{ij}$定义为连接这两个节点
+的最短路径上的边数。
+\end{definition}
+
+\begin{definition}[直径]
+网络中任意两个节点之间的距离的最大值称为该网络的直径，记为$D$，即
+\begin{equation}\label{eq:dimension}
+    D = \max_{i,j} d_{ij}
+\end{equation}
+\end{definition}
+
+\begin{definition}[平均路径长度]
+网络的平均路径长度$L$定义为任意两个节点之间的距离的平均值，即
+\begin{equation}\label{eq:avarage_path_lentgh}
+    L = \frac{2}{N(N+1)}\sum_{i\geq j}d_{ij}
+\end{equation}
+其中$N$为网络节点数。网络的平均路径长度也称为网络的特征路径长度。
+\end{definition}
+
+注意，为了便于数学处理，在公式\eqref{eq:avarage_path_lentgh}中包含了节
+点到其自身的距离（该距离为零）。如果不考虑节点到其自身的距离，那么公式
+\eqref{eq:avarage_path_lentgh}的右端需要乘以因子$(N+1)/(N-1)$。在实际应
+用中，该差别可以忽略不计。
+
+\subsection{聚类系数}
+
+在图论中，聚类系数(clustering coefficient)是用来描述一个图中的顶点之间
+结集成团的程度的系数。具体来说，是一个点的邻接点之间相互连接的程度。许
+多大规模的实际网络都具有明显的聚类效应。例如生活社交网络中，你的朋友同
+时也是朋友的概率会随着网络规模的增加而趋向于某个非零常数。这意味着这些
+实际的复杂网络并不是完全随机的，而是在某种程度上具有类似于社会关系网络
+中“物以类聚，人以群分”的特性。
+
+集聚系数分为整体与局部两种。整体集聚系数可以给出一个图中整体的集聚程度
+的评估，而局部集聚系数则可以测量图中每一个结点附近的集聚程度。
+
+\begin{definition}[整体聚类系数]
+整体集聚系数的定义建立在闭三点组（邻近三点组）之上。假设网络中有一部分
+节点是两两相连的，那么可以找出很多个“三角形”，其对应的三点两两相连，
+称为闭三点组。除此以外还有开三点组，也就是之间连有两条边的三点（缺一条
+  边的三角形）。这两种三点组构成了所有的连通三点组。整体集聚系数定义为
+一个网络中所有闭三点组的数量与所有连通三点组（无论开还是闭）的总量之比，
+即
+\[
+    C_{total}=\frac{3\times G_{\triangle}}{3 \times G_{\triangle} + G_{\wedge}}
+\]
+其中$C_{total}$表示网络的整体聚类系数，$G_{\triangle}$表示该网络中闭三
+点组的个数，$G_{\wedge}$表示该网络中开三点组的个数\cite{luce1949method}。
+\end{definition}
+
+对图中具体的某一个点，它的局部集聚系数$C_i$表示与它相连的点抱成团（完全
+  子图）的程度。Watts与Strogatz在1998年的论文
+\cite{watts1998smallworld}中首次引入了这个概念，用以判别一个图是否是小
+世界网络。
+
+\begin{definition}[局部聚类系数]
+假设网络中的一个节点$i$有$k_i$条边与其他节点相连，这$k_i$个节点称为节点
+$i$的邻居。显然，在这$k_i$个节点之间最多可能有$k_i(k_i-1)/2$条边。而这
+$k_i$个节点之间实际存在的边数$E_i$和总的可能的边数$k_i(k_i-1)/2$之比就
+定义为节点$i$的聚类系数(clustering coefficient)$C_i$，即
+\begin{equation}\label{eq:clustering_coefficient}
+    C_i = \frac{2E_i}{k_i(k_i-1)}
+\end{equation}
+从几何特性上看，上式的一个等价定义为：
+\begin{equation}\label{eq:clustering_coefficient_triangle}
+    C_i = \frac{\text{与节点$i$相连的三角形的数量}}{\text{与节点$i$相连
+        的三元组的数量}}
+\end{equation}
+其中，与节点$i$相连的三元组是指由节点$i$和其两个邻居节点构成的组合。
+\end{definition}
+
+知道了一个图里的每一个顶点的局部集聚系数后，可以计算整个图的平均集聚系
+数。这个概念也是Watts与Strogatz在1998年的论文
+\cite{watts1998smallworld}中引入的：
+
+\begin{definition}[平均聚类系数]
+平均聚类系数定义为所有顶点的局部集聚系数的算术平均数，即
+\begin{equation}
+    \bar{C} = \frac{1}{n}\sum_{i=1}^{n} C_i.
+\end{equation}
+\end{definition}
+
+
+\chapter{结论}\label{chapter_concludes}
+
+本文在第\ref{chapter_smallworld}章中，通过考虑数据中心网络布局构建中的
+最大度限制问题，提出了符合数据中心网络基本要求的DS小世界模型，并分析了
+它的性质。随后提出SIDN，将DS模型映射到具体的网络结构中，并分析了所构成
+网络的平均直径、网络总带宽、对故障的容错能力等各项网络性能。
+
+分析与仿真实验证明，SIDN网络具有很好的扩展能力，网络总带宽与网络规模成
+近似线性增长的关系；具有很强的容错能力，链路损坏与节点损坏几乎无法破坏
+网络的联通性，故障率对网络性能的影响与破坏节点/链路占总资源比率线性相关。
+
+随后在第\ref{chapter_scalefree}章中，分析了无尺度网络在数据中心网络构建
+应用中的理论方面问题。对Scafida \cite{gyarmati2010scafida}文中所述在最
+大度限制的情况下运用BA算法构造的网络并不会损失无尺度性质的观点，进行了
+深入的分析，并指出了该论点的局限性。
+
+在给出了在引入节点最大度限制之后，利用分治和递归的思想，对无尺度网络
+进行多层构建，对所构造的网络进行度-度相关性，以及聚类性分析。
+
+
+\subsection{测试表格}
+
+\begin{table}
+  \centering
+  \begin{tabular}{cccp{38mm}}
+    \toprule
+    \textbf{文档域类型} & \textbf{Java类型} & \textbf{宽度(字节)} & \textbf{说明} \\
+    \midrule
+    BOOLEAN  & boolean &  1  & \\
+    CHAR     & char    &  2  & UTF-16字符 \\
+    BYTE     & byte    &  1  & 有符号8位整数 \\
+    SHORT    & short   &  2  & 有符号16位整数 \\
+    INT      & int     &  4  & 有符号32位整数 \\
+    LONG     & long    &  8  & 有符号64位整数 \\
+    STRING   & String  &  字符串长度  & 以UTF-8编码存储 \\
+    DATE     & java.util.Date & 8 & 距离GMT时间1970年1月1日0点0分0秒的毫秒数 \\
+    BYTE\_ARRAY & byte$[]$ & 数组长度 & 用于存储二进制值 \\
+    BIG\_INTEGER & java.math.BigInteger & 和具体值有关 & 任意精度的长整数 \\
+    BIG\_DECIMAL & java.math.BigDecimal & 和具体值有关 & 任意精度的十进制实数 \\
+    \bottomrule
+  \end{tabular}
+  \caption{测试一下表格}\label{table:test}
+\end{table}
+
+表\ref{table:test}用于测试表格。随后分析了无尺度网络构造过程中，交换机节点与数据
+节点的角色区别，分析了两者在不同比率下形成的网络形态，以及对网络性能造成的影响。
+
+通过理论分析和仿真实验，分析并找出比率因子q的最佳取值。此外，无尺度现象
+的引入提高了网络的聚类系数，从而在不失灵活性可靠性的基础上，进一步提升
+了网络的性能。
+
+在\ref{chapter_random}章中，将关注点转移到交换机本身。由于图论难以描述
+数据中心网络中的交换设备，因此放弃基于图的抽象模型，转而基于多维簇划分
+的思想，提出并设计了WarpNet网络模型。
+
+该网络模型突破了基于图描述的局限性，并对网络的带宽等指标进行理论分析并
+给出定量描述。最后对比了理论分析、仿真测试结果，并在实际物理环境中进系
+真实部署，通过6节点的小规模实验以及1000节点虚拟机的大规模实验，表明该模
+型的理论分析、仿真测试与实际实验吻合，并在网络性能、容错能力、伸缩性灵
+活性方面得到了进一步的提升。
+
+在\ref{chapter_experiments}章中，针对网络模型研究这一类工作的共性，设计
+构造通用验证平台系统。以海量虚拟机和虚拟分布式交换机的形式，实现了基于
+少量物理节点，对大规模节点的模拟。其模拟运行的过程与真实运行在实现层面
+完全一致，运行的结果与真实环境线性相关。除为本文所涉若干网络模型提供验
+证外，可进一步推广到更为广泛的领域，为各种网络模型及路由算法的研究工作，
+提供分析、指导与验证。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%                           附录
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-NJUthesis~宏包针对南京大学对学位论文格式的规定制作的~\LaTeX{}~宏包，
-其目的是简化学位论文的撰写，使得论文作者可以将精力集中到论文的内容上而不是
-浪费在版面设置上。同时宏包在符合学位论文撰写要求的基础上尽可能地进行美化，
-其中还参考了出版界的一些排版规范。
-
-\section{系统要求}
-
-\texttt{NJUthesis}~宏包可以在目前大多数的~\TeX{}~系统中使用，例如~C\TeX{}、
- ~MiK\TeX{}、~te\TeX{}、~fp\TeX{}。
-
-\texttt{NJUthesis}~宏包通过~\texttt{ctex}~宏包来获得中文支持
-。~\texttt{ctex}~ 宏包提供了一个统一的中文~\LaTeX{}~文档框架，底层支持~CCT~
-和~CJK~两种中文~\LaTeX{}~系统。最新的~\texttt{ctex}~宏包可以从~
-\url{http://www.ctex.org}~网站下载。
-
-此外，~\texttt{NJUthesis}~宏包还使用了宏包~amsmath、~amsthm、~amsfonts、
- ~amssymb、~bm~、~geometry~、~enumitem~和~hyperref。目前大多数的~\TeX{}~系统
-中都包含有这些宏包。即使您系统中的宏包不全，您也可以到~CTAN~下载到这些宏包。
-
-最新的~C\TeX{}~套装（2.4.1~以上版本）中包含了以上列出的各种宏包，用户无需额
-外的设置即可使用。
-
-\section{下载与安装}
-
-NJUthesis~宏包的最新版本可以从~\url{http://njuthesis.googlecode.com/}~
-网站或者~
-\url{http://share.solrex.org/njuthesis/}~网站下载。
-
-对此宏包最简单的使用方法是直接修改~template.tex~和~template.bib~文件。如果您
-仅仅想安装宏包，可以将宏包文件放置到~\TeX{}~系统的~localtexmf/tex/latex/njuthesis~目录下，
-然后刷新~\TeX{}~系统的文件名数据库。
-
-关于安装过程的问题可以参考~C\TeX{}-FAQ~以及其他~\LaTeX{}~教材。
-
-\section{本模板打包的文件}
-
-关键文件：
-
-\begin{description}
-\item[NJUthesis.cls] 文档类文件，是~NJUthesis~宏包的主要文件，用户在文件头
-  ~\\documentclass~声明文档类为~NJUthesis~即可使用此文档类格式化文档。
-  一般不建议用户手工修改该文件。
-
-\item[NJUthesis.cfg] 配合文档类的控制文件，里面主要是一些字符串的定义。
-  用户可以编辑修改该文件。
-
-\item[template.tex] 随宏包包含的一个模板文件，该模板文件指示了该如何使用
-  宏包提供的文档类。用户可以使用该文件作为毕业论文源文件的很好的开端。
-
-\item[template.bib] 随宏包包含的模板文件相关的~BibTeX~文献数据库，当用户
-  使用~BibTeX~时可以以其为一个很好的开端；当用户使用自定义的参考文献时，
-  可以在模板文件中注释掉对其的引用并忽略该文件的存在。
-\end{description}
-
-辅助文件：
-
-\begin{description}
-\item[NJUthesis.bst] 默认的~BibTeX~样式文件，如果想修改样式，例如使用
-  ~IEEEtran.bst~作为~BibTeX~样式，只需要将~IEEEtran.bst~更名为
-  ~NJUthesis.bst~即可。
-
-\item[NJUthesis.pdf] 宏包帮助文档，其中有对宏包的说明以及对宏包源文件的
-  完全注释，适合高级用户修改文档类文件时参考。
-\end{description}
-
-\section{编译方法}
-
-下面以编译模板文件~template.tex~生成~template.pdf~为例，给出在不同情况下
-应该使用的编译命令流程。
-
-\subsection{Windows~平台下}
-
-\subsubsection{标准编译命令}
-
-如果您使用~BibTeX~管理参考文献，并且将自己的参考文件条目均添加到
-~tempalte.bib~中，编译命令应该为：
-
-\begin{Verbatim}[frame=lines]
-set ARTICLE=template
-latex %ARTICLE%.tex
-bibtex %ARTICLE%
-latex %ARTICLE%.tex
-gbk2uni %ARTICLE%
-latex %ARTICLE%.tex
-dvipdfmx %ARTICLE%.dvi
-pause
-\end{Verbatim}
-
-其中，bibtex~命令完成对参考文献的处理，gbk2uni~命令完成对~pdf~书签编码的
-处理，latex~命令生成~dvi~文件，dvipdfmx~命令生成~pdf~文件。如果您修改了
-模板文件名，例如将~template.tex~修改成~thesis-yang.tex~，那么您只需将第
-一句中的变量定义修改成~thesis-yang~即可。
-
-您可以将上面的命令保存成一个文件（并且建议这样做），例如~make.bat~，
-这样每次编译时双击该文件，
-或者在该目录的~Windows~命令行下输入~make~即可完成编译。
-
-\subsubsection{不使用~BibTeX}
-
-尽管我们强烈建议您使用~BibTeX~管理参考文献，如果您不使用~BibTeX~而是
-自己手写参考文献条目，那么您可以使用以下方式编译模板。
-
-首先在模板文件~template.tex~中注释掉引用~BibTeX~数据库的语句，即：
-
-\begin{Verbatim}[frame=lines]
-\bibliography{template}
-\end{Verbatim}
-
-\noindent 并加入手写的参考文献条目。
-
-其次使用下面命令编译模板文件：
-\begin{Verbatim}[frame=lines]
-set ARTICLE=template
-latex %ARTICLE%.tex
-latex %ARTICLE%.tex
-gbk2uni %ARTICLE%
-latex %ARTICLE%.tex
-dvipdfmx %ARTICLE%.dvi
-pause
-\end{Verbatim}
-
-\subsubsection{使用~pdflatex~命令}
-
-我们强烈不建议这样做，主要原因是本模板中文封面中的南京大学校徽和毛笔校名均
-使用的是~eps~图片，使用~pdflatex~无法对其进行正常处理。如果您希望使用
-~pdflatex~，那么您至少需要将这两张~eps~图片转成~jpg, png~或者~pdf~图片。
-
-出于对矢量图的偏好，我们目前不愿意提供与~pdflatex~兼容的图片格式，也不提供
-~pdflatex~的编译流程，因此您需要自己处理与~pdflatex~有关的兼容问题。
-
-\subsubsection{清理垃圾文件}
-
-latex~编译时会生成很多垃圾文件，下面的命令可以清理除~pdf~之外的垃圾文件，
-您可以将其保存成一个~clean.bat~的批处理文件，即可双击执行。
-
-\begin{Verbatim}[frame=lines]
-del /Q *.aux *.toc *.lon *.lor *.lof *.ilg *.idx *.ind
-del /Q *.out *.log *.exa *.nav *.snm *.bbl *.blg *.spl
-del /Q *.lot *.bak *~ *.dvi *.ps
-pause
-\end{Verbatim}
-
-如果想同时清除~pdf~文件，您可以在后面加上~*.pdf~，并保存成~dist-clean.bat~
-的批处理文件。
-
-\subsubsection{使用~cygwin~时的~Makefile}
-
-在~Windows~下使用~cygwin~时，用~Makefile~来对项目进行编译是再自然不过的想法。
-下面给出一个编译本模板可以使用的~Makefile。值得注意的是~Makefile~的缩进需要
-强制使用制表符。
-
-\begin{Verbatim}[frame=lines]
-ARTICLE=template
-ARTICLE_SRC=$(ARTICLE).tex $(ARTICLE).bib CASthesis.cfg
-IMAGES=
-
-all: article
-
-article: $(ARTICLE).pdf
-
-$(ARTICLE).pdf: $(ARTICLE_SRC) $(IMAGES)
-	latex $(ARTICLE).tex
-	bibtex $(ARTICLE)
-	latex $(ARTICLE).tex
-	gbk2uni $(ARTICLE)
-	latex $(ARTICLE).tex
-	dvipdfmx $(ARTICLE).dvi
-
-clean:
-	rm -f *.aux *.toc *.lon *.lor *.lof *.ilg *.idx *.ind
-	rm -f *.out *.log *.exa *.nav *.snm *.bbl *.blg *.spl
-	rm -f *.lot *.bak *~ *.dvi *.ps
-
-distclean: clean
-	rm -f *.pdf
-\end{Verbatim}
-
-\subsection{Linux~平台下}
-
-Void.
-
-\section{问题反馈}
-
-用户在使用中遇到问题、需要增加某种功能或者提供一个~patch，都可以到本项目的
-~Issue~列表中提出，Issue~列表的地址在：
-
-\begin{center}
-\url{http://code.google.com/p/njuthesis/issues/list}
-\end{center}
-
-欢迎大家反馈自己的使用情况，使我们可以不断改进宏包，但是在提问前请最好检查
-自己使用的是否为最新版本，以及列表中类似问题是否已经被提出。总之，谢谢您的
-支持！
-
-\chapter{论文撰写}
-
-\section{文档类选项}
-
-NJUthesis~文档类提供有以下一些选项：
-
-\begin{description}
-
-\item[phd/master] 当选择~phd~时，生成南大博士论文，包含国家图书馆格式的封面，
-但不包括书脊，书脊需要单独制作；选择~master~时，生成南大硕士论文。
-
-\item[oneside/twoside] 当选择~oneside~时，生成单面打印格式论文；当选择
-~twoside~时，生成双面打印格式论文。双面打印格式会将封面、摘要起始页、
-章起始页全部放在奇数页上。
-
-\item[dvipdfm/dvips/pdflatex] 兼容的编译命令选项，最好使用默认的~dvipdfm。
-如果您对默认的命令有意见，那么我们认为您充分了解这几个命令的不同，那么您
-足以自己修改图片格式和决定编译流程，所以使用其它选项时请不要完全使用本文
-中的帮助。
-
-\end{description}
-
-\section{封面和摘要页的字符串}
-
-\texttt{NJUthesis}~宏包的设置都保存在~\texttt{NJUthesis.cfg}~文件中。用户可
-以在~\texttt{.tex}~中通过宏包提供的命令修改设置。对于常用的设置修改，如培养
-单位名称、专业名称等，可以直接在~\texttt{NJUthesis.cfg}~文件中进行。各培养单
-位可以修改后提供本单位统一的~\texttt{NJUthesis.cfg}~文件供本单位用户使用。
-
-\section{内容撰写}
-
-请阅读文献《\href{http://mirror.ctan.org/info/lshort/english/lshort.pdf}{The Not So Short Introduction to \LaTeXe{}}》
-~\cite{Oetiker2008}，或者其有点儿老的中文翻译版《\href{http://mirror.ctan.org/info/lshort/chinese/lshort-zh-cn.pdf}{一份不太简短的~\LaTeXe{}~介绍}》\cite{lshort-cn}。
-
-\section{插图}
-
-请阅读文献《\href{ftp://ftp.tex.ac.uk/tex-archive/info/epslatex.pdf}{Using Imported Graphics in \LaTeX{} and pdf\LaTeX{}}》
-~\cite{Reckdahl2006}，或者其有点儿老的中文翻译版《\href{http://www.ctex.org/documents/latex/graphics/}{\LaTeXe{} 插图指南}》
-~\cite{Wang1997}。
-
-\section{数学公式}
-
-请阅读文献《The LaTeX Companion》第~8~章``\href{http://media.cism.it/attachments/ch8.pdf}{Higher Mathematics}''\cite{Goossens1997}。
-
-
-\section{参考文献}
-
-本节主要介绍参考文献的格式，在~NJUthesis~中控制参考文献的主要有两个
-地方：
-
-\begin{verbatim}
-\RequirePackage[sort&compress, numbers]{natbib}
-\end{verbatim}
-
-\noindent 和
-
-\begin{verbatim}
-\bibliographystyle{NJUthesis}
-\end{verbatim}
-
-\noindent 第一个条目是~\texttt{natbib}~宏包，其规定了参考文献的排序和展示等
-格式，第二个条目是~\texttt{NJUthesis.bst}~文件，规定了参考文献条目的展示格式
-。期望使用下面的参考文献格式时，必须使用~\texttt{BibTeX}~来处理参考文献。
-
-在~numeric mode~下（正如本文所用，将~\texttt{numbers}~作为~\texttt{natbib}~
- 参数），参考文献的标准引用方式是使用方括号加文献序号的方式，例如~
-\cite{Al-Osh1987}，这时候使用默认的~
-
-\begin{verbatim}
-\cite{key}
-\end{verbatim}
-
-\noindent 命令即可。但也可以使用~author year~的方式引用，例如~
-\citet{Al-Osh1987}，这时候使用
-
-\begin{verbatim}
-\citet{key}
-\end{verbatim}
-
-\noindent 命令。
-
-但是，如果您希望在~numeric mode~下使用~authoryear mode~（将
- ~\texttt{authoryear}~作为~\texttt{natbib}~参数）的标签样式，例如~
-\citenju{Al-Osh1987}，可以使用我们自定义的
-
-\begin{verbatim}
-\citenju{key}
-\end{verbatim}
-
-\noindent 命令，下面是一个例子：
-
-\begin{verbatim}
-\Citenju{Al-Osh1987}~引入了~XXX，
-\citenju{Duffie2001}~介绍了~XXX。
-XXX~可见~\citenjup{Freeland1998}，
-XX~可见~(\citenjupr{Xu2007}; \citenjupr{Wang1999})。
-\end{verbatim}
-
-\Citenju{Al-Osh1987}~引入了~XXX，\citenju{Duffie2001}~介绍了~XXX。 XXX~可见~
-\citenjup{Freeland1998}，XX~可见~(\citenjupr{Xu2007}; \citenjupr{Wang1999})
-。
-
-\section{其它问题}
-
-请到南京大学小百合论坛科技文献排版讨论区
-（网址：\url{http://bbs.nju.edu.cn/bbsdoc?board=Tex}），
-或者水木清华论坛~\LaTeX{}~讨论区
-（网址：\url{http://www.newsmth.net/bbsdoc.php?board=TeX}）
-提问。
-
-\chapter{常见问题}
-\label{C:FAQ}
-
-
-\newtheoremstyle{question}% name
-  {}%      Space above, empty = `usual value'
-  {}%      Space below
-  {\tt}% Body font
-  {}%         Indent amount (empty = no indent, \parindent = para indent)
-  {\bfseries}% Thm head font
-  {.}%        Punctuation after thm head
-  {10pt}% Space after thm head: \newline = linebreak
-  {}%         Thm head spec
-
-\newtheoremstyle{answer}% name
-  {}%      Space above, empty = `usual value'
-  {}%      Space below
-  {\rm}% Body font
-  {}%         Indent amount (empty = no indent, \parindent = para indent)
-  {\bfseries}% Thm head font
-  {.}%        Punctuation after thm head
-  {10pt}% Space after thm head: \newline = linebreak
-  {}%         Thm head spec
-
-\theoremstyle{question}
- \newtheorem{FAQ}{问题~}
-\theoremstyle{answer}
- \newtheorem{ANS}{回答~}
-
-\section{表格}
-
-\begin{FAQ}
-页眉里论文题目和各章标题中的字母均为大写，不能实现大小写的区别，
-而我写的论文需要在页眉中出现的标题中区分英文字母的大小写比如：
-YBaCuO而不是YBACUO。
-\end{FAQ}
-
-\begin{ANS}
-在~\texttt{NJUthesis.cfg}~文件中加上
-\begin{verbatim}
-\renewcommand\title[2][\NJUT@value@title]{%
-  \def\NJUT@value@title{#2}
-  \def\NJUT@value@titlemark{#1}}
-\def\chaptermark#1{\markboth {{\ifnum \c@secnumdepth>\m@ne
-  \if@mainmatter\CTEXthechapter \quad\fi
-  \fi #1}}{}}%
-\def\sectionmark#1{\markright{{\ifnum \c@secnumdepth >\z@
-  \CTEXthesection \quad \fi #1}}}
-\end{verbatim}
-\end{ANS}
-
-
-\section{脚注}
-
-\begin{FAQ}
-如果在章节标题中加入注脚，则不仅会出现在本章首页的页脚，
-也会出现在目录的页脚，不知是否能够让其不要出现在目录的页脚中。
-\end{FAQ}
-
-\begin{ANS}
-可以使用如下的命令来定义章节的标题
-
-\begin{verbatim}
-
-\chapter[出现在目录和页眉的标题]{出现在正文的标题\footnote{这个不会出现在目录中。}}
-
-\end{verbatim}
-section、~subsection 等命令也有类似的用法。
-\end{ANS}
-
-\chapter{总结与展望}
-\label{C:CONC}
-
-  % 附录
 \appendix
 
 \chapter{博士(硕士)学位论文编写格式规定(试行)}
@@ -578,34 +529,24 @@ GB7714文后参考文献著录规则。
 
 \section{前置部分}
 
-
 \subsection{封面（博士论文国图版用）}
 
 \begin{enumerate}
 \item 封面是论文的外表面，提供应有的信息，并起保护作用。
-
 \item 封面上应包括下列内容：
-
-\begin{enumerate}
-
-\item 分类号  在左上角注明分类号，便于信息交换和处理。一般应注明《中国图书资
-料分类法》的类号，同时应注明《国际十进分类法UDC》的类号；
-
-\item 密级  在右上角注明密级；
-
-\item “博士学位论文”用大号字标明；
-
-\item 题名和副题名   用大号字标明；
-
-\item 作者姓名；
-
-\item 学科专业名称；
-
-\item 研究方向；
-\item 导师姓名，职称；
-\item 日期包括论文提交日期和答辩日期；
-\item 学位授予单位。
-\end{enumerate}
+  \begin{enumerate}
+  \item 分类号  在左上角注明分类号，便于信息交换和处理。一般应注明《中国图书资
+    料分类法》的类号，同时应注明《国际十进分类法UDC》的类号；
+  \item 密级  在右上角注明密级；
+  \item “博士学位论文”用大号字标明；
+  \item 题名和副题名   用大号字标明；
+  \item 作者姓名；
+  \item 学科专业名称；
+  \item 研究方向；
+  \item 导师姓名，职称；
+  \item 日期包括论文提交日期和答辩日期；
+  \item 学位授予单位。
+  \end{enumerate}
 \end{enumerate}
 
 \subsection{题名}
@@ -670,9 +611,8 @@ GB7714文后参考文献著录规则。
 
 图的清单应有序号、图题和页码。表的清单应有序号、表题和页码。
 
-\subsection{符号、标志、缩略词、首字母缩写、计量单位、名词、术语等的注释表符
-号、标志、缩略词、首字母缩写、计量单位、名词、术语等的注释说明汇集表，应置于
-图表清单之后。}
+符号、标志、缩略词、首字母缩写、计量单位、名词、术语等的注释表符号、标志、缩略词、
+首字母缩写、计量单位、名词、术语等的注释说明汇集表，应置于图表清单之后。
 
 \section{主体部分}
 
@@ -833,8 +773,7 @@ GB7714文后参考文献著录规则。
 
 例：2. 李四光，地壳构造与地壳运动，中国科学，1973 (4)：400－429
 
-\subsubsection{参考文献采用顺序编码制，按论文正文所引用文献出现的先后顺序连
-续编码。}
+参考文献采用顺序编码制，按论文正文所引用文献出现的先后顺序连续编码。
 
 \section{附录}
 
@@ -879,19 +818,19 @@ GB7714文后参考文献著录规则。
 \backmatter
 
 % 参考文献。使用BibTeX。不使用BibTeX时注释掉下面一句。
-\bibliography{template}
+\bibliography{sample}
 
 % 不使用 BibTeX
 %\begin{thebibliography}{2}
 %
 %\bibitem{deng:01a}
-%{邓建松,~彭冉冉,~陈长松}.
-%\newblock {\em \LaTeXe{}~科技排版指南}.
-%\newblock 科学出版社,~书号:~7-03-009239-2/TP.1516, 北京, 2001.
+%{邓建松,彭冉冉,陈长松}.
+%\newblock {\em \LaTeXe{}科技排版指南}.
+%\newblock 科学出版社,书号:7-03-009239-2/TP.1516, 北京, 2001.
 %
 %\bibitem{wang:00a}
 %王磊.
-%\newblock {\em \LaTeXe{}~插图指南}.
+%\newblock {\em \LaTeXe{}插图指南}.
 %\newblock 2000.
 %\end{thebibliography}
 
@@ -908,11 +847,11 @@ GB7714文后参考文献著录规则。
 \end{authorinfo}
 % 论文作者教育经历列表，按日期从近到远排列，不包括将要申请的学位。
 \begin{education}
-\item[2007.9～2010.6] 南京大学计算机科学与技术系 \hfill 硕士
-\item[2003.9～2007.6] 南京大学计算机科学与技术系 \hfill 本科
+\item[2007.9 --- 2010.6] 南京大学计算机科学与技术系 \hfill 硕士
+\item[2003.9 --- 2007.6] 南京大学计算机科学与技术系 \hfill 本科
 \end{education}
 % 论文作者在攻读学位期间所发表的文章的列表，按发表日期从近到远排列。
-\begin{publications}{2}
+\begin{publications}
 \item Xiaobao Wei, Jinnan Chen, ``Voting-on-Grid Clustering for Secure
   Localization in Wireless Sensor Networks,'' in \emph{Proc. IEEE International
     Conference on Communications (ICC) 2010}, May. 2010.
@@ -924,9 +863,9 @@ GB7714文后参考文献著录规则。
 % 论文作者在攻读学位期间参与的科研课题的列表，按照日期从近到远排列。
 \begin{projects}
 \item 国家自然科学基金面上项目``无线传感器网络在知识获取过程中的若干安全问题研究''
-（课题年限~2010.1～2012.12），负责位置相关安全问题的研究。
+（课题年限~2010.1 --- 2012.12），负责位置相关安全问题的研究。
 \item 江苏省知识创新工程重要方向项目下属课题``下一代移动通信安全机制研究''
-（课题年限~2010.1～2010.12），负责LTE/SAE认证相关的安全问题研究。
+（课题年限~2010.1 --- 2010.12），负责LTE/SAE认证相关的安全问题研究。
 \end{projects}
 \end{resume}
 
@@ -936,13 +875,13 @@ GB7714文后参考文献著录规则。
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{thanks}
+\begin{acknowledgement}
   首先感谢我的母亲韦春花对我的支持。其次感谢我的导师陈近南对我的精心指导和热心帮助。接下来，
   感谢我的师兄茅十八和风际中，他们阅读了我的论文草稿并提出了很有价值的修改建议。
 
   最后，感谢我亲爱的老婆们：双儿、苏荃、阿珂、沐剑屏、曾柔、建宁公主、方怡，感谢
-  你们在生活上对我无微不至的关怀和照顾。
-\end{thanks}
+  你们在生活上对我无微不至的关怀和照顾。我爱你们！
+\end{acknowledgement}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
