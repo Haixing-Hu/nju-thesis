@@ -722,7 +722,7 @@
     \vskip 5mm
     {\bf\kaishu\zihao{1}\njut@cap@cover@thesis}\\
     \vskip 5mm
-    {\bf\kaishu\zihao{1}\njut@cap@cover@apply}\\
+    {\bf\kaishu\zihao{1}（\njut@cap@cover@apply）}\\
     \vskip\stretch{1}
     \bf\kaishu\zihao{3}
     \def\tabcolsep{1pt}
@@ -827,7 +827,8 @@
 }
 \newcommand{\keywords}[1]{%
   \vspace{2ex}\noindent%
-  {\heiti\njut@cap@abstract@keywordsname{：}}{\ }{#1}%
+  {\renewcommand*{\njut@value@keywords}{#1}%
+   \heiti\njut@cap@abstract@keywordsname{：}}{\ }{#1}%
 }
 \newenvironment{englishabstract}{%
   \if@twoside\cleardoublepage\else\clearpage\fi
@@ -917,6 +918,8 @@
 \newcommand*{\njut@setpdfinfo}{\hypersetup{%
         pdftitle={\njut@value@title},
         pdfauthor={\njut@value@author},
+        pdfsubject={\njut@cap@cover@apply},
+        pdfkeywords={\njut@value@keywords},
         pdfcreator={\njut@value@author},
         pdfproducer={XeLaTeX with the NJU-Thesis document class}}
 }

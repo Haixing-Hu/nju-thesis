@@ -23,7 +23,7 @@
 %<class>\NeedsTeXFormat{LaTeX2e}[1995/12/01]
 %<class>\ProvidesClass{njuthesis}
 %<*class>
-  [2013/08/24 v1.0.0 Document Class for the Degree Papers of Nanjing University]
+  [2013/08/25 v1.0.1 Document Class for the Degree Papers of Nanjing University]
 %</class>
 %<*driver>
 \documentclass[10pt,a4paper]{ltxdoc}
@@ -113,6 +113,7 @@
 %   & \textbf{修订内容} \\
 % \midrule
 %  v1.0.0 & 2013/08/24 & 胡海星 & 完成第一个可工作版本 \\
+%  v1.0.1 & 2013/08/25 & 胡海星 & 增加了一些PDF文档的元信息\\
 % \bottomrule
 % \end{tabular*}
 % \end{titlepage}
@@ -1139,7 +1140,7 @@
 \renewcommand*{\CJKunderlinecolor}{\color{black}}
 %    \end{macrocode}
 %
-% 使用|indentfirst|宏包使得每段都首行缩进2个字符。
+% 使用|indentfirst|宏包支持首行缩进。
 %    \begin{macrocode}
 \RequirePackage{indentfirst}
 %    \end{macrocode}
@@ -1269,7 +1270,7 @@
 \newcommand*{\njut@cap@cover}{中文封面}
 \newcommand*{\njut@cap@cover@thesis}%
 {研\hspace{1em}究\hspace{1em}生\hspace{1em}毕\hspace{1em}业\hspace{1em}论\hspace{1em}文}
-\newcommand*{\njut@cap@cover@apply}{（申请{\njut@value@degree}学位）}
+\newcommand*{\njut@cap@cover@apply}{申请{\njut@value@degree}学位}
 \newcommand*{\njut@cap@cover@title}%
 {论\hspace{1em}文\hspace{1em}题\hspace{1em}目}
 \newcommand*{\njut@cap@cover@author}%
@@ -1435,6 +1436,11 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
               November\or
               December\fi
               \number\day, \number\year}
+%    \end{macrocode}
+%
+% 文档类中用到的其他变量的默认值：
+%    \begin{macrocode}
+\newcommand*{\njut@value@keywords}{}
 %    \end{macrocode}
 %
 % \subsection{格式控制常量定义}
@@ -2443,7 +2449,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
     \vskip 5mm
     {\bf\kaishu\zihao{1}\njut@cap@cover@thesis}\\
     \vskip 5mm
-    {\bf\kaishu\zihao{1}\njut@cap@cover@apply}\\
+    {\bf\kaishu\zihao{1}（\njut@cap@cover@apply）}\\
     \vskip\stretch{1}
     \bf\kaishu\zihao{3}
     \def\tabcolsep{1pt}
@@ -2581,7 +2587,8 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 %    \begin{macrocode}
 \newcommand{\keywords}[1]{%
   \vspace{2ex}\noindent%
-  {\heiti\njut@cap@abstract@keywordsname{：}}{\ }{#1}%
+  {\renewcommand*{\njut@value@keywords}{#1}%
+   \heiti\njut@cap@abstract@keywordsname{：}}{\ }{#1}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2783,6 +2790,8 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 \newcommand*{\njut@setpdfinfo}{\hypersetup{%
         pdftitle={\njut@value@title},
         pdfauthor={\njut@value@author},
+        pdfsubject={\njut@cap@cover@apply},
+        pdfkeywords={\njut@value@keywords},
         pdfcreator={\njut@value@author},
         pdfproducer={XeLaTeX with the NJU-Thesis document class}}
 }
@@ -2905,7 +2914,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 \setlength{\parskip}{4pt plus1pt minus0pt}
 \setlength{\topsep}{0pt}
 \setlength{\partopsep}{0pt}
-\setlength{\parindent}{20pt}
+\setlength{\parindent}{2em}
 \addtolength{\oddsidemargin}{-1cm}
 \advance\textwidth 1.5cm
 \addtolength{\topmargin}{-1cm}
