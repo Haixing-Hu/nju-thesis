@@ -1,0 +1,948 @@
+%% Thesis Template of Nanjing University
+%%   for using NJU-Thesis package with XeLaTeX
+%%
+%% Created by Haixing Hu
+%% Homepage: https://github.com/Haixing-Hu/nju-thesis
+%%
+%% $Id: sample.tex, v1.0.0 2013/08/24 Exp $
+\documentclass[oneside, phd]{njuthesis}
+% 可选参数：
+%   nobackinfo 取消封二页导师签名信息
+%   oneside/twoside 单面/双面打印
+%   phd/master/bachelor 博士/硕士/学士论文
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%                           国家图书馆封面内容设置
+%%
+%%                            仅博士论文才需要填写
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 国图分类
+\classification{计算机软件与理论}
+% 密级
+\confidential{公开}
+% UDC编码
+\udc{004.72}
+% 国家图书馆封面上的论文标题第一行，不可换行。
+\titlelinea{基于小世界理论的}
+% 国家图书馆封面上的论文标题第二行，不可换行。此属性可选，默认值为空白。
+\titlelineb{数据中心网络模型}
+% 国家图书馆封面上的论文标题第三行，不可换行。此属性可选，默认值为空白。
+\titlelinec{}
+% 导师所在院系
+\supervisordepartment{计算机科学与技术系}
+% 导师所在学校或机构，此属性可选，默认值为``南京大学''。
+\supervisorinstitute{南京大学}
+% 答辩委员会主席
+\chairman{张三丰\hspace{1em}教授}
+% 第一位评阅人
+\reviewera{阳顶天\hspace{1em}教授}
+% 第二位评阅人
+\reviewerb{张无忌\hspace{1em}副教授}
+% 第三位评阅人
+\reviewerc{黄裳\hspace{1em}教授}
+% 第四位评阅人
+\reviewerd{郭靖\hspace{1em}研究员}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%                             中文封面内容设置
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 论文标题，若太长可换行
+\title{基于小世界理论的\\ 数据中心网络模型}
+% 论文作者姓名
+\author{韦小宝}
+% 论文作者学生证号
+\studentnum{MG0033011}
+% 论文作者入学年份（年级）
+\grade{2010}
+% 导师姓名职称
+\supervisor{陈近南\hspace{2em}教授}
+% 论文作者的学科与专业方向
+\major{计算机软件与理论}
+% 论文作者的研究方向
+\researchfield{计算机网络与信息安全}
+% 论文作者所在院系的中文名称
+\department{计算机科学与技术系}
+% 论文作者所在学校或机构的名称。此属性可选，默认值为``南京大学''。
+\institute{南京大学}
+% 论文的提交日期，需设置年、月、日。
+\submitdate{2013年5月10日}
+% 论文的答辩日期，需设置年、月、日。
+\defenddate{2013年6月1日}
+% 论文的定稿日期，需设置年、月、日。此属性可选，默认值为最后一次编译时的日期，精确到日。
+\date{2013年5月1日}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%                           英文封面内容设置
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 论文的英文标题。如果标题太长可换行。
+\englishtitle{Network Models of Data Centers\\
+Based on the Small World Theory}
+% 论文作者姓名的拼音
+\englishauthor{Xiaobao Wei}
+% 导师姓名职称的英文
+\englishsupervisor{Professor Jinnan Chen}
+% 论文作者学科与专业的英文名
+\englishmajor{Computer Software and Theory}
+% 论文作者所在院系的英文名称
+\englishdepartment{Department of Computer Science and Technology}
+% 论文作者所在学校或机构的英文名称。此属性可选，默认值为``Nanjing University''。
+\englishinstitute{Nanjing University}
+% 论文完成日期的英文形式，它将出现在英文封面下方。需设置年、月、日。日期格式使用美国的日期
+% 格式，即``Month day, year''，其中``Month''为月份的英文名全称，首字母大写；``day''为
+% 该月中日期的阿拉伯数字表示；``year''为年份的四位阿拉伯数字表示。此属性可选，默认值为最后
+% 一次编译时的日期。
+\englishdate{May 1, 2013}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+% 制作封面命令
+\maketitle
+% 制作英文封面命令
+\makeenglishtitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%                               前言部分
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frontmatter
+
+% 中文摘要
+\begin{abstract}
+这里是中文摘要。这里是中文摘要。这里是中文摘要。这里是中文摘要。这里是中文摘要。
+这里是中文摘要。这里是中文摘要。这里是中文摘要。这里是中文摘要。
+
+这里是中文摘要。这里是中文摘要。这里是中文摘要。这里是中文摘要。这里是中文摘要。
+这里是中文摘要。这里是中文摘要。这里是中文摘要。
+
+% 中文关键词。关键词之间用中文全角分号隔开，末尾无标点符号。
+\keywords{小世界理论；网络模型；数据中心}
+\end{abstract}
+
+% 英文摘要
+\begin{englishabstract}
+
+This is English abstract. This is English abstract. This is English
+abstract. This is English abstract.This is English abstract. This is English
+abstract. This is English abstract.
+
+This is English abstract. This is English abstract. This is English
+abstract. This is English abstract. This is English abstract.
+
+% 英文关键词。关键词之间用英文半角逗号隔开，末尾无符号。
+\englishkeywords{Small World, Network Model, Data Center}
+\end{englishabstract}
+
+% 生成论文目录
+\tableofcontents
+
+% 生成表格目录。如无需表格目录则可注释掉下述语句。
+\listoftables
+% 生成插图目录。如无需插图目录则可注释掉下述语句。
+\listoffigures
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%                               正文部分
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mainmatter
+
+\chapter{基本使用帮助}\label{C:intro}
+
+NJUthesis~宏包针对南京大学对学位论文格式的规定制作的~\LaTeX{}~宏包，
+其目的是简化学位论文的撰写，使得论文作者可以将精力集中到论文的内容上而不是
+浪费在版面设置上。同时宏包在符合学位论文撰写要求的基础上尽可能地进行美化，
+其中还参考了出版界的一些排版规范。
+
+\section{系统要求}
+
+\texttt{NJUthesis}~宏包可以在目前大多数的~\TeX{}~系统中使用，例如~C\TeX{}、
+ ~MiK\TeX{}、~te\TeX{}、~fp\TeX{}。
+
+\texttt{NJUthesis}~宏包通过~\texttt{ctex}~宏包来获得中文支持
+。~\texttt{ctex}~ 宏包提供了一个统一的中文~\LaTeX{}~文档框架，底层支持~CCT~
+和~CJK~两种中文~\LaTeX{}~系统。最新的~\texttt{ctex}~宏包可以从~
+\url{http://www.ctex.org}~网站下载。
+
+此外，~\texttt{NJUthesis}~宏包还使用了宏包~amsmath、~amsthm、~amsfonts、
+ ~amssymb、~bm~、~geometry~、~enumitem~和~hyperref。目前大多数的~\TeX{}~系统
+中都包含有这些宏包。即使您系统中的宏包不全，您也可以到~CTAN~下载到这些宏包。
+
+最新的~C\TeX{}~套装（2.4.1~以上版本）中包含了以上列出的各种宏包，用户无需额
+外的设置即可使用。
+
+\section{下载与安装}
+
+NJUthesis~宏包的最新版本可以从~\url{http://njuthesis.googlecode.com/}~
+网站或者~
+\url{http://share.solrex.org/njuthesis/}~网站下载。
+
+对此宏包最简单的使用方法是直接修改~template.tex~和~template.bib~文件。如果您
+仅仅想安装宏包，可以将宏包文件放置到~\TeX{}~系统的~localtexmf/tex/latex/njuthesis~目录下，
+然后刷新~\TeX{}~系统的文件名数据库。
+
+关于安装过程的问题可以参考~C\TeX{}-FAQ~以及其他~\LaTeX{}~教材。
+
+\section{本模板打包的文件}
+
+关键文件：
+
+\begin{description}
+\item[NJUthesis.cls] 文档类文件，是~NJUthesis~宏包的主要文件，用户在文件头
+  ~\\documentclass~声明文档类为~NJUthesis~即可使用此文档类格式化文档。
+  一般不建议用户手工修改该文件。
+
+\item[NJUthesis.cfg] 配合文档类的控制文件，里面主要是一些字符串的定义。
+  用户可以编辑修改该文件。
+
+\item[template.tex] 随宏包包含的一个模板文件，该模板文件指示了该如何使用
+  宏包提供的文档类。用户可以使用该文件作为毕业论文源文件的很好的开端。
+
+\item[template.bib] 随宏包包含的模板文件相关的~BibTeX~文献数据库，当用户
+  使用~BibTeX~时可以以其为一个很好的开端；当用户使用自定义的参考文献时，
+  可以在模板文件中注释掉对其的引用并忽略该文件的存在。
+\end{description}
+
+辅助文件：
+
+\begin{description}
+\item[NJUthesis.bst] 默认的~BibTeX~样式文件，如果想修改样式，例如使用
+  ~IEEEtran.bst~作为~BibTeX~样式，只需要将~IEEEtran.bst~更名为
+  ~NJUthesis.bst~即可。
+
+\item[NJUthesis.pdf] 宏包帮助文档，其中有对宏包的说明以及对宏包源文件的
+  完全注释，适合高级用户修改文档类文件时参考。
+\end{description}
+
+\section{编译方法}
+
+下面以编译模板文件~template.tex~生成~template.pdf~为例，给出在不同情况下
+应该使用的编译命令流程。
+
+\subsection{Windows~平台下}
+
+\subsubsection{标准编译命令}
+
+如果您使用~BibTeX~管理参考文献，并且将自己的参考文件条目均添加到
+~tempalte.bib~中，编译命令应该为：
+
+\begin{Verbatim}[frame=lines]
+set ARTICLE=template
+latex %ARTICLE%.tex
+bibtex %ARTICLE%
+latex %ARTICLE%.tex
+gbk2uni %ARTICLE%
+latex %ARTICLE%.tex
+dvipdfmx %ARTICLE%.dvi
+pause
+\end{Verbatim}
+
+其中，bibtex~命令完成对参考文献的处理，gbk2uni~命令完成对~pdf~书签编码的
+处理，latex~命令生成~dvi~文件，dvipdfmx~命令生成~pdf~文件。如果您修改了
+模板文件名，例如将~template.tex~修改成~thesis-yang.tex~，那么您只需将第
+一句中的变量定义修改成~thesis-yang~即可。
+
+您可以将上面的命令保存成一个文件（并且建议这样做），例如~make.bat~，
+这样每次编译时双击该文件，
+或者在该目录的~Windows~命令行下输入~make~即可完成编译。
+
+\subsubsection{不使用~BibTeX}
+
+尽管我们强烈建议您使用~BibTeX~管理参考文献，如果您不使用~BibTeX~而是
+自己手写参考文献条目，那么您可以使用以下方式编译模板。
+
+首先在模板文件~template.tex~中注释掉引用~BibTeX~数据库的语句，即：
+
+\begin{Verbatim}[frame=lines]
+\bibliography{template}
+\end{Verbatim}
+
+\noindent 并加入手写的参考文献条目。
+
+其次使用下面命令编译模板文件：
+\begin{Verbatim}[frame=lines]
+set ARTICLE=template
+latex %ARTICLE%.tex
+latex %ARTICLE%.tex
+gbk2uni %ARTICLE%
+latex %ARTICLE%.tex
+dvipdfmx %ARTICLE%.dvi
+pause
+\end{Verbatim}
+
+\subsubsection{使用~pdflatex~命令}
+
+我们强烈不建议这样做，主要原因是本模板中文封面中的南京大学校徽和毛笔校名均
+使用的是~eps~图片，使用~pdflatex~无法对其进行正常处理。如果您希望使用
+~pdflatex~，那么您至少需要将这两张~eps~图片转成~jpg, png~或者~pdf~图片。
+
+出于对矢量图的偏好，我们目前不愿意提供与~pdflatex~兼容的图片格式，也不提供
+~pdflatex~的编译流程，因此您需要自己处理与~pdflatex~有关的兼容问题。
+
+\subsubsection{清理垃圾文件}
+
+latex~编译时会生成很多垃圾文件，下面的命令可以清理除~pdf~之外的垃圾文件，
+您可以将其保存成一个~clean.bat~的批处理文件，即可双击执行。
+
+\begin{Verbatim}[frame=lines]
+del /Q *.aux *.toc *.lon *.lor *.lof *.ilg *.idx *.ind
+del /Q *.out *.log *.exa *.nav *.snm *.bbl *.blg *.spl
+del /Q *.lot *.bak *~ *.dvi *.ps
+pause
+\end{Verbatim}
+
+如果想同时清除~pdf~文件，您可以在后面加上~*.pdf~，并保存成~dist-clean.bat~
+的批处理文件。
+
+\subsubsection{使用~cygwin~时的~Makefile}
+
+在~Windows~下使用~cygwin~时，用~Makefile~来对项目进行编译是再自然不过的想法。
+下面给出一个编译本模板可以使用的~Makefile。值得注意的是~Makefile~的缩进需要
+强制使用制表符。
+
+\begin{Verbatim}[frame=lines]
+ARTICLE=template
+ARTICLE_SRC=$(ARTICLE).tex $(ARTICLE).bib CASthesis.cfg
+IMAGES=
+
+all: article
+
+article: $(ARTICLE).pdf
+
+$(ARTICLE).pdf: $(ARTICLE_SRC) $(IMAGES)
+	latex $(ARTICLE).tex
+	bibtex $(ARTICLE)
+	latex $(ARTICLE).tex
+	gbk2uni $(ARTICLE)
+	latex $(ARTICLE).tex
+	dvipdfmx $(ARTICLE).dvi
+
+clean:
+	rm -f *.aux *.toc *.lon *.lor *.lof *.ilg *.idx *.ind
+	rm -f *.out *.log *.exa *.nav *.snm *.bbl *.blg *.spl
+	rm -f *.lot *.bak *~ *.dvi *.ps
+
+distclean: clean
+	rm -f *.pdf
+\end{Verbatim}
+
+\subsection{Linux~平台下}
+
+Void.
+
+\section{问题反馈}
+
+用户在使用中遇到问题、需要增加某种功能或者提供一个~patch，都可以到本项目的
+~Issue~列表中提出，Issue~列表的地址在：
+
+\begin{center}
+\url{http://code.google.com/p/njuthesis/issues/list}
+\end{center}
+
+欢迎大家反馈自己的使用情况，使我们可以不断改进宏包，但是在提问前请最好检查
+自己使用的是否为最新版本，以及列表中类似问题是否已经被提出。总之，谢谢您的
+支持！
+
+\chapter{论文撰写}
+
+\section{文档类选项}
+
+NJUthesis~文档类提供有以下一些选项：
+
+\begin{description}
+
+\item[phd/master] 当选择~phd~时，生成南大博士论文，包含国家图书馆格式的封面，
+但不包括书脊，书脊需要单独制作；选择~master~时，生成南大硕士论文。
+
+\item[oneside/twoside] 当选择~oneside~时，生成单面打印格式论文；当选择
+~twoside~时，生成双面打印格式论文。双面打印格式会将封面、摘要起始页、
+章起始页全部放在奇数页上。
+
+\item[dvipdfm/dvips/pdflatex] 兼容的编译命令选项，最好使用默认的~dvipdfm。
+如果您对默认的命令有意见，那么我们认为您充分了解这几个命令的不同，那么您
+足以自己修改图片格式和决定编译流程，所以使用其它选项时请不要完全使用本文
+中的帮助。
+
+\end{description}
+
+\section{封面和摘要页的字符串}
+
+\texttt{NJUthesis}~宏包的设置都保存在~\texttt{NJUthesis.cfg}~文件中。用户可
+以在~\texttt{.tex}~中通过宏包提供的命令修改设置。对于常用的设置修改，如培养
+单位名称、专业名称等，可以直接在~\texttt{NJUthesis.cfg}~文件中进行。各培养单
+位可以修改后提供本单位统一的~\texttt{NJUthesis.cfg}~文件供本单位用户使用。
+
+\section{内容撰写}
+
+请阅读文献《\href{http://mirror.ctan.org/info/lshort/english/lshort.pdf}{The Not So Short Introduction to \LaTeXe{}}》
+~\cite{Oetiker2008}，或者其有点儿老的中文翻译版《\href{http://mirror.ctan.org/info/lshort/chinese/lshort-zh-cn.pdf}{一份不太简短的~\LaTeXe{}~介绍}》\cite{lshort-cn}。
+
+\section{插图}
+
+请阅读文献《\href{ftp://ftp.tex.ac.uk/tex-archive/info/epslatex.pdf}{Using Imported Graphics in \LaTeX{} and pdf\LaTeX{}}》
+~\cite{Reckdahl2006}，或者其有点儿老的中文翻译版《\href{http://www.ctex.org/documents/latex/graphics/}{\LaTeXe{} 插图指南}》
+~\cite{Wang1997}。
+
+\section{数学公式}
+
+请阅读文献《The LaTeX Companion》第~8~章``\href{http://media.cism.it/attachments/ch8.pdf}{Higher Mathematics}''\cite{Goossens1997}。
+
+
+\section{参考文献}
+
+本节主要介绍参考文献的格式，在~NJUthesis~中控制参考文献的主要有两个
+地方：
+
+\begin{verbatim}
+\RequirePackage[sort&compress, numbers]{natbib}
+\end{verbatim}
+
+\noindent 和
+
+\begin{verbatim}
+\bibliographystyle{NJUthesis}
+\end{verbatim}
+
+\noindent 第一个条目是~\texttt{natbib}~宏包，其规定了参考文献的排序和展示等
+格式，第二个条目是~\texttt{NJUthesis.bst}~文件，规定了参考文献条目的展示格式
+。期望使用下面的参考文献格式时，必须使用~\texttt{BibTeX}~来处理参考文献。
+
+在~numeric mode~下（正如本文所用，将~\texttt{numbers}~作为~\texttt{natbib}~
+ 参数），参考文献的标准引用方式是使用方括号加文献序号的方式，例如~
+\cite{Al-Osh1987}，这时候使用默认的~
+
+\begin{verbatim}
+\cite{key}
+\end{verbatim}
+
+\noindent 命令即可。但也可以使用~author year~的方式引用，例如~
+\citet{Al-Osh1987}，这时候使用
+
+\begin{verbatim}
+\citet{key}
+\end{verbatim}
+
+\noindent 命令。
+
+但是，如果您希望在~numeric mode~下使用~authoryear mode~（将
+ ~\texttt{authoryear}~作为~\texttt{natbib}~参数）的标签样式，例如~
+\citenju{Al-Osh1987}，可以使用我们自定义的
+
+\begin{verbatim}
+\citenju{key}
+\end{verbatim}
+
+\noindent 命令，下面是一个例子：
+
+\begin{verbatim}
+\Citenju{Al-Osh1987}~引入了~XXX，
+\citenju{Duffie2001}~介绍了~XXX。
+XXX~可见~\citenjup{Freeland1998}，
+XX~可见~(\citenjupr{Xu2007}; \citenjupr{Wang1999})。
+\end{verbatim}
+
+\Citenju{Al-Osh1987}~引入了~XXX，\citenju{Duffie2001}~介绍了~XXX。 XXX~可见~
+\citenjup{Freeland1998}，XX~可见~(\citenjupr{Xu2007}; \citenjupr{Wang1999})
+。
+
+\section{其它问题}
+
+请到南京大学小百合论坛科技文献排版讨论区
+（网址：\url{http://bbs.nju.edu.cn/bbsdoc?board=Tex}），
+或者水木清华论坛~\LaTeX{}~讨论区
+（网址：\url{http://www.newsmth.net/bbsdoc.php?board=TeX}）
+提问。
+
+\chapter{常见问题}
+\label{C:FAQ}
+
+
+\newtheoremstyle{question}% name
+  {}%      Space above, empty = `usual value'
+  {}%      Space below
+  {\tt}% Body font
+  {}%         Indent amount (empty = no indent, \parindent = para indent)
+  {\bfseries}% Thm head font
+  {.}%        Punctuation after thm head
+  {10pt}% Space after thm head: \newline = linebreak
+  {}%         Thm head spec
+
+\newtheoremstyle{answer}% name
+  {}%      Space above, empty = `usual value'
+  {}%      Space below
+  {\rm}% Body font
+  {}%         Indent amount (empty = no indent, \parindent = para indent)
+  {\bfseries}% Thm head font
+  {.}%        Punctuation after thm head
+  {10pt}% Space after thm head: \newline = linebreak
+  {}%         Thm head spec
+
+\theoremstyle{question}
+ \newtheorem{FAQ}{问题~}
+\theoremstyle{answer}
+ \newtheorem{ANS}{回答~}
+
+\section{表格}
+
+\begin{FAQ}
+页眉里论文题目和各章标题中的字母均为大写，不能实现大小写的区别，
+而我写的论文需要在页眉中出现的标题中区分英文字母的大小写比如：
+YBaCuO而不是YBACUO。
+\end{FAQ}
+
+\begin{ANS}
+在~\texttt{NJUthesis.cfg}~文件中加上
+\begin{verbatim}
+\renewcommand\title[2][\NJUT@value@title]{%
+  \def\NJUT@value@title{#2}
+  \def\NJUT@value@titlemark{#1}}
+\def\chaptermark#1{\markboth {{\ifnum \c@secnumdepth>\m@ne
+  \if@mainmatter\CTEXthechapter \quad\fi
+  \fi #1}}{}}%
+\def\sectionmark#1{\markright{{\ifnum \c@secnumdepth >\z@
+  \CTEXthesection \quad \fi #1}}}
+\end{verbatim}
+\end{ANS}
+
+
+\section{脚注}
+
+\begin{FAQ}
+如果在章节标题中加入注脚，则不仅会出现在本章首页的页脚，
+也会出现在目录的页脚，不知是否能够让其不要出现在目录的页脚中。
+\end{FAQ}
+
+\begin{ANS}
+可以使用如下的命令来定义章节的标题
+
+\begin{verbatim}
+
+\chapter[出现在目录和页眉的标题]{出现在正文的标题\footnote{这个不会出现在目录中。}}
+
+\end{verbatim}
+section、~subsection 等命令也有类似的用法。
+\end{ANS}
+
+\chapter{总结与展望}
+\label{C:CONC}
+
+  % 附录
+\appendix
+
+\chapter{博士(硕士)学位论文编写格式规定(试行)}
+
+\section{适用范围}
+
+本规定适用于博士学位论文编写，硕士学位论文编写应参照执行。
+
+\section{引用标准}
+
+GB7713科学技术报告、学位论文和学术论文的编写格式。
+
+GB7714文后参考文献著录规则。
+
+\section{印制要求}
+
+论文必须用白色纸印刷，并用A4(210mm×297mm)标准大小的白纸。纸的四周应留足空白
+边缘，上方和左侧应空边25mm以上，下方和右侧应空边20mm以上。除前置部分外，其它
+部分双面印刷。
+
+论文装订不要用铁钉，以便长期存档和收藏。
+
+论文封面与封底之间的中缝（书脊）必须有论文题目、作者和学校名。
+
+\section{编写格式}
+
+论文由前置部分、主体部分、附录部分(必要时)、结尾部分(必要时)组成。
+
+前置部分包括封面，题名页，声明及说明，前言，摘要(中、英文)，关键词，目次页，
+插图和附表清单(必要时)，符号、标志、缩略词、首字母缩写、单位、术语、名词解释
+表(必要时)。
+
+主体部分包括绪论(作为正文第一章)、正文、结论、致谢、参考文献表。
+
+附录部分包括必要的各种附录。
+
+结尾部分包括索引和封底。
+
+\section{前置部分}
+
+
+\subsection{封面（博士论文国图版用）}
+
+\begin{enumerate}
+\item 封面是论文的外表面，提供应有的信息，并起保护作用。
+
+\item 封面上应包括下列内容：
+
+\begin{enumerate}
+
+\item 分类号  在左上角注明分类号，便于信息交换和处理。一般应注明《中国图书资
+料分类法》的类号，同时应注明《国际十进分类法UDC》的类号；
+
+\item 密级  在右上角注明密级；
+
+\item “博士学位论文”用大号字标明；
+
+\item 题名和副题名   用大号字标明；
+
+\item 作者姓名；
+
+\item 学科专业名称；
+
+\item 研究方向；
+\item 导师姓名，职称；
+\item 日期包括论文提交日期和答辩日期；
+\item 学位授予单位。
+\end{enumerate}
+\end{enumerate}
+
+\subsection{题名}
+
+\begin{enumerate}
+
+\item 题名是以最恰当、最简明的词语反映论文中最重要的特定内容的逻辑组合。
+
+题名所用每一词语必须考虑到有助于选定关键词和编写题录、索引等二次文献可以提供
+检索的特定实用信息。
+
+题名应避免使用不常见的缩略词、首字母缩写字、字符、代号和公式等。
+
+题名一般不宜超过20字。
+
+论文应有外文题名，外文题名一般不宜超过10个实词。
+
+\item 可以有副题名。
+\item 题名在整本论文中不同地方出现时，应完全相同。
+\end{enumerate}
+
+\subsection{前言}
+
+前言是作者对本论文基本特征的简介，如论文背景、主旨、目的、意义等并简述本论文
+的创新性成果。
+
+\subsection{摘要}
+
+\begin{enumerate}
+
+\item 摘要是论文内容不加注释和评论的简单陈述。
+
+\item 论文应有中、英文摘要，中、英文摘要内容应相同。
+
+\item 摘要应具有独立性和自含性，即不阅读论文的全文，便能获得必要的信息，摘要
+中有数据、有结论，是一篇完整的短文，可以独立使用，可以引用，可以用于推广。摘
+要的内容应包括与论文同等量的主要信息，供读者确定有无必要阅读全文，也供文摘等
+二次文献引用。摘要的重点是成果和结论。
+
+\item 中文摘要一般在1500字，英文摘要不宜超过1500实词。
+
+\item 摘要中不用图、表、化学结构式、非公知公用的符号和术语。
+
+\end{enumerate}
+
+\subsection{关键词}
+
+关键词是为了文献标引工作从论文中选取出来用于表示全文主题内容信息款目的单词或
+术语。
+
+每篇论文选取3－8个词作为关键词，以显著的字符另起一行，排在摘要的左下方。在英
+文摘要的左下方应标注与中文对应的英文关键词。
+
+\subsection{目次页}
+
+目次页由论文的章、节、附录等的序号、名称和页码组成，另页排在摘要的后面。
+
+\subsection{插图和附表清单}
+
+论文中如图表较多，可以分别列出清单并置于目次页之后。
+
+
+图的清单应有序号、图题和页码。表的清单应有序号、表题和页码。
+
+\subsection{符号、标志、缩略词、首字母缩写、计量单位、名词、术语等的注释表符
+号、标志、缩略词、首字母缩写、计量单位、名词、术语等的注释说明汇集表，应置于
+图表清单之后。}
+
+\section{主体部分}
+
+\subsection{格式}
+
+主体部分由绪论开始，以结论结束。主体部分必须由另页右页开始。每一章必须另页开
+始。全部论文章、节、目的格式和版面安排要划一，层次清楚。
+
+\subsection{序号}
+
+\begin{enumerate}
+
+\item 论文的章可以写成：第一章。节及节以下均用阿拉伯数字编排序号，如
+1.1，1.1.1等。
+
+\item 论文中的图、表、附注、参考文献、公式、算式等一律用阿拉伯数字分别分章依
+序连续编排序号。其标注形式应便于互相区别，一般用下例：图1.2；表2.3；附注1）
+；文献[4]；式(6.3)等。
+
+\item 论文一律用阿拉伯数字连续编页码。页码由首页开始，作为第1页，并为右页另
+页。封页、封二、封三和封底不编入页码，应为题名页、前言、目次页等前置部分单独
+编排页码。页码必须标注在每页的相同位置，便于识别。
+
+\item 附录依序用大写正体A、B、C ┅ 编序号，如：附录A。附录中的图、表、式、参
+考文献等另行编序号，与正文分开，也一律用阿拉伯数字编码，但在数码前题以附条序
+码，如图A.1；表B.2；式(B.3)；文献[A.5]等。
+
+\end{enumerate}
+
+\subsection{绪论}
+
+绪论（综述）：简要说明研究工作的目的、范围、相关领域的前人工作和知识空白、理
+论基础和分析，研究设想、研究方法和实验设计、预期结果和意义等。一般在教科书中
+有的知识，在绪论中不必赘述。
+
+绪论的内容应包括论文研究方向相关领域的最新进展、对有关进展和问题的评价、本论
+文研究的命题和技术路线等；绪论应表明博士生对研究方向相关的学科领域有系统深入
+的了解，论文具有先进性和前沿性；
+
+为了反映出作者确已掌握了坚实的基础理论和系统的专门知识，具有开阔的科学视野，
+对研究方案作了充分论证，绪论应单独成章，列为第一章，绪论的篇幅应达1～2万字，
+不得少于1万字；绪论引用的文献应在100篇以上，其中外文文献不少于60%；引用文献
+应按正文中引用的先后排列。
+
+\subsection{正文}
+
+论文的正文是核心部分，占主要篇幅。正文必须实事求是，客观真切，准确完备，合乎
+逻辑，层次分明，简便可读。
+
+正文的每一章(除绪论外)应有小结，在小结中应明确阐明作者在本章中所做的工作，特
+别是创新性成果。凡本论文要用的基础性内容或他人的成果不应单独成章，也不应作过
+多的阐述，一般只引结论、使用条件等，不作推导；
+
+\subsubsection{图}
+
+图包括曲线图、构造图、示意图、图解、框图、流程图、记录图、布置图、地图、照片
+、图版等。
+
+图应具有“自明性”，即只看图、图题和图例，不阅读正文，就可以理解图意。
+
+图应编排序号。每一图应有简短确切的图题，连同图号置于图下。必要时，应将图上的
+符号、标记、代码，以及实验条件等，用最简练的文字，横排于图题下方，作为图例说
+明。
+
+曲线图的纵、横坐标必须标注“量、标准规定符号、单位”。此三者只有在不必要标明
+(如无量纲等)的情况下方可省略。坐标上标注的量的符号和缩略词必须与正文一致。
+
+照片图要求主题和主要显示部分的轮廓鲜明，便于制版。如用放大缩小的复制品，必须
+清晰，反差适中。照片上应该有表示目的物尺寸的标度。
+
+\subsubsection{表}
+
+表的编排，一般是内容和测试项目由左至右横读，数据依序竖排。表应有自明性。
+
+表应编排序号。
+
+每一表应有简短确切的表题，连同标号置于表上。必要时，应将表中的符号、标记、代
+码，以及需要说明事项，以最简练的文字，横排于表题下，作为表注，也可以附注于表
+下。表内附注的序号宜用小号阿拉伯数字并加圆括号置于被标注对象的右上角，如：x
+ x x1) ，不宜用“*”，以免与数学上共轭和物质转移的符号相混。
+
+表的各栏均应标明“量或测试项目、标准规定符号、单位”。只有在无必要标注的情况下
+方可省略。表中的缩略词和符号，必须与正文中一致。
+
+表内同一栏的数字必须上下对齐。表内不宜用“同上”，“同左”和类似词，一律填入具体
+数字或文字。表内“空白”代表未测或无此项，“－”或“┅”(因“－”可能与代表阴性反应相
+混)代表未发现，“0”代表实测结果确为零。
+
+如数据已绘成曲线图，可不再列表。
+
+\subsubsection{数学、物理和化学式}
+
+正文中的公式、算式或方程式等应编排序号，序号标注于该式所在行(当有续行时，应
+标注于最后一行)的最右边。
+
+较长的式，另行居中横排。如式必须转行时，只能在?，?，?，?，<，>处转行。上下式
+尽可能在等号“＝”处对齐。
+
+小数点用“.”表示。大于999的整数和多于三位数的小数，一律用半个阿拉伯数字符的小
+间隔分开，不用千位撇。对于纯小数应将0列于小数点之前。
+
+示例：应该写成94 652.023 567；  0.314 325,  不应写成94, 652.023, 567；
+   .314, 325
+
+应注意区别各种字符，如：拉丁文、希腊文、俄文、德文花体、草体；罗马数字和阿拉
+伯数字；字符的正斜体、黑白体、大小写、上下脚标(特别是多层次，如“三踏步”)、上
+下偏差等。
+
+\subsubsection{计量单位}
+
+报告、论文必须采用国务院发布的《中华人民共和国法定计量单位》，并遵照《中华人
+民共和国法定计量单位使用方法》执行。使用各种量、单位和符号，必须遵循附录B所
+列国家标准的规定执行。单位名称和符号的书写方式一律采用国际通用符号。
+
+\subsubsection{符号和缩略词}
+
+符号和缩略词应遵照国家标准的有关规定执行。如无标准可循，可采纳本学科或本专业
+的权威性机构或学术团体所公布的规定；也可以采用全国自然科学名词审定委员会编印
+的各学科词汇的用词。如不得不引用某些不是公知公用的、且又不易为同行读者所理解
+的、或系作者自定的符号、记号、缩略词、首字母缩写字等时，均应在第一次出现时一
+一加以说明，给以明确的定义。
+
+\subsection{结论}
+
+报告、论文的结论是最终的、总体的结论，不是正文中各段的小结的简单重复。结论应
+该准确、完整、明确、精炼。在结论中要清楚地阐明论文中有那些自己完成的成果，特
+别是创新性成果；
+
+如果不可能导出应有的结论，也可以没有结论而进行必要的讨论。可以在结论或讨论中
+提出建议、研究设想、仪器设备改进意见、尚待解决的问题等。
+
+\subsection{致谢}
+
+可以在正文后对下列方面致谢：
+
+国家科学基金、资助研究工作的奖学金基金、合作单位、资助或支持的企业、组织或个
+人；
+
+协助完成研究工作和提供便利条件的组织或个人；
+
+在研究工作中提出建议和提供帮助的人；
+
+给予转载和引用权的资料、图片、文献、研究思想和设想的所有者；
+
+其他应感谢的组织或个人。
+
+\subsection{参考文献表}
+
+\subsubsection{专著著录格式}
+
+主要责任者，其他责任者，书名，版本，出版地：出版者，出版年
+
+例：1. 刘少奇，论共产党员的修养，修订2版，北京：人民出版社，1962
+
+\subsubsection{连续出版物中析出的文献著录格式}
+
+析出文献责任者，析出文献其他责任者，析出题名，原文献题名，版本：文献中的位置。
+
+例：2. 李四光，地壳构造与地壳运动，中国科学，1973 (4)：400－429
+
+\subsubsection{参考文献采用顺序编码制，按论文正文所引用文献出现的先后顺序连
+续编码。}
+
+\section{附录}
+
+附录是作为报告、论文主体的补充项目，并不是必需的。
+
+\begin{enumerate}
+\item 下列内容可以作为附录编于报告、论文后，也可以另编成册；
+
+\begin{enumerate}
+
+\item 为了整篇论文材料的完整，但编入正文又有损于编排的条理和逻辑性，这一材料
+包括比正文更为详尽的信息、研究方法和技术更深入的叙述，建议可以阅读的参考文献
+题录，对了解正文内容有用的补充信息等；
+
+\item 由于篇幅过大或取材于复制品而不便于编入正文的材料；
+
+\item 不便于编入正文的罕见珍贵资料；
+
+\item 对一般读者并非必要阅读，但对本专业同行有参考价值的资料；
+
+\item 某些重要的原始数据、数学推导、计算程序、框图、结构图、注释、统计表、计
+算机打印输出件等。
+
+\end{enumerate}
+
+\item 附录与正文连续编页码。
+
+\item 每一附录均另页起。
+
+\end{enumerate}
+
+\section{结尾部分 (必要时)}
+
+为了将论文迅速存储入电子计算机，可以提供有关的输入数据。可以编排分类索引、著
+者索引、关键词索引等。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%                              附件部分
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\backmatter
+
+% 参考文献。使用BibTeX。不使用BibTeX时注释掉下面一句。
+\bibliography{template}
+
+% 不使用 BibTeX
+%\begin{thebibliography}{2}
+%
+%\bibitem{deng:01a}
+%{邓建松,~彭冉冉,~陈长松}.
+%\newblock {\em \LaTeXe{}~科技排版指南}.
+%\newblock 科学出版社,~书号:~7-03-009239-2/TP.1516, 北京, 2001.
+%
+%\bibitem{wang:00a}
+%王磊.
+%\newblock {\em \LaTeXe{}~插图指南}.
+%\newblock 2000.
+%\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%                           作者简历与科研成果
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{resume}
+% 论文作者身份简介，一句话即可。
+\begin{authorinfo}
+\noindent 韦小宝，男，汉族，1985年11月出生，江苏省扬州人。
+\end{authorinfo}
+% 论文作者教育经历列表，按日期从近到远排列，不包括将要申请的学位。
+\begin{education}
+\item[2007.9～2010.6] 南京大学计算机科学与技术系 \hfill 硕士
+\item[2003.9～2007.6] 南京大学计算机科学与技术系 \hfill 本科
+\end{education}
+% 论文作者在攻读学位期间所发表的文章的列表，按发表日期从近到远排列。
+\begin{publications}{2}
+\item Xiaobao Wei, Jinnan Chen, ``Voting-on-Grid Clustering for Secure
+  Localization in Wireless Sensor Networks,'' in \emph{Proc. IEEE International
+    Conference on Communications (ICC) 2010}, May. 2010.
+\item Xiaobao Wei, Shiba Mao, Jinnan Chen, ``Protecting Source Location Privacy
+  in Wireless Sensor Networks with Data Aggregation,'' in \emph{Proc. 6th
+    International Conference on Ubiquitous Intelligence and Computing (UIC)
+    2009}, Oct. 2009.
+\end{publications}
+% 论文作者在攻读学位期间参与的科研课题的列表，按照日期从近到远排列。
+\begin{projects}
+\item 国家自然科学基金面上项目``无线传感器网络在知识获取过程中的若干安全问题研究''
+（课题年限~2010.1～2012.12），负责位置相关安全问题的研究。
+\item 江苏省知识创新工程重要方向项目下属课题``下一代移动通信安全机制研究''
+（课题年限~2010.1～2010.12），负责LTE/SAE认证相关的安全问题研究。
+\end{projects}
+\end{resume}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%                           致谢
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thanks}
+  首先感谢我的母亲韦春花对我的支持。其次感谢我的导师陈近南对我的精心指导和热心帮助。接下来，
+  感谢我的师兄茅十八和风际中，他们阅读了我的论文草稿并提出了很有价值的修改建议。
+
+  最后，感谢我亲爱的老婆们：双儿、苏荃、阿珂、沐剑屏、曾柔、建宁公主、方怡，感谢
+  你们在生活上对我无微不至的关怀和照顾。
+\end{thanks}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
