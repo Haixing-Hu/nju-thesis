@@ -433,6 +433,8 @@
 \newcommand{\njut@dateformat}{\zihao{-4}}
 \setcounter{secnumdepth}{4}
 \renewcommand*{\today}{{\number\year}年{\number\month}月{\number\day}日}
+\renewcommand*{\thefigure}{\thechapter\,--\,\arabic{figure}}
+\renewcommand*{\thetable}{\thechapter\,--\,\arabic{table}}
 \setstretch{1.38}
 \geometry{headheight=2.6cm,headsep=3mm,footskip=13mm}
 \geometry{top=3.5cm,bottom=3.5cm,left=3.2cm,right=3.2cm}
@@ -579,12 +581,12 @@
   \renewcommand*{\njut@value@nlc@confidential}{#1}}
 \newcommand*{\udc}[1]{%
   \renewcommand*{\njut@value@nlc@udc}{#1}}
-\newcommand*{\titlelinea}[1]{%
-  \renewcommand{\njut@value@nlc@titlelinea}{#1}}
-\newcommand*{\titlelineb}[1]{%
-  \renewcommand{\njut@value@nlc@titlelineb}{#1}}
-\newcommand*{\titlelinec}[1]{%
-  \renewcommand{\njut@value@nlc@titlelinec}{#1}}
+\newcommand*{\nlctitlea}[1]{%
+  \renewcommand{\njut@value@nlc@titlea}{#1}}
+\newcommand*{\nlctitleb}[1]{%
+  \renewcommand{\njut@value@nlc@titleb}{#1}}
+\newcommand*{\nlctitlec}[1]{%
+  \renewcommand{\njut@value@nlc@titlec}{#1}}
 \newcommand*{\supervisorinfo}[1]{%
   \renewcommand{\njut@value@nlc@supervisorinfo}{#1}}
 \newcommand*{\chairman}[1]{%
@@ -599,7 +601,7 @@
   \renewcommand{\njut@value@nlc@reviewerd}{#1}}
 \newcommand*{\nlcdate}[1]{%
   \renewcommand{\njut@value@nlc@date}{#1}}
-\renewcommand{\title}[1]{%
+\renewcommand*{\title}[1]{%
   \renewcommand{\njut@value@title}{#1}}
 \renewcommand*{\author}[1]{%
   \renewcommand{\njut@value@author}{#1}}
@@ -660,16 +662,16 @@
     {\kaishu\zihao{-0} \njut@cap@nlc@title}
     {\kaishu\zihao{1}
     \vskip \stretch{1}
-    \njutunderline[9em]{~\njut@value@nlc@titlelinea~}\\
-    \njutunderline[9em]{~\njut@value@nlc@titlelineb~}\\
-    \njutunderline[9em]{~\njut@value@nlc@titlelinec~}\\
+    \njutunderline[9em]{\njut@value@nlc@titlea}\\
+    \njutunderline[9em]{\njut@value@nlc@titleb}\\
+    \njutunderline[9em]{\njut@value@nlc@titlec}\\
     }
     \vskip \stretch{1}
-    {\kaishu\zihao{4} \njut@cap@nlc@quotetitle}
+    \kaishu\zihao{4}\njut@cap@nlc@quotetitle
     \vskip \stretch{1}
-    {\kaishu\zihao{1} \njutunderline{~{\njut@value@author}~}}
+    \kaishu\zihao{1}\njutunderline{\njut@value@author}
     \vskip \stretch{1}
-    {\kaishu\zihao{4} \njut@cap@nlc@author}
+    \kaishu\zihao{4}\njut@cap@nlc@author
   \end{center}
   {\kaishu\zihao{4}
     \vskip \stretch{1}
@@ -678,16 +680,17 @@
 
     \noindent\njutunderline[\textwidth]{\njut@value@nlc@supervisorinfo}
 
-    \noindent\njut@cap@nlc@degree\njutunderline[8em]{\njut@value@degree}
-    \njut@cap@nlc@major\njutunderline[164pt]{\njut@value@major}
+    \noindent\njut@cap@nlc@degree%
+    \njutunderline[8em]{\njut@value@degree}%
+    \noindent\njut@cap@nlc@major%
+    \njutunderline[164pt]{\njut@value@major}
 
     \noindent\njut@cap@nlc@submitdate%
-    \njutunderline[8em]{\njut@value@submitdate}
+    \njutunderline[8em]{\njut@value@submitdate}%
     \njut@cap@nlc@defenddate%
     \njutunderline[134pt]{\njut@value@defenddate}
 
-    \noindent\njut@cap@nlc@institute%
-    \njutunderline[290pt]{}
+    \noindent\njut@cap@nlc@institute\njutunderline[290pt]{}
 
     \noindent\hfill\njut@cap@nlc@chairman%
     \njutunderline[9em]{\njut@value@nlc@chairman}
@@ -714,10 +717,10 @@
     \vskip 10mm
     \includegraphics[width=1.96cm]{\njut@cap@institute@logo} \\
     \includegraphics[height=2cm]{\njut@cap@institute@name} \\
+    \vskip 8mm
+    {\bf\kaishu\zihao{1}\makebox[10em][s]{\njut@cap@cover@thesis}}\\
     \vskip 5mm
-    {\bf\kaishu\zihao{1}\njut@cap@cover@thesis}\\
-    \vskip 5mm
-    {\bf\kaishu\zihao{1}（\njut@cap@cover@apply）}\\
+    {\bf\kaishu\zihao{1}（\makebox[7em][s]{\njut@cap@cover@apply}）}\\
     \vskip\stretch{1}
     \bf\kaishu\zihao{3}
     \def\tabcolsep{1pt}
@@ -788,31 +791,34 @@
     \cleardoublepage
   \fi
 }
+\newcommand*{\abstracttitlea}[1]{%
+  \renewcommand{\njut@value@abstract@titlea}{#1}}
+\newcommand*{\abstracttitleb}[1]{%
+  \renewcommand{\njut@value@abstract@titleb}{#1}}
 \newenvironment{abstract}{%
   \if@twoside\cleardoublepage\else\clearpage\fi
   \thispagestyle{empty}
   \pdfbookmark[0]{\njut@cap@abstract}{abstract}
   \begin{center}
-    {\bf\kaishu\zihao{-2}%
-      \uuline{\njut@cap@abstract@chaptername}}
+    \bf\kaishu\zihao{-2}%
+    \njutunderline{\njut@cap@abstract@chaptername}
   \end{center}
-
-  {\kaishu\zihao{4}%
-    {\noindent\njut@cap@abstract@title{：}%
-      \njutunderline[316pt]{\njut@value@title}}
-
-    {\noindent\njutunderline[178pt]{\njut@value@major}%
-      \njut@cap@abstract@major%
-     \njutunderline[50pt]{\njut@value@grade}%
-     \njut@cap@abstract@author{：}%
-     \njutunderline[60pt]{\njut@value@author}}
-
-    {\noindent\njut@cap@abstract@supervisor{：}%
-      \njutunderline[252pt]{\njut@value@supervisor}}
-  }
+  \vspace{3mm}
+  \kaishu\zihao{4}%
+  \noindent\njut@cap@abstract@title{：}%
+  \njutunderline[318pt]{\njut@value@abstract@titlea}\\
+  \noindent\njutunderline[\textwidth]{\njut@value@abstract@titleb}\\
+  \noindent\njutunderline[178pt]{\njut@value@major}%
+  \njut@cap@abstract@major%
+  \njutunderline[50pt]{\njut@value@grade}%
+  \njut@cap@abstract@author{：}%
+  \njutunderline[61pt]{\njut@value@author}\\
+  \noindent\njut@cap@abstract@supervisor{：}%
+  \njutunderline[248pt]{\njut@value@supervisor}\\
+  \vspace{5mm}
   \begin{center}
     {\heiti\zihao{-3}\njut@cap@abstract@abstractname}
-  \end{center}
+  \end{center}\par
 }{%
   \clearpage
   \if@twoside
@@ -821,30 +827,37 @@
   \fi
 }
 \newcommand{\keywords}[1]{%
+  \renewcommand*{\njut@value@abstract@keywords}{#1}%
   \vspace{2ex}\noindent%
-  {\renewcommand*{\njut@value@keywords}{#1}%
-   \heiti\njut@cap@abstract@keywordsname{：}}{\ }{#1}%
+  {\bf\njut@cap@abstract@keywordsname{：}}~{#1}%
 }
+\newcommand*{\englishabstracttitlea}[1]{%
+  \renewcommand{\njut@value@abstract@en@titlea}{#1}}
+\newcommand*{\englishabstracttitleb}[1]{%
+  \renewcommand{\njut@value@abstract@en@titleb}{#1}}
 \newenvironment{englishabstract}{%
   \if@twoside\cleardoublepage\else\clearpage\fi
   \thispagestyle{empty}
   \pdfbookmark[0]{\njut@cap@abstract@en}{englishabstract}
   \begin{center}
     {\bf\kaishu\zihao{-2}%
-      \uuline{\njut@cap@abstract@en@chaptername}}
+     \njutunderline{\njut@cap@abstract@en@chaptername}}
   \end{center}
-
   {\zihao{4}%
-    \begin{description}[font=\normalfont, leftmargin=4em]
-      \item[\njut@cap@abstract@en@title{:}] \njut@value@en@title
-      \item[\njut@cap@abstract@en@major{:}] \njut@value@en@major
-      \item[\njut@cap@abstract@en@author{:}] \njut@value@en@author
-      \item[\njut@cap@abstract@en@supervisor{:}] \njut@value@en@supervisor
-    \end{description}
+   \njut@cap@abstract@en@title{:}~%
+   \njutunderline[360pt]{\njut@value@abstract@en@titlea}\\
+   \njutunderline[\textwidth]{\njut@value@abstract@en@titleb}\\
+   \njut@cap@abstract@en@major{:}~%
+   \njutunderline[298pt]{\njut@value@en@major}\\
+   \njut@cap@abstract@en@author{:}~%
+   \njutunderline[299pt]{\njut@value@en@author}\\
+   \njut@cap@abstract@en@supervisor{:}~%
+   \njutunderline[348pt]{\njut@value@en@supervisor}\\
   }
+  \vspace{5mm}
   \begin{center}
-   {\bf\zihao{-3}\njut@cap@abstract@en@abstractname}
-  \end{center}
+    {\bf\zihao{-3}\njut@cap@abstract@en@abstractname}
+  \end{center}\par
 }{%
   \clearpage
   \if@twoside
@@ -853,8 +866,9 @@
   \fi
 }
 \newcommand{\englishkeywords}[1]{%
-  \vspace{2ex}\noindent
-  {\bf\njut@cap@abstract@en@keywordsname{:}}{\ }{#1}%
+  \renewcommand*{\njut@value@abstract@en@keywords}{#1}%
+  \vspace{2ex}\noindent%
+  {\bf\njut@cap@abstract@en@keywordsname{:}}~~{#1}%
 }
 \newenvironment{resume}{%
   \nchapter{\njut@cap@resume@chaptername}
@@ -914,7 +928,7 @@
         pdftitle={\njut@value@title},
         pdfauthor={\njut@value@author},
         pdfsubject={\njut@cap@cover@apply},
-        pdfkeywords={\njut@value@keywords},
+        pdfkeywords={\njut@value@abstract@keywords},
         pdfcreator={\njut@value@author},
         pdfproducer={XeLaTeX with the NJU-Thesis document class}}
 }

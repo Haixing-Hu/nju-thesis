@@ -117,7 +117,7 @@
 %  v1.0.2 & 2013/08/25 & 胡海星 & 合并了国家图书馆封面上的导师信息\newline
 %                                使用|\makebox[width][s]{...}|使得封面标签可以自动
 %                                两端对其分布\newline
-%                                修改了用户手册的样式\\
+%                                修改了学位论文和用户手册的样式\\
 % \bottomrule
 % \end{tabular*}
 % \end{center}
@@ -493,19 +493,22 @@
 % \end{example}
 %
 % \myentry{论文标题及副标题}
-% \DescribeMacro{\titlelinea}
-% \DescribeMacro{\titlelineb}
-% \DescribeMacro{\titlelinec}分别用于设置国家图书馆封面的论文标题及副标题的第一行、第
-% 二行和第三行。|\titlelinea|属性必须被设置，|titlelineb|和|titlelinec|属性为可选，
-% 其默认值为空白。
+% \DescribeMacro{\nlctitlea}
+% \DescribeMacro{\nlctitleb}
+% \DescribeMacro{\nlctitlec}分别用于设置国家图书馆封面的论文标题及副标题的第一行、
+% 第二行和第三行。|\nlctitlea|属性必须被设置，|\nlctitleb|和|\nlctitlec|属性为可
+% 选，其默认值为空白。这三个命令是为了让用户在论文标题较长时手动进行分割换行。
+% \begin{note}
+% |\nlctitlea|、|nlctitleb|和|nlctitlec|命令的参数中都不能出现换行。
+% \end{note}
 % \begin{example}
-% \titlelinea{基于小世界理论的}
-% \titlelineb{数据中心网络模型研究}
+% \nlctitlea{基于小世界理论的}
+% \nlctitleb{数据中心网络模型研究}
 % \end{example}
 %
 % \begin{note}
-% |\titlelinea|、|titlelineb|和|titlelinec|命令的参数中不能换行。若标题太长，请自行
-% 将其分割，最多分为三行。
+% |\nlctitlea|、|\nlctitleb|和|\nlctitlec|命令的参数中不能换行。若标
+% 题太长，请自行将其分割，最多分为三行。
 % \end{note}
 %
 % \myentry{导师信息}
@@ -539,28 +542,28 @@
 % 下面是论文的中文封面的内容替换命令。
 %
 % \myentry{论文标题}
-% \DescribeMacro{\title}设置论文的中文标题。如果标题太长，可在此命令参数中换行。此属性
-% 必须被设置。
-% \begin{example}
-% \title{基于小世界理论的\\ 数据中心网络模型}
-% \end{example}
-%
+% \DescribeMacro{\title}设置论文的中文标题。此属性必须被设置。
 % \begin{note}
-% 不能在|\title{}|中使用|\thanks|脚注。
+% |\title|的参数中不可换行，也不能使用|\thanks|脚注。
 % \end{note}
+% \begin{example}
+% \title{基于小世界理论的数据中心网络模型}
+% \end{example}
 %
 % \myentry{作者姓名}
 % \DescribeMacro{\author}设置论文作者的姓名。此属性必须被设置。
+% \begin{note}
+% |\author|的参数中不可换行，也不能使用|\thanks|脚注。
+% \end{note}
 % \begin{example}
 % \author{张三}
 % \end{example}
 %
-% \begin{note}
-% 不能在|\author{}|中使用|\thanks|脚注。
-% \end{note}
-%
 % \myentry{作者学号}
 % \DescribeMacro{\studentnum}设置论文作者的学号。此属性必须被设置。
+% \begin{note}
+% |\studentnum|的参数中不可换行。
+% \end{note}
 % \begin{example}
 % \studentnum{MGXXXXXXX}
 % \end{example}
@@ -574,24 +577,36 @@
 %
 % \myentry{导师姓名职称}
 % \DescribeMacro{\supervisor}设置论文作者的导师的姓名和职称。此属性必须被设置。
+% \begin{note}
+% |\supervisor|的参数中不可换行。
+% \end{note}
 % \begin{example}
-% \supervisorname{李四\hspace{1em}教授}
+% \supervisorname{李四~~教授}
 % \end{example}
 %
 % \myentry{学科专业}
 % \DescribeMacro{\major}设置论文作者的学科与专业方向。此属性必须被设置。
+% \begin{note}
+% |\major|的参数中不可换行。
+% \end{note}
 % \begin{example}
 % \major{计算机软件与理论}
 % \end{example}
 %
 % \myentry{研究方向}
 % \DescribeMacro{\researchfield}设置论文作者的研究方向。此属性必须被设置。
+% \begin{note}
+% |\researchfield|的参数中不可换行。
+% \end{note}
 % \begin{example}
 % \major{计算机网络与信息安全}
 % \end{example}
 %
 % \myentry{院系名称}
 % \DescribeMacro{\department}设置论文作者所在院系的中文名称。此属性必须被设置。
+% \begin{note}
+% |\department|的参数中不可换行。
+% \end{note}
 % \begin{example}
 % \department{计算机科学与技术系}
 % \end{example}
@@ -599,6 +614,9 @@
 % \myentry{学校名称}
 % \DescribeMacro{\institute}设置论文作者所在学校或机构的名称，该学校或机构也是所申请学
 % 位的颁发机构。此属性为可选，默认值为``南京大学''。
+% \begin{note}
+% |\institute|的参数中不可换行。
+% \end{note}
 % \begin{example}
 % \institute{南京大学}
 % \end{example}
@@ -627,7 +645,7 @@
 % 下面是论文的英文封面的内容替换命令。
 %
 % \myentry{论文标题}
-% \DescribeMacro{\englishtitle}设置论文的英文标题。如果标题太长，可在此命令参数中换行。
+% \DescribeMacro{\entitle}设置论文的英文标题。如果标题太长，可在此命令参数中换行。
 % 此属性必须被设置。
 % \begin{example}
 % \englishtitle{Network Models of Data Centers\\
@@ -683,6 +701,38 @@
 % \englishdate{May 1, 2013}
 % \end{example}
 %
+% \subsubsection{中文摘要页命令}
+%
+% \myentry{标题及副标题}
+% \DescribeMacro{\abstracttitlea}
+% \DescribeMacro{\abstracttitleb}分别用于设置中文摘要页面的论文标题及副标题的第一行和
+% 第二行。|\abstracttitlea|属性为可选，其默认值为使用|\title|命令所设置的论文标题；
+% |\abstracttitleb|属性为可选，其默认值为空白。这两个命令是为了让用户在论文标题较长时
+% 手动进行分割换行。
+% \begin{note}
+% |\abstracttitlea|和|abstracttitleb|命令的参数中都不能出现换行。
+% \end{note}
+% \begin{example}
+% \abstracttitlea{基于小世界理论的}
+% \abstracttitleb{数据中心网络模型研究}
+% \end{example}
+%
+% \subsubsection{英文摘要页命令}
+%
+% \myentry{标题及副标题}
+% \DescribeMacro{\englishabstracttitlea}
+% \DescribeMacro{\englishabstracttitleb}分别用于设置英文摘要页面的论文标题及副标题的
+% 第一行和第二行。|\englishabstracttitlea|属性为可选，其默认值为使用|\entitle|命令所
+% 设置的论文英文标题；|\englishabstracttitleb|属性为可选，其默认值为空白。这两个命令
+% 是为了让用户在论文标题较长时手动进行分割换行。
+% \begin{note}
+% |\englishabstracttitlea|和|englishabstracttitleb|命令的参数中都不能出现换行。
+% \end{note}
+% \begin{example}
+% \englishabstracttitlea{A Network Model of Data Centers}
+% \englishabstracttitleb{Based on the Small World Theory}
+% \end{example}
+%
 % \subsubsection{文档结构命令和环境}
 %
 % \myentry{生成中文封面}
@@ -701,14 +751,9 @@
 %
 % \myentry{中文摘要}
 % \DescribeMacro{\abstract} 为中文摘要环境。此环境必须被放在{\TeX}文档的导言区。
-% \begin{note}
-% |abstract|环境的正文第一行应为一空行，否则第一段不能首行自动缩进两个字符。
-% \end{note}
 % \begin{example}
 % \begin{abstract}
-%
 % 本文基于小世界理论，研究了数据中心的网络模型。………………
-%
 % \end{abstract}
 % \end{example}
 %
@@ -726,12 +771,8 @@
 %
 % \myentry{英文摘要}
 % \DescribeMacro{\englishabstract} 为英文摘要环境。此环境必须被放在{\TeX}文档的导言区。
-% \begin{note}
-% |englishabstract|环境的正文第一行应为一空行，否则第一段不能首行自动缩进两个字符。
-% \end{note}
 % \begin{example}
 % \begin{englishabstract}
-%
 % In this paper, we studied the network model of data centers,
 % based on the theory of small worlds. ....
 % \end{englishabstract}
@@ -1348,9 +1389,9 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 \newcommand*{\njut@value@nlc@classification}{(分类)}
 \newcommand*{\njut@value@nlc@confidential}{(密级)}
 \newcommand*{\njut@value@nlc@udc}{}
-\newcommand*{\njut@value@nlc@titlelinea}{(论文标题)}
-\newcommand*{\njut@value@nlc@titlelineb}{}
-\newcommand*{\njut@value@nlc@titlelinec}{}
+\newcommand*{\njut@value@nlc@titlea}{(论文标题)}
+\newcommand*{\njut@value@nlc@titleb}{}
+\newcommand*{\njut@value@nlc@titlec}{}
 \newcommand*{\njut@value@nlc@supervisorinfo}{(导师的职务、职称、学位、单位名称及地址)}
 \newcommand*{\njut@value@nlc@chairman}{(答辩主席)}
 \newcommand*{\njut@value@nlc@reviewera}{(评审人)}
@@ -1427,9 +1468,18 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
               \number\day, \number\year}
 %    \end{macrocode}
 %
-% 文档类中用到的其他变量的默认值：
+% 定义南京大学学位论文中文摘要页中要填写的字段的默认值：
 %    \begin{macrocode}
-\newcommand*{\njut@value@keywords}{}
+\newcommand*{\njut@value@abstract@titlea}{\njut@value@title}
+\newcommand*{\njut@value@abstract@titleb}{}
+\newcommand*{\njut@value@abstract@keywords}{}
+%    \end{macrocode}
+%
+% 定义南京大学学位论文英文摘要页中要填写的字段的默认值：
+%    \begin{macrocode}
+\newcommand*{\njut@value@abstract@en@titlea}{\njut@value@en@title}
+\newcommand*{\njut@value@abstract@en@titleb}{}
+\newcommand*{\njut@value@abstract@en@keywords}{}
 %    \end{macrocode}
 %
 % \subsection{格式控制常量定义}
@@ -2003,6 +2053,12 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 %    \end{macrocode}
 % \end{macro}
 %
+% 设置浮动表格和插图的编号格式：
+%    \begin{macrocode}
+\renewcommand*{\thefigure}{\thechapter\,--\,\arabic{figure}}
+\renewcommand*{\thetable}{\thechapter\,--\,\arabic{table}}
+%    \end{macrocode}
+%
 % \subsection{页幅设置}
 %
 % 正文统一用小四号字，间距为固定值20pt。|\linestrech|的值为$1$时为单倍行距， $1.2$时是
@@ -2268,12 +2324,12 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
   \renewcommand*{\njut@value@nlc@confidential}{#1}}
 \newcommand*{\udc}[1]{%
   \renewcommand*{\njut@value@nlc@udc}{#1}}
-\newcommand*{\titlelinea}[1]{%
-  \renewcommand{\njut@value@nlc@titlelinea}{#1}}
-\newcommand*{\titlelineb}[1]{%
-  \renewcommand{\njut@value@nlc@titlelineb}{#1}}
-\newcommand*{\titlelinec}[1]{%
-  \renewcommand{\njut@value@nlc@titlelinec}{#1}}
+\newcommand*{\nlctitlea}[1]{%
+  \renewcommand{\njut@value@nlc@titlea}{#1}}
+\newcommand*{\nlctitleb}[1]{%
+  \renewcommand{\njut@value@nlc@titleb}{#1}}
+\newcommand*{\nlctitlec}[1]{%
+  \renewcommand{\njut@value@nlc@titlec}{#1}}
 \newcommand*{\supervisorinfo}[1]{%
   \renewcommand{\njut@value@nlc@supervisorinfo}{#1}}
 \newcommand*{\chairman}[1]{%
@@ -2292,7 +2348,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 %
 % 中文封面字段设置：
 %    \begin{macrocode}
-\renewcommand{\title}[1]{%
+\renewcommand*{\title}[1]{%
   \renewcommand{\njut@value@title}{#1}}
 \renewcommand*{\author}[1]{%
   \renewcommand{\njut@value@author}{#1}}
@@ -2370,16 +2426,16 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
     {\kaishu\zihao{-0} \njut@cap@nlc@title}
     {\kaishu\zihao{1}
     \vskip \stretch{1}
-    \njutunderline[9em]{~\njut@value@nlc@titlelinea~}\\
-    \njutunderline[9em]{~\njut@value@nlc@titlelineb~}\\
-    \njutunderline[9em]{~\njut@value@nlc@titlelinec~}\\
+    \njutunderline[9em]{\njut@value@nlc@titlea}\\
+    \njutunderline[9em]{\njut@value@nlc@titleb}\\
+    \njutunderline[9em]{\njut@value@nlc@titlec}\\
     }
     \vskip \stretch{1}
-    {\kaishu\zihao{4} \njut@cap@nlc@quotetitle}
+    \kaishu\zihao{4}\njut@cap@nlc@quotetitle
     \vskip \stretch{1}
-    {\kaishu\zihao{1} \njutunderline{~{\njut@value@author}~}}
+    \kaishu\zihao{1}\njutunderline{\njut@value@author}
     \vskip \stretch{1}
-    {\kaishu\zihao{4} \njut@cap@nlc@author}
+    \kaishu\zihao{4}\njut@cap@nlc@author
   \end{center}
   {\kaishu\zihao{4}
     \vskip \stretch{1}
@@ -2388,16 +2444,17 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 
     \noindent\njutunderline[\textwidth]{\njut@value@nlc@supervisorinfo}
 
-    \noindent\njut@cap@nlc@degree\njutunderline[8em]{\njut@value@degree}
-    \njut@cap@nlc@major\njutunderline[164pt]{\njut@value@major}
+    \noindent\njut@cap@nlc@degree%
+    \njutunderline[8em]{\njut@value@degree}%
+    \noindent\njut@cap@nlc@major%
+    \njutunderline[164pt]{\njut@value@major}
 
     \noindent\njut@cap@nlc@submitdate%
-    \njutunderline[8em]{\njut@value@submitdate}
+    \njutunderline[8em]{\njut@value@submitdate}%
     \njut@cap@nlc@defenddate%
     \njutunderline[134pt]{\njut@value@defenddate}
 
-    \noindent\njut@cap@nlc@institute%
-    \njutunderline[290pt]{}
+    \noindent\njut@cap@nlc@institute\njutunderline[290pt]{}
 
     \noindent\hfill\njut@cap@nlc@chairman%
     \njutunderline[9em]{\njut@value@nlc@chairman}
@@ -2430,10 +2487,10 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
     \vskip 10mm
     \includegraphics[width=1.96cm]{\njut@cap@institute@logo} \\
     \includegraphics[height=2cm]{\njut@cap@institute@name} \\
+    \vskip 8mm
+    {\bf\kaishu\zihao{1}\makebox[10em][s]{\njut@cap@cover@thesis}}\\
     \vskip 5mm
-    {\bf\kaishu\zihao{1}\njut@cap@cover@thesis}\\
-    \vskip 5mm
-    {\bf\kaishu\zihao{1}（\njut@cap@cover@apply）}\\
+    {\bf\kaishu\zihao{1}（\makebox[7em][s]{\njut@cap@cover@apply}）}\\
     \vskip\stretch{1}
     \bf\kaishu\zihao{3}
     \def\tabcolsep{1pt}
@@ -2527,6 +2584,22 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 %
 % \subsection{摘要页}
 %
+% \begin{macro}{\abstracttitlea}
+% 用于设置中文摘要页论文标题的第一行。
+%    \begin{macrocode}
+\newcommand*{\abstracttitlea}[1]{%
+  \renewcommand{\njut@value@abstract@titlea}{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\abstracttitleb}
+% 用于设置中文摘要页论文标题的第二行。
+%    \begin{macrocode}
+\newcommand*{\abstracttitleb}[1]{%
+  \renewcommand{\njut@value@abstract@titleb}{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{abstract}
 % 定义中文摘要环境。该环境自动生成南京大学中文摘要页。
 %    \begin{macrocode}
@@ -2535,26 +2608,25 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
   \thispagestyle{empty}
   \pdfbookmark[0]{\njut@cap@abstract}{abstract}
   \begin{center}
-    {\bf\kaishu\zihao{-2}%
-      \uuline{\njut@cap@abstract@chaptername}}
+    \bf\kaishu\zihao{-2}%
+    \njutunderline{\njut@cap@abstract@chaptername}
   \end{center}
-
-  {\kaishu\zihao{4}%
-    {\noindent\njut@cap@abstract@title{：}%
-      \njutunderline[316pt]{\njut@value@title}}
-
-    {\noindent\njutunderline[178pt]{\njut@value@major}%
-      \njut@cap@abstract@major%
-     \njutunderline[50pt]{\njut@value@grade}%
-     \njut@cap@abstract@author{：}%
-     \njutunderline[60pt]{\njut@value@author}}
-
-    {\noindent\njut@cap@abstract@supervisor{：}%
-      \njutunderline[252pt]{\njut@value@supervisor}}
-  }
+  \vspace{3mm}
+  \kaishu\zihao{4}%
+  \noindent\njut@cap@abstract@title{：}%
+  \njutunderline[318pt]{\njut@value@abstract@titlea}\\
+  \noindent\njutunderline[\textwidth]{\njut@value@abstract@titleb}\\
+  \noindent\njutunderline[178pt]{\njut@value@major}%
+  \njut@cap@abstract@major%
+  \njutunderline[50pt]{\njut@value@grade}%
+  \njut@cap@abstract@author{：}%
+  \njutunderline[61pt]{\njut@value@author}\\
+  \noindent\njut@cap@abstract@supervisor{：}%
+  \njutunderline[248pt]{\njut@value@supervisor}\\
+  \vspace{5mm}
   \begin{center}
     {\heiti\zihao{-3}\njut@cap@abstract@abstractname}
-  \end{center}
+  \end{center}\par
 }{%
   \clearpage
   \if@twoside
@@ -2570,10 +2642,26 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 % 以中文全角分号隔开，末尾不需要加标点。
 %    \begin{macrocode}
 \newcommand{\keywords}[1]{%
+  \renewcommand*{\njut@value@abstract@keywords}{#1}%
   \vspace{2ex}\noindent%
-  {\renewcommand*{\njut@value@keywords}{#1}%
-   \heiti\njut@cap@abstract@keywordsname{：}}{\ }{#1}%
+  {\bf\njut@cap@abstract@keywordsname{：}}~{#1}%
 }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\englishabstracttitlea}
+% 用于设置英文摘要页论文标题的第一行。
+%    \begin{macrocode}
+\newcommand*{\englishabstracttitlea}[1]{%
+  \renewcommand{\njut@value@abstract@en@titlea}{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\englishabstracttitleb}
+% 用于设置英文摘要页论文标题的第二行。
+%    \begin{macrocode}
+\newcommand*{\englishabstracttitleb}[1]{%
+  \renewcommand{\njut@value@abstract@en@titleb}{#1}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2586,20 +2674,23 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
   \pdfbookmark[0]{\njut@cap@abstract@en}{englishabstract}
   \begin{center}
     {\bf\kaishu\zihao{-2}%
-      \uuline{\njut@cap@abstract@en@chaptername}}
+     \njutunderline{\njut@cap@abstract@en@chaptername}}
   \end{center}
-
   {\zihao{4}%
-    \begin{description}[font=\normalfont, leftmargin=4em]
-      \item[\njut@cap@abstract@en@title{:}] \njut@value@en@title
-      \item[\njut@cap@abstract@en@major{:}] \njut@value@en@major
-      \item[\njut@cap@abstract@en@author{:}] \njut@value@en@author
-      \item[\njut@cap@abstract@en@supervisor{:}] \njut@value@en@supervisor
-    \end{description}
+   \njut@cap@abstract@en@title{:}~%
+   \njutunderline[360pt]{\njut@value@abstract@en@titlea}\\
+   \njutunderline[\textwidth]{\njut@value@abstract@en@titleb}\\
+   \njut@cap@abstract@en@major{:}~%
+   \njutunderline[298pt]{\njut@value@en@major}\\
+   \njut@cap@abstract@en@author{:}~%
+   \njutunderline[299pt]{\njut@value@en@author}\\
+   \njut@cap@abstract@en@supervisor{:}~%
+   \njutunderline[348pt]{\njut@value@en@supervisor}\\
   }
+  \vspace{5mm}
   \begin{center}
-   {\bf\zihao{-3}\njut@cap@abstract@en@abstractname}
-  \end{center}
+    {\bf\zihao{-3}\njut@cap@abstract@en@abstractname}
+  \end{center}\par
 }{%
   \clearpage
   \if@twoside
@@ -2615,8 +2706,9 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 % 以英文半角逗号隔开，末尾不需要加标点。
 %    \begin{macrocode}
 \newcommand{\englishkeywords}[1]{%
-  \vspace{2ex}\noindent
-  {\bf\njut@cap@abstract@en@keywordsname{:}}{\ }{#1}%
+  \renewcommand*{\njut@value@abstract@en@keywords}{#1}%
+  \vspace{2ex}\noindent%
+  {\bf\njut@cap@abstract@en@keywordsname{:}}~~{#1}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2775,7 +2867,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
         pdftitle={\njut@value@title},
         pdfauthor={\njut@value@author},
         pdfsubject={\njut@cap@cover@apply},
-        pdfkeywords={\njut@value@keywords},
+        pdfkeywords={\njut@value@abstract@keywords},
         pdfcreator={\njut@value@author},
         pdfproducer={XeLaTeX with the NJU-Thesis document class}}
 }

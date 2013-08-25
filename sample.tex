@@ -26,11 +26,11 @@
 % UDC编码
 \udc{004.72}
 % 国家图书馆封面上的论文标题第一行，不可换行。
-\titlelinea{基于小世界理论的}
+\nlctitlea{基于小世界理论的}
 % 国家图书馆封面上的论文标题第二行，不可换行。此属性可选，默认值为空白。
-\titlelineb{数据中心网络模型}
+\nlctitleb{数据中心网络模型}
 % 国家图书馆封面上的论文标题第三行，不可换行。此属性可选，默认值为空白。
-\titlelinec{}
+\nlctitlec{}
 % 导师的单位名称及地址
 \supervisorinfo{南京大学计算机科学与技术系~~南京市汉口路22号~~210093}
 % 答辩委员会主席
@@ -50,8 +50,8 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% 论文标题，若太长可换行
-\title{基于小世界理论的\\ 数据中心网络模型}
+% 论文标题，不可换行
+\title{基于小世界理论的数据中心网络模型}
 % 论文作者姓名
 \author{韦小宝}
 % 论文作者学生证号
@@ -81,9 +81,8 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% 论文的英文标题。如果标题太长可换行。
-\englishtitle{Network Models of Data Centers Based on \\
-the Small World Theory}
+% 论文的英文标题，不可换行
+\englishtitle{A Network Model of Data Centers Based on the Small World Theory}
 % 论文作者姓名的拼音
 \englishauthor{Xiaobao Wei}
 % 导师姓名职称的英文
@@ -99,6 +98,32 @@ the Small World Theory}
 % 该月中日期的阿拉伯数字表示；``year''为年份的四位阿拉伯数字表示。此属性可选，默认值为最后
 % 一次编译时的日期。
 \englishdate{May 1, 2013}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%                           中文摘要内容设置
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 设置中文摘要页面的论文标题及副标题的第一行。
+% 此属性可选，其默认值为使用|\title|命令所设置的论文标题
+%% \abstracttitlea{基于小世界理论的}
+% 设置中文摘要页面的论文标题及副标题的第二行。
+% 此属性可选，其默认值为空白
+%% \abstracttitleb{数据中心网络模型}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%                           英文摘要内容设置
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 设置英文摘要页面的论文标题及副标题的第一行。
+% 此属性可选，其默认值为使用|\englishtitle|命令所设置的论文标题
+\englishabstracttitlea{A Netork Model of Data Centers}
+% 设置英文摘要页面的论文标题及副标题的第二行。
+% 此属性可选，其默认值为空白
+\englishabstracttitleb{Based on the Small World Theory}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
@@ -118,7 +143,6 @@ the Small World Theory}
 
 % 中文摘要
 \begin{abstract}
-% 中文摘要首行必须为空行，否则第一段不能首行缩进两字符
 
 复杂网络的研究可上溯到20世纪60年代对ER网络的研究。90年后代随着Internet
 的发展，以及对人类社会、通信网络、生物网络、社交网络等各领域研究的深入，
@@ -134,8 +158,6 @@ the Small World Theory}
 
 % 英文摘要
 \begin{englishabstract}
-% 英文摘要首行必须为空行，否则第一段不能首行缩进两字符
-
 This is English abstract. This is English abstract. This is English
 abstract. This is English abstract.This is English abstract. This is English
 abstract. This is English abstract.
@@ -191,6 +213,29 @@ abstract. This is English abstract. This is English abstract.
 有1千台机器故障；数千块硬盘损坏；一个PDU损坏导致500-1000台服务器下线6小
 时；一次网络重连导致5\%的节点下线2天；20个机柜故障导致40-80台节点下线；
 大量的小问题导致30秒左右的卡顿等等\cite{Dean2009}。
+
+
+\begin{table}
+  \centering
+  \begin{tabular}{cccp{38mm}}
+    \toprule
+    \textbf{文档域类型} & \textbf{Java类型} & \textbf{宽度(字节)} & \textbf{说明} \\
+    \midrule
+    BOOLEAN  & boolean &  1  & \\
+    CHAR     & char    &  2  & UTF-16字符 \\
+    BYTE     & byte    &  1  & 有符号8位整数 \\
+    SHORT    & short   &  2  & 有符号16位整数 \\
+    INT      & int     &  4  & 有符号32位整数 \\
+    LONG     & long    &  8  & 有符号64位整数 \\
+    STRING   & String  &  字符串长度  & 以UTF-8编码存储 \\
+    DATE     & java.util.Date & 8 & 距离GMT时间1970年1月1日0点0分0秒的毫秒数 \\
+    BYTE\_ARRAY & byte$[]$ & 数组长度 & 用于存储二进制值 \\
+    BIG\_INTEGER & java.math.BigInteger & 和具体值有关 & 任意精度的长整数 \\
+    BIG\_DECIMAL & java.math.BigDecimal & 和具体值有关 & 任意精度的十进制实数 \\
+    \bottomrule
+  \end{tabular}
+  \caption{测试表格}\label{table:test1}
+\end{table}
 
 另一方面，在学术领域，在这方面有许多相关研究。大致上可分为两派，其一以
 改良为主，如针对扩展性问题，Fat-tree\cite{al2008scalable}通过增加交换机
@@ -268,14 +313,14 @@ PacketShader\cite{han2010packetshader}等。
 言而概之，“人多力量大”。
 
 但随着节点数目的增多，问题的重点将逐步转换为如何对大量节点进行高效互联。图
-\ref{fig:traditional_network}所示为传统IaaS云中心网络结构的一部分。通过BR边界路
-由器，AR接入路由器构建数据中心的主干；核心交换机和接入交换机S，构成二层交换网络
-层，大量的服务器节点通过二层交换机被最终接入整个网络。
+\ref{fig:test1}所示为传统IaaS云中心网络结构的一部分。通过BR边界路由器，AR接入路
+由器构建数据中心的主干；核心交换机和接入交换机S，构成二层交换网络层，大量的服务
+器节点通过二层交换机被最终接入整个网络。
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width= 0.7\textwidth]{njulogo.eps}\\
-  \caption{传统网络结构}\label{fig:traditional_network}
+  \includegraphics[width= 0.5\textwidth]{njuname.eps}\\
+  \caption{测试插图}\label{fig:test1}
 \end{figure}
 
 在上述传统网络中，当节点总数达到数千乃至万数量级时，上层链路的聚合带宽
@@ -292,6 +337,12 @@ PacketShader\cite{han2010packetshader}等。
 生活中，常出现初次见面的陌生人却拥有双方都认识的共同熟人，于是大家时常
 会感叹：“这世界真小！”。这种现象被称为``小世界现象''，后又称为``六度
 分割理论''。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width= 0.5\textwidth]{njuname.eps}\\
+  \caption{测试插图}\label{fig:test2}
+\end{figure}
 
 1909年，现代无线电之父Guglielmo Marconi在其诺贝尔奖致辞中讨论了覆盖整个地球所需
 的无线电中继站数目，并根据他的实验结果计算出平均需要$5.83$（近似为$6$）个中继站
@@ -310,6 +361,29 @@ PacketShader\cite{han2010packetshader}等。
 接或间接地影响了早期的社交网络理论的研究，他被认为是六度分隔(six
 degrees of separation)理论的最早提出者\cite{barabasi2003linked}。
 
+
+\begin{table}
+  \centering
+  \begin{tabular}{cccp{38mm}}
+    \toprule
+    \textbf{文档域类型} & \textbf{Java类型} & \textbf{宽度(字节)} & \textbf{说明} \\
+    \midrule
+    BOOLEAN  & boolean &  1  & \\
+    CHAR     & char    &  2  & UTF-16字符 \\
+    BYTE     & byte    &  1  & 有符号8位整数 \\
+    SHORT    & short   &  2  & 有符号16位整数 \\
+    INT      & int     &  4  & 有符号32位整数 \\
+    LONG     & long    &  8  & 有符号64位整数 \\
+    STRING   & String  &  字符串长度  & 以UTF-8编码存储 \\
+    DATE     & java.util.Date & 8 & 距离GMT时间1970年1月1日0点0分0秒的毫秒数 \\
+    BYTE\_ARRAY & byte$[]$ & 数组长度 & 用于存储二进制值 \\
+    BIG\_INTEGER & java.math.BigInteger & 和具体值有关 & 任意精度的长整数 \\
+    BIG\_DECIMAL & java.math.BigDecimal & 和具体值有关 & 任意精度的十进制实数 \\
+    \bottomrule
+  \end{tabular}
+  \caption{测试表格}\label{table:test2}
+\end{table}
+
 1961年，Michael Gurevich在社会学家Ithiel de Sola Pool的指导下完成了他的
 博士论文，对社交网络进行了实验性的研究。随后，数学家Manfred Kochen与
 Sola Pool一道在他们的手稿《Contacts and Influences》中对这些实验结果做
@@ -318,6 +392,11 @@ Sola Pool一道在他们的手稿《Contacts and Influences》中对这些实验
 Monte Carlo法做了模拟，并证实了该结论\cite{pool1978}，从而为心理学家
 Stanley Milgram后来的发现打下了基础。
 
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width= 0.5\textwidth]{njuname.eps}\\
+  \caption{测试插图}\label{fig:test3}
+\end{figure}
 
 \section{网络结构的重要指标}
 
@@ -356,12 +435,40 @@ Stanley Milgram后来的发现打下了基础。
 
 \subsection{聚类系数}
 
+\begin{table}
+  \centering
+  \begin{tabular}{cccp{38mm}}
+    \toprule
+    \textbf{文档域类型} & \textbf{Java类型} & \textbf{宽度(字节)} & \textbf{说明} \\
+    \midrule
+    BOOLEAN  & boolean &  1  & \\
+    CHAR     & char    &  2  & UTF-16字符 \\
+    BYTE     & byte    &  1  & 有符号8位整数 \\
+    SHORT    & short   &  2  & 有符号16位整数 \\
+    INT      & int     &  4  & 有符号32位整数 \\
+    LONG     & long    &  8  & 有符号64位整数 \\
+    STRING   & String  &  字符串长度  & 以UTF-8编码存储 \\
+    DATE     & java.util.Date & 8 & 距离GMT时间1970年1月1日0点0分0秒的毫秒数 \\
+    BYTE\_ARRAY & byte$[]$ & 数组长度 & 用于存储二进制值 \\
+    BIG\_INTEGER & java.math.BigInteger & 和具体值有关 & 任意精度的长整数 \\
+    BIG\_DECIMAL & java.math.BigDecimal & 和具体值有关 & 任意精度的十进制实数 \\
+    \bottomrule
+  \end{tabular}
+  \caption{测试表格}\label{table:test3}
+\end{table}
+
 在图论中，聚类系数(clustering coefficient)是用来描述一个图中的顶点之间
 结集成团的程度的系数。具体来说，是一个点的邻接点之间相互连接的程度。许
 多大规模的实际网络都具有明显的聚类效应。例如生活社交网络中，你的朋友同
 时也是朋友的概率会随着网络规模的增加而趋向于某个非零常数。这意味着这些
 实际的复杂网络并不是完全随机的，而是在某种程度上具有类似于社会关系网络
 中“物以类聚，人以群分”的特性。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width= 0.5\textwidth]{njuname.eps}\\
+  \caption{测试插图}\label{fig:test4}
+\end{figure}
 
 集聚系数分为整体与局部两种。整体集聚系数可以给出一个图中整体的集聚程度
 的评估，而局部集聚系数则可以测量图中每一个结点附近的集聚程度。
@@ -385,7 +492,37 @@ Stanley Milgram后来的发现打下了基础。
 \cite{watts1998smallworld}中首次引入了这个概念，用以判别一个图是否是小
 世界网络。
 
+\begin{table}
+  \centering
+  \begin{tabular}{cccp{38mm}}
+    \toprule
+    \textbf{文档域类型} & \textbf{Java类型} & \textbf{宽度(字节)} & \textbf{说明} \\
+    \midrule
+    BOOLEAN  & boolean &  1  & \\
+    CHAR     & char    &  2  & UTF-16字符 \\
+    BYTE     & byte    &  1  & 有符号8位整数 \\
+    SHORT    & short   &  2  & 有符号16位整数 \\
+    INT      & int     &  4  & 有符号32位整数 \\
+    LONG     & long    &  8  & 有符号64位整数 \\
+    STRING   & String  &  字符串长度  & 以UTF-8编码存储 \\
+    DATE     & java.util.Date & 8 & 距离GMT时间1970年1月1日0点0分0秒的毫秒数 \\
+    BYTE\_ARRAY & byte$[]$ & 数组长度 & 用于存储二进制值 \\
+    BIG\_INTEGER & java.math.BigInteger & 和具体值有关 & 任意精度的长整数 \\
+    BIG\_DECIMAL & java.math.BigDecimal & 和具体值有关 & 任意精度的十进制实数 \\
+    \bottomrule
+  \end{tabular}
+  \caption{测试表格}\label{table:test4}
+\end{table}
+
 \begin{definition}[局部聚类系数]
+
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width= 0.5\textwidth]{njuname.eps}\\
+  \caption{测试插图}\label{fig:test5}
+\end{figure}
+
 假设网络中的一个节点$i$有$k_i$条边与其他节点相连，这$k_i$个节点称为节点
 $i$的邻居。显然，在这$k_i$个节点之间最多可能有$k_i(k_i-1)/2$条边。而这
 $k_i$个节点之间实际存在的边数$E_i$和总的可能的边数$k_i(k_i-1)/2$之比就
@@ -401,6 +538,12 @@ $k_i$个节点之间实际存在的边数$E_i$和总的可能的边数$k_i(k_i-1
 其中，与节点$i$相连的三元组是指由节点$i$和其两个邻居节点构成的组合。
 \end{definition}
 
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width= 0.5\textwidth]{njuname.eps}\\
+  \caption{测试插图}\label{fig:test6}
+\end{figure}
+
 知道了一个图里的每一个顶点的局部集聚系数后，可以计算整个图的平均集聚系
 数。这个概念也是Watts与Strogatz在1998年的论文
 \cite{watts1998smallworld}中引入的：
@@ -415,25 +558,21 @@ $k_i$个节点之间实际存在的边数$E_i$和总的可能的边数$k_i(k_i-1
 
 \chapter{结论}\label{chapter_concludes}
 
-本文在第\ref{chapter_smallworld}章中，通过考虑数据中心网络布局构建中的
-最大度限制问题，提出了符合数据中心网络基本要求的DS小世界模型，并分析了
-它的性质。随后提出SIDN，将DS模型映射到具体的网络结构中，并分析了所构成
-网络的平均直径、网络总带宽、对故障的容错能力等各项网络性能。
+本文在第一章中，通过考虑数据中心网络布局构建中的最大度限制问题，提出了符合数据中
+心网络基本要求的DS小世界模型，并分析了它的性质。随后提出SIDN，将DS模型映射到具体
+的网络结构中，并分析了所构成网络的平均直径、网络总带宽、对故障的容错能力等各项网
+络性能。
 
 分析与仿真实验证明，SIDN网络具有很好的扩展能力，网络总带宽与网络规模成
 近似线性增长的关系；具有很强的容错能力，链路损坏与节点损坏几乎无法破坏
 网络的联通性，故障率对网络性能的影响与破坏节点/链路占总资源比率线性相关。
 
-随后在第\ref{chapter_scalefree}章中，分析了无尺度网络在数据中心网络构建
-应用中的理论方面问题。对Scafida \cite{gyarmati2010scafida}文中所述在最
-大度限制的情况下运用BA算法构造的网络并不会损失无尺度性质的观点，进行了
-深入的分析，并指出了该论点的局限性。
+随后在第二章中，分析了无尺度网络在数据中心网络构建应用中的理论方面问题。对
+Scafida \cite{gyarmati2010scafida}文中所述在最大度限制的情况下运用BA算法构造的网
+络并不会损失无尺度性质的观点，进行了深入的分析，并指出了该论点的局限性。
 
 在给出了在引入节点最大度限制之后，利用分治和递归的思想，对无尺度网络
 进行多层构建，对所构造的网络进行度-度相关性，以及聚类性分析。
-
-
-\subsection{测试表格}
 
 \begin{table}
   \centering
@@ -454,19 +593,18 @@ $k_i$个节点之间实际存在的边数$E_i$和总的可能的边数$k_i(k_i-1
     BIG\_DECIMAL & java.math.BigDecimal & 和具体值有关 & 任意精度的十进制实数 \\
     \bottomrule
   \end{tabular}
-  \caption{测试一下表格}\label{table:test}
+  \caption{测试表格}\label{table:test5}
 \end{table}
 
-表\ref{table:test}用于测试表格。随后分析了无尺度网络构造过程中，交换机节点与数据
+表\ref{table:test5}用于测试表格。随后分析了无尺度网络构造过程中，交换机节点与数据
 节点的角色区别，分析了两者在不同比率下形成的网络形态，以及对网络性能造成的影响。
 
 通过理论分析和仿真实验，分析并找出比率因子q的最佳取值。此外，无尺度现象
 的引入提高了网络的聚类系数，从而在不失灵活性可靠性的基础上，进一步提升
 了网络的性能。
 
-在\ref{chapter_random}章中，将关注点转移到交换机本身。由于图论难以描述
-数据中心网络中的交换设备，因此放弃基于图的抽象模型，转而基于多维簇划分
-的思想，提出并设计了WarpNet网络模型。
+在第三章中，将关注点转移到交换机本身。由于图论难以描述数据中心网络中的交换设备，
+因此放弃基于图的抽象模型，转而基于多维簇划分的思想，提出并设计了WarpNet网络模型。
 
 该网络模型突破了基于图描述的局限性，并对网络的带宽等指标进行理论分析并
 给出定量描述。最后对比了理论分析、仿真测试结果，并在实际物理环境中进系
@@ -474,12 +612,11 @@ $k_i$个节点之间实际存在的边数$E_i$和总的可能的边数$k_i(k_i-1
 型的理论分析、仿真测试与实际实验吻合，并在网络性能、容错能力、伸缩性灵
 活性方面得到了进一步的提升。
 
-在\ref{chapter_experiments}章中，针对网络模型研究这一类工作的共性，设计
-构造通用验证平台系统。以海量虚拟机和虚拟分布式交换机的形式，实现了基于
-少量物理节点，对大规模节点的模拟。其模拟运行的过程与真实运行在实现层面
-完全一致，运行的结果与真实环境线性相关。除为本文所涉若干网络模型提供验
-证外，可进一步推广到更为广泛的领域，为各种网络模型及路由算法的研究工作，
-提供分析、指导与验证。
+在第四章中，针对网络模型研究这一类工作的共性，设计构造通用验证平台系统。以海量虚
+拟机和虚拟分布式交换机的形式，实现了基于少量物理节点，对大规模节点的模拟。其模拟
+运行的过程与真实运行在实现层面完全一致，运行的结果与真实环境线性相关。除为本文所
+涉若干网络模型提供验证外，可进一步推广到更为广泛的领域，为各种网络模型及路由算法
+的研究工作，提供分析、指导与验证。
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
