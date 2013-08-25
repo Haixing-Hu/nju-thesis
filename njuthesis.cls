@@ -26,8 +26,6 @@
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{njuthesis}
 [2013/08/24 1.0.0 Documents Class for Degree Papers of Nanjing University.]
-\newif\ifnjut@oneside \njut@onesidetrue
-\newif\ifnjut@twoside \njut@twosidefalse
 \newif\ifnjut@adobefonts \njut@adobefontstrue
 \newif\ifnjut@winfonts \njut@winfontsfalse
 \newif\ifnjut@linuxfonts \njut@linuxfontsfalse
@@ -37,10 +35,6 @@
 \newif\ifnjut@master \njut@masterfalse
 \newif\ifnjut@bachelor \njut@bachelorfalse
 \newif\ifnjut@showcomments \njut@showcommentsfalse
-\DeclareOption{oneside}{\njut@onesidetrue
-  \njut@twosidefalse}
-\DeclareOption{twoside}{\njut@twosidetrue
-  \njut@onesidefalse}
 \DeclareOption{adobefonts}{\njut@adobefontstrue
   \njut@winfontsfalse
   \njut@linuxfontsfalse
@@ -73,9 +67,9 @@
 \RequirePackage{titlesec}
 \RequirePackage{graphicx}
 \DeclareGraphicsExtensions{.pdf,.eps,.jpg,.png}
-\RequirePackage{subfig}
 \RequirePackage{caption}
 \RequirePackage{float}
+\RequirePackage{subfig}
 \RequirePackage{array}
 \RequirePackage{longtable}
 \RequirePackage{booktabs}
@@ -116,6 +110,8 @@
 \RequirePackage[sort&compress,numbers]{natbib}
 \RequirePackage{hypernat}
 \RequirePackage{tabularx}
+\RequirePackage{glossaries}
+\RequirePackage{ifthen}
 \ifnjut@showcomments
     \RequirePackage{etex}
     \RequirePackage[textwidth=2.5cm,shadow,textsize=footnotesize]{todonotes}
@@ -371,7 +367,9 @@
 \renewcommand*{\contentsname}{\njut@cap@contentsname}
 \renewcommand*{\listfigurename}{\njut@cap@listfigurename}
 \renewcommand*{\listtablename}{\njut@cap@listtablename}
+\newcommand*{\listsymbolname}{\njut@cap@listsymbolname}
 \newcommand*{\listequationname}{\njut@cap@listequationname}
+\renewcommand*{\glossaryname}{\njut@cap@glossaryname}
 \renewcommand*{\indexname}{\njut@cap@indexname}
 \newcommand*{\equationname}{\njut@cap@equationname}
 \renewcommand*{\bibname}{\njut@cap@bibname}
@@ -433,19 +431,42 @@
 \newcommand{\njut@dateformat}{\zihao{-4}}
 \setcounter{secnumdepth}{4}
 \renewcommand*{\today}{{\number\year}年{\number\month}月{\number\day}日}
-\renewcommand*{\thefigure}{\thechapter\,--\,\arabic{figure}}
-\renewcommand*{\thetable}{\thechapter\,--\,\arabic{table}}
+\renewcommand*{\thefigure}{\thechapter.\arabic{figure}}
+\renewcommand*{\thetable}{\thechapter.\arabic{table}}
+\captionsetup{font=small}
+\captionsetup[table]{position=above}
+\captionsetup[figure]{position=below}
+\floatstyle{plaintop}
+\restylefloat{table}
 \setstretch{1.38}
 \geometry{headheight=2.6cm,headsep=3mm,footskip=13mm}
 \geometry{top=3.5cm,bottom=3.5cm,left=3.2cm,right=3.2cm}
 \setlength{\parindent}{2em}
 \fancypagestyle{plain}{%
-  \fancyhf{}
-  \fancyhead[C]{\if@mainmatter\small\leftmark\fi}
-  \fancyfoot[C]{\small~{第{\thepage}页}~}
-  \renewcommand{\headrulewidth}{\if@mainmatter 0.7pt\else 0pt \fi}
+   \fancyhead{}                       % get rid of headers and footers
+   \renewcommand{\headrulewidth}{0pt} % and the header line
+   \renewcommand{\footrulewidth}{0pt} % and the footer line
 }
-\pagestyle{plain}
+\fancyfoot{}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[LE,RO]{\thepage}
+\renewcommand{\headrulewidth}{1pt}
+\fancyhead[RE]{\leftmark}
+\fancyhead[LO]{%
+ \ifthenelse{\equal{\rightmark}{}}% if \rightmark is empty
+            {\leftmark}%
+            {\rightmark}%
+}
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{\markboth{%
+ \bfseries\if@mainmatter\chaptertitlename.\hspace{1em}\fi{#1}%
+}{}}
+\renewcommand{\sectionmark}[1]{\markright{%
+ \bfseries\if@mainmatter\thesection.\hspace{1em}\fi{#1}%
+}}
+%% Patch for blank pages between chapters which disables the current page style
+\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+  \hbox{}\thispagestyle{empty}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
 \DefineFNsymbolsTM*{hurst}{%
     \textdagger       \dagger
       \textdaggerdbl  \ddagger
@@ -544,7 +565,7 @@
       \penalty\@highpenalty
     \endgroup
   \fi}
-\renewcommand{\tableofcontents}{%
+\renewcommand*{\tableofcontents}{%
     \if@twocolumn
       \@restonecoltrue\onecolumn
     \else
@@ -553,6 +574,28 @@
     \nchapter{\contentsname}%
     \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
     \@starttoc{toc}%
+    \if@restonecol\twocolumn\fi
+}
+\renewcommand*{\listoftables}{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \nchapter{\listtablename}%
+    \@mkboth{\MakeUppercase\listtablename}{\MakeUppercase\listtablename}%
+    \@starttoc{lot}%
+    \if@restonecol\twocolumn\fi
+}
+\renewcommand*{\listoffigures}{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \nchapter{\listfigurename}%
+    \@mkboth{\MakeUppercase\listfigurename}{\MakeUppercase\listfigurename}%
+    \@starttoc{lof}%
     \if@restonecol\twocolumn\fi
 }
 \renewenvironment{thebibliography}[1]
@@ -649,7 +692,6 @@
            {\CJKunderline{\makebox[#1]{#2}}}
 \def\njutunderline{\@ifnextchar[\njut@underline\CJKunderline}
 \newcommand*{\njut@makenlccover}{%
-  \cleardoublepage
   \thispagestyle{empty}
   \pdfbookmark[0]{\njut@cap@nlc}{nlc}
   {\songti\zihao{-4}
@@ -710,11 +752,6 @@
 
     \noindent\hfill\njutunderline[9em]{\njut@value@nlc@reviewerd}
   }
-  \clearpage
-  \if@twoside
-  \thispagestyle{empty}
-  \cleardoublepage
-  \fi
 }
 \newcommand*{\njut@makecover}{%
   \thispagestyle{empty}
@@ -760,17 +797,19 @@
 }
 \renewcommand*{\maketitle}{%
   \ifnjut@phd
-    \njut@makenlccover
+     \njut@makenlccover
+     \cleardoublepage
   \fi
-  \if@twoside\cleardoublepage\else\clearpage\fi
   \njut@makecover
-  \clearpage
   \ifnjut@backinfo
+    \clearpage
     \njut@makecoverback
+    \clearpage
+  \else
+    \cleardoublepage
   \fi
 }
 \newcommand*{\makeenglishtitle}{%
-  \cleardoublepage
   \thispagestyle{empty}
   \begin{center}
     \vspace*{20pt}
@@ -791,18 +830,15 @@
     \vskip 20pt
       \it\normalsize\njut@cap@cover@en@statement
   \end{center}
-  \clearpage
-  \if@twoside
-    \thispagestyle{empty}
-    \cleardoublepage
-  \fi
+  \cleardoublepage
 }
 \newcommand*{\abstracttitlea}[1]{%
-  \renewcommand{\njut@value@abstract@titlea}{#1}}
+  \renewcommand{\njut@value@abstract@titlea}{#1}%
+}
 \newcommand*{\abstracttitleb}[1]{%
-  \renewcommand{\njut@value@abstract@titleb}{#1}}
+  \renewcommand{\njut@value@abstract@titleb}{#1}%
+}
 \newenvironment{abstract}{%
-  \if@twoside\cleardoublepage\else\clearpage\fi
   \thispagestyle{empty}
   \pdfbookmark[0]{\njut@cap@abstract}{abstract}
   \begin{center}
@@ -826,23 +862,20 @@
     {\heiti\zihao{-3}\njut@cap@abstract@abstractname}
   \end{center}\par
 }{%
-  \clearpage
-  \if@twoside
-    \thispagestyle{empty}
-    \cleardoublepage
-  \fi
+  \cleardoublepage
 }
 \newcommand{\keywords}[1]{%
   \renewcommand*{\njut@value@abstract@keywords}{#1}%
-  \vspace{2ex}\noindent%
+  \par\vspace{2ex}\noindent%
   {\bf\njut@cap@abstract@keywordsname{：}}~{#1}%
 }
 \newcommand*{\englishabstracttitlea}[1]{%
-  \renewcommand{\njut@value@abstract@en@titlea}{#1}}
+  \renewcommand{\njut@value@abstract@en@titlea}{#1}%
+}
 \newcommand*{\englishabstracttitleb}[1]{%
-  \renewcommand{\njut@value@abstract@en@titleb}{#1}}
+  \renewcommand{\njut@value@abstract@en@titleb}{#1}%
+}
 \newenvironment{englishabstract}{%
-  \if@twoside\cleardoublepage\else\clearpage\fi
   \thispagestyle{empty}
   \pdfbookmark[0]{\njut@cap@abstract@en}{englishabstract}
   \begin{center}
@@ -865,15 +898,11 @@
     {\bf\zihao{-3}\njut@cap@abstract@en@abstractname}
   \end{center}\par
 }{%
-  \clearpage
-  \if@twoside
-    \thispagestyle{empty}
-    \cleardoublepage
-  \fi
+  \cleardoublepage
 }
 \newcommand{\englishkeywords}[1]{%
   \renewcommand*{\njut@value@abstract@en@keywords}{#1}%
-  \vspace{2ex}\noindent%
+  \par\vspace{2ex}\noindent%
   {\bf\njut@cap@abstract@en@keywordsname{:}}~~{#1}%
 }
 \newenvironment{resume}{%
@@ -901,7 +930,7 @@
   \end{enumerate}
 }
 \newenvironment{acknowledgement}{%
-  \nchapter{\njut@cap@acknowledgement@chaptername}
+  \nchapter{\njut@cap@acknowledgementname}
 }{}
 \newcommand*{\njut@cap@datefield}{%
 \njutunderline[1cm]{}{\njut@cap@year}%
@@ -957,20 +986,20 @@
 \end{tabular*}
 }
 \newcommand*{\makelicense}{%
-\thispagestyle{empty}
-\nchapter{\njut@cap@license@chaptername}
-\njut@license@makedeclaration
-\par\vspace{1em}
-\njut@license@maketable
-\par\vspace{1em}
-\noindent\njut@cap@license@confidential
-\begin{itemize}[label=$\square$]
-\item {\njut@cap@license@public}
-\item {\njut@cap@license@secret}
-\njut@cap@datefield~~\njut@cap@to~~\njut@cap@datefield
-\end{itemize}
-\vspace{1em}
-\noindent\njut@cap@license@remark
+  \thispagestyle{empty}
+  \nchapter{\njut@cap@license@chaptername}
+  \njut@license@makedeclaration
+  \par\vspace{1em}
+  \njut@license@maketable
+  \par\vspace{1em}
+  \noindent\njut@cap@license@confidential
+  \begin{itemize}[label=$\square$]
+  \item {\njut@cap@license@public}
+  \item {\njut@cap@license@secret}
+    \njut@cap@datefield~~\njut@cap@to~~\njut@cap@datefield
+  \end{itemize}
+  \vspace{1em}
+  \noindent\njut@cap@license@remark
 }
 \newcommand{\zhdash}{\kern0.3ex\rule[0.8ex]{2em}{0.1ex}\kern0.3ex}
 \newcommand{\cell}[3]{\parbox[c][#2][c]{#1}{\makebox[#1]{#3}}}

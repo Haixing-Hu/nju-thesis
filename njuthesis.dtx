@@ -23,10 +23,10 @@
 %<class>\NeedsTeXFormat{LaTeX2e}[1995/12/01]
 %<class>\ProvidesClass{njuthesis}
 %<*class>
-  [2013/08/25 v1.0.3 Document Class for the Degree Papers of Nanjing University]
+  [2013/08/25 v1.0.4 Document Class for the Degree Papers of Nanjing University]
 %</class>
 %<*driver>
-\documentclass[10pt,a4paper]{ltxdoc}
+\documentclass[10pt,a4paper,twoside]{ltxdoc}
 \usepackage{dtx-style}
 \EnableCrossrefs
 \CodelineIndex
@@ -98,7 +98,7 @@
 % 本文档是{\njuthesis}宏包的说明文档，其中包含宏包文件的设置说明以及宏包源代码的完全注释。
 % \end{abstract}
 %
-% \if@twoside\cleardoublepage\else\clearpage\fi
+% \cleardoublepage
 % \section*{{\hfill}修订历史{\hfill}}
 % \begin{center}
 % \noindent
@@ -119,13 +119,16 @@
 %                                两端对其分布\newline
 %                                修改了学位论文和用户手册的样式\\
 %  v1.0.3 & 2013/08/25 & 胡海星 & 增加了《学位论文出版授权书》页面\\
+%  v1.0.4 & 2013/08/25 & 胡海星 & 按照南京大学《博士 (硕士) 学位论文编写格式
+%                                规定 (试行)》的要求修改了学位论文的一些排版格式\newline
+%                                修复了页眉页脚的问题\\
 % \bottomrule
 % \end{tabular*}
 % \end{center}
-% \if@twoside\cleardoublepage\else\clearpage\fi
+% \cleardoublepage
 %
 % \tableofcontents
-% \if@twoside\cleardoublepage\else\clearpage\fi
+% \cleardoublepage
 %
 % \pagenumbering{arabic}
 % \pagestyle{headings}
@@ -151,6 +154,8 @@
 % \url{http://gs.nju.edu.cn/content/xw/ss3.htm}
 % \item \textsl{南京大学博士答辩流程及相关材料下载}，\\
 % \url{http://gs.nju.edu.cn/content/xw/bs3.htm}
+% \item \textsl{南京大学博士(硕士)学位论文编写格式规定(试行)}\\
+% \url{http://grawww.nju.edu.cn/content/xw/lwgf.doc}
 % \end{itemize}
 %
 % 本模板的编写过程中参考了以下文档，这里一并向这些文档的作者表示感谢：
@@ -222,7 +227,7 @@
 %     |multirow| & |hyperref|    & |enumitem| & |xcolor|   & |amsmath|   & |amsfonts| \\
 %     |amssymb|  & |bm|          & |mathrsfs| & |txfonts|  & |ntheorem|  & |makeidx|  \\
 %     |setspace| & |footmisc|    & |hypernat| & |fancyhdr| & |natbib|    & |tabularx| \\
-%     |titlesec| &               &            &            &             &            \\
+%     |titlesec| & |glossaries|  & |ifthen|   & |etex|     & |todonotes| &            \\
 %   \hline
 %   \end{tabular*}
 %   \caption{{\njuthesis}用到的宏包}\label{table:dependence}
@@ -311,27 +316,13 @@
 %
 % 本模板提供了一些选项以方便使用：
 % \begin{description}
-%
-% \item[oneside, twoside] 用于控制文档是单面打印还是双面打印。当选择|oneside|时，生成
-% 单面打印格式论文；当选择|twoside|时，生成双面打印格式论文。双面打印格式会将封面、摘要起
-% 始页、章起始页全部放在奇数页上。默认选项是|oneside|。
-% \begin{example}
-% \documentclass[twoside]{njuthesis}
-% \end{example}
-%
-% \item[cs4size, c5size] 用于控制论文正文的缺省字号。其中|cs4size|表示使用小四字号为缺
-%   省字体大小；|c5size|表示使用五号字为缺省字体大小。默认选项是|c5size|。
-% \begin{example}
-% \documentclass[twoside,cs4size]{njuthesis}
-% \end{example}
-%
 % \item[winfonts, linuxfonts, macfonts, adobefonts] |winfonts|选项使得文档使
 %   用Windows系统提供的字体；|linuxfonts|选项使得文档使用Linux系统提供的字
 %   体；|macfonts|选项使得文档使用Mac系统提供的字体；|adobefonts|选项使得文档使
 %   用Adobe提供的OTF中文字体，一般来说OTF字体的显示效果要优于ttf字体。
 %   默认选项是|adobefonts|。
 % \begin{example}
-% \documentclass[twoside,cs4size,winfonts]{njuthesis}
+% \documentclass[winfonts]{njuthesis}
 % \end{example}
 %   表\ref{table:fontnames}中列出了默认配置下使用不同字体选项时所采用的实际字体
 %   名称。系统中必须正确安装了相应的字体才能正常编译文档。\\
@@ -354,24 +345,21 @@
 %     \caption{默认配置下不同字体选项所使用的实际字体名称}
 %     \label{table:fontnames}
 %   \end{table}
-%
 % \item[nobackinfo] 该选项用于控制是否在封面背面打印导师签名信息。如果设置了此选项，则
 %   \textbf{不在}封面背面打印导师签名信息。此选项默认不被设置，一般情况下也无需设置
 %   该选项。
 % \begin{example}
-% \documentclass[twoside,cs4size,winfonts,nobackinfo]{njuthesis}
+% \documentclass[adobefonts,nobackinfo]{njuthesis}
 % \end{example}
-%
 % \item[phd, master, bachelor] 用于设置申请的学位级别。当选择|phd|时，生成南京大学博
 % 士学位论文，包含国家图书馆格式的封面，但不包括书脊，书脊需要单独制作；选择|master|时，
 % 生成南京大学硕士学位论文；选择|bachelor|时，生成南京大学学士学位论文。
 % \begin{example}
-% \documentclass[twoside,cs4size,winfonts,phd]{njuthesis}
+% \documentclass[adobefonts,phd]{njuthesis}
 % \end{example}
 % \begin{note}
 % 这三个选项必须设置一个且只能设置一个。
 % \end{note}
-%
 % \item[showcomments] 如果设置了此选项，则文档中的注释会被显示出来，否则所有注释
 % 都会被隐藏。此选项默认不被设置。
 % \begin{example}
@@ -382,8 +370,12 @@
 % composing选项编译时中间文件中存在使用|\comment| 命令而由|todonotes|宏包引入的pgf
 % 指令，简单跳过编译或者清除上次编译的中间文件然后执行全新的编译即能顺利进行。
 % \end{note}
-%
 % \end{description}
+%
+% \begin{note}
+% 本模板不提供对字号和单双面打印的选择选项。因为国内的学位论文基本上都要求使用小四号宋体，
+% 并双面打印。
+% \end{note}
 %
 % \subsection{命令和环境}
 %
@@ -469,8 +461,8 @@
 % \end{note}
 %
 % \myentry{分类号}
-% \DescribeMacro{\classification}设置论文的国家图书馆分类号。此属性必须被设置。
-% 具体的分类号需咨询学校图书馆的老师。
+% \DescribeMacro{\classification}设置论文按照《中国图书资料分类法》的分类编号。此属性
+% 必须被设置。具体的分类号需咨询学校图书馆的老师。
 % \begin{example}
 %   \classification{O175.2}
 % \end{example}
@@ -482,12 +474,13 @@
 % \end{example}
 %
 % \myentry{UDC}
-% \DescribeMacro{\udc}设置论文的UDC编号。国际十进分类法（Universal Decimal
-% Classification，简称UDC），又称为通用十进制分类法，是世界上规模最大、用户最多、影响最
-% 广泛的一部文献资料分类法。自1899--1905年比利时学者奥特勒和拉封丹共同主编、出版UDC法文
-% 第一版以来，现已有20多种语言的各种详略版本。近百年来，UDC已被世界上几十个国家的10多万个
-% 图书馆和情报机构采用。UDC目前已成为名符其实的国际通用文献分类法。此属性可选，默认值为空
-% 白。论文的具体UDC编号需咨询学校图书馆的老师，或在下面网址查询：\\
+% \DescribeMacro{\udc}设置论文按照《国际十进分类法UDC》的分类编号。国际十进分类
+% 法（Universal Decimal Classification，简称UDC），又称为通用十进制分类法，是世
+% 界上规模最大、用户最多、影响最广泛的一部文献资料分类法。自1899--1905年比利时学
+% 者奥特勒和拉封丹共同主编、出版UDC法文第一版以来，现已有20多种语言的各种详略版
+% 本。近百年来，UDC已被世界上几十个国家的10多万个图书馆和情报机构采用。UDC目前已
+% 成为名符其实的国际通用文献分类法。此属性可选，默认值为空白。论文的具体UDC编号
+% 需咨询学校图书馆的老师，或在下面网址查询：\\
 % \url{http://www.udcc.org/udcsummary/php/index.php?lang=chi}
 % \begin{example}
 % \udc{004.72}
@@ -953,8 +946,6 @@
 % 模板的配置文件|njuthesis.cfg|中定义了很多固定词汇，一般无须修改。如果有特殊需求，
 % 推荐在导言区使用 \cs{renewcommand}。当然，导言区里可以直接使用中文。
 %
-% \clearpage
-%
 % \section{实现细节}
 %
 % \subsection{基本信息}
@@ -970,8 +961,6 @@
 %  默认选项为|oneside|, |adobefonts|。
 %    \begin{macrocode}
 %<*cls>
-\newif\ifnjut@oneside \njut@onesidetrue
-\newif\ifnjut@twoside \njut@twosidefalse
 \newif\ifnjut@adobefonts \njut@adobefontstrue
 \newif\ifnjut@winfonts \njut@winfontsfalse
 \newif\ifnjut@linuxfonts \njut@linuxfontsfalse
@@ -981,10 +970,6 @@
 \newif\ifnjut@master \njut@masterfalse
 \newif\ifnjut@bachelor \njut@bachelorfalse
 \newif\ifnjut@showcomments \njut@showcommentsfalse
-\DeclareOption{oneside}{\njut@onesidetrue
-  \njut@twosidefalse}
-\DeclareOption{twoside}{\njut@twosidetrue
-  \njut@onesidefalse}
 \DeclareOption{adobefonts}{\njut@adobefontstrue
   \njut@winfontsfalse
   \njut@linuxfontsfalse
@@ -1063,13 +1048,8 @@
 \DeclareGraphicsExtensions{.pdf,.eps,.jpg,.png}
 %    \end{macrocode}
 %
-% |subfigure|宏包已经不再推荐使用，改用新的|subfig|宏包支持插入子图和子表。
-%    \begin{macrocode}
-\RequirePackage{subfig}
-%    \end{macrocode}
-%
-% |caption2|宏包已经不再推荐使用，改用新的|caption|宏包处理浮动图形和表格的标题样式。然而
-% |caption|宏包会被|subfig|自动载入，所以可以忽略下述宏包引用语句。
+% |caption2|宏包已经不再推荐使用，改用新的|caption|宏包处理浮动图形和表格的标题
+% 样式。
 %    \begin{macrocode}
 \RequirePackage{caption}
 %    \end{macrocode}
@@ -1077,6 +1057,11 @@
 % |float|宏包为浮动图形和表格环境提供了一个H选项，强制将其放在当前位置。
 %    \begin{macrocode}
 \RequirePackage{float}
+%    \end{macrocode}
+%
+% |subfigure|宏包已经不再推荐使用，改用新的|subfig|宏包支持插入子图和子表。
+%    \begin{macrocode}
+\RequirePackage{subfig}
 %    \end{macrocode}
 %
 % 使用|array|宏包扩展表格的列选项。
@@ -1245,6 +1230,16 @@
 \RequirePackage{tabularx}
 %    \end{macrocode}
 %
+% |glossaries|宏包可用于制作术语表。但该宏包必须在|hyperref|之后载入。
+%    \begin{macrocode}
+\RequirePackage{glossaries}
+%    \end{macrocode}
+%
+% |ifthen|宏包提供了|\ifthenelse|命令，本模板将使用该命令定义一些其他命令。
+%    \begin{macrocode}
+\RequirePackage{ifthen}
+%    \end{macrocode}
+%
 % 引入|todonotes|宏包以支持编写论文时自己写批注，批注的可见性由|showcomments|文档选项控
 % 制。也就是定义了|showcomments|文档选项时批注可见，不定义时不可见。引入|etex|宏包以避免
 % |todonotes|和|listings|宏包冲突而导致``No room for a new count''错误。
@@ -1266,14 +1261,17 @@
 \newcommand*{\njut@cap@revisionhistory}{修订历史}
 \newcommand*{\njut@cap@listfigurename}{插图索引}
 \newcommand*{\njut@cap@listtablename}{表格索引}
+\newcommand*{\njut@cap@listsymbolname}{符号索引}
 \newcommand*{\njut@cap@listequationname}{公式索引}
 \newcommand*{\njut@cap@equationname}{公式}
 \newcommand*{\njut@cap@bibname}{参考文献}
+\newcommand*{\njut@cap@glossaryname}{术\hspace{0.5em}语\hspace{0.5em}表}
 \newcommand*{\njut@cap@indexname}{索\hspace{2em}引}
 \newcommand*{\njut@cap@figurename}{图}
 \newcommand*{\njut@cap@tablename}{表}
-\newcommand*{\njut@cap@chaptername}{第~{\thechapter}~章}
-\newcommand*{\njut@cap@appendixname}{附录}
+\newcommand*{\njut@cap@chaptername}{\if@mainmatter{第\CJKnumber{\thechapter}章}\fi}
+\newcommand*{\njut@cap@acknowledgementname}{致\hspace{2em}谢}
+\newcommand*{\njut@cap@appendixname}{附录\thechapter}
 %    \end{macrocode}
 %
 % 定义常用数学定理环境的字符串常量：
@@ -1399,11 +1397,6 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
             {攻读{\njut@value@degree}学位期间完成的学术成果}
 \newcommand*{\njut@cap@resume@projects}%
             {攻读{\njut@value@degree}学位期间参与的科研课题}
-%    \end{macrocode}
-%
-% 定义南京大学学位论文中``致谢''页的字符串常量：
-%    \begin{macrocode}
-\newcommand*{\njut@cap@acknowledgement@chaptername}{致\hspace{2em}谢}
 %    \end{macrocode}
 %
 % 定义《学位论文出版授权书》中的字符串常量：
@@ -2011,7 +2004,9 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 \renewcommand*{\contentsname}{\njut@cap@contentsname}
 \renewcommand*{\listfigurename}{\njut@cap@listfigurename}
 \renewcommand*{\listtablename}{\njut@cap@listtablename}
+\newcommand*{\listsymbolname}{\njut@cap@listsymbolname}
 \newcommand*{\listequationname}{\njut@cap@listequationname}
+\renewcommand*{\glossaryname}{\njut@cap@glossaryname}
 \renewcommand*{\indexname}{\njut@cap@indexname}
 \newcommand*{\equationname}{\njut@cap@equationname}
 \renewcommand*{\bibname}{\njut@cap@bibname}
@@ -2119,10 +2114,25 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 %    \end{macrocode}
 % \end{macro}
 %
+% \subsection{浮动环境}
+%
 % 设置浮动表格和插图的编号格式：
 %    \begin{macrocode}
-\renewcommand*{\thefigure}{\thechapter\,--\,\arabic{figure}}
-\renewcommand*{\thetable}{\thechapter\,--\,\arabic{table}}
+\renewcommand*{\thefigure}{\thechapter.\arabic{figure}}
+\renewcommand*{\thetable}{\thechapter.\arabic{table}}
+%    \end{macrocode}
+%
+% 设置浮动环境标题的字体大小。根据学位论文格式要求，插图和表格标题字体需要比正文字体略小。
+%    \begin{macrocode}
+\captionsetup{font=small}
+%    \end{macrocode}
+%
+% 根据学位论文格式要求，表格的标题必须位于表格上方，插图的标题必须位于插图下方。
+%    \begin{macrocode}
+\captionsetup[table]{position=above}
+\captionsetup[figure]{position=below}
+\floatstyle{plaintop}
+\restylefloat{table}
 %    \end{macrocode}
 %
 % \subsection{页幅设置}
@@ -2156,16 +2166,93 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 %
 % \subsection{页眉页脚}
 %
-% 正文以前的内容没有页眉，页脚为罗马数字编码的页码。正文以后的内容页眉为章标题，页脚为阿拉
-% 伯数字编码的页码。
+% 我们使用|fancyhdr|宏包来设置页眉页脚。|fancyhdr|宏包提供了一个|fancy|页面风格，
+% 在该风格下，章节的起始页（即包含“第XX章”标题的页面）的页眉页脚将使用|plain|风
+% 格，而章节的后继页面的页眉页脚将使用|fancy|风格的默认定义或用户通过
+% |\fancyhead|或|\fancyfoot|命令定义的样式。
+%
+% 首先，我们需要修改|plain|风格的页眉页脚，将其页脚默认的页码去掉。
 %    \begin{macrocode}
 \fancypagestyle{plain}{%
-  \fancyhf{}
-  \fancyhead[C]{\if@mainmatter\small\leftmark\fi}
-  \fancyfoot[C]{\small~{第{\thepage}页}~}
-  \renewcommand{\headrulewidth}{\if@mainmatter 0.7pt\else 0pt \fi}
+   \fancyhead{}                       % get rid of headers and footers
+   \renewcommand{\headrulewidth}{0pt} % and the header line
+   \renewcommand{\footrulewidth}{0pt} % and the footer line
 }
-\pagestyle{plain}
+%    \end{macrocode}
+%
+% 接下来我们按照如下规则修改|fancy|风格的页眉页脚设置，注意学位论文始终是双面打印的：
+% \begin{itemize}
+%    \item 令偶数页的页眉如下：
+%      \begin{itemize}
+%      \item 左上角显示当前页页码
+%      \item 右上角显示当前章（chapter）的编号和标题；
+%      \item 若当前不为于|mainmatter|中，则右上角只显示当前章的标题。
+%      \end{itemize}
+%    \item 令奇数页的页眉如下：
+%      \begin{itemize}
+%      \item 左上角显示当前节（section）的编号和标题
+%      \item 右上角显示当前页页码；
+%      \item 若当前页面尚未开始此章的第一节，即节编号和节标题为空；则左上角显示当前
+%      章（chapter）的编号和标题；若当前不为于|mainmatter|中，则左上角只显示当前章的
+%      标题。
+%      \end{itemize}
+%    \item 无论奇偶页，页眉下都有一条分割线；
+%    \item 无论奇偶页，页脚都为空，页脚上都无分割线。
+% \end{itemize}
+%
+% 设置|fancy|风格下的页脚，令页脚为空；令页脚分割线宽度为$0$：
+%    \begin{macrocode}
+\fancyfoot{}
+\renewcommand{\footrulewidth}{0pt}
+%    \end{macrocode}
+%
+% 设置|fancy|风格下的页眉，令偶数页左上角和奇数页右上角显示当前页码，令页眉的分
+% 割线宽度为$1$：
+%    \begin{macrocode}
+\fancyhead[LE,RO]{\thepage}
+\renewcommand{\headrulewidth}{1pt}
+%    \end{macrocode}
+%
+% 设置|fancy|风格的页眉，令偶数页右上角和奇数页左上角分别显示当前章信息和当前节
+% 信息；但若当前页面尚未开始本章的第一节（即|\rightmark|为空），则奇数页左上角也
+% 显示当前章信息（即|\leftmark|）。
+%    \begin{macrocode}
+\fancyhead[RE]{\leftmark}
+\fancyhead[LO]{%
+ \ifthenelse{\equal{\rightmark}{}}% if \rightmark is empty
+            {\leftmark}%
+            {\rightmark}%
+}
+%    \end{macrocode}
+%
+% 设置全局使用|fancy|风格。
+%    \begin{macrocode}
+\pagestyle{fancy}
+%    \end{macrocode}
+%
+% 重新定义|chaptermark|，让其显示当前章信息和当前节信息。注意下面的重定义必须放
+% 在第一次调用|\pagestyle{fancy}|之后，因为第一次调用该命令会设置|chaptermark|。
+%    \begin{macrocode}
+\renewcommand{\chaptermark}[1]{\markboth{%
+ \bfseries\if@mainmatter\chaptertitlename.\hspace{1em}\fi{#1}%
+}{}}
+%    \end{macrocode}
+%
+% 重新定义|sectionmark|，让其显示当前节信息。注意下面的重定义必须放在第一次调用
+% |\pagestyle{fancy}|之后，因为第一次调用该命令会设置|sectionmark|。
+%    \begin{macrocode}
+\renewcommand{\sectionmark}[1]{\markright{%
+ \bfseries\if@mainmatter\thesection.\hspace{1em}\fi{#1}%
+}}
+%    \end{macrocode}
+%
+% 另一个麻烦的问题是：默认的|fancy|风格会在每一章最后的空白页（由于是双面打印）
+% 也加上页眉页脚，但我们通常不希望如此。解决方法是修改{\LaTeX}内部的|\cleardoublepage|
+% 命令的定义如下：
+%    \begin{macrocode}
+%% Patch for blank pages between chapters which disables the current page style
+\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+  \hbox{}\thispagestyle{empty}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
 %    \end{macrocode}
 %
 % \subsection{脚注}
@@ -2334,7 +2421,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 % \begin{macro}{\tableofcontents}
 % 修改|\tableofcontents|命令用于生成目录页。
 %    \begin{macrocode}
-\renewcommand{\tableofcontents}{%
+\renewcommand*{\tableofcontents}{%
     \if@twocolumn
       \@restonecoltrue\onecolumn
     \else
@@ -2343,6 +2430,40 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
     \nchapter{\contentsname}%
     \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
     \@starttoc{toc}%
+    \if@restonecol\twocolumn\fi
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\listoftables}
+% 修改|\listoftables|命令，使得表格列表被加入目录中。
+%    \begin{macrocode}
+\renewcommand*{\listoftables}{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \nchapter{\listtablename}%
+    \@mkboth{\MakeUppercase\listtablename}{\MakeUppercase\listtablename}%
+    \@starttoc{lot}%
+    \if@restonecol\twocolumn\fi
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\listoffigures}
+% 修改|\listoffigures|命令，使得插图列表被加入目录中。
+%    \begin{macrocode}
+\renewcommand*{\listoffigures}{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \nchapter{\listfigurename}%
+    \@mkboth{\MakeUppercase\listfigurename}{\MakeUppercase\listfigurename}%
+    \@starttoc{lof}%
     \if@restonecol\twocolumn\fi
 }
 %    \end{macrocode}
@@ -2479,7 +2600,6 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 % 定义生成国家图书馆封面的命令。
 %    \begin{macrocode}
 \newcommand*{\njut@makenlccover}{%
-  \cleardoublepage
   \thispagestyle{empty}
   \pdfbookmark[0]{\njut@cap@nlc}{nlc}
   {\songti\zihao{-4}
@@ -2540,11 +2660,6 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 
     \noindent\hfill\njutunderline[9em]{\njut@value@nlc@reviewerd}
   }
-  \clearpage
-  \if@twoside
-  \thispagestyle{empty}
-  \cleardoublepage
-  \fi
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2605,26 +2720,30 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 %
 % \begin{macro}{\maketitle}
 %   重新定义{\LaTeX}提供的|\maketitle|命令，使其生成南京大学学术论文所需的中文封面。
+% 注意我们使用了前面修改过的|\cleardoublepage|命令来插入无页眉页脚的空白页。
 %    \begin{macrocode}
 \renewcommand*{\maketitle}{%
   \ifnjut@phd
-    \njut@makenlccover
+     \njut@makenlccover
+     \cleardoublepage
   \fi
-  \if@twoside\cleardoublepage\else\clearpage\fi
   \njut@makecover
-  \clearpage
   \ifnjut@backinfo
+    \clearpage
     \njut@makecoverback
+    \clearpage
+  \else
+    \cleardoublepage
   \fi
 }
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\makeenglishtitle}
-% 定义生成英文封面的命令。
+% 定义生成英文封面的命令。注意我们使用了前面修改过的|\cleardoublepage|命令来插入无页眉
+% 页脚的空白页。
 %    \begin{macrocode}
 \newcommand*{\makeenglishtitle}{%
-  \cleardoublepage
   \thispagestyle{empty}
   \begin{center}
     \vspace*{20pt}
@@ -2645,11 +2764,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
     \vskip 20pt
       \it\normalsize\njut@cap@cover@en@statement
   \end{center}
-  \clearpage
-  \if@twoside
-    \thispagestyle{empty}
-    \cleardoublepage
-  \fi
+  \cleardoublepage
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2660,7 +2775,8 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 % 用于设置中文摘要页论文标题的第一行。
 %    \begin{macrocode}
 \newcommand*{\abstracttitlea}[1]{%
-  \renewcommand{\njut@value@abstract@titlea}{#1}}
+  \renewcommand{\njut@value@abstract@titlea}{#1}%
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2668,15 +2784,16 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 % 用于设置中文摘要页论文标题的第二行。
 %    \begin{macrocode}
 \newcommand*{\abstracttitleb}[1]{%
-  \renewcommand{\njut@value@abstract@titleb}{#1}}
+  \renewcommand{\njut@value@abstract@titleb}{#1}%
+}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{abstract}
-% 定义中文摘要环境。该环境自动生成南京大学中文摘要页。
+% 定义中文摘要环境。该环境自动生成南京大学中文摘要页。注意我们使用了前面修改过的
+% |\cleardoublepage|命令来插入无页眉页脚的空白页。
 %    \begin{macrocode}
 \newenvironment{abstract}{%
-  \if@twoside\cleardoublepage\else\clearpage\fi
   \thispagestyle{empty}
   \pdfbookmark[0]{\njut@cap@abstract}{abstract}
   \begin{center}
@@ -2700,11 +2817,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
     {\heiti\zihao{-3}\njut@cap@abstract@abstractname}
   \end{center}\par
 }{%
-  \clearpage
-  \if@twoside
-    \thispagestyle{empty}
-    \cleardoublepage
-  \fi
+  \cleardoublepage
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2715,7 +2828,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 %    \begin{macrocode}
 \newcommand{\keywords}[1]{%
   \renewcommand*{\njut@value@abstract@keywords}{#1}%
-  \vspace{2ex}\noindent%
+  \par\vspace{2ex}\noindent%
   {\bf\njut@cap@abstract@keywordsname{：}}~{#1}%
 }
 %    \end{macrocode}
@@ -2725,7 +2838,8 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 % 用于设置英文摘要页论文标题的第一行。
 %    \begin{macrocode}
 \newcommand*{\englishabstracttitlea}[1]{%
-  \renewcommand{\njut@value@abstract@en@titlea}{#1}}
+  \renewcommand{\njut@value@abstract@en@titlea}{#1}%
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2733,15 +2847,16 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 % 用于设置英文摘要页论文标题的第二行。
 %    \begin{macrocode}
 \newcommand*{\englishabstracttitleb}[1]{%
-  \renewcommand{\njut@value@abstract@en@titleb}{#1}}
+  \renewcommand{\njut@value@abstract@en@titleb}{#1}%
+}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{englishabstract}
-% 定义英文摘要环境。该环境自动生成南京大学英文摘要页。
+% 定义英文摘要环境。该环境自动生成南京大学英文摘要页。注意我们使用了前面修改过的
+% |\cleardoublepage|命令来插入无页眉页脚的空白页。
 %    \begin{macrocode}
 \newenvironment{englishabstract}{%
-  \if@twoside\cleardoublepage\else\clearpage\fi
   \thispagestyle{empty}
   \pdfbookmark[0]{\njut@cap@abstract@en}{englishabstract}
   \begin{center}
@@ -2764,11 +2879,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
     {\bf\zihao{-3}\njut@cap@abstract@en@abstractname}
   \end{center}\par
 }{%
-  \clearpage
-  \if@twoside
-    \thispagestyle{empty}
-    \cleardoublepage
-  \fi
+  \cleardoublepage
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2779,7 +2890,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 %    \begin{macrocode}
 \newcommand{\englishkeywords}[1]{%
   \renewcommand*{\njut@value@abstract@en@keywords}{#1}%
-  \vspace{2ex}\noindent%
+  \par\vspace{2ex}\noindent%
   {\bf\njut@cap@abstract@en@keywordsname{:}}~~{#1}%
 }
 %    \end{macrocode}
@@ -2847,7 +2958,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 % 该环境用于``致谢''页。
 %    \begin{macrocode}
 \newenvironment{acknowledgement}{%
-  \nchapter{\njut@cap@acknowledgement@chaptername}
+  \nchapter{\njut@cap@acknowledgementname}
 }{}
 %    \end{macrocode}
 % \end{macro}
@@ -2930,20 +3041,20 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 % 档属性自动填写。
 %    \begin{macrocode}
 \newcommand*{\makelicense}{%
-\thispagestyle{empty}
-\nchapter{\njut@cap@license@chaptername}
-\njut@license@makedeclaration
-\par\vspace{1em}
-\njut@license@maketable
-\par\vspace{1em}
-\noindent\njut@cap@license@confidential
-\begin{itemize}[label=$\square$]
-\item {\njut@cap@license@public}
-\item {\njut@cap@license@secret}
-\njut@cap@datefield~~\njut@cap@to~~\njut@cap@datefield
-\end{itemize}
-\vspace{1em}
-\noindent\njut@cap@license@remark
+  \thispagestyle{empty}
+  \nchapter{\njut@cap@license@chaptername}
+  \njut@license@makedeclaration
+  \par\vspace{1em}
+  \njut@license@maketable
+  \par\vspace{1em}
+  \noindent\njut@cap@license@confidential
+  \begin{itemize}[label=$\square$]
+  \item {\njut@cap@license@public}
+  \item {\njut@cap@license@secret}
+    \njut@cap@datefield~~\njut@cap@to~~\njut@cap@datefield
+  \end{itemize}
+  \vspace{1em}
+  \noindent\njut@cap@license@remark
 }
 %    \end{macrocode}
 % \end{macro}
@@ -3068,6 +3179,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 \RequirePackage{enumitem}
 \RequirePackage{titlesec}
 \RequirePackage{titling}
+\RequirePackage{fancyhdr}
 \RequirePackage{hyperref}
 \hypersetup{%
   unicode=false,
@@ -3233,7 +3345,14 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 \setlist[itemize,2]{label=$\blacksquare$}
 \setlist[itemize,3]{label=$\Diamondblack$}
 
-\pagestyle{empty}
+% 默认的|fancy|风格会在每一章最后的空白页（由于是双面打印）也加上页眉页脚，但我
+% 们通常不希望如此。解决方法是修改{\LaTeX}内部的|\cleardoublepage|命令的定义如下：
+\makeatletter
+\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+  \hbox{}\thispagestyle{empty}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
+\makeatother
+
+\pagestyle{fancy}
 %</dtx-style>
 %    \end{macrocode}
 % \fi
