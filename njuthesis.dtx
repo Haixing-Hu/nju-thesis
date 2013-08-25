@@ -23,7 +23,7 @@
 %<class>\NeedsTeXFormat{LaTeX2e}[1995/12/01]
 %<class>\ProvidesClass{njuthesis}
 %<*class>
-  [2013/08/25 v1.0.1 Document Class for the Degree Papers of Nanjing University]
+  [2013/08/25 v1.0.2 Document Class for the Degree Papers of Nanjing University]
 %</class>
 %<*driver>
 \documentclass[10pt,a4paper]{ltxdoc}
@@ -98,10 +98,10 @@
 % 本文档是{\njuthesis}宏包的说明文档，其中包含宏包文件的设置说明以及宏包源代码的完全注释。
 % \end{abstract}
 %
-% \begin{titlepage}
-% \centering
-% \section*{修订历史}
-% \hspace{2em}\noindent
+% \if@twoside\cleardoublepage\else\clearpage\fi
+% \section*{{\hfill}修订历史{\hfill}}
+% \begin{center}
+% \noindent
 % \begin{tabular*}{\textwidth}{C{1.1cm}
 %                              C{1.8cm}
 %                              C{1.5cm}
@@ -114,14 +114,17 @@
 % \midrule
 %  v1.0.0 & 2013/08/24 & 胡海星 & 完成第一个可工作版本 \\
 %  v1.0.1 & 2013/08/25 & 胡海星 & 增加了一些PDF文档的元信息\\
+%  v1.0.2 & 2013/08/25 & 胡海星 & 合并了国家图书馆封面上的导师信息\newline
+%                                使用|\makebox[width][s]{...}|使得封面标签可以自动
+%                                两端对其分布\newline
+%                                修改了用户手册的样式\\
 % \bottomrule
 % \end{tabular*}
-% \end{titlepage}
+% \end{center}
+% \if@twoside\cleardoublepage\else\clearpage\fi
 %
-% \begin{titlepage}
-% \centering
 % \tableofcontents
-% \end{titlepage}
+% \if@twoside\cleardoublepage\else\clearpage\fi
 %
 % \pagenumbering{arabic}
 % \pagestyle{headings}
@@ -505,17 +508,11 @@
 % 将其分割，最多分为三行。
 % \end{note}
 %
-% \myentry{导师所属院系}
-% \DescribeMacro{\supervisordepartment}设置论文作者的导师所属院系。此属性必须被设置。
+% \myentry{导师信息}
+% \DescribeMacro{\supervisorinfo}设置论文作者的导师的单位名称及地址。此属性必须
+% 被设置。
 % \begin{example}
-% \supervisordepartment{计算机科学与技术系}
-% \end{example}
-%
-% \myentry{导师所属学校}
-% \DescribeMacro{\supervisorinstitute}设置论文作者的导师所属学校或机构。此属性可选，
-% 默认值为``南京大学''。
-% \begin{example}
-% \supervisorinstitute{南京大学}
+% \supervisorinfo{南京大学计算机科学与技术系，南京市汉口路22号，210093}
 % \end{example}
 %
 % \myentry{答辩委员会主席}
@@ -1268,30 +1265,23 @@
 % 定义南京大学学位论文中文封面的字符串常量：
 %    \begin{macrocode}
 \newcommand*{\njut@cap@cover}{中文封面}
-\newcommand*{\njut@cap@cover@thesis}%
-{研\hspace{1em}究\hspace{1em}生\hspace{1em}毕\hspace{1em}业\hspace{1em}论\hspace{1em}文}
+\newcommand*{\njut@cap@cover@thesis}{研究生毕业论文}
 \newcommand*{\njut@cap@cover@apply}{申请{\njut@value@degree}学位}
-\newcommand*{\njut@cap@cover@title}%
-{论\hspace{1em}文\hspace{1em}题\hspace{1em}目}
-\newcommand*{\njut@cap@cover@author}%
-{作\hspace{1em}者\hspace{1em}姓\hspace{1em}名}
-\newcommand*{\njut@cap@cover@supervisor}%
-{指\hspace{1em}导\hspace{1em}教\hspace{1em}师}
+\newcommand*{\njut@cap@cover@title}{论文题目}
+\newcommand*{\njut@cap@cover@author}{作者姓名}
+\newcommand*{\njut@cap@cover@supervisor}{指导教师}
 \newcommand*{\njut@cap@cover@major}{学科、专业方向}
-\newcommand*{\njut@cap@cover@researchfield}%
-{研\hspace{1em}究\hspace{1em}方\hspace{1em}向}
+\newcommand*{\njut@cap@cover@researchfield}{研究方向}
 \newcommand*{\njut@cap@cover@department}{院系}
 \newcommand*{\njut@cap@cover@institute}{南京大学}
 %    \end{macrocode}
 %
 % 定义南京大学学位论文中文封面背面的字符串常量：
 %    \begin{macrocode}
-\newcommand*{\njut@cap@coverback@supervisor}%
-{指\hspace{0.66em}导\hspace{0.66em}教\hspace{0.66em}师}
-\newcommand*{\njut@cap@coverback@studentnum}
-{学\hspace{4em}号}
+\newcommand*{\njut@cap@coverback@supervisor}{指导教师}
+\newcommand*{\njut@cap@coverback@studentnum}{学号}
 \newcommand*{\njut@cap@coverback@defenddate}{论文答辩日期}
-\newcommand*{\njut@cap@coverback@sign}{\hspace{8em}（签字）}
+\newcommand*{\njut@cap@coverback@sign}{\hspace{10em}（签字）}
 %    \end{macrocode}
 %
 % 定义南京大学学位论文英文封面的字符串常量：
@@ -1361,8 +1351,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 \newcommand*{\njut@value@nlc@titlelinea}{(论文标题)}
 \newcommand*{\njut@value@nlc@titlelineb}{}
 \newcommand*{\njut@value@nlc@titlelinec}{}
-\newcommand*{\njut@value@nlc@supervisordepartment}{(导师所属院系)}
-\newcommand*{\njut@value@nlc@supervisorinstitute}{南京大学}
+\newcommand*{\njut@value@nlc@supervisorinfo}{(导师的职务、职称、学位、单位名称及地址)}
 \newcommand*{\njut@value@nlc@chairman}{(答辩主席)}
 \newcommand*{\njut@value@nlc@reviewera}{(评审人)}
 \newcommand*{\njut@value@nlc@reviewerb}{}
@@ -2285,10 +2274,8 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
   \renewcommand{\njut@value@nlc@titlelineb}{#1}}
 \newcommand*{\titlelinec}[1]{%
   \renewcommand{\njut@value@nlc@titlelinec}{#1}}
-\newcommand*{\supervisordepartment}[1]{%
-  \renewcommand{\njut@value@nlc@supervisordepartment}{#1}}
-\newcommand*{\supervisorinstitute}[1]{%
-  \renewcommand{\njut@value@nlc@supervisorinstitute}{#1}}
+\newcommand*{\supervisorinfo}[1]{%
+  \renewcommand{\njut@value@nlc@supervisorinfo}{#1}}
 \newcommand*{\chairman}[1]{%
   \renewcommand{\njut@value@nlc@chairman}{#1}}
 \newcommand*{\reviewera}[1]{%
@@ -2354,7 +2341,8 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 % \begin{macro}{\njutunderline}
 % 定义封面中用到的生成下划线的宏。
 %    \begin{macrocode}
-\def\njut@underline[#1]#2{\CJKunderline{\hbox to #1{\hfill#2\hfill}}}
+\newcommand{\njut@underline}[2][\textwidth]%
+           {\CJKunderline{\makebox[#1]{#2}}}
 \def\njutunderline{\@ifnextchar[\njut@underline\CJKunderline}
 %    \end{macrocode}
 % \end{macro}
@@ -2363,75 +2351,71 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 % 定义生成国家图书馆封面的命令。
 %    \begin{macrocode}
 \newcommand*{\njut@makenlccover}{%
-    \cleardoublepage
-    \thispagestyle{empty}
-    \pdfbookmark[0]{\njut@cap@nlc}{nlc}
-    {\songti\zihao{-4}
-      \njut@cap@nlc@classification~
-      \njutunderline[150pt]{\njut@value@nlc@classification}
-      \hfill
-      \njut@cap@nlc@confidential~
-      \njutunderline[150pt]{\njut@value@nlc@confidential}
-      \vskip 10pt
-      \njut@cap@nlc@udc~
-      \njutunderline[160pt]{\njut@value@nlc@udc}
+  \cleardoublepage
+  \thispagestyle{empty}
+  \pdfbookmark[0]{\njut@cap@nlc}{nlc}
+  {\songti\zihao{-4}
+    \njut@cap@nlc@classification~
+    \njutunderline[150pt]{\njut@value@nlc@classification}
+    \hfill
+    \njut@cap@nlc@confidential~
+    \njutunderline[150pt]{\njut@value@nlc@confidential}
+    \vskip 10pt
+    \njut@cap@nlc@udc~
+    \njutunderline[160pt]{\njut@value@nlc@udc}
+  }
+  \vskip \stretch{2}
+  \begin{center}
+    \def\ULthickness{1pt}
+    {\kaishu\zihao{-0} \njut@cap@nlc@title}
+    {\kaishu\zihao{1}
+    \vskip \stretch{1}
+    \njutunderline[9em]{~\njut@value@nlc@titlelinea~}\\
+    \njutunderline[9em]{~\njut@value@nlc@titlelineb~}\\
+    \njutunderline[9em]{~\njut@value@nlc@titlelinec~}\\
     }
-    \vskip \stretch{2}
-    \begin{center}
-      \def\ULthickness{1pt}
-      {\kaishu\zihao{-0} \njut@cap@nlc@title}
-      {\kaishu\zihao{1}
-        \vskip \stretch{1}
-        \njutunderline[9em]{~\njut@value@nlc@titlelinea~}\\
-        \njutunderline[9em]{~\njut@value@nlc@titlelineb~}\\
-        \njutunderline[9em]{~\njut@value@nlc@titlelinec~}\\
-      }
-      \vskip \stretch{1}
-      {\kaishu\zihao{4} \njut@cap@nlc@quotetitle}
-      \vskip \stretch{1}
-      {\kaishu\zihao{1} \njutunderline{~{\njut@value@author}~}}
-      \vskip \stretch{1}
-      {\kaishu\zihao{4} \njut@cap@nlc@author}
-    \end{center}
-    {\kaishu\zihao{4}
-      \vskip \stretch{1}
-      \noindent\njut@cap@nlc@supervisor%
-      \njutunderline[94pt]{~\njut@value@supervisor~}
+    \vskip \stretch{1}
+    {\kaishu\zihao{4} \njut@cap@nlc@quotetitle}
+    \vskip \stretch{1}
+    {\kaishu\zihao{1} \njutunderline{~{\njut@value@author}~}}
+    \vskip \stretch{1}
+    {\kaishu\zihao{4} \njut@cap@nlc@author}
+  \end{center}
+  {\kaishu\zihao{4}
+    \vskip \stretch{1}
+    \noindent\njut@cap@nlc@supervisor%
+    \njutunderline[94pt]{\njut@value@supervisor}
 
-      \noindent\njutunderline[\textwidth]%
-      {~{\njut@value@nlc@supervisorinstitute}%
-        \hspace{2em}{\njut@value@nlc@supervisordepartment}~}
+    \noindent\njutunderline[\textwidth]{\njut@value@nlc@supervisorinfo}
 
-      \noindent\njut@cap@nlc@degree%
-      \njutunderline[8em]{~\njut@value@degree~}
-      \njut@cap@nlc@major%
-      \njutunderline[164pt]{~\njut@value@major~}
+    \noindent\njut@cap@nlc@degree\njutunderline[8em]{\njut@value@degree}
+    \njut@cap@nlc@major\njutunderline[164pt]{\njut@value@major}
 
-      \noindent\njut@cap@nlc@submitdate%
-      \njutunderline[8em]{~\njut@value@submitdate~}
-      \njut@cap@nlc@defenddate%
-      \njutunderline[134pt]{~\njut@value@defenddate~}
+    \noindent\njut@cap@nlc@submitdate%
+    \njutunderline[8em]{\njut@value@submitdate}
+    \njut@cap@nlc@defenddate%
+    \njutunderline[134pt]{\njut@value@defenddate}
 
-      \noindent\njut@cap@nlc@institute%
-      \njutunderline[290pt]{}
+    \noindent\njut@cap@nlc@institute%
+    \njutunderline[290pt]{}
 
-      \noindent\hfill\njut@cap@nlc@chairman%
-      \njutunderline[9em]{~\njut@value@nlc@chairman~}
+    \noindent\hfill\njut@cap@nlc@chairman%
+    \njutunderline[9em]{\njut@value@nlc@chairman}
 
-      \noindent\hfill\njut@cap@nlc@reviwer%
-      \njutunderline[9em]{~\njut@value@nlc@reviewera~}
+    \noindent\hfill\njut@cap@nlc@reviwer%
+    \njutunderline[9em]{\njut@value@nlc@reviewera}
 
-      \noindent\hfill\njutunderline[9em]{~\njut@value@nlc@reviewerb~}
+    \noindent\hfill\njutunderline[9em]{\njut@value@nlc@reviewerb}
 
-      \noindent\hfill\njutunderline[9em]{~\njut@value@nlc@reviewerc~}
+    \noindent\hfill\njutunderline[9em]{\njut@value@nlc@reviewerc}
 
-      \noindent\hfill\njutunderline[9em]{~\njut@value@nlc@reviewerd~}
-    }
-    \clearpage
-    \if@twoside
-    \thispagestyle{empty}
-    \cleardoublepage
-    \fi
+    \noindent\hfill\njutunderline[9em]{\njut@value@nlc@reviewerd}
+  }
+  \clearpage
+  \if@twoside
+  \thispagestyle{empty}
+  \cleardoublepage
+  \fi
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2454,16 +2438,16 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
     \bf\kaishu\zihao{3}
     \def\tabcolsep{1pt}
     \def\arraystretch{1.5}
-    \begin{tabular}{lc}
-      \njut@cap@cover@title
+    \begin{tabular}{p{7.3em}c}
+      \makebox[7em][s]{\njut@cap@cover@title}
       & \njutunderline[310pt]{\njut@value@title}\\
-      \njut@cap@cover@author
+      \makebox[7em][s]{\njut@cap@cover@author}
       & \njutunderline[310pt]{\njut@value@author}\\
-      \njut@cap@cover@major
+      \makebox[7em][s]{\njut@cap@cover@major}
       & \njutunderline[310pt]{\njut@value@major}\\
-      \njut@cap@cover@supervisor
+      \makebox[7em][s]{\njut@cap@cover@supervisor}
       & \njutunderline[310pt]{\njut@value@supervisor}\\
-      \njut@cap@cover@researchfield
+      \makebox[7em][s]{\njut@cap@cover@researchfield}
       & \njutunderline[310pt]{\njut@value@researchfield}\\
     \end{tabular}\\
     \vskip \stretch{1}
@@ -2481,10 +2465,10 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
   \vspace*{\stretch{1}}
   {\bf\kaishu\zihao{-3}
    \noindent
-   \begin{tabular}{rl}
-   \njut@cap@coverback@studentnum &：\njut@value@studentnum\\
-   \njut@cap@coverback@defenddate &：\njut@value@defenddate\\
-   \njut@cap@coverback@supervisor &：\njut@cap@coverback@sign\\
+   \begin{tabular}{p{6.2em}l}
+   \makebox[6em][s]{\njut@cap@coverback@studentnum}： &\njut@value@studentnum\\
+   \makebox[6em][s]{\njut@cap@coverback@defenddate}： &\njut@value@defenddate\\
+   \makebox[6em][s]{\njut@cap@coverback@supervisor}： &\njut@cap@coverback@sign\\
    \end{tabular}}
 }
 %    \end{macrocode}
@@ -2515,22 +2499,22 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
   \thispagestyle{empty}
   \begin{center}
     \vspace*{20pt}
-      {\bf\zihao{2}\linespread{2}\njut@value@en@title}
+      \bf\zihao{2}\njut@value@en@title
     \vskip \stretch{1}
-      {\normalfont\zihao{4}by}
+      \normalfont\zihao{4}by
     \vskip 3pt
-      {\bf\zihao{4}\njut@value@en@author}
+      \bf\zihao{4}\njut@value@en@author
     \vskip\stretch{1}
-      {\normalfont\zihao{4}\njut@cap@cover@en@supervisor}
+      \normalfont\zihao{4}\njut@cap@cover@en@supervisor
     \vskip 3pt
-      {\normalfont\zihao{4}\njut@value@en@supervisor}
+      \normalfont\zihao{4}\njut@value@en@supervisor
     \vskip \stretch{2}
-      {\normalfont\normalsize\njut@value@en@department\\
-       \njut@value@en@institute}
+      \normalfont\normalsize\njut@value@en@department\\
+       \njut@value@en@institute
     \vskip 30pt
-      {\normalfont\normalsize\njut@value@en@date}
+      \normalfont\normalsize\njut@value@en@date
     \vskip 20pt
-      {\it\normalsize\njut@cap@cover@en@statement}
+      \it\normalsize\njut@cap@cover@en@statement
   \end{center}
   \clearpage
   \if@twoside
@@ -2822,6 +2806,8 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 \RequirePackage{booktabs}
 \RequirePackage{paralist}
 \RequirePackage{enumitem}
+\RequirePackage{titlesec}
+\RequirePackage{titling}
 \RequirePackage{hyperref}
 \hypersetup{%
   unicode=false,
@@ -2902,14 +2888,12 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
   extendedchars=false,columns=flexible,mathescape=true
   % numbersep=-1em
 }
-\renewcommand{\lstlistingname}{代码}
 \renewcommand{\contentsname}{目\hspace{2em}录}
-\renewcommand{\listfigurename}{插图目录}
-\renewcommand{\listtablename}{表格目录}
+\renewcommand{\indexname}{{\hfill}索\hspace{2em}引{\hfill}}
 \renewcommand{\figurename}{图}
 \renewcommand{\tablename}{表}
 \renewcommand{\refname}{参考文献}
-\renewcommand{\indexname}{索\hspace{2em}引}
+\renewcommand{\lstlistingname}{代码}
 
 \setlength{\parskip}{4pt plus1pt minus0pt}
 \setlength{\topsep}{0pt}
@@ -2936,35 +2920,34 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 \long\def\myentry#1{\vskip5pt\par\noindent\llap{{\color{blue}\fangsong #1}}%
   \marginpar{\strut}\hskip\parindent}
 
-\renewcommand{\section}{%
-  \@startsection{section}{1}{\z@}%
-                {-3.5ex \@plus -1ex \@minus -.2ex}%
-                {2.3ex \@plus.2ex}%
-                {\normalfont\Large\bfseries}}
+% 使用|titlesec|宏包提供的|\titleformat|命令设置标题格式：
+\titleformat*{\section}{\Large\bfseries}
+\titleformat*{\subsection}{\large\bfseries}
+\titleformat*{\subsubsection}{\normalsize\bfseries}
+\titleformat*{\paragraph}{\normalsize\bfseries}
+\titleformat*{\subparagraph}{\normalsize\bfseries}
 
-\renewcommand{\subsection}{%
-  \@startsection{subsection}{2}{\z@}%
-                {-3.25ex\@plus -1ex \@minus -.2ex}%
-                {1.5ex \@plus .2ex}%
-                {\normalfont\large\bfseries}}
+% 使用|titling|宏包设置标题的字体
+\pretitle{\begin{center}\huge\bfseries}
+\posttitle{\par\end{center}\vskip 1em}
+\preauthor{\begin{center}
+             \large \lineskip 0.5em}
+\postauthor{\par\end{center}}
+\predate{\begin{center}\large}
+\postdate{\par\end{center}}
 
-\renewcommand{\subsubsection}{%
-  \@startsection{subsubsection}{3}{\z@}%
-                {-3.25ex\@plus -1ex \@minus -.2ex}%
-                {1.5ex \@plus .2ex}%
-                {\normalfont\normalsize\bfseries}}
-
-\renewcommand{\paragraph}{%
-  \@startsection{paragraph}{4}{\z@}%
-                {3.25ex \@plus1ex \@minus.2ex}%
-                {-1em}%
-                {\normalfont\normalsize\bfseries}}
-
-\renewcommand{\subparagraph}{%
-  \@startsection{subparagraph}{5}{\parindent}%
-                {3.25ex \@plus1ex \@minus .2ex}%
-                {-1em}%
-                {\normalfont\normalsize\bfseries}}
+% 修改|\tableofcontents|命令用于生成目录页。
+\renewcommand{\tableofcontents}{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \section*{\hfill\contentsname\hfill}%
+    \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
+    \@starttoc{toc}%
+    \if@restonecol\twocolumn\fi
+}
 
 \newcolumntype{C}[1]{>{\centering\let\newline\\%
     \arraybackslash\hspace{0pt}}p{#1}}

@@ -585,10 +585,8 @@
   \renewcommand{\njut@value@nlc@titlelineb}{#1}}
 \newcommand*{\titlelinec}[1]{%
   \renewcommand{\njut@value@nlc@titlelinec}{#1}}
-\newcommand*{\supervisordepartment}[1]{%
-  \renewcommand{\njut@value@nlc@supervisordepartment}{#1}}
-\newcommand*{\supervisorinstitute}[1]{%
-  \renewcommand{\njut@value@nlc@supervisorinstitute}{#1}}
+\newcommand*{\supervisorinfo}[1]{%
+  \renewcommand{\njut@value@nlc@supervisorinfo}{#1}}
 \newcommand*{\chairman}[1]{%
   \renewcommand{\njut@value@nlc@chairman}{#1}}
 \newcommand*{\reviewera}[1]{%
@@ -639,78 +637,75 @@
   \renewcommand{\njut@value@en@institute}{#1}}
 \newcommand*{\englishdate}[1]{%
   \renewcommand{\njut@value@en@date}{#1}}
-\def\njut@underline[#1]#2{\CJKunderline{\hbox to #1{\hfill#2\hfill}}}
+\newcommand{\njut@underline}[2][\textwidth]%
+           {\CJKunderline{\makebox[#1]{#2}}}
 \def\njutunderline{\@ifnextchar[\njut@underline\CJKunderline}
 \newcommand*{\njut@makenlccover}{%
-    \cleardoublepage
-    \thispagestyle{empty}
-    \pdfbookmark[0]{\njut@cap@nlc}{nlc}
-    {\songti\zihao{-4}
-      \njut@cap@nlc@classification~
-      \njutunderline[150pt]{\njut@value@nlc@classification}
-      \hfill
-      \njut@cap@nlc@confidential~
-      \njutunderline[150pt]{\njut@value@nlc@confidential}
-      \vskip 10pt
-      \njut@cap@nlc@udc~
-      \njutunderline[160pt]{\njut@value@nlc@udc}
+  \cleardoublepage
+  \thispagestyle{empty}
+  \pdfbookmark[0]{\njut@cap@nlc}{nlc}
+  {\songti\zihao{-4}
+    \njut@cap@nlc@classification~
+    \njutunderline[150pt]{\njut@value@nlc@classification}
+    \hfill
+    \njut@cap@nlc@confidential~
+    \njutunderline[150pt]{\njut@value@nlc@confidential}
+    \vskip 10pt
+    \njut@cap@nlc@udc~
+    \njutunderline[160pt]{\njut@value@nlc@udc}
+  }
+  \vskip \stretch{2}
+  \begin{center}
+    \def\ULthickness{1pt}
+    {\kaishu\zihao{-0} \njut@cap@nlc@title}
+    {\kaishu\zihao{1}
+    \vskip \stretch{1}
+    \njutunderline[9em]{~\njut@value@nlc@titlelinea~}\\
+    \njutunderline[9em]{~\njut@value@nlc@titlelineb~}\\
+    \njutunderline[9em]{~\njut@value@nlc@titlelinec~}\\
     }
-    \vskip \stretch{2}
-    \begin{center}
-      \def\ULthickness{1pt}
-      {\kaishu\zihao{-0} \njut@cap@nlc@title}
-      {\kaishu\zihao{1}
-        \vskip \stretch{1}
-        \njutunderline[9em]{~\njut@value@nlc@titlelinea~}\\
-        \njutunderline[9em]{~\njut@value@nlc@titlelineb~}\\
-        \njutunderline[9em]{~\njut@value@nlc@titlelinec~}\\
-      }
-      \vskip \stretch{1}
-      {\kaishu\zihao{4} \njut@cap@nlc@quotetitle}
-      \vskip \stretch{1}
-      {\kaishu\zihao{1} \njutunderline{~{\njut@value@author}~}}
-      \vskip \stretch{1}
-      {\kaishu\zihao{4} \njut@cap@nlc@author}
-    \end{center}
-    {\kaishu\zihao{4}
-      \vskip \stretch{1}
-      \noindent\njut@cap@nlc@supervisor%
-      \njutunderline[94pt]{~\njut@value@supervisor~}
+    \vskip \stretch{1}
+    {\kaishu\zihao{4} \njut@cap@nlc@quotetitle}
+    \vskip \stretch{1}
+    {\kaishu\zihao{1} \njutunderline{~{\njut@value@author}~}}
+    \vskip \stretch{1}
+    {\kaishu\zihao{4} \njut@cap@nlc@author}
+  \end{center}
+  {\kaishu\zihao{4}
+    \vskip \stretch{1}
+    \noindent\njut@cap@nlc@supervisor%
+    \njutunderline[94pt]{\njut@value@supervisor}
 
-      \noindent\njutunderline[\textwidth]%
-      {~{\njut@value@nlc@supervisorinstitute}%
-        \hspace{2em}{\njut@value@nlc@supervisordepartment}~}
+    \noindent\njutunderline[\textwidth]{\njut@value@nlc@supervisorinfo}
 
-      \noindent\njut@cap@nlc@degree%
-      \njutunderline[8em]{~\njut@value@degree~}
-      \njut@cap@nlc@major%
-      \njutunderline[164pt]{~\njut@value@major~}
+    \noindent\njut@cap@nlc@degree\njutunderline[8em]{\njut@value@degree}
+    \njut@cap@nlc@major\njutunderline[164pt]{\njut@value@major}
 
-      \noindent\njut@cap@nlc@submitdate%
-      \njutunderline[8em]{~\njut@value@submitdate~}
-      \njut@cap@nlc@defenddate%
-      \njutunderline[134pt]{~\njut@value@defenddate~}
+    \noindent\njut@cap@nlc@submitdate%
+    \njutunderline[8em]{\njut@value@submitdate}
+    \njut@cap@nlc@defenddate%
+    \njutunderline[134pt]{\njut@value@defenddate}
 
-      \noindent\njut@cap@nlc@institute%
-      \njutunderline[290pt]{}
+    \noindent\njut@cap@nlc@institute%
+    \njutunderline[290pt]{}
 
-      \noindent\hfill\njut@cap@nlc@chairman%
-      \njutunderline[9em]{~\njut@value@nlc@chairman~}
+    \noindent\hfill\njut@cap@nlc@chairman%
+    \njutunderline[9em]{\njut@value@nlc@chairman}
 
-      \noindent\hfill\njut@cap@nlc@reviwer%
-      \njutunderline[9em]{~\njut@value@nlc@reviewera~}
+    \noindent\hfill\njut@cap@nlc@reviwer%
+    \njutunderline[9em]{\njut@value@nlc@reviewera}
 
-      \noindent\hfill\njutunderline[9em]{~\njut@value@nlc@reviewerb~}
+    \noindent\hfill\njutunderline[9em]{\njut@value@nlc@reviewerb}
 
-      \noindent\hfill\njutunderline[9em]{~\njut@value@nlc@reviewerc~}
+    \noindent\hfill\njutunderline[9em]{\njut@value@nlc@reviewerc}
 
-      \noindent\hfill\njutunderline[9em]{~\njut@value@nlc@reviewerd~}
-    }
-    \clearpage
-    \if@twoside
-    \thispagestyle{empty}
-    \cleardoublepage
-    \fi
+    \noindent\hfill\njutunderline[9em]{\njut@value@nlc@reviewerd}
+  }
+  \clearpage
+  \if@twoside
+  \thispagestyle{empty}
+  \cleardoublepage
+  \fi
 }
 \newcommand*{\njut@makecover}{%
   \thispagestyle{empty}
@@ -727,16 +722,16 @@
     \bf\kaishu\zihao{3}
     \def\tabcolsep{1pt}
     \def\arraystretch{1.5}
-    \begin{tabular}{lc}
-      \njut@cap@cover@title
+    \begin{tabular}{p{7.3em}c}
+      \makebox[7em][s]{\njut@cap@cover@title}
       & \njutunderline[310pt]{\njut@value@title}\\
-      \njut@cap@cover@author
+      \makebox[7em][s]{\njut@cap@cover@author}
       & \njutunderline[310pt]{\njut@value@author}\\
-      \njut@cap@cover@major
+      \makebox[7em][s]{\njut@cap@cover@major}
       & \njutunderline[310pt]{\njut@value@major}\\
-      \njut@cap@cover@supervisor
+      \makebox[7em][s]{\njut@cap@cover@supervisor}
       & \njutunderline[310pt]{\njut@value@supervisor}\\
-      \njut@cap@cover@researchfield
+      \makebox[7em][s]{\njut@cap@cover@researchfield}
       & \njutunderline[310pt]{\njut@value@researchfield}\\
     \end{tabular}\\
     \vskip \stretch{1}
@@ -748,10 +743,10 @@
   \vspace*{\stretch{1}}
   {\bf\kaishu\zihao{-3}
    \noindent
-   \begin{tabular}{rl}
-   \njut@cap@coverback@studentnum &：\njut@value@studentnum\\
-   \njut@cap@coverback@defenddate &：\njut@value@defenddate\\
-   \njut@cap@coverback@supervisor &：\njut@cap@coverback@sign\\
+   \begin{tabular}{p{6.2em}l}
+   \makebox[6em][s]{\njut@cap@coverback@studentnum}： &\njut@value@studentnum\\
+   \makebox[6em][s]{\njut@cap@coverback@defenddate}： &\njut@value@defenddate\\
+   \makebox[6em][s]{\njut@cap@coverback@supervisor}： &\njut@cap@coverback@sign\\
    \end{tabular}}
 }
 \renewcommand*{\maketitle}{%
@@ -770,22 +765,22 @@
   \thispagestyle{empty}
   \begin{center}
     \vspace*{20pt}
-      {\bf\zihao{2}\linespread{2}\njut@value@en@title}
+      \bf\zihao{2}\njut@value@en@title
     \vskip \stretch{1}
-      {\normalfont\zihao{4}by}
+      \normalfont\zihao{4}by
     \vskip 3pt
-      {\bf\zihao{4}\njut@value@en@author}
+      \bf\zihao{4}\njut@value@en@author
     \vskip\stretch{1}
-      {\normalfont\zihao{4}\njut@cap@cover@en@supervisor}
+      \normalfont\zihao{4}\njut@cap@cover@en@supervisor
     \vskip 3pt
-      {\normalfont\zihao{4}\njut@value@en@supervisor}
+      \normalfont\zihao{4}\njut@value@en@supervisor
     \vskip \stretch{2}
-      {\normalfont\normalsize\njut@value@en@department\\
-       \njut@value@en@institute}
+      \normalfont\normalsize\njut@value@en@department\\
+       \njut@value@en@institute
     \vskip 30pt
-      {\normalfont\normalsize\njut@value@en@date}
+      \normalfont\normalsize\njut@value@en@date
     \vskip 20pt
-      {\it\normalsize\njut@cap@cover@en@statement}
+      \it\normalsize\njut@cap@cover@en@statement
   \end{center}
   \clearpage
   \if@twoside

@@ -35,6 +35,8 @@
 \RequirePackage{booktabs}
 \RequirePackage{paralist}
 \RequirePackage{enumitem}
+\RequirePackage{titlesec}
+\RequirePackage{titling}
 \RequirePackage{hyperref}
 \hypersetup{%
   unicode=false,
@@ -109,14 +111,12 @@
   extendedchars=false,columns=flexible,mathescape=true
   % numbersep=-1em
 }
-\renewcommand{\lstlistingname}{代码}
 \renewcommand{\contentsname}{目\hspace{2em}录}
-\renewcommand{\listfigurename}{插图目录}
-\renewcommand{\listtablename}{表格目录}
+\renewcommand{\indexname}{{\hfill}索\hspace{2em}引{\hfill}}
 \renewcommand{\figurename}{图}
 \renewcommand{\tablename}{表}
 \renewcommand{\refname}{参考文献}
-\renewcommand{\indexname}{索\hspace{2em}引}
+\renewcommand{\lstlistingname}{代码}
 
 \setlength{\parskip}{4pt plus1pt minus0pt}
 \setlength{\topsep}{0pt}
@@ -143,35 +143,31 @@
 \long\def\myentry#1{\vskip5pt\par\noindent\llap{{\color{blue}\fangsong #1}}%
   \marginpar{\strut}\hskip\parindent}
 
-\renewcommand{\section}{%
-  \@startsection{section}{1}{\z@}%
-                {-3.5ex \@plus -1ex \@minus -.2ex}%
-                {2.3ex \@plus.2ex}%
-                {\normalfont\Large\bfseries}}
+\titleformat*{\section}{\Large\bfseries}
+\titleformat*{\subsection}{\large\bfseries}
+\titleformat*{\subsubsection}{\normalsize\bfseries}
+\titleformat*{\paragraph}{\normalsize\bfseries}
+\titleformat*{\subparagraph}{\normalsize\bfseries}
 
-\renewcommand{\subsection}{%
-  \@startsection{subsection}{2}{\z@}%
-                {-3.25ex\@plus -1ex \@minus -.2ex}%
-                {1.5ex \@plus .2ex}%
-                {\normalfont\large\bfseries}}
+\pretitle{\begin{center}\huge\bfseries}
+\posttitle{\par\end{center}\vskip 1em}
+\preauthor{\begin{center}
+             \large \lineskip 0.5em}
+\postauthor{\par\end{center}}
+\predate{\begin{center}\large}
+\postdate{\par\end{center}}
 
-\renewcommand{\subsubsection}{%
-  \@startsection{subsubsection}{3}{\z@}%
-                {-3.25ex\@plus -1ex \@minus -.2ex}%
-                {1.5ex \@plus .2ex}%
-                {\normalfont\normalsize\bfseries}}
-
-\renewcommand{\paragraph}{%
-  \@startsection{paragraph}{4}{\z@}%
-                {3.25ex \@plus1ex \@minus.2ex}%
-                {-1em}%
-                {\normalfont\normalsize\bfseries}}
-
-\renewcommand{\subparagraph}{%
-  \@startsection{subparagraph}{5}{\parindent}%
-                {3.25ex \@plus1ex \@minus .2ex}%
-                {-1em}%
-                {\normalfont\normalsize\bfseries}}
+\renewcommand{\tableofcontents}{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \section*{\hfill\contentsname\hfill}%
+    \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
+    \@starttoc{toc}%
+    \if@restonecol\twocolumn\fi
+}
 
 \newcolumntype{C}[1]{>{\centering\let\newline\\%
     \arraybackslash\hspace{0pt}}p{#1}}
