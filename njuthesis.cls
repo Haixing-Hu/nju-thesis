@@ -472,7 +472,7 @@
   partopsep=0pt,            % 列表环境前面紧接着一个空白行时其顶端的额外垂直空白
   itemsep=0ex plus 0.1ex,   % 列表项之间的额外垂直空白
   parsep=0pt,               % 列表项内的段落之间的垂直空白
-  leftmargin=2em,           % 环境的左边界和列表之间的水平距离
+  leftmargin=1.5em,         % 环境的左边界和列表之间的水平距离
   rightmargin=0em,          % 环境的右边界和列表之间的水平距离
   labelsep=0.5em,           % 包含标签的盒子与列表项的第一行文本之间的间隔
   labelwidth=2em,           % 包含标签的盒子的正常宽度；若实际宽度更宽，则使用实际宽度。
@@ -605,12 +605,18 @@
   \renewcommand{\njut@value@title}{#1}}
 \renewcommand*{\author}[1]{%
   \renewcommand{\njut@value@author}{#1}}
+\newcommand*{\telphone}[1]{%
+  \renewcommand{\njut@value@telphone}{#1}}
+\newcommand*{\email}[1]{%
+  \renewcommand{\njut@value@email}{#1}}
 \newcommand*{\studentnum}[1]{%
   \renewcommand{\njut@value@studentnum}{#1}}
 \newcommand*{\grade}[1]{%
   \renewcommand{\njut@value@grade}{#1}}
 \newcommand*{\supervisor}[1]{%
   \renewcommand{\njut@value@supervisor}{#1}}
+\newcommand*{\supervisortelphone}[1]{%
+  \renewcommand{\njut@value@supervisortelphone}{#1}}
 \newcommand*{\major}[1]{%
   \renewcommand{\njut@value@major}{#1}}
 \newcommand*{\researchfield}[1]{%
@@ -897,6 +903,75 @@
 \newenvironment{acknowledgement}{%
   \nchapter{\njut@cap@acknowledgement@chaptername}
 }{}
+\newcommand*{\njut@cap@datefield}{%
+\njutunderline[1cm]{}{\njut@cap@year}%
+\njutunderline[1cm]{}{\njut@cap@month}%
+\njutunderline[1cm]{}{\njut@cap@day}
+}
+\newcommand*{\njut@license@makedeclaration}{%
+\par\njut@cap@license@declaration
+\vspace{5mm}
+\begin{flushright}
+  \njut@cap@license@sign\njutunderline[6cm]{}\\
+  \njut@cap@datefield\\
+\end{flushright}%
+}
+\newcommand*{\njut@license@maketable}{%
+\noindent\zihao{5}%
+\begin{tabular*}{\textwidth}
+    {|C{2.2cm}|C{2cm}|C{1.5cm}|C{2.1cm}|C{1.42cm}C{1.5cm}|C{1.25cm}|}
+  \hline
+  \cell{2.2cm}{1cm}{\njut@cap@license@title}
+  & \multicolumn{6}{c|}{\njut@value@title} \\
+  \hline
+  \cell{2.2cm}{1cm}{\njut@cap@license@studentnum}
+  & {\njut@value@studentnum}
+  & {\njut@cap@license@department}
+  & \multicolumn{2}{c|}{%
+    \cell{3.52cm}{1cm}{\njut@value@department}%
+  }
+  & {\njut@cap@license@grade}
+  & {\njut@value@grade} \\
+  \hline
+  \cell{2.2cm}{1.5cm}{\njut@cap@license@category}
+  & \multicolumn{3}{c}{
+    \begin{tabular*}{5.6cm}{p{2.8cm}p{2.8cm}}
+       $\square$\njut@cap@license@categorymaster
+      & $\square$\njut@cap@license@categorymasterspec \\
+       $\square$\njut@cap@license@categoryphd
+      & $\square$\njut@cap@license@categoryphdspec \\
+    \end{tabular*}}
+  & \multicolumn{3}{c|}{%
+    \raisebox{-1em}{\njut@cap@license@categoryhint}}\\
+  \hline
+  \cell{2.2cm}{1cm}{\njut@cap@license@telphone}
+  & \multicolumn{2}{c|}{{\njut@value@telphone}}
+  & {\njut@cap@license@email}
+  & \multicolumn{3}{c|}{{\njut@value@email}}  \\
+  \hline
+  \cell{2.2cm}{1cm}{\njut@cap@license@supervisorname}
+  & \multicolumn{2}{c|}{{\njut@value@supervisor}}
+  & {\njut@cap@license@supervisortelphone}
+  & \multicolumn{3}{c|}{{\njut@value@supervisortelphone}} \\
+  \hline
+\end{tabular*}
+}
+\newcommand*{\makelicense}{%
+\thispagestyle{empty}
+\nchapter{\njut@cap@license@chaptername}
+\njut@license@makedeclaration
+\par\vspace{1em}
+\njut@license@maketable
+\par\vspace{1em}
+\noindent\njut@cap@license@confidential
+\begin{itemize}[label=$\square$]
+\item {\njut@cap@license@public}
+\item {\njut@cap@license@secret}
+\njut@cap@datefield~~\njut@cap@to~~\njut@cap@datefield
+\end{itemize}
+\vspace{1em}
+\noindent\njut@cap@license@remark
+}
 \newcommand{\zhdash}{\kern0.3ex\rule[0.8ex]{2em}{0.1ex}\kern0.3ex}
 \newcommand{\cell}[3]{\parbox[c][#2][c]{#1}{\makebox[#1]{#3}}}
 \newcolumntype{C}[1]{>{\centering\let\newline\\%
