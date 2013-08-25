@@ -23,7 +23,7 @@
 %<class>\NeedsTeXFormat{LaTeX2e}[1995/12/01]
 %<class>\ProvidesClass{njuthesis}
 %<*class>
-  [2013/08/25 v1.0.2 Document Class for the Degree Papers of Nanjing University]
+  [2013/08/25 v1.0.3 Document Class for the Degree Papers of Nanjing University]
 %</class>
 %<*driver>
 \documentclass[10pt,a4paper]{ltxdoc}
@@ -118,6 +118,7 @@
 %                                使用|\makebox[width][s]{...}|使得封面标签可以自动
 %                                两端对其分布\newline
 %                                修改了学位论文和用户手册的样式\\
+%  v1.0.3 & 2013/08/25 & 胡海星 & 增加了《学位论文出版授权书》页面\\
 % \bottomrule
 % \end{tabular*}
 % \end{center}
@@ -475,7 +476,7 @@
 % \end{example}
 %
 % \myentry{密级}
-% \DescribeMacro{\classification}设置论文的密级。此属性必须被设置。
+% \DescribeMacro{\confidential}设置论文的密级。此属性必须被设置。
 % \begin{example}
 % \confidential{机密}
 % \end{example}
@@ -559,6 +560,18 @@
 % \author{张三}
 % \end{example}
 %
+% \myentry{作者电话}
+% \DescribeMacro{\telphone}设置论文作者的电话号码。此属性必须被设置。
+% \begin{example}
+% \telphone{13671413272}
+% \end{example}
+%
+% \myentry{作者邮件}
+% \DescribeMacro{\email}设置论文作者的电子邮件地址。此属性必须被设置。
+% \begin{example}
+% \email{san.zhang@gmail.com}
+% \end{example}
+%
 % \myentry{作者学号}
 % \DescribeMacro{\studentnum}设置论文作者的学号。此属性必须被设置。
 % \begin{note}
@@ -582,6 +595,12 @@
 % \end{note}
 % \begin{example}
 % \supervisorname{李四~~教授}
+% \end{example}
+%
+% \myentry{导师电话}
+% \DescribeMacro{\supervisortelphone}设置论文作者的导师的姓名和职称。此属性必须被设置。
+% \begin{example}
+% \supervisortelphone{13671607471}
 % \end{example}
 %
 % \myentry{学科专业}
@@ -762,9 +781,7 @@
 % 中使用。关键词之间用中文全角分号隔开。
 % \begin{example}
 % \begin{abstract}
-%
 % 本文基于小世界理论，研究了数据中心的网络模型。………………
-%
 % \keywords{数据中心；网络模型；小世界理论}
 % \end{abstract}
 % \end{example}
@@ -783,10 +800,8 @@
 % |englishabstract|环境中使用。关键词之间用英文半角逗号隔开。
 % \begin{example}
 % \begin{englishabstract}
-%
 % In this paper, we studied the network model of data centers,
 % based on the theory of small worlds. ....
-%
 % \englishkeywords{Data Center, Network Model, Small World}
 % \end{englishabstract}
 % \end{example}
@@ -852,15 +867,22 @@
 % \end{example}
 %
 % \myentry{致谢章节}
-% \DescribeMacro{\thanks} 此环境用于生成致谢章节。此环境必须被放在{\TeX}文档的最后。
+% \DescribeMacro{\acknowledgement}此环境用于生成致谢章节。
 % \begin{example}
-% \begin{thanks}
+% \begin{acknowledgement}
 % 首先感谢我的母亲韦春花对我的支持。其次感谢我的导师陈近南对我的精心指导和热心帮助。接
 % 下来，感谢我的师兄茅十八和风际中，他们阅读了我的论文草稿并提出了很有价值的修改建议。
 %
 % 最后，感谢我亲爱的老婆们：双儿、苏荃、阿珂、沐剑屏、曾柔、建宁公主、方怡，感谢你们在
 % 生活上对我无微不至的关怀和照顾。
-% \end{thanks}
+% \end{acknowledgement}
+% \end{example}
+%
+% \myentry{生成《学位论文出版授权书》}
+% \DescribeMacro{\makelicense}该命令用于生成《学位论文出版授权书》。该授权书中的一些字
+% 段将根据用户所设置的文档属性自动填写。
+% \begin{example}
+% \makelicense
 % \end{example}
 %
 % \subsubsection{其它命令和环境}
@@ -1273,6 +1295,14 @@
 \newcommand*{\njut@cap@algorithm}{算法}
 %    \end{macrocode}
 %
+% 定义日期中的中文字符：
+%    \begin{macrocode}
+\newcommand*{\njut@cap@year}{年}
+\newcommand*{\njut@cap@month}{月}
+\newcommand*{\njut@cap@day}{日}
+\newcommand*{\njut@cap@to}{至}
+%    \end{macrocode}
+%
 % 定义学位名称的中英文字符串常量：
 %    \begin{macrocode}
 \newcommand*{\njut@cap@phd}{博士}
@@ -1289,11 +1319,12 @@
 \newcommand*{\njut@cap@nlc@classification}{分类号}
 \newcommand*{\njut@cap@nlc@confidential}{密级}
 \newcommand*{\njut@cap@nlc@udc}{UDC}
-\newcommand*{\njut@cap@nlc@title}{学\hspace{1em}位\hspace{1em}论\hspace{1em}文}
+\newcommand*{\njut@cap@nlc@title}%
+{学\hspace{1em}位\hspace{1em}论\hspace{1em}文}
 \newcommand*{\njut@cap@nlc@quotetitle}{（题名和副题名）}
 \newcommand*{\njut@cap@nlc@author}{（作者姓名）}
 \newcommand*{\njut@cap@nlc@supervisor}%
-            {指导教师姓名、职务、职称、学位、单位名称及地址}
+{指导教师姓名、职务、职称、学位、单位名称及地址}
 \newcommand*{\njut@cap@nlc@degree}{申请学位级别}
 \newcommand*{\njut@cap@nlc@major}{专业名称}
 \newcommand*{\njut@cap@nlc@submitdate}{论文提交日期}
@@ -1375,12 +1406,43 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 \newcommand*{\njut@cap@acknowledgement@chaptername}{致\hspace{2em}谢}
 %    \end{macrocode}
 %
+% 定义《学位论文出版授权书》中的字符串常量：
+%    \begin{macrocode}
+\newcommand*{\njut@cap@license@chaptername}{学位论文出版授权书}
+\newcommand*{\njut@cap@license@declaration}{本人完全同意《中国优秀%
+博硕士学位论文全文数据库出版章程》（以下简称“章程” ），愿意将本人的学%
+位论文提交“中国学术期刊（光盘版）电子杂志社”在《中国博士学位论文全文数%
+据库》、《中国优秀硕士学位论文全文数据库》中全文发表。《中国博士学位论文%
+全文数据库》、《中国优秀硕士学位论文全文数据库》可以以电子、网络及其他数%
+字媒体形式公开出版，并同意编入《中国知识资源总库》，在《中国博硕士学位论%
+文评价数据库》中使用和在互联网上传播，同意按“章程”规定享受相关权益。}
+\newcommand*{\njut@cap@license@sign}{作者签名：}
+\newcommand*{\njut@cap@license@confidential}{论文涉密情况：}
+\newcommand*{\njut@cap@license@public}{不保密}
+\newcommand*{\njut@cap@license@secret}{保密，保密期：}
+\newcommand*{\njut@cap@license@title}{论文题名}
+\newcommand*{\njut@cap@license@studentnum}{研究生学号}
+\newcommand*{\njut@cap@license@department}{所在院系}
+\newcommand*{\njut@cap@license@grade}{学位年度}
+\newcommand*{\njut@cap@license@category}{论文级别}
+\newcommand*{\njut@cap@license@telphone}{作者电话}
+\newcommand*{\njut@cap@license@email}{作者Email}
+\newcommand*{\njut@cap@license@supervisorname}{第一导师姓名}
+\newcommand*{\njut@cap@license@supervisortelphone}{导师电话}
+\newcommand*{\njut@cap@license@categoryhint}{（请在方框内画勾）}
+\newcommand*{\njut@cap@license@categorymaster}{硕士}
+\newcommand*{\njut@cap@license@categoryphd}{博士}
+\newcommand*{\njut@cap@license@categorymasterspec}{硕士专业学位}
+\newcommand*{\njut@cap@license@categoryphdspec}{博士专业学位}
+\newcommand*{\njut@cap@license@remark}{注：请将该授权书填写后装订在%
+学位论文最后一页（南大封面）。}
+%    \end{macrocode}
+%
 % 定义学位颁发机构的校徽和校名图片文件名：
 %    \begin{macrocode}
 \newcommand*{\njut@cap@institute@logo}{njulogo.eps}
 \newcommand*{\njut@cap@institute@name}{njuname.eps}
 %    \end{macrocode}
-%
 %
 % \subsection{字段默认值定义}
 %
@@ -1392,7 +1454,8 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 \newcommand*{\njut@value@nlc@titlea}{(论文标题)}
 \newcommand*{\njut@value@nlc@titleb}{}
 \newcommand*{\njut@value@nlc@titlec}{}
-\newcommand*{\njut@value@nlc@supervisorinfo}{(导师的职务、职称、学位、单位名称及地址)}
+\newcommand*{\njut@value@nlc@supervisorinfo}{(导师的职务、%
+职称、学位、单位名称及地址)}
 \newcommand*{\njut@value@nlc@chairman}{(答辩主席)}
 \newcommand*{\njut@value@nlc@reviewera}{(评审人)}
 \newcommand*{\njut@value@nlc@reviewerb}{}
@@ -1417,9 +1480,12 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 \fi
 \newcommand*{\njut@value@title}{(论文标题)}
 \newcommand*{\njut@value@author}{(作者姓名)}
+\newcommand*{\njut@value@telphone}{(作者电话号码)}
+\newcommand*{\njut@value@email}{(作者电子邮件)}
 \newcommand*{\njut@value@studentnum}{XXXXXXXX}
 \newcommand*{\njut@value@grade}{XXXX}
 \newcommand*{\njut@value@supervisor}{(导师姓名和职称)}
+\newcommand*{\njut@value@supervisortelphone}{(导师电话号码)}
 \newcommand*{\njut@value@major}{(作者专业)}
 \newcommand*{\njut@value@researchfield}{(作者研究方向)}
 \newcommand*{\njut@value@department}{(作者所属院系)}
@@ -2149,7 +2215,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
   partopsep=0pt,            % 列表环境前面紧接着一个空白行时其顶端的额外垂直空白
   itemsep=0ex plus 0.1ex,   % 列表项之间的额外垂直空白
   parsep=0pt,               % 列表项内的段落之间的垂直空白
-  leftmargin=2em,           % 环境的左边界和列表之间的水平距离
+  leftmargin=1.5em,         % 环境的左边界和列表之间的水平距离
   rightmargin=0em,          % 环境的右边界和列表之间的水平距离
   labelsep=0.5em,           % 包含标签的盒子与列表项的第一行文本之间的间隔
   labelwidth=2em,           % 包含标签的盒子的正常宽度；若实际宽度更宽，则使用实际宽度。
@@ -2352,12 +2418,18 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
   \renewcommand{\njut@value@title}{#1}}
 \renewcommand*{\author}[1]{%
   \renewcommand{\njut@value@author}{#1}}
+\newcommand*{\telphone}[1]{%
+  \renewcommand{\njut@value@telphone}{#1}}
+\newcommand*{\email}[1]{%
+  \renewcommand{\njut@value@email}{#1}}
 \newcommand*{\studentnum}[1]{%
   \renewcommand{\njut@value@studentnum}{#1}}
 \newcommand*{\grade}[1]{%
   \renewcommand{\njut@value@grade}{#1}}
 \newcommand*{\supervisor}[1]{%
   \renewcommand{\njut@value@supervisor}{#1}}
+\newcommand*{\supervisortelphone}[1]{%
+  \renewcommand{\njut@value@supervisortelphone}{#1}}
 \newcommand*{\major}[1]{%
   \renewcommand{\njut@value@major}{#1}}
 \newcommand*{\researchfield}[1]{%
@@ -2780,6 +2852,102 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 %    \end{macrocode}
 % \end{macro}
 %
+% \subsection{学位论文出版授权书}
+%
+% \begin{macro}{\njut@cap@datefield}
+% 该命令生成一个由用户填写的日期域。
+%    \begin{macrocode}
+\newcommand*{\njut@cap@datefield}{%
+\njutunderline[1cm]{}{\njut@cap@year}%
+\njutunderline[1cm]{}{\njut@cap@month}%
+\njutunderline[1cm]{}{\njut@cap@day}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\njut@license@makedeclaration}
+% 该命令生成《学位论文出版授权书》中的授权声明。
+%    \begin{macrocode}
+\newcommand*{\njut@license@makedeclaration}{%
+\par\njut@cap@license@declaration
+\vspace{5mm}
+\begin{flushright}
+  \njut@cap@license@sign\njutunderline[6cm]{}\\
+  \njut@cap@datefield\\
+\end{flushright}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\njut@license@maketable}
+% 该命令生成《学位论文出版授权书》中的论文信息表格。
+%    \begin{macrocode}
+\newcommand*{\njut@license@maketable}{%
+\noindent\zihao{5}%
+\begin{tabular*}{\textwidth}
+    {|C{2.2cm}|C{2cm}|C{1.5cm}|C{2.1cm}|C{1.42cm}C{1.5cm}|C{1.25cm}|}
+  \hline
+  \cell{2.2cm}{1cm}{\njut@cap@license@title}
+  & \multicolumn{6}{c|}{\njut@value@title} \\
+  \hline
+  \cell{2.2cm}{1cm}{\njut@cap@license@studentnum}
+  & {\njut@value@studentnum}
+  & {\njut@cap@license@department}
+  & \multicolumn{2}{c|}{%
+    \cell{3.52cm}{1cm}{\njut@value@department}%
+  }
+  & {\njut@cap@license@grade}
+  & {\njut@value@grade} \\
+  \hline
+  \cell{2.2cm}{1.5cm}{\njut@cap@license@category}
+  & \multicolumn{3}{c}{
+    \begin{tabular*}{5.6cm}{p{2.8cm}p{2.8cm}}
+       $\square$\njut@cap@license@categorymaster
+      & $\square$\njut@cap@license@categorymasterspec \\
+       $\square$\njut@cap@license@categoryphd
+      & $\square$\njut@cap@license@categoryphdspec \\
+    \end{tabular*}}
+  & \multicolumn{3}{c|}{%
+    \raisebox{-1em}{\njut@cap@license@categoryhint}}\\
+  \hline
+  \cell{2.2cm}{1cm}{\njut@cap@license@telphone}
+  & \multicolumn{2}{c|}{{\njut@value@telphone}}
+  & {\njut@cap@license@email}
+  & \multicolumn{3}{c|}{{\njut@value@email}}  \\
+  \hline
+  \cell{2.2cm}{1cm}{\njut@cap@license@supervisorname}
+  & \multicolumn{2}{c|}{{\njut@value@supervisor}}
+  & {\njut@cap@license@supervisortelphone}
+  & \multicolumn{3}{c|}{{\njut@value@supervisortelphone}} \\
+  \hline
+\end{tabular*}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\makelicense}
+% 该命令用于生成《学位论文出版授权书》。该授权书中的一些字段将根据用户所设置的文
+% 档属性自动填写。
+%    \begin{macrocode}
+\newcommand*{\makelicense}{%
+\thispagestyle{empty}
+\nchapter{\njut@cap@license@chaptername}
+\njut@license@makedeclaration
+\par\vspace{1em}
+\njut@license@maketable
+\par\vspace{1em}
+\noindent\njut@cap@license@confidential
+\begin{itemize}[label=$\square$]
+\item {\njut@cap@license@public}
+\item {\njut@cap@license@secret}
+\njut@cap@datefield~~\njut@cap@to~~\njut@cap@datefield
+\end{itemize}
+\vspace{1em}
+\noindent\njut@cap@license@remark
+}
+%    \end{macrocode}
+% \end{macro}
+%
 % \subsection{其他自定义命令和环境}
 %
 % \begin{macro}{\zhdash}
@@ -3054,7 +3222,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
   partopsep=0pt,            % 列表环境前面紧接着一个空白行时其顶端的额外垂直空白
   itemsep=0ex plus 0.1ex,   % 列表项之间的额外垂直空白
   parsep=0pt,               % 列表项内的段落之间的垂直空白
-  leftmargin=2em,           % 环境的左边界和列表之间的水平距离
+  leftmargin=1.5em,           % 环境的左边界和列表之间的水平距离
   rightmargin=0em,          % 环境的右边界和列表之间的水平距离
   labelsep=0.5em,           % 包含标签的盒子与列表项的第一行文本之间的间隔
   labelwidth=2em,           % 包含标签的盒子的正常宽度；若实际宽度更宽，则使用实际宽度。
