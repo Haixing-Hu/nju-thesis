@@ -38,6 +38,7 @@
 \RequirePackage{titlesec}
 \RequirePackage{titling}
 \RequirePackage{fancyhdr}
+\RequirePackage{geometry}
 \RequirePackage{hyperref}
 \hypersetup{%
   unicode=false,
@@ -197,7 +198,12 @@
   \hbox{}\thispagestyle{empty}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
 \makeatother
 
-\pagestyle{fancy}
+\geometry{headheight=2.6cm,headsep=3mm,footskip=13mm}
+\geometry{top=3.5cm,bottom=3.5cm,left=3.2cm,right=3.2cm}
+
+\renewcommand{\abstractname}{摘~~~~要}
+\renewcommand{\contentsname}{目~~~~录}
+
 \endinput
 %%
 %% End of file `dtx-style.sty'.

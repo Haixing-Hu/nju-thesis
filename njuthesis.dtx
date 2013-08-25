@@ -26,7 +26,7 @@
   [2013/08/25 v1.0.4 Document Class for the Degree Papers of Nanjing University]
 %</class>
 %<*driver>
-\documentclass[10pt,a4paper,twoside]{ltxdoc}
+\documentclass[10pt,a4paper,oneside]{ltxdoc}
 \usepackage{dtx-style}
 \EnableCrossrefs
 \CodelineIndex
@@ -73,9 +73,7 @@
 % \newcommand{\njuthesis}{\texttt{NJU-Thesis}}
 % \newcommand{\texlive}{\TeX live 2012}
 %
-% \renewcommand{\abstractname}{摘~~~~要}
-% \renewcommand{\contentsname}{目~~~~录}
-%
+% \pagestyle{empty}
 % \title{\njuthesis：南京大学学位论文\\
 %        {\XeLaTeX}模板}
 % \author{{胡海星}\\
@@ -98,7 +96,7 @@
 % 本文档是{\njuthesis}宏包的说明文档，其中包含宏包文件的设置说明以及宏包源代码的完全注释。
 % \end{abstract}
 %
-% \cleardoublepage
+% \clearpage
 % \section*{{\hfill}修订历史{\hfill}}
 % \begin{center}
 % \noindent
@@ -125,14 +123,12 @@
 % \bottomrule
 % \end{tabular*}
 % \end{center}
-% \cleardoublepage
+% \clearpage
 %
 % \tableofcontents
-% \cleardoublepage
+% \clearpage
 %
-% \pagenumbering{arabic}
-% \pagestyle{headings}
-%
+% \pagestyle{fancy}
 % \section{文档类简介}
 %
 % {\njuthesis}是为了帮助南京大学的同学撰写学位论文而编写的{\XeLaTeX}文档类。该宏包提供了
@@ -3180,6 +3176,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 \RequirePackage{titlesec}
 \RequirePackage{titling}
 \RequirePackage{fancyhdr}
+\RequirePackage{geometry}
 \RequirePackage{hyperref}
 \hypersetup{%
   unicode=false,
@@ -3352,7 +3349,15 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
   \hbox{}\thispagestyle{empty}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
 \makeatother
 
-\pagestyle{fancy}
+% 文章用A4纸标准大小的白纸打印，页眉：2.6cm，页脚：2.4cm，页边距上下：3.5cm，左
+% 右：3.2cm。
+\geometry{headheight=2.6cm,headsep=3mm,footskip=13mm}
+\geometry{top=3.5cm,bottom=3.5cm,left=3.2cm,right=3.2cm}
+
+\renewcommand{\abstractname}{摘~~~~要}
+\renewcommand{\contentsname}{目~~~~录}
+
+
 %</dtx-style>
 %    \end{macrocode}
 % \fi
