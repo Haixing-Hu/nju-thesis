@@ -12,9 +12,10 @@
 PACKAGE=njuthesis
 SOURCES=$(PACKAGE).dtx $(PACKAGE).ins
 CLS=$(PACKAGE).cls $(PACKAGE).cfg dtx-style.sty
+BST=$(PACKAGE).bst
 SAMPLE=sample
 SAMPLECONTENTS=$(SAMPLE).tex
-BIBFILE=$(SAMPLE).bib
+SAMPLEBIB=$(SAMPLE).bib
 INSTITUTE_LOGO=njulogo.eps
 INSTITUTE_NAME=njuname.eps
 TEXMFLOCAL=$(shell get_texmf_dir.sh)
@@ -36,7 +37,6 @@ doc: $(PACKAGE).pdf
 $(PACKAGE).pdf: $(CLS)
 	xelatex $(PACKAGE).dtx
 	makeindex -s gind.ist -o $(PACKAGE).ind $(PACKAGE).idx
-	makeindex -s gglo.ist -o $(PACKAGE).gls $(PACKAGE).glo
 	xelatex $(PACKAGE).dtx
 	xelatex $(PACKAGE).dtx
 
@@ -44,13 +44,13 @@ $(PACKAGE).pdf: $(CLS)
 
 sample:	 $(SAMPLE).pdf
 
-$(SAMPLE).pdf: $(CLS) $(SAMPLE).tex $(SAMPLE).toc $(SAMPLE).bbl
+$(SAMPLE).pdf: $(CLS) $(BST) $(SAMPLE).tex $(SAMPLE).toc $(SAMPLE).bbl
 	xelatex $(SAMPLE).tex
 
 $(SAMPLE).toc: $(CLS) $(SAMPLE).tex
 	xelatex $(SAMPLE).tex
 
-$(SAMPLE).bbl: $(BIBFILE)
+$(SAMPLE).bbl: $(SAMPLEBIB)
 	bibtex $(SAMPLE)
 	xelatex $(SAMPLE).tex
 
@@ -58,9 +58,11 @@ $(SAMPLE).bbl: $(BIBFILE)
 
 install: $(SOURCE) $(CLS) $(PACKAGE).pdf $(SAMPLE).pdf
 	mkdir -p $(TEXMFLOCAL)/tex/latex/njuthesis
-	cp -rvf $(SOURCES) $(CLS) $(LOGO) $(TEXMFLOCAL)/tex/latex/njuthesis/
+	cp -rvf $(SOURCES) $(CLS) $(INSTITUTE_LOGO) $(INSTITUTE_NAME) $(TEXMFLOCAL)/tex/latex/njuthesis/
 	mkdir -p $(TEXMFLOCAL)/doc/latex/njuthesis
 	cp -rvf $(PACKAGE).pdf $(SAMPLE).pdf $(TEXMFLOCAL)/doc/latex/njuthesis/
+	mkdir -p $(TEXMFLOCAL)/bibtex/bst
+	cp -rvf $(BST) $(TEXMFLOCAL)/bibtex/bst/
 	texhash
 
 ###### clean
