@@ -23,7 +23,7 @@
 %<cls>\NeedsTeXFormat{LaTeX2e}[1995/12/01]
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
-%<cls|cfg>[2013/08/25 v1.0.5 Document Class for the Degree Papers of Nanjing University]
+%<cls|cfg>[2013/08/25 v1.0.6 Document Class for the Degree Papers of Nanjing University]
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
 \usepackage{dtx-style}
@@ -165,6 +165,14 @@
 %                                删除了脚注样式的设置\newline
 %                                删除了\env{algorithm}环境的定义，因为很多情况下
 %                                其他算法和代码排版宏包都会定义该环境\\
+%  v1.0.6 & 2013/08/25 & 胡海星 & 修复了生成学士学位论文的bug\newline
+%                                增加了对国家标准的参考\newline
+%                                增加了\textbf{GB/T 7156-2003}标准所定义的文献
+%                                密级\newline
+%                                将论文密级设置命令\cs{confidential}更名为
+%                                \cs{securitylevel}\newline
+%                                修改了国家图书馆封面和英文封面的样式\newline
+%                                将生成国家图书馆封面的命令独立了出来\\
 % \bottomrule
 % \end{tabular*}
 % \end{center}
@@ -189,16 +197,6 @@
 % 由于作者水平有限，虽然现在的这个版本基本上满足了学位论文的撰写需求，但难免还存在不足之
 % 处，欢迎大家积极反馈意见。
 %
-% 南京大学研究生院对硕士学位论文和博士学位论文的格式要求可参见下述网址：
-% \begin{itemize}
-% \item \textsl{南京大学硕士答辩流程及相关材料下载}，\\
-% \url{http://gs.nju.edu.cn/content/xw/ss3.htm}
-% \item \textsl{南京大学博士答辩流程及相关材料下载}，\\
-% \url{http://gs.nju.edu.cn/content/xw/bs3.htm}
-% \item \textsl{南京大学博士(硕士)学位论文编写格式规定(试行)}\\
-% \url{http://grawww.nju.edu.cn/content/xw/lwgf.doc}
-% \end{itemize}
-%
 % 本模板的编写过程中参考了以下文档，这里一并向这些文档的作者表示感谢：
 %
 % \begin{itemize}
@@ -213,6 +211,30 @@
 % \item \textsl{How to Package Your {\LaTeX} Package}, Scott Pakin,\\
 % \url{http://www.iitg.ernet.in/trivedi/LatexHelp/Latex%20Manual/dtxtut.pdf}
 % \end{itemize}
+%
+% \section{遵循的标准}
+%
+% {\njuthesis}所参照的南京大学研究生院的要求如下：
+% \begin{itemize}
+% \item \textsl{南京大学硕士答辩流程及相关材料下载}，\\
+% \url{http://gs.nju.edu.cn/content/xw/ss3.htm}
+% \item \textsl{南京大学博士答辩流程及相关材料下载}，\\
+% \url{http://gs.nju.edu.cn/content/xw/bs3.htm}
+% \item \textsl{南京大学博士(硕士)学位论文编写格式规定(试行)}\\
+% \url{http://grawww.nju.edu.cn/content/xw/lwgf.doc}
+% \end{itemize}
+%
+% {\njuthesis}所参照的中华人民共和国国家标准如下：
+% \begin{itemize}
+% \item \textbf{GB/T 7714-2005 文后参考文献著录规则}
+% \item \textbf{GB/T 7713.1-2006 学位论文编写规则}
+% \item \textbf{GB/T 7713.3-2009 科技报告编写规则}
+% \item \textbf{GB/T 7713-1987 科学技术报告、学位论文和学术论文的编写格式},
+% （已被\textbf{GB/T 7713.1-2006}和\textbf{GB/T 7713.3-2009}替代）
+% \item \textbf{GB/T 7156-2003 文献保密等级代码与标识}
+% \end{itemize}
+%
+% 上述标准的电子版可在{\njuthesis}项目主页的源码库中找到。
 %
 % \section{安装}
 %
@@ -537,11 +559,31 @@
 % \end{example}
 %
 % \myentry{密级}
-% \DescribeMacro{\confidential}
-% 命令\cs{confidential}设置论文的密级。此属性必须被设置。
+% \DescribeMacro{\securitylevel}
+% \DescribeMacro{\openlevel}
+% \DescribeMacro{\controllevel}
+% \DescribeMacro{\confidentiallevel}
+% \DescribeMacro{\clasifiedlevel}
+% \DescribeMacro{\mostconfidentiallevel}
+% 命令\cs{securitylevel}设置论文的密级。论文的密级必须按照\textbf{GB/T 7156-2003}标准
+% 进行填写。
+%
+% 根据\textbf{GB/T 7156-2003}标准，文献保密等级分为$5$级,即“公开级”、“限制级”、
+% “秘密级”、“机密级”、“绝密级”。本模板中预定义了该标准中文献保密等级的五个等级的
+% 代码常量：
+% \begin{enumerate}
+% \item \cs{openlevel}，表示公开级：此级别的文献可在国内外发行和交换。
+% \item \cs{controllevel}，表示限制级：此级别的文献内容不涉及国家秘密，但在一定时间内
+% 限制其交流和使用范围。
+% \item \cs{confidentiallevel}，表示秘密级：此级别的文献内容涉及一般国家秘密。
+% \item \cs{clasifiedlevel}，表示机密级：此级别的文献内容涉及重要的国家秘密 。
+% \item \cs{mostconfidentiallevel}，表示绝密级：此级别的文献内容涉及最重要的国家秘密。
+% \end{enumerate}
+%
+% 如果未设置\cs{securitylevel}，其默认值将被设置为\cs{openlevel}，即“公开级”。
 %
 % \begin{example}
-% \confidential{机密}
+% \securitylevel{\controllevel}
 % \end{example}
 %
 % \myentry{UDC编号}
@@ -786,7 +828,7 @@
 % \end{note}
 %
 % \begin{example}
-% \englishauthor{Sang Zhang}
+% \englishauthor{WEI Xiao-Bao}
 % \end{example}
 %
 % \myentry{导师姓名职称}
@@ -795,7 +837,7 @@
 % 性必须被设置。
 %
 % \begin{example}
-% \englishsupervisor{Professor Si Li}
+% \englishsupervisor{Professor CHEN Jin-Nan}
 % \end{example}
 %
 % \myentry{作者专业}
@@ -892,11 +934,20 @@
 %
 % 本节描述论文中可能用到的其他文档结构命令和环境。
 %
-% \myentry{生成中文封面和国家图书馆封面}
+% \myentry{生成国家图书馆封面}
+% \DescribeMacro{\makenlctitle}
+% 命令\cs{makenlctitle}用于生成论文的国家图书馆封面。此命令必须被用在{\TeX}文档
+% 的\cs{begin{document}}命令之后和\cs{frontmatter}命令之前。目前只有博士学位论文要
+% 求制作国家图书馆封面，硕士学位论文和学士学位论文不需要。
+%
+% \begin{example}
+% \makenlctitle
+% \end{example}
+%
+% \myentry{生成中文封面}
 % \DescribeMacro{\maketitle}
-% 命令\cs{maketitle}用于生成论文的中文封面，若论文类型为博士论文，也同时生成论文
-% 的国家图书馆封面。此命令必须被用在{\TeX}文档的\cs{begin{document}}命令之后和
-% \cs{frontmatter}命令之前。
+% 命令\cs{maketitle}用于生成论文的中文封面。此命令必须被用在{\TeX}文档的
+% \cs{begin{document}}命令之后和\cs{frontmatter}命令之前。
 %
 % \begin{example}
 % \maketitle
@@ -905,7 +956,7 @@
 % \myentry{生成英文封面}
 % \DescribeMacro{\makeenglishtitle}
 % 命令\cs{makeenglishtitle}用于生成论文的英文封面。此命令必须被用在{\TeX}文档的
-% \cs{maketitle}命令之后和\cs{frontmatter}命令之前。
+% \cs{begin{document}}命令之后和\cs{frontmatter}命令之前。
 %
 % \begin{example}
 % \makeenglishtitle
@@ -1054,11 +1105,11 @@
 % % 论文作者在攻读学位期间所发表的文章的列表，按发表日期从近到远排列。
 % \begin{publications}
 % \item Xiaobao Wei, Jinnan Chen, ``Voting-on-Grid Clustering for Secure
-%   Localization in Wireless Sensor Networks,'' in \emph{Proc. IEEE
+%   Localization in Wireless Sensor Networks,'' in \textsl{Proc. IEEE
 %   International Conference on Communications (ICC) 2010}, May. 2010.
 % \item Xiaobao Wei, Shiba Mao, Jinnan Chen, ``Protecting Source Location
 %   Privacy in Wireless Sensor Networks with Data Aggregation,'' in
-%   \emph{Proc. 6th International Conference on Ubiquitous Intelligence
+%   \textsl{Proc. 6th International Conference on Ubiquitous Intelligence
 %   and Computing (UIC) 2009}, Oct. 2009.
 % \end{publications}
 % % 论文作者在攻读学位期间参与的科研课题的列表，按照日期从近到远排列。
@@ -1191,9 +1242,14 @@
   \njut@linuxfontsfalse}
 \DeclareOption{nobackinfo}{\njut@backinfofalse}
 \DeclareOption{phd}{\njut@phdtrue
-  \njut@masterfalse}
+  \njut@masterfalse
+  \njut@bachelorfalse}
 \DeclareOption{master}{\njut@mastertrue
-  \njut@phdfalse}
+  \njut@phdfalse
+  \njut@bachelorfalse}
+\DeclareOption{bachelor}{\njut@bachelortrue
+  \njut@phdfalse
+  \njut@masterfalse}
 \DeclareOption{showcomments}{\njut@showcommentstrue}
 %    \end{macrocode}
 %
@@ -1522,7 +1578,7 @@
 \newcommand*{\njut@cap@phd}{博士}
 \newcommand*{\njut@cap@master}{硕士}
 \newcommand*{\njut@cap@bachelor}{学士}
-\newcommand*{\njut@cap@en@phd}{Ph.D.}
+\newcommand*{\njut@cap@en@phd}{Doctor of Philosophy}
 \newcommand*{\njut@cap@en@master}{Master}
 \newcommand*{\njut@cap@en@bachelor}{Bachelor}
 %    \end{macrocode}
@@ -1531,7 +1587,7 @@
 %    \begin{macrocode}
 \newcommand*{\njut@cap@nlc}{国家图书馆封面}
 \newcommand*{\njut@cap@nlc@classification}{分类号}
-\newcommand*{\njut@cap@nlc@confidential}{密级}
+\newcommand*{\njut@cap@nlc@securitylevel}{密级}
 \newcommand*{\njut@cap@nlc@udc}{UDC}
 \newcommand*{\njut@cap@nlc@title}{%
 学\hspace{1em}位\hspace{1em}论\hspace{1em}文%
@@ -1548,6 +1604,15 @@
 \newcommand*{\njut@cap@nlc@institute}{学位授予单位和日期}
 \newcommand*{\njut@cap@nlc@chairman}{答辩委员会主席：}
 \newcommand*{\njut@cap@nlc@reviwer}{评阅人：}
+%    \end{macrocode}
+%
+% 定义标准的文献密级汉字代码：
+%    \begin{macrocode}
+\newcommand*{\njut@cap@nlc@openlevel}{公开}
+\newcommand*{\njut@cap@nlc@controllevel}{限制}
+\newcommand*{\njut@cap@nlc@confidentiallevel}{秘密}
+\newcommand*{\njut@cap@nlc@clasifiedlevel}{机密}
+\newcommand*{\njut@cap@nlc@mostconfidentiallevel}{绝密}
 %    \end{macrocode}
 %
 % 定义南京大学学位论文中文封面的字符串常量：
@@ -1574,10 +1639,16 @@
 %
 % 定义南京大学学位论文英文封面的字符串常量：
 %    \begin{macrocode}
-\newcommand*{\njut@cap@cover@en@supervisor}{Directed by}
+\newcommand*{\njut@cap@cover@en@by}{by}
+\newcommand*{\njut@cap@cover@en@in}{in}
+\newcommand*{\njut@cap@cover@en@supervisor}{Supervised by}
 \newcommand*{\njut@cap@cover@en@statement}{%
-Submitted in partial fulfilment of the requirements\\
-for the degree of {\njut@value@en@degree} in {\njut@value@en@major}%
+A dissertation submitted to\\
+the graduate school of {\njut@value@en@institute}\\
+in partial fulfilment of the requirements for the degree of\\
+{\textsc{\njut@value@en@degree}}\\
+in\\
+{\njut@value@en@major}
 }
 %    \end{macrocode}
 %
@@ -1632,7 +1703,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}%
 库》中使用和在互联网上传播，同意按“章程”规定享受相关权益。%
 }
 \newcommand*{\njut@cap@license@sign}{作者签名：}
-\newcommand*{\njut@cap@license@confidential}{论文涉密情况：}
+\newcommand*{\njut@cap@license@securitylevel}{论文涉密情况：}
 \newcommand*{\njut@cap@license@public}{不保密}
 \newcommand*{\njut@cap@license@secret}{保密，保密期：}
 \newcommand*{\njut@cap@license@title}{论文题名}
@@ -1665,7 +1736,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}%
 % 定义国家图书馆（NLC）封面中要填写的字段的默认值：
 %    \begin{macrocode}
 \newcommand*{\njut@value@nlc@classification}{(分类)}
-\newcommand*{\njut@value@nlc@confidential}{(密级)}
+\newcommand*{\njut@value@nlc@securitylevel}{\openlevel}
 \newcommand*{\njut@value@nlc@udc}{}
 \newcommand*{\njut@value@nlc@titlea}{\njut@value@title}
 \newcommand*{\njut@value@nlc@titleb}{}
@@ -1813,18 +1884,10 @@ December\fi
 %
 % 定义英文字体名称。
 %    \begin{macrocode}
-\newcommand*{\njut@enfn@main}{Times New Roman}
-\newcommand*{\njut@enfn@sans}{Arial}
-\newcommand*{\njut@enfn@mono}{Courier New}
+\newcommand*{\njut@enfn@main}{Times}
+\newcommand*{\njut@enfn@sans}{Helvetica}
+\newcommand*{\njut@enfn@mono}{Courier}
 %    \end{macrocode}
-%
-% \begin{note}
-% Linux系统没有提供Times New Roman字体，需要安装Microsoft Windows Core Fonts。
-% 如果是 Debian-based 系统，可以执行下述命令:
-% \begin{shell}
-% $sudo apt-get install msttcorefonts
-% \end{shell}
-% \end{note}
 %
 % 定义注释的颜色：\cs{commentlinecolor}控制注释的线条颜色；\cs{commentbordercolor}控
 % 制注释盒子的边框颜色；\cs{commentbackgroundcolor}控制注释盒子的背景颜
@@ -2164,6 +2227,11 @@ December\fi
 \newcommand*{\ziju}[1]{\renewcommand*{\CJKglue}{\hskip {#1}}}
 %    \end{macrocode}
 %
+% 修改\cs{textsc}命令，使其可在中文编码下正常工作。
+%    \begin{macrocode}
+\renewcommand{\textsc}[1]{{\usefont{OT1}{cmr}{m}{sc}{#1}}}
+%    \end{macrocode}
+%
 % \subsection{数学公式和定理}
 %
 % 按照南京大学学位论文的格式要求，重定义公式、图、表的编号格式。例如：
@@ -2485,7 +2553,7 @@ December\fi
 %
 % 设置无序列表的标签符号。
 %    \begin{macrocode}
-\setlist[itemize,1]{label=$\bullet$}
+\setlist[itemize,1]{label=$\medbullet$}
 \setlist[itemize,2]{label=$\blacksquare$}
 \setlist[itemize,3]{label=$\Diamondblack$}
 %    \end{macrocode}
@@ -2681,8 +2749,13 @@ December\fi
 %    \begin{macrocode}
 \newcommand*{\classification}[1]{%
   \renewcommand*{\njut@value@nlc@classification}{#1}}
-\newcommand*{\confidential}[1]{%
-  \renewcommand*{\njut@value@nlc@confidential}{#1}}
+\newcommand*{\securitylevel}[1]{%
+  \renewcommand*{\njut@value@nlc@securitylevel}{#1}}
+\newcommand*{\openlevel}{\njut@cap@nlc@openlevel}
+\newcommand*{\controllevel}{\njut@cap@nlc@controllevel}
+\newcommand*{\confidentiallevel}{\njut@cap@nlc@confidentiallevel}
+\newcommand*{\clasifiedlevel}{\njut@cap@nlc@clasifiedlevel}
+\newcommand*{\mostconfidentiallevel}{\njut@cap@nlc@mostconfidentiallevel}
 \newcommand*{\udc}[1]{%
   \renewcommand*{\njut@value@nlc@udc}{#1}}
 \newcommand*{\nlctitlea}[1]{%
@@ -2770,23 +2843,24 @@ December\fi
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\njut@makenlccover}
-% 定义生成国家图书馆封面的命令。
+% \begin{macro}{\makenlctitle}
+% 定义生成国家图书馆封面的命令。注意我们使用了前面修改过的\cs{cleardoublepage}命令来插入
+% 无页眉页脚的空白页。
 %    \begin{macrocode}
-\newcommand*{\njut@makenlccover}{%
+\newcommand*{\makenlctitle}{%
   \thispagestyle{empty}
   \pdfbookmark[0]{\njut@cap@nlc}{nlc}
   {\songti\zihao{-4}
-    \njut@cap@nlc@classification~
+    \makebox[40pt]{\njut@cap@nlc@classification}\hspace{1pt}
     \njutunderline[150pt]{\njut@value@nlc@classification}
     \hfill
-    \njut@cap@nlc@confidential~
-    \njutunderline[150pt]{\njut@value@nlc@confidential}
+    \makebox[40pt]{\njut@cap@nlc@securitylevel}\hspace{1pt}
+    \njutunderline[150pt]{\njut@value@nlc@securitylevel}
     \vskip 10pt
-    \njut@cap@nlc@udc~
-    \njutunderline[160pt]{\njut@value@nlc@udc}
+    \makebox[40pt]{\njut@cap@nlc@udc}\hspace{1pt}
+    \njutunderline[150pt]{\njut@value@nlc@udc}
   }
-  \vskip \stretch{2}
+  \vskip\stretch{2}
   \begin{center}
     \def\ULthickness{1pt}
     {\kaishu\zihao{-0} \njut@cap@nlc@title}
@@ -2803,45 +2877,39 @@ December\fi
     \vskip \stretch{1}
     {\kaishu\zihao{4}\njut@cap@nlc@author}
   \end{center}
+  \vskip\stretch{1}
   {\kaishu\zihao{4}
-    \vskip \stretch{1}
     \noindent\njut@cap@nlc@supervisor%
-    \njutunderline[94pt]{\njut@value@supervisor}
-
-    \noindent\njutunderline[\textwidth]{\njut@value@nlc@supervisorinfo}
-
+    \njutunderline[94pt]{\njut@value@supervisor}\par
+    \noindent\njutunderline[\textwidth]{%
+      \njut@value@nlc@supervisorinfo}\par
     \noindent\njut@cap@nlc@degree%
     \njutunderline[8em]{\njut@value@degree}%
     \noindent\njut@cap@nlc@major%
-    \njutunderline[164pt]{\njut@value@major}
-
+    \njutunderline[164pt]{\njut@value@major}\par
     \noindent\njut@cap@nlc@submitdate%
     \njutunderline[8em]{\njut@value@submitdate}%
     \njut@cap@nlc@defenddate%
-    \njutunderline[134pt]{\njut@value@defenddate}
-
-    \noindent\njut@cap@nlc@institute\njutunderline[290pt]{}
-
+    \njutunderline[134pt]{\njut@value@defenddate}\par
+    \noindent\njut@cap@nlc@institute\njutunderline[290pt]{}\par
     \noindent\hfill\njut@cap@nlc@chairman%
-    \njutunderline[9em]{\njut@value@nlc@chairman}
-
+    \njutunderline[9em]{\njut@value@nlc@chairman}\par
     \noindent\hfill\njut@cap@nlc@reviwer%
-    \njutunderline[9em]{\njut@value@nlc@reviewera}
-
-    \noindent\hfill\njutunderline[9em]{\njut@value@nlc@reviewerb}
-
-    \noindent\hfill\njutunderline[9em]{\njut@value@nlc@reviewerc}
-
-    \noindent\hfill\njutunderline[9em]{\njut@value@nlc@reviewerd}
+    \njutunderline[9em]{\njut@value@nlc@reviewera}\par
+    \noindent\hfill\njutunderline[9em]{\njut@value@nlc@reviewerb}\par
+    \noindent\hfill\njutunderline[9em]{\njut@value@nlc@reviewerc}\par
+    \noindent\hfill\njutunderline[9em]{\njut@value@nlc@reviewerd}\par
   }
+  \cleardoublepage
 }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\njut@makecover}
-% 定义生成中文封面的命令。
+% \begin{macro}{\maketitle}
+% 重新定义{\LaTeX}提供的\cs{maketitle}命令，使其生成南京大学学术论文所需的中文封面。
+% 注意我们使用了前面修改过的\cs{cleardoublepage}命令来插入无页眉页脚的空白页。
 %    \begin{macrocode}
-\newcommand*{\njut@makecover}{%
+\renewcommand*{\maketitle}{%
   \thispagestyle{empty}
   \pdfbookmark[0]{\njut@cap@cover}{cover}
   \begin{center}
@@ -2871,47 +2939,24 @@ December\fi
     \vskip \stretch{1}
     {\bf\kaishu\zihao{4}\njut@value@date}
   \end{center}
-}
-%    \end{macrocode}
-%  \end{macro}
-%
-% \begin{macro}{\njut@makecoverback}
-% 定义生成中文封面背面信息的命令。
-%    \begin{macrocode}
-\newcommand*{\njut@makecoverback}{%
-  \thispagestyle{empty}
-  \vspace*{\stretch{1}}
-  {\bf\kaishu\zihao{-3}
-   \noindent
-   \begin{tabular}{p{6.2em}l}
-   \makebox[6em][s]{\njut@cap@coverback@studentnum}： &\njut@value@studentnum\\
-   \makebox[6em][s]{\njut@cap@coverback@defenddate}： &\njut@value@defenddate\\
-   \makebox[6em][s]{\njut@cap@coverback@supervisor}： &\njut@cap@coverback@sign\\
-   \end{tabular}}
-}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\maketitle}
-%   重新定义{\LaTeX}提供的\cs{maketitle}命令，使其生成南京大学学术论文所需的中文封面。
-% 注意我们使用了前面修改过的\cs{cleardoublepage}命令来插入无页眉页脚的空白页。
-%    \begin{macrocode}
-\renewcommand*{\maketitle}{%
-  \ifnjut@phd
-     \njut@makenlccover
-     \cleardoublepage
-  \fi
-  \njut@makecover
   \ifnjut@backinfo
     \clearpage
-    \njut@makecoverback
+    \thispagestyle{empty}
+    \vspace*{\stretch{1}}
+    {\bf\kaishu\zihao{-3}
+    \noindent
+    \begin{tabular}{p{6.2em}l}
+    \makebox[6em][s]{\njut@cap@coverback@studentnum}： &\njut@value@studentnum\\
+    \makebox[6em][s]{\njut@cap@coverback@defenddate}： &\njut@value@defenddate\\
+    \makebox[6em][s]{\njut@cap@coverback@supervisor}： &\njut@cap@coverback@sign\\
+    \end{tabular}}
     \clearpage
   \else
     \cleardoublepage
   \fi
 }
 %    \end{macrocode}
-% \end{macro}
+%  \end{macro}
 %
 % \begin{macro}{\makeenglishtitle}
 % 定义生成英文封面的命令。注意我们使用了前面修改过的\cs{cleardoublepage}命令来插入无页眉
@@ -2921,23 +2966,26 @@ December\fi
   \thispagestyle{empty}
   \begin{center}
     \vspace*{20pt}
-      \bf\zihao{2}\njut@value@en@title
+    \bf\sffamily\zihao{2}\njut@value@en@title
     \vskip \stretch{1}
-      \normalfont\zihao{4}by
+    \normalfont\rmfamily\zihao{4}\njut@cap@cover@en@by
     \vskip 3pt
-      \bf\zihao{4}\njut@value@en@author
+    \bf\sffamily\zihao{4}\njut@value@en@author
     \vskip\stretch{1}
-      \normalfont\zihao{4}\njut@cap@cover@en@supervisor
+    \normalfont\rmfamily\zihao{4}\njut@cap@cover@en@supervisor
     \vskip 3pt
-      \normalfont\zihao{4}\njut@value@en@supervisor
-    \vskip \stretch{2}
-      \normalfont\normalsize\njut@value@en@department\\
-       \njut@value@en@institute
+    \normalfont\sffamily\zihao{4}\njut@value@en@supervisor
+    \vskip\stretch{1}
+    \normalsize\rmfamily\njut@cap@cover@en@statement
+    \vskip\stretch{2}
+    \includegraphics[width=2.5cm]{\njut@cap@institute@logo} \\
+    \vskip 3mm
+    \normalfont\njut@value@en@department\\
+    \njut@value@en@institute
     \vskip 30pt
-      \normalfont\normalsize\njut@value@en@date
-    \vskip 20pt
-      \it\normalsize\njut@cap@cover@en@statement
+    \normalfont\normalsize\njut@value@en@date
   \end{center}
+  \normalfont
   \cleardoublepage
 }
 %    \end{macrocode}
@@ -3235,7 +3283,7 @@ December\fi
   \par\vspace{1em}
   \njut@license@maketable
   \par\vspace{1em}
-  \noindent\njut@cap@license@confidential
+  \noindent\njut@cap@license@securitylevel
   \begin{itemize}[label=$\square$]
   \item {\njut@cap@license@public}
   \item {\njut@cap@license@secret}

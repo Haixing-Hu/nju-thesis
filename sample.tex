@@ -19,15 +19,22 @@
 
 % 设置论文按照《中国图书资料分类法》的分类编号
 \classification{0175.2}
-% 密级
-\confidential{公开}
+% 论文的密级。需按照GB/T 7156-2003标准进行设置。预定义的值包括：
+% - \openlevel，表示公开级：此级别的文献可在国内外发行和交换。
+% - \controllevel，表示限制级：此级别的文献内容不涉及国家秘密，但在一定时间内
+%   限制其交流和使用范围。
+% - \confidentiallevel，表示秘密级：此级别的文献内容涉及一般国家秘密。
+% - \clasifiedlevel，表示机密级：此级别的文献内容涉及重要的国家秘密 。
+% - \mostconfidentiallevel，表示绝密级：此级别的文献内容涉及最重要的国家秘密。
+% 此属性可选，默认为\openlevel，即公开级。
+\securitylevel{\openlevel}
 % 设置论文按照《国际十进分类法UDC》的分类编号
 % 该编号可在下述网址查询：http://www.udcc.org/udcsummary/php/index.php?lang=chi
 \udc{004.72}
 % 国家图书馆封面上的论文标题第一行，不可换行。此属性可选，默认值为通过\title设置的标题。
-\nlctitlea{基于小世界理论的}
+\nlctitlea{数据中心}
 % 国家图书馆封面上的论文标题第二行，不可换行。此属性可选，默认值为空白。
-\nlctitleb{数据中心网络模型}
+\nlctitleb{网络模型研究}
 % 国家图书馆封面上的论文标题第三行，不可换行。此属性可选，默认值为空白。
 \nlctitlec{}
 % 导师的单位名称及地址
@@ -47,7 +54,7 @@
 % 设置论文的中文封面
 
 % 论文标题，不可换行
-\title{基于小世界理论的数据中心网络模型}
+\title{数据中心网络模型研究}
 % 论文作者姓名
 \author{韦小宝}
 % 论文作者联系电话
@@ -81,11 +88,11 @@
 % 设置论文的英文封面
 
 % 论文的英文标题，不可换行
-\englishtitle{On Network Models of Data Centers based on the Small World Theory}
+\englishtitle{A Research on Network Infrastructures for Data Centers}
 % 论文作者姓名的拼音
-\englishauthor{Xiaobao Wei}
+\englishauthor{WEI Xiao-Bao}
 % 导师姓名职称的英文
-\englishsupervisor{Professor Jinnan Chen}
+\englishsupervisor{Professor CHEN Jin-Nan}
 % 论文作者学科与专业的英文名
 \englishmajor{Computer Software and Theory}
 % 论文作者所在院系的英文名称
@@ -103,31 +110,33 @@
 
 % 设置中文摘要页面的论文标题及副标题的第一行。
 % 此属性可选，其默认值为使用|\title|命令所设置的论文标题
-% \abstracttitlea{基于小世界理论的}
+% \abstracttitlea{数据中心网络模型研究}
 % 设置中文摘要页面的论文标题及副标题的第二行。
 % 此属性可选，其默认值为空白
-% \abstracttitleb{数据中心网络模型}
+% \abstracttitleb{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 设置论文的英文摘要
 
 % 设置英文摘要页面的论文标题及副标题的第一行。
 % 此属性可选，其默认值为使用|\englishtitle|命令所设置的论文标题
-\englishabstracttitlea{On Netork Models of Data Centers based on}
+\englishabstracttitlea{A Research on Network Infrastructures}
 % 设置英文摘要页面的论文标题及副标题的第二行。
 % 此属性可选，其默认值为空白
-\englishabstracttitleb{the Small World Theory}
+\englishabstracttitleb{for Data Centers}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 制作封面，包括国家图书馆封面（如果是博士学位论文）和中文封面
-\maketitle
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 制作国家图书馆封面（博士学位论文才需要）
+\makenlctitle
+% 制作中文封面
+\maketitle
 % 制作英文封面
 \makeenglishtitle
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 开始前言部分
@@ -697,7 +706,7 @@ Fall-Out指标计算公式如下：
 \Blindtext
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{基于小世界模型的网络模型实现:SIDN}\label{chapter_smallworld}
+\chapter{小世界网络模型}\label{chapter_smallworld}
 \section{小世界现象}
 
 生活中，常出现初次见面的陌生人却拥有双方都认识的共同熟人，于是大家时常
@@ -997,7 +1006,7 @@ $P(k)$称为该网络的度分布。
 \Blindtext
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{基于随机网络的模型：WarpNet}\label{chapter_random}
+\chapter{随机网络模型}\label{chapter_random}
 \section{随机网络背景与研究现状}
 \Blindtext
 \section{WarpNet网络模型构建}\label{sec:warpnet_construction}
@@ -1026,7 +1035,7 @@ $P(k)$称为该网络的度分布。
 \blindtext
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{无尺度网络在数据中心网络中的应用研究}\label{chapter_scalefree}
+\chapter{无尺度网络模型}\label{chapter_scalefree}
 \section{无尺度网络背景与研究现状}
 \Blindtext
 \section{基于数据中心的无尺度网络运用}
@@ -1072,7 +1081,7 @@ $P(k)$称为该网络的度分布。
 \blindtext
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{基于大规模虚拟机的网络模型验证框架：VMNS}\label{chapter_experiments}
+\chapter{网络模型验证框架}\label{chapter_experiments}
 \section{引言}
 \Blindtext
 \section{模拟平台实现}

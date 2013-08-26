@@ -25,7 +25,7 @@
 %% through LaTeX.
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{njuthesis.cls}
-[2013/08/25 v1.0.5 Document Class for the Degree Papers of Nanjing University]
+[2013/08/25 v1.0.6 Document Class for the Degree Papers of Nanjing University]
 \newif\ifnjut@adobefonts\njut@adobefontstrue
 \newif\ifnjut@winfonts\njut@winfontsfalse
 \newif\ifnjut@linuxfonts\njut@linuxfontsfalse
@@ -53,9 +53,14 @@
   \njut@linuxfontsfalse}
 \DeclareOption{nobackinfo}{\njut@backinfofalse}
 \DeclareOption{phd}{\njut@phdtrue
-  \njut@masterfalse}
+  \njut@masterfalse
+  \njut@bachelorfalse}
 \DeclareOption{master}{\njut@mastertrue
-  \njut@phdfalse}
+  \njut@phdfalse
+  \njut@bachelorfalse}
+\DeclareOption{bachelor}{\njut@bachelortrue
+  \njut@phdfalse
+  \njut@masterfalse}
 \DeclareOption{showcomments}{\njut@showcommentstrue}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
 \ProcessOptions\relax
@@ -340,6 +345,7 @@
 \renewcommand{\Huge}{% 小初号 36bp
   \@setfontsize\Huge{\njut@fs@szero}{\njut@fs@szeroskip}}
 \newcommand*{\ziju}[1]{\renewcommand*{\CJKglue}{\hskip {#1}}}
+\renewcommand{\textsc}[1]{{\usefont{OT1}{cmr}{m}{sc}{#1}}}
 \renewcommand*{\thefigure}{\arabic{chapter}.\arabic{figure}}
 \renewcommand*{\thetable}{\arabic{chapter}.\arabic{table}}
 \renewcommand*{\theequation}{(\arabic{chapter}.\arabic{equation})}
@@ -469,7 +475,7 @@
   labelsep=0.5em,           % 包含标签的盒子与列表项的第一行文本之间的间隔
   labelwidth=2em,           % 包含标签的盒子的正常宽度；若实际宽度更宽，则使用实际宽度。
 }
-\setlist[itemize,1]{label=$\bullet$}
+\setlist[itemize,1]{label=$\medbullet$}
 \setlist[itemize,2]{label=$\blacksquare$}
 \setlist[itemize,3]{label=$\Diamondblack$}
 \renewenvironment{quote}%
@@ -591,8 +597,13 @@
 \bibliographystyle{njuthesis}
 \newcommand*{\classification}[1]{%
   \renewcommand*{\njut@value@nlc@classification}{#1}}
-\newcommand*{\confidential}[1]{%
-  \renewcommand*{\njut@value@nlc@confidential}{#1}}
+\newcommand*{\securitylevel}[1]{%
+  \renewcommand*{\njut@value@nlc@securitylevel}{#1}}
+\newcommand*{\openlevel}{\njut@cap@nlc@openlevel}
+\newcommand*{\controllevel}{\njut@cap@nlc@controllevel}
+\newcommand*{\confidentiallevel}{\njut@cap@nlc@confidentiallevel}
+\newcommand*{\clasifiedlevel}{\njut@cap@nlc@clasifiedlevel}
+\newcommand*{\mostconfidentiallevel}{\njut@cap@nlc@mostconfidentiallevel}
 \newcommand*{\udc}[1]{%
   \renewcommand*{\njut@value@nlc@udc}{#1}}
 \newcommand*{\nlctitlea}[1]{%
@@ -662,20 +673,20 @@
 \newcommand{\njut@underline}[2][\textwidth]%
            {\CJKunderline{\makebox[#1]{#2}}}
 \def\njutunderline{\@ifnextchar[\njut@underline\CJKunderline}
-\newcommand*{\njut@makenlccover}{%
+\newcommand*{\makenlctitle}{%
   \thispagestyle{empty}
   \pdfbookmark[0]{\njut@cap@nlc}{nlc}
   {\songti\zihao{-4}
-    \njut@cap@nlc@classification~
+    \makebox[40pt]{\njut@cap@nlc@classification}\hspace{1pt}
     \njutunderline[150pt]{\njut@value@nlc@classification}
     \hfill
-    \njut@cap@nlc@confidential~
-    \njutunderline[150pt]{\njut@value@nlc@confidential}
+    \makebox[40pt]{\njut@cap@nlc@securitylevel}\hspace{1pt}
+    \njutunderline[150pt]{\njut@value@nlc@securitylevel}
     \vskip 10pt
-    \njut@cap@nlc@udc~
-    \njutunderline[160pt]{\njut@value@nlc@udc}
+    \makebox[40pt]{\njut@cap@nlc@udc}\hspace{1pt}
+    \njutunderline[150pt]{\njut@value@nlc@udc}
   }
-  \vskip \stretch{2}
+  \vskip\stretch{2}
   \begin{center}
     \def\ULthickness{1pt}
     {\kaishu\zihao{-0} \njut@cap@nlc@title}
@@ -692,39 +703,32 @@
     \vskip \stretch{1}
     {\kaishu\zihao{4}\njut@cap@nlc@author}
   \end{center}
+  \vskip\stretch{1}
   {\kaishu\zihao{4}
-    \vskip \stretch{1}
     \noindent\njut@cap@nlc@supervisor%
-    \njutunderline[94pt]{\njut@value@supervisor}
-
-    \noindent\njutunderline[\textwidth]{\njut@value@nlc@supervisorinfo}
-
+    \njutunderline[94pt]{\njut@value@supervisor}\par
+    \noindent\njutunderline[\textwidth]{%
+      \njut@value@nlc@supervisorinfo}\par
     \noindent\njut@cap@nlc@degree%
     \njutunderline[8em]{\njut@value@degree}%
     \noindent\njut@cap@nlc@major%
-    \njutunderline[164pt]{\njut@value@major}
-
+    \njutunderline[164pt]{\njut@value@major}\par
     \noindent\njut@cap@nlc@submitdate%
     \njutunderline[8em]{\njut@value@submitdate}%
     \njut@cap@nlc@defenddate%
-    \njutunderline[134pt]{\njut@value@defenddate}
-
-    \noindent\njut@cap@nlc@institute\njutunderline[290pt]{}
-
+    \njutunderline[134pt]{\njut@value@defenddate}\par
+    \noindent\njut@cap@nlc@institute\njutunderline[290pt]{}\par
     \noindent\hfill\njut@cap@nlc@chairman%
-    \njutunderline[9em]{\njut@value@nlc@chairman}
-
+    \njutunderline[9em]{\njut@value@nlc@chairman}\par
     \noindent\hfill\njut@cap@nlc@reviwer%
-    \njutunderline[9em]{\njut@value@nlc@reviewera}
-
-    \noindent\hfill\njutunderline[9em]{\njut@value@nlc@reviewerb}
-
-    \noindent\hfill\njutunderline[9em]{\njut@value@nlc@reviewerc}
-
-    \noindent\hfill\njutunderline[9em]{\njut@value@nlc@reviewerd}
+    \njutunderline[9em]{\njut@value@nlc@reviewera}\par
+    \noindent\hfill\njutunderline[9em]{\njut@value@nlc@reviewerb}\par
+    \noindent\hfill\njutunderline[9em]{\njut@value@nlc@reviewerc}\par
+    \noindent\hfill\njutunderline[9em]{\njut@value@nlc@reviewerd}\par
   }
+  \cleardoublepage
 }
-\newcommand*{\njut@makecover}{%
+\renewcommand*{\maketitle}{%
   \thispagestyle{empty}
   \pdfbookmark[0]{\njut@cap@cover}{cover}
   \begin{center}
@@ -754,27 +758,17 @@
     \vskip \stretch{1}
     {\bf\kaishu\zihao{4}\njut@value@date}
   \end{center}
-}
-\newcommand*{\njut@makecoverback}{%
-  \thispagestyle{empty}
-  \vspace*{\stretch{1}}
-  {\bf\kaishu\zihao{-3}
-   \noindent
-   \begin{tabular}{p{6.2em}l}
-   \makebox[6em][s]{\njut@cap@coverback@studentnum}： &\njut@value@studentnum\\
-   \makebox[6em][s]{\njut@cap@coverback@defenddate}： &\njut@value@defenddate\\
-   \makebox[6em][s]{\njut@cap@coverback@supervisor}： &\njut@cap@coverback@sign\\
-   \end{tabular}}
-}
-\renewcommand*{\maketitle}{%
-  \ifnjut@phd
-     \njut@makenlccover
-     \cleardoublepage
-  \fi
-  \njut@makecover
   \ifnjut@backinfo
     \clearpage
-    \njut@makecoverback
+    \thispagestyle{empty}
+    \vspace*{\stretch{1}}
+    {\bf\kaishu\zihao{-3}
+    \noindent
+    \begin{tabular}{p{6.2em}l}
+    \makebox[6em][s]{\njut@cap@coverback@studentnum}： &\njut@value@studentnum\\
+    \makebox[6em][s]{\njut@cap@coverback@defenddate}： &\njut@value@defenddate\\
+    \makebox[6em][s]{\njut@cap@coverback@supervisor}： &\njut@cap@coverback@sign\\
+    \end{tabular}}
     \clearpage
   \else
     \cleardoublepage
@@ -784,23 +778,26 @@
   \thispagestyle{empty}
   \begin{center}
     \vspace*{20pt}
-      \bf\zihao{2}\njut@value@en@title
+    \bf\sffamily\zihao{2}\njut@value@en@title
     \vskip \stretch{1}
-      \normalfont\zihao{4}by
+    \normalfont\rmfamily\zihao{4}\njut@cap@cover@en@by
     \vskip 3pt
-      \bf\zihao{4}\njut@value@en@author
+    \bf\sffamily\zihao{4}\njut@value@en@author
     \vskip\stretch{1}
-      \normalfont\zihao{4}\njut@cap@cover@en@supervisor
+    \normalfont\rmfamily\zihao{4}\njut@cap@cover@en@supervisor
     \vskip 3pt
-      \normalfont\zihao{4}\njut@value@en@supervisor
-    \vskip \stretch{2}
-      \normalfont\normalsize\njut@value@en@department\\
-       \njut@value@en@institute
+    \normalfont\sffamily\zihao{4}\njut@value@en@supervisor
+    \vskip\stretch{1}
+    \normalsize\rmfamily\njut@cap@cover@en@statement
+    \vskip\stretch{2}
+    \includegraphics[width=2.5cm]{\njut@cap@institute@logo} \\
+    \vskip 3mm
+    \normalfont\njut@value@en@department\\
+    \njut@value@en@institute
     \vskip 30pt
-      \normalfont\normalsize\njut@value@en@date
-    \vskip 20pt
-      \it\normalsize\njut@cap@cover@en@statement
+    \normalfont\normalsize\njut@value@en@date
   \end{center}
+  \normalfont
   \cleardoublepage
 }
 \newcommand*{\abstracttitlea}[1]{%
@@ -969,7 +966,7 @@
   \par\vspace{1em}
   \njut@license@maketable
   \par\vspace{1em}
-  \noindent\njut@cap@license@confidential
+  \noindent\njut@cap@license@securitylevel
   \begin{itemize}[label=$\square$]
   \item {\njut@cap@license@public}
   \item {\njut@cap@license@secret}
