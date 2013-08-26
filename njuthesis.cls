@@ -677,13 +677,13 @@
   \thispagestyle{empty}
   \pdfbookmark[0]{\njut@cap@nlc}{nlc}
   {\songti\zihao{-4}
-    \makebox[40pt]{\njut@cap@nlc@classification}\hspace{1pt}
+    \makebox[40pt][l]{\njut@cap@nlc@classification}
     \njutunderline[150pt]{\njut@value@nlc@classification}
     \hfill
-    \makebox[40pt]{\njut@cap@nlc@securitylevel}\hspace{1pt}
+    \makebox[40pt][r]{\njut@cap@nlc@securitylevel}
     \njutunderline[150pt]{\njut@value@nlc@securitylevel}
     \vskip 10pt
-    \makebox[40pt]{\njut@cap@nlc@udc}\hspace{1pt}
+    \makebox[40pt][l]{\njut@cap@nlc@udc}
     \njutunderline[150pt]{\njut@value@nlc@udc}
   }
   \vskip\stretch{2}
