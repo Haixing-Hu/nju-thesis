@@ -24,7 +24,7 @@
 % 设置论文按照《国际十进分类法UDC》的分类编号
 % 该编号可在下述网址查询：http://www.udcc.org/udcsummary/php/index.php?lang=chi
 \udc{004.72}
-% 国家图书馆封面上的论文标题第一行，不可换行。
+% 国家图书馆封面上的论文标题第一行，不可换行。此属性可选，默认值为通过\title设置的标题。
 \nlctitlea{基于小世界理论的}
 % 国家图书馆封面上的论文标题第二行，不可换行。此属性可选，默认值为空白。
 \nlctitleb{数据中心网络模型}
@@ -75,7 +75,7 @@
 % 论文的答辩日期，需设置年、月、日。
 \defenddate{2013年6月1日}
 % 论文的定稿日期，需设置年、月、日。此属性可选，默认值为最后一次编译时的日期，精确到日。
-\date{2013年5月1日}
+%% \date{2013年5月1日}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 设置论文的英文封面
@@ -158,7 +158,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 论文的前言，应放在目录之前，中英文摘要之后
 %
-\chapter{前\hspace{2em}言}
+\begin{preface}
 
 复杂网络的研究可上溯到20世纪60年代对ER网络的研究。90年后代随着Internet
 的发展，以及对人类社会、通信网络、生物网络、社交网络等各领域研究的深入，
@@ -239,6 +239,8 @@
 韦小宝\\
 2013年夏于南京大学
 \end{flushright}
+
+\end{preface}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 生成论文目录
@@ -328,7 +330,138 @@
 \end{table}
 \Blindtext
 \subsection{现有问题与不足}
-\Blindtext
+
+
+下面是一个项目列表：
+
+\begin{itemize}
+\item 这是第一项。这是第一项。
+\item 这是第二项。这是第二项。这是第二项。这是第二项。这是第二项。这是第二项。这
+  是第二项。这是第二项。这是第二项。这是第二项。这是第二项。
+\item 这是第三项。这是第三项。这是第三项。
+  \begin{itemize}
+  \item 测试第二层列表。测试第二层列表。
+  \item 测试第二层列表。测试第二层列表。
+  \begin{itemize}
+     \item 测试第三层列表。测试第三层列表。
+     \item 测试第三层列表。测试第三层列表。
+  \end{itemize}
+  \item 测试第二层列表。测试第二层列表。测试第二层列表。测试第二层列表。测试第二
+    层列表。
+  \end{itemize}
+\item 这是第四项。这是第四项。这是第四项。
+  \begin{enumerate}
+  \item 测试第二层列表。测试第二层列表。测试第二层列表。测试第二层列表。测试第二
+    层列表。测试第二层列表。测试第二层列表。测试第二层列表。
+  \item 测试第二层列表。测试第二层列表。
+  \item 测试第二层列表。测试第二层列表。测试第二层列表。测试第二层列表。测试第二
+    层列表。
+  \end{enumerate}
+\end{itemize}
+
+下面是一个编号列表：
+
+\begin{enumerate}
+\item 这是第一项。这是第一项。这是第一项。这是第一项。这是第一项。这是第一项。这
+  是第一项。这是第一项。这是第一项。这是第一项。这是第一项。
+\item 这是第二项。这是第二项。
+\item 这是第三项。这是第三项。这是第三项。
+  \begin{itemize}
+  \item 测试第二层列表。测试第二层列表。
+  \item 测试第二层列表。测试第二层列表。
+  \item 测试第二层列表。测试第二层列表。测试第二层列表。测试第二层列表。测试第二
+    层列表。
+  \end{itemize}
+\item 这是第四项。这是第四项。这是第四项。
+  \begin{enumerate}
+  \item 测试第二层列表。测试第二层列表。
+  \begin{enumerate}
+  \item 测试第三层列表。测试第三层列表。测试第三层列表。测试第三层列表。测试第三
+    层列表。测试第三层列表。
+  \item 测试第三层列表。测试第三层列表。
+  \item 测试第三层列表。测试第三层列表。测试第三层列表。
+  \end{enumerate}
+  \item 测试第二层列表。测试第二层列表。测试第二层列表。
+  \end{enumerate}
+\end{enumerate}
+
+下面是最多三层的阿拉伯数字列表:
+\begin{arabicenum}
+\item 第1项
+\item 第2项
+  \begin{arabicenum}
+  \item 第2.1项
+  \item 第2.2项
+    \begin{arabicenum}
+    \item 第2.2.1项
+    \item 第2.2.2项
+    \item 第2.2.3项
+    \end{arabicenum}
+  \item 第2.3项
+  \end{arabicenum}
+\item 第3项
+\end{arabicenum}
+
+下面是最多两层的罗马数字列表:
+\begin{romanenum}
+\item 第1项
+\item 第2项
+  \begin{romanenum}
+  \item 第2.1项
+  \item 第2.2项
+  \item 第2.3项
+  \end{romanenum}
+\item 第3项
+\end{romanenum}
+
+下面是最多两层的小写字母列表:
+\begin{alphaenum}
+\item 第1项
+\item 第2项
+  \begin{alphaenum}
+  \item 第2.1项
+  \item 第2.2项
+  \item 第2.3项
+  \end{alphaenum}
+\item 第3项
+\end{alphaenum}
+
+
+下面测试一下引用环境|quote|。下面测试一下引用环境|quote|。下面测试一下引用环境|quote|。
+下面测试一下引用环境|quote|。下面测试一下引用环境|quote|。下面测试一下引用环境|quote|。
+下面测试一下引用环境|quote|。下面测试一下引用环境|quote|。下面测试一下引用环境|quote|。
+
+\begin{quote}
+这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。
+这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。
+这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。
+
+这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。
+这是一段引用。这是一段引用。这是一段引用。
+
+这是一段引用。这是一段引用。
+\end{quote}
+
+下面测试一下引用环境|quotation|。下面测试一下引用环境|quotation|。
+下面测试一下引用环境|quotation|。下面测试一下引用环境|quotation|。
+下面测试一下引用环境|quotation|。下面测试一下引用环境|quotation|。
+下面测试一下引用环境|quotation|。下面测试一下引用环境|quotation|。
+下面测试一下引用环境|quotation|。
+
+\begin{quotation}
+这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。
+这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。
+这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。
+
+这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。
+这是一段引用。这是一段引用。这是一段引用。
+
+这是一段引用。这是一段引用。
+\end{quotation}
+
+引用结束。引用结束。引用结束。引用结束。引用结束。引用结束。引用结束。引用结束。引用结束。
+引用结束。引用结束。引用结束。
+
 \subsection{中心观点与思想}
 
 云计算在概念上通常被分为IaaS、PaaS、SaaS几个层面。但透过分类去理解其本
@@ -361,7 +494,181 @@
 靠性、高灵活性和高伸缩性。因此，云计算并不仅仅以数量换性能的表象，本质
 上为低成本高性能，追求高能效比，并在实现层面讲究可实现性和可操作性。
 \subsection{需要解决的问题与挑战}
-\Blindtext
+
+测试一下中文字体：
+
+{\songti\zihao{0} 宋体，初号}
+
+{\songti\zihao{-0} 宋体，小初}
+
+{\songti\zihao{1} 宋体，一号}
+
+{\songti\zihao{-1} 宋体，小一}
+
+{\songti\zihao{2} 宋体，二号}
+
+{\songti\zihao{-2} 宋体，小二}
+
+{\songti\zihao{3} 宋体，三号}
+
+{\songti\zihao{-3} 宋体，小三}
+
+{\songti\zihao{4} 宋体，四号}
+
+{\songti\zihao{-4} 宋体，小四}
+
+{\songti\zihao{5} 宋体，五号}
+
+{\songti\zihao{-5} 宋体，小五}
+
+{\songti\zihao{6} 宋体，六号}
+
+{\songti\zihao{-6} 宋体，小六}
+
+{\songti\zihao{7} 宋体，七号}
+
+{\songti\zihao{8} 宋体，八号}
+
+{\heiti\zihao{0} 黑体，初号}
+
+{\heiti\zihao{-0} 黑体，小初}
+
+{\heiti\zihao{1} 黑体，一号}
+
+{\heiti\zihao{-1} 黑体，小一}
+
+{\heiti\zihao{2} 黑体，二号}
+
+{\heiti\zihao{-2} 黑体，小二}
+
+{\heiti\zihao{3} 黑体，三号}
+
+{\heiti\zihao{-3} 黑体，小三}
+
+{\heiti\zihao{4} 黑体，四号}
+
+{\heiti\zihao{-4} 黑体，小四}
+
+{\heiti\zihao{5} 黑体，五号}
+
+{\heiti\zihao{-5} 黑体，小五}
+
+{\heiti\zihao{6} 黑体，六号}
+
+{\heiti\zihao{-6} 黑体，小六}
+
+{\heiti\zihao{7} 黑体，七号}
+
+{\heiti\zihao{8} 黑体，八号}
+
+{\kaishu\zihao{0} 楷书，初号}
+
+{\kaishu\zihao{-0} 楷书，小初}
+
+{\kaishu\zihao{1} 楷书，一号}
+
+{\kaishu\zihao{-1} 楷书，小一}
+
+{\kaishu\zihao{2} 楷书，二号}
+
+{\kaishu\zihao{-2} 楷书，小二}
+
+{\kaishu\zihao{3} 楷书，三号}
+
+{\kaishu\zihao{-3} 楷书，小三}
+
+{\kaishu\zihao{4} 楷书，四号}
+
+{\kaishu\zihao{-4} 楷书，小四}
+
+{\kaishu\zihao{5} 楷书，五号}
+
+{\kaishu\zihao{-5} 楷书，小五}
+
+{\kaishu\zihao{6} 楷书，六号}
+
+{\kaishu\zihao{-6} 楷书，小六}
+
+{\kaishu\zihao{7} 楷书，七号}
+
+{\kaishu\zihao{8} 楷书，八号}
+
+{\fangsong\zihao{0} 仿宋，初号}
+
+{\fangsong\zihao{-0} 仿宋，小初}
+
+{\fangsong\zihao{1} 仿宋，一号}
+
+{\fangsong\zihao{-1} 仿宋，小一}
+
+{\fangsong\zihao{2} 仿宋，二号}
+
+{\fangsong\zihao{-2} 仿宋，小二}
+
+{\fangsong\zihao{3} 仿宋，三号}
+
+{\fangsong\zihao{-3} 仿宋，小三}
+
+{\fangsong\zihao{4} 仿宋，四号}
+
+{\fangsong\zihao{-4} 仿宋，小四}
+
+{\fangsong\zihao{5} 仿宋，五号}
+
+{\fangsong\zihao{-5} 仿宋，小五}
+
+{\fangsong\zihao{6} 仿宋，六号}
+
+{\fangsong\zihao{-6} 仿宋，小六}
+
+{\fangsong\zihao{7} 仿宋，七号}
+
+{\fangsong\zihao{8} 仿宋，八号}
+
+测试一下标准字号：
+
+{\Huge 汉字，Huge}
+
+{\huge 汉字，huge}
+
+{\LARGE 汉字，LARGE}
+
+{\Large 汉字，Large}
+
+{\large 汉字，large}
+
+{\normalsize 汉字，normalsize}
+
+{\small 汉字，small}
+
+{\footnotesize 汉字，footnotesize}
+
+{\scriptsize 汉字，scriptsize}
+
+{\tiny 汉字，tiny}
+
+测试一下标准字体的变形：
+
+{\songti 宋体} {\heiti 黑体} {\kaishu 楷书} {\fangsong 仿宋}
+
+{\textsl{textsl字体}}
+
+{\bfseries bfseries字体}
+
+{\textbf{textbf字体}}
+
+{\textit{textit字体}}
+
+测试一下数学公式中的字体大小。
+
+\newcommand{\set}[1]{\left\{\,#1\,\right\}}
+\newcommand{\card}[1]{\left|\,#1\,\right|}
+
+Fall-Out指标计算公式如下：
+\begin{equation*}
+  \mbox{fallout} = \frac{\card{\set{\text{不相关文档}}\cap\set{\text{获取的文档}}}}{\card{\set{\text{不相关文档}}}}
+\end{equation*}
+
 \section{研究的应用背景}
 云计算作为分布式技术的当前表现形式，通过将众多节点资源整合，以冗余、去
 中心化的分布式模式，实现传统技术中需要大型机才能解决的海量信息问题。一

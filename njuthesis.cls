@@ -23,18 +23,18 @@
 %% 
 %% To produce the documentation run the original source files ending with `.dtx'
 %% through LaTeX.
-\NeedsTeXFormat{LaTeX2e}[1999/12/01]
-\ProvidesClass{njuthesis}
-[2013/08/24 1.0.0 Documents Class for Degree Papers of Nanjing University.]
-\newif\ifnjut@adobefonts \njut@adobefontstrue
-\newif\ifnjut@winfonts \njut@winfontsfalse
-\newif\ifnjut@linuxfonts \njut@linuxfontsfalse
-\newif\ifnjut@macfonts \njut@macfontsfalse
-\newif\ifnjut@backinfo \njut@backinfotrue
-\newif\ifnjut@phd \njut@phdfalse
-\newif\ifnjut@master \njut@masterfalse
-\newif\ifnjut@bachelor \njut@bachelorfalse
-\newif\ifnjut@showcomments \njut@showcommentsfalse
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesClass{njuthesis.cls}
+[2013/08/25 v1.0.5 Document Class for the Degree Papers of Nanjing University]
+\newif\ifnjut@adobefonts\njut@adobefontstrue
+\newif\ifnjut@winfonts\njut@winfontsfalse
+\newif\ifnjut@linuxfonts\njut@linuxfontsfalse
+\newif\ifnjut@macfonts\njut@macfontsfalse
+\newif\ifnjut@backinfo\njut@backinfotrue
+\newif\ifnjut@phd\njut@phdfalse
+\newif\ifnjut@master\njut@masterfalse
+\newif\ifnjut@bachelor\njut@bachelorfalse
+\newif\ifnjut@showcomments\njut@showcommentsfalse
 \DeclareOption{adobefonts}{\njut@adobefontstrue
   \njut@winfontsfalse
   \njut@linuxfontsfalse
@@ -57,9 +57,9 @@
 \DeclareOption{master}{\njut@mastertrue
   \njut@phdfalse}
 \DeclareOption{showcomments}{\njut@showcommentstrue}
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
 \ProcessOptions\relax
-\LoadClass[12pt,a4paper]{book}
+\LoadClass[12pt,a4paper,doubleside]{book}
 \RequirePackage{ifxetex}
 \RequireXeTeX
 \RequirePackage{lastpage}
@@ -83,7 +83,6 @@
 \RequirePackage{mathrsfs}
 \RequirePackage{txfonts}
 \RequirePackage[amsmath,thmmarks,hyperref]{ntheorem}
-\RequirePackage{makeidx}
 \RequirePackage{setspace}
 \RequirePackage[perpage,symbol*,stable]{footmisc}
 \RequirePackage{fancyhdr}
@@ -97,6 +96,10 @@
 \RequirePackage{indentfirst}
 \RequirePackage{hyperref}
 \hypersetup{%
+    unicode=false,
+    hyperfootnotes=true,
+    hyperindex=true,
+    pageanchor=true,
     CJKbookmarks=true,
     bookmarksnumbered=true,
     bookmarksopen=true,
@@ -105,11 +108,13 @@
     colorlinks=false,
     plainpages=false,
     pdfpagelabels,
-    pdfborder=0 0 0}
+    pdfborder=0 0 0%
+}
 \urlstyle{same}
 \RequirePackage[sort&compress,numbers]{natbib}
 \RequirePackage{hypernat}
 \RequirePackage{tabularx}
+\RequirePackage{makeidx}
 \RequirePackage{glossaries}
 \RequirePackage{ifthen}
 \ifnjut@showcomments
@@ -151,7 +156,8 @@
 \setCJKfamilyfont{kai}{\njut@zhfn@kaishu}
 \setCJKfamilyfont{fangsong}{\njut@zhfn@fangsong}
 \setCJKmainfont[BoldFont={\njut@zhfn@heiti},%
-                ItalicFont={\njut@zhfn@kaishu}]{\njut@zhfn@songti}
+                ItalicFont={\njut@zhfn@kaishu}]%
+               {\njut@zhfn@songti}
 \setCJKsansfont{\njut@zhfn@heiti}
 \setCJKmonofont{\njut@zhfn@fangsong}
 \setmainfont{\njut@enfn@main}
@@ -333,10 +339,10 @@
   \@setfontsize\huge{\njut@fs@one}{\njut@fs@oneskip}}
 \renewcommand{\Huge}{% 小初号 36bp
   \@setfontsize\Huge{\njut@fs@szero}{\njut@fs@szeroskip}}
-\newcommand*{\ziju}[1]{\renewcommand{\CJKglue}{\hskip {#1}}}
-\renewcommand*{\theequation}{\arabic{section}--\arabic{equation}}
-\renewcommand*{\thefigure}{\arabic{section}--\arabic{figure}}
-\renewcommand*{\thetable}{\arabic{section}--\arabic{table}}
+\newcommand*{\ziju}[1]{\renewcommand*{\CJKglue}{\hskip {#1}}}
+\renewcommand*{\thefigure}{\arabic{chapter}.\arabic{figure}}
+\renewcommand*{\thetable}{\arabic{chapter}.\arabic{table}}
+\renewcommand*{\theequation}{(\arabic{chapter}.\arabic{equation})}
 \renewcommand*{\thesubfigure}{(\alph{subfigure})}
 \renewcommand*{\thesubtable}{(\alph{subtable})}
 \theoremstyle{plain}
@@ -358,7 +364,6 @@
                       {\hfill\ensuremath{\square}\vspace{1em}}
 \newenvironment{solution}{\noindent\textbf{{\njut@cap@solution}：}}
                          {\vspace{1em}}
-\newtheorem{algorithm}{\njut@cap@algorithm}[chapter]
 \renewcommand*{\textfraction}{0.05}
 \renewcommand*{\topfraction}{0.9}
 \renewcommand*{\bottomfraction}{0.8}
@@ -380,59 +385,47 @@
 \titleformat{\chapter}[hang]
             {\centering\zihao{1}\bfseries}
             {\chaptertitlename}{1em}{}
+\titlespacing{\chapter}
+             {0pt}
+             {*4}
+             {*3}
 \titleformat{\section}[hang]
             {\zihao{-2}\bfseries}
             {\thesection}{1em}{}
+\titlespacing{\section}
+             {0pt}
+             {*3.5}
+             {*2.3}
 \titleformat{\subsection}[hang]
             {\zihao{3}\bfseries}
             {\thesubsection}{1em}{}
+\titlespacing{\subsection}
+             {0pt}
+             {*3}
+             {*1.5}
 \titleformat{\subsubsection}[hang]
             {\zihao{-3}\bfseries}
             {\thesubsubsection}{1em}{}
+\titlespacing{\subsubsection}
+             {0pt}
+             {*2.5}
+             {*1.5}
 \titleformat{\paragraph}[hang]
             {\zihao{4}\bfseries}
             {\theparagraph}{1em}{}
+\titlespacing{\paragraph}
+             {0pt}
+             {*2}
+             {*1}
 \titleformat{\subparagraph}[hang]
             {\zihao{-4}\bfseries}
             {\thesubparagraph}{1em}{}
-
-%% \renewcommand{\section}{%
-%%   \@startsection{section}{1}%
-%%                 {\z@}%
-%%                 {-3.5ex \@plus -1ex \@minus -.2ex}%
-%%                 {2.3ex \@plus .2ex}%
-%%                 {\zihao{-2}\bfseries}}
-%% \renewcommand{\subsection}{%
-%%   \@startsection{subsection}{2}%
-%%                 {\z@}%
-%%                 {-3.0ex \@plus -1ex \@minus -.2ex}%
-%%                 {1.5ex \@plus .2ex}%
-%%                 {\zihao{3}\bfseries}}
-%% \renewcommand{\subsubsection}{%
-%%   \@startsection{subsubsection}{3}%
-%%                 {\z@}%
-%%                 {-2.5ex \@plus -1ex \@minus -.2ex}%
-%%                 {1.5ex \@plus .2ex}%
-%%                 {\zihao{-3}\bfseries}}
-%% \renewcommand{\paragraph}{%
-%%   \@startsection{paragraph}{4}%
-%%                 {\z@}%
-%%                 {-2.0ex \@plus -1ex \@minus -.2ex}%
-%%                 {1ex \@plus .2ex}%
-%%                 {\normalfont\zihao{4}\bfseries}}
-%% \renewcommand{\subparagraph}{%
-%%   \@startsection{subparagraph}{5}%
-%%                 {\z@}%
-%%                 {-1.5ex \@plus -1ex \@minus -.2ex}%
-%%                 {1ex \@plus .2ex}%
-%%                 {\normalfont\zihao{-4}\bfseries}}
-\newcommand{\njut@titleformat}{\zihao{-1}\bfseries}
-\newcommand{\njut@authorformat}{\zihao{-4}}
-\newcommand{\njut@dateformat}{\zihao{-4}}
+\titlespacing{\subparagraph}
+             {0pt}
+             {*1.5}
+             {*1}
 \setcounter{secnumdepth}{4}
 \renewcommand*{\today}{{\number\year}年{\number\month}月{\number\day}日}
-\renewcommand*{\thefigure}{\thechapter.\arabic{figure}}
-\renewcommand*{\thetable}{\thechapter.\arabic{table}}
 \captionsetup{font=small}
 \captionsetup[table]{position=above}
 \captionsetup[figure]{position=below}
@@ -464,30 +457,8 @@
 \renewcommand{\sectionmark}[1]{\markright{%
  \bfseries\if@mainmatter\thesection.\hspace{1em}\fi{#1}%
 }}
-%% Patch for blank pages between chapters which disables the current page style
 \def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
   \hbox{}\thispagestyle{empty}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
-\DefineFNsymbolsTM*{hurst}{%
-    \textdagger       \dagger
-      \textdaggerdbl  \ddagger
-      \textsection      \mathsection
-      \textparagraph  \mathparagraph
-      \textbardbl       \|%
-      {\textasteriskcentered\textasteriskcentered}{**}%
-      {\textdagger\textdagger}{\dagger\dagger}%
-      {\textdaggerdbl\textdaggerdbl}{\dagger\dagger}%
-      {\textsection\textsection}{\mathsection\mathsection}%
-      {\textparagraph\textparagraph}{\mathparagraph\mathparagraph}%
-      {\textasteriskcentered\textasteriskcentered\textasteriskcentered}{***}%
-      {\textdagger\textdagger\textdagger}{\dagger\dagger\dagger}%
-      {\textdaggerdbl\textdaggerdbl\textdaggerdbl}{\ddagger\ddagger\ddagger}%
-      {\textsection\textsection\textsection}%
-      {\mathsection\mathsection\mathsection}%
-      {\textparagraph\textparagraph\textparagraph}%
-      {\mathparagraph\mathparagraph\mathparagraph}%
-      \textasteriskcentered  *
-}%
-\setfnsymbol{hurst}
 \setlist{%
   topsep=0.3em,             % 列表顶端的垂直空白
   partopsep=0pt,            % 列表环境前面紧接着一个空白行时其顶端的额外垂直空白
@@ -498,7 +469,7 @@
   labelsep=0.5em,           % 包含标签的盒子与列表项的第一行文本之间的间隔
   labelwidth=2em,           % 包含标签的盒子的正常宽度；若实际宽度更宽，则使用实际宽度。
 }
-\setlist[itemize,1]{label=$\medbullet$}
+\setlist[itemize,1]{label=$\bullet$}
 \setlist[itemize,2]{label=$\blacksquare$}
 \setlist[itemize,3]{label=$\Diamondblack$}
 \renewenvironment{quote}%
@@ -674,7 +645,7 @@
   \renewcommand{\njut@value@defenddate}{#1}}
 \renewcommand*{\date}[1]{%
   \renewcommand{\njut@value@date}{#1}}
-\newcommand{\englishtitle}[1]{%
+\newcommand*{\englishtitle}[1]{%
   \renewcommand{\njut@value@en@title}{#1}}
 \newcommand*{\englishauthor}[1]{%
   \renewcommand{\njut@value@en@author}{#1}}
@@ -715,11 +686,11 @@
     \njutunderline[9em]{\njut@value@nlc@titlec}\\
     }
     \vskip \stretch{1}
-    \kaishu\zihao{4}\njut@cap@nlc@quotetitle
+    {\kaishu\zihao{4}\njut@cap@nlc@quotetitle}
     \vskip \stretch{1}
-    \kaishu\zihao{1}\njutunderline{\njut@value@author}
+    {\kaishu\zihao{1}\njutunderline{\njut@value@author}}
     \vskip \stretch{1}
-    \kaishu\zihao{4}\njut@cap@nlc@author
+    {\kaishu\zihao{4}\njut@cap@nlc@author}
   \end{center}
   {\kaishu\zihao{4}
     \vskip \stretch{1}
@@ -765,7 +736,7 @@
     \vskip 5mm
     {\bf\kaishu\zihao{1}（\makebox[7em][s]{\njut@cap@cover@apply}）}\\
     \vskip\stretch{1}
-    \bf\kaishu\zihao{3}
+    {\bf\kaishu\zihao{3}
     \def\tabcolsep{1pt}
     \def\arraystretch{1.5}
     \begin{tabular}{p{7.3em}c}
@@ -779,7 +750,7 @@
       & \njutunderline[310pt]{\njut@value@supervisor}\\
       \makebox[7em][s]{\njut@cap@cover@researchfield}
       & \njutunderline[310pt]{\njut@value@researchfield}\\
-    \end{tabular}\\
+    \end{tabular}}\\
     \vskip \stretch{1}
     {\bf\kaishu\zihao{4}\njut@value@date}
   \end{center}
@@ -842,11 +813,11 @@
   \thispagestyle{empty}
   \pdfbookmark[0]{\njut@cap@abstract}{abstract}
   \begin{center}
-    \bf\kaishu\zihao{-2}%
-    \njutunderline{\njut@cap@abstract@chaptername}
+    {\bf\kaishu\zihao{-2}%
+     \njutunderline{\njut@cap@abstract@chaptername}}
   \end{center}
   \vspace{3mm}
-  \kaishu\zihao{4}%
+  {\kaishu\zihao{4}%
   \noindent\njut@cap@abstract@title{：}%
   \njutunderline[318pt]{\njut@value@abstract@titlea}\\
   \noindent\njutunderline[\textwidth]{\njut@value@abstract@titleb}\\
@@ -857,10 +828,12 @@
   \njutunderline[61pt]{\njut@value@author}\\
   \noindent\njut@cap@abstract@supervisor{：}%
   \njutunderline[248pt]{\njut@value@supervisor}\\
+  }
   \vspace{5mm}
   \begin{center}
     {\heiti\zihao{-3}\njut@cap@abstract@abstractname}
-  \end{center}\par
+  \end{center}%
+  \normalsize\par%
 }{%
   \cleardoublepage
 }
@@ -896,7 +869,8 @@
   \vspace{5mm}
   \begin{center}
     {\bf\zihao{-3}\njut@cap@abstract@en@abstractname}
-  \end{center}\par
+  \end{center}%
+  \normalsize\par%
 }{%
   \cleardoublepage
 }
@@ -905,6 +879,12 @@
   \par\vspace{2ex}\noindent%
   {\bf\njut@cap@abstract@en@keywordsname{:}}~~{#1}%
 }
+\newenvironment{preface}{%
+  \nchapter{\njut@cap@preface}
+}{}
+\newenvironment{acknowledgement}{%
+  \nchapter{\njut@cap@acknowledgementname}
+}{}
 \newenvironment{resume}{%
   \nchapter{\njut@cap@resume@chaptername}
 }{}
@@ -929,9 +909,6 @@
 }{%
   \end{enumerate}
 }
-\newenvironment{acknowledgement}{%
-  \nchapter{\njut@cap@acknowledgementname}
-}{}
 \newcommand*{\njut@cap@datefield}{%
 \njutunderline[1cm]{}{\njut@cap@year}%
 \njutunderline[1cm]{}{\njut@cap@month}%

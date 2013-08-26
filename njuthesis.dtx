@@ -20,17 +20,15 @@
 %<*driver>
 \ProvidesFile{njuthesis.dtx}
 %</driver>
-%<class>\NeedsTeXFormat{LaTeX2e}[1995/12/01]
-%<class>\ProvidesClass{njuthesis}
-%<*class>
-  [2013/08/25 v1.0.4 Document Class for the Degree Papers of Nanjing University]
-%</class>
+%<cls>\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+%<cls>\ProvidesClass{njuthesis.cls}
+%<cfg>\ProvidesFile{njuthesis.cfg}
+%<cls|cfg>[2013/08/25 v1.0.5 Document Class for the Degree Papers of Nanjing University]
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
 \usepackage{dtx-style}
 \EnableCrossrefs
 \CodelineIndex
-\RecordChanges
 \begin{document}
   \DocInput{njuthesis.dtx}
 \end{document}
@@ -64,28 +62,70 @@
 % \DoNotIndex{\hfil,\par,\vskip,\vspace,\quad}
 % \DoNotIndex{\centering,\raggedright}
 % \DoNotIndex{\c@secnumdepth,\@startsection,\@setfontsize}
-% \DoNotIndex{\ ,\@plus,\@minus,\p@,\z@,\@m,\@M,\@ne,\m@ne}
-% \DoNotIndex{\@@par}
+% \DoNotIndex{\@plus,\@minus,\p@,\z@,\@m,\@M,\@ne,\m@ne,\@@par,\@dottedtocline}
+% \DoNotIndex{\ ,\,,\.,\\}
+% \DoNotIndex{\|}
+% \DoNotIndex{\@dottedtocline}
+% \DoNotIndex{\@afterindenttrue,\@arabic,\@biblabel,\@clubpenalty}
+% \DoNotIndex{\@empty,\@highpenalty,\@ifnextchar,\@latex@warning,\@listI,\@listi}
+% \DoNotIndex{\@mainmatterfalse,\@mainmattertrue,\@mkboth,\@nobreakfalse}
+% \DoNotIndex{\@nobreaktrue,\@noitemerr,\@openbib@code,\@pnumwidth,\@restonecolfalse}
+% \DoNotIndex{\@restonecoltrue,\@starttoc,\@tempcnta,\@tempdima,\@tocrmarg}
+% \DoNotIndex{\@afterindenttrue,\@arabic,\@biblabel,\@clubpenalty,\@dottedtocline}
+% \DoNotIndex{\@empty,\@highpenalty,\@ifnextchar,\@latex@warning,\@listI,\@listi}
+% \DoNotIndex{\@mainmatterfalse,\@mainmattertrue,\@mkboth,\@nobreakfalse,\@nobreaktrue}
+% \DoNotIndex{\@noitemerr,\@openbib@code,\@pnumwidth,\@restonecolfalse}
+% \DoNotIndex{\@restonecoltrue,\@starttoc,\@tempcnta,\@tempdima,\@tocrmarg}
+% \DoNotIndex{\abovedisplayshortskip,\abovedisplayskip,\addpenalty,\addvspace}
+% \DoNotIndex{\advance,\alph,\arabic,\arraybackslash,\arraystretch,\AtBeginDocument}
+% \DoNotIndex{\belowdisplayshortskip,\belowdisplayskip,\bf,\blacksquare,\bottomfraction}
+% \DoNotIndex{\bullet,\c@enumiv,\c@page,\c@tocdepth,\captionsetup,\cdot,\CJKfamily}
+% \DoNotIndex{\CJKglue,\CJKnumber,\CJKunderline,\CJKunderlinecolor,\ClassError}
+% \DoNotIndex{\clearpage,\CurrentOption,\dagger,\day,\ddagger}
+% \DoNotIndex{\DeclareGraphicsExtensions,\DeclareMathSizes,\DeclareOption}
+% \DoNotIndex{\DeclareRobustCommand,\defaultfontfeatures,\DefineFNsymbolsTM}
+% \DoNotIndex{\Diamondblack,\endlist,\ensuremath,\efill,\equal,\everypar}
+% \DoNotIndex{\fontsize,\global,\hb@xt@,\hbox,\hfill,\hline,\hskip,\hspace,\hss}
+% \DoNotIndex{\if@mainmatter,\if@restonecol,\if@twocolumn,\if@twoside,\ifodd}
+% \DoNotIndex{\ifthenelse,\ignorespaces,\includegraphics,\input,\it,\item}
+% \DoNotIndex{\itemsep,\kern,\l@chapter,\l@part,\labelsep,\labelwidth,\leaders}
+% \DoNotIndex{\leavevmode,\leftmargin,\leftmargini,\leftmark,\leftskip,\list}
+% \DoNotIndex{\LoadClass,\m@th,\makebox,\MakeUppercase,\markboth,\markright}
+% \DoNotIndex{\mathparagraph,\mathsection,\mkern,\month,\multicolumn}
+% \DoNotIndex{\newcolumntype,\newenvironment,\newif,\newline,\newlist,\newpage}
+% \DoNotIndex{\newtheorem,\nobreak,\normalcolor,\null,\number,\onecolumn,\p@enumiv}
+% \DoNotIndex{\pagestyle,\parbox,\parfillskip,\parindent,\parsep,\PassOptionsToClass}
+% \DoNotIndex{\pdfbookmark,\penalty,\ProcessOptions,\punctstyle,\raisebox,\renewenvironment}
+% \DoNotIndex{\RequirePackage,\RequireXeTeX,\restylefloat,\rightmargin,\rightmark,\rightskip}
+% \DoNotIndex{\roman,\rule,\selectfont,,\setcounter,\setfnsymbol}
+% \DoNotIndex{\setlength,\setlist,\settowidth,\sfcode,\sloppy,\square,\stretch,\tabcolsep}
+% \DoNotIndex{\textasteriskcentered,\textbardbl,\textbf,\textdagger,\textdaggerdbl}
+% \DoNotIndex{\textfraction,\textnormal,\textparagraph,\textsection,\textwidth}
+% \DoNotIndex{\theenumiv,\theoremseparator,\theoremstyle,\theoremsymbol,\thispagestyle}
+% \DoNotIndex{\titleformat,\titlespacing,\topsep,\twocolumn,\ULthickness}
+% \DoNotIndex{\usecounter,\widowpenalty,\year,\color,\clubpenalty,\chaptermark}
+% \DoNotIndex{\chaptertitlename,\geometry,\l@chapter,\l@part}
 %
-% \GetFileInfo{njuthesis.dtx}
+% \GetFileInfo{njuthesis.cls}
 %
 % \MakeShortVerb{\|}
-% \newcommand{\njuthesis}{\texttt{NJU-Thesis}}
-% \newcommand{\texlive}{\TeX live 2012}
+% \newcommand*{\njuthesis}{\texttt{NJU-Thesis}}
+% \newcommand*{\texlive}{{\TeX}\ Live\ 2012}
 %
 % \pagestyle{empty}
 % \title{\njuthesis：南京大学学位论文\\
 %        {\XeLaTeX}模板}
 % \author{{胡海星}\\
 %         {\texttt{starfish.hu@gmail.com}}\\
-%         [5pt]{南京大学计算机科学与技术系}}
+%         {南京大学计算机科学与技术系}}
 % \date{\fileversion\ (\filedate)}
 % \maketitle
 % \thispagestyle{empty}
 %
 % \begin{abstract}
-% {\njuthesis}宏包提供了一个南京大学学位论文的{\XeLaTeX}文档类。该文档类严格按照南京大学
-% 对学位论文的格式要求进行排版，底层通过|xeCJK|宏包支持中文。
+% \setlength{\parindent}{2em}
+% {\indent}宏包{\njuthesis}提供了一个南京大学学位论文的{\XeLaTeX}文档类。该文档类严格
+% 按照南京大学对学位论文的格式要求进行排版，底层通过|xeCJK|宏包支持中文。
 %
 % 目前{\njuthesis}宏包可用于排版学士学位、硕士学位论文和博士学位论文。对于学士学位论文，
 % 采用和硕士学位论文一样的格式进行排版。
@@ -95,8 +135,8 @@
 %
 % 本文档是{\njuthesis}宏包的说明文档，其中包含宏包文件的设置说明以及宏包源代码的完全注释。
 % \end{abstract}
-%
 % \clearpage
+%
 % \section*{{\hfill}修订历史{\hfill}}
 % \begin{center}
 % \noindent
@@ -113,13 +153,18 @@
 %  v1.0.0 & 2013/08/24 & 胡海星 & 完成第一个可工作版本 \\
 %  v1.0.1 & 2013/08/25 & 胡海星 & 增加了一些PDF文档的元信息\\
 %  v1.0.2 & 2013/08/25 & 胡海星 & 合并了国家图书馆封面上的导师信息\newline
-%                                使用|\makebox[width][s]{...}|使得封面标签可以自动
-%                                两端对其分布\newline
+%                                使用\cs{makebox}\oarg{width}\oarg{s}\marg{text}
+%                                使得封面标签可以自动两端对其分布\newline
 %                                修改了学位论文和用户手册的样式\\
 %  v1.0.3 & 2013/08/25 & 胡海星 & 增加了《学位论文出版授权书》页面\\
 %  v1.0.4 & 2013/08/25 & 胡海星 & 按照南京大学《博士 (硕士) 学位论文编写格式
 %                                规定 (试行)》的要求修改了学位论文的一些排版格式\newline
 %                                修复了页眉页脚的问题\\
+%  v1.0.5 & 2013/08/25 & 胡海星 & 按照dtx的写作规范修改了手册的排版\newline
+%                                增加了\env{preface}环境\newline
+%                                删除了脚注样式的设置\newline
+%                                删除了\env{algorithm}环境的定义，因为很多情况下
+%                                其他算法和代码排版宏包都会定义该环境\\
 % \bottomrule
 % \end{tabular*}
 % \end{center}
@@ -129,7 +174,7 @@
 % \clearpage
 %
 % \pagestyle{fancy}
-% \section{文档类简介}
+% \section{简介}
 %
 % {\njuthesis}是为了帮助南京大学的同学撰写学位论文而编写的{\XeLaTeX}文档类。该宏包提供了
 % 一个南京大学学位论文的{\XeLaTeX}文档类，用于生成符合南京大学学位论文格式要求进行的学位论
@@ -165,14 +210,18 @@
 % \item \textsl{{\LaTeXe} for class and package writers}, The {\LaTeX}3 Project
 % \item \textsl{The {\LaTeX} Companion, second edition}, Frank Mittelbach,
 % Michel Gooseens.
+% \item \textsl{How to Package Your {\LaTeX} Package}, Scott Pakin,\\
+% \url{http://www.iitg.ernet.in/trivedi/LatexHelp/Latex%20Manual/dtxtut.pdf}
 % \end{itemize}
 %
 % \section{安装}
 %
 % \subsection{下载}
 %
-% 可在{\njuthesis}项目主页下载最新版本：
+% 可在{\njuthesis}项目主页下载最新版本，亦可在该主页上反馈模板的bug和意见建议：
+% \begin{center}
 % \url{https://github.com/Haixing-Hu/nju-thesis}
+% \end{center}
 %
 % \subsection{模板的组成部分}
 %
@@ -223,7 +272,7 @@
 %     |multirow| & |hyperref|    & |enumitem| & |xcolor|   & |amsmath|   & |amsfonts| \\
 %     |amssymb|  & |bm|          & |mathrsfs| & |txfonts|  & |ntheorem|  & |makeidx|  \\
 %     |setspace| & |footmisc|    & |hypernat| & |fancyhdr| & |natbib|    & |tabularx| \\
-%     |titlesec| & |glossaries|  & |ifthen|   & |etex|     & |todonotes| &            \\
+%     |titlesec| & |glossaries|  & |ifthen|   & |etex|     & |todonotes| &  \\
 %   \hline
 %   \end{tabular*}
 %   \caption{{\njuthesis}用到的宏包}\label{table:dependence}
@@ -232,8 +281,10 @@
 % \subsection{推荐的{\TeX}系统}
 %
 % 本模板当前版本v{\fileversion}{\ }({\filedate})在{\texlive}下编写，尚未在其他
-% {\TeX}系统上测试。因此推荐用户使用{\texlive}。其安装包可以在
-% \url{http://tug.org/texlive/}下载。
+% {\TeX}系统上测试。因此推荐用户使用{\texlive}。其安装包可以在下述网址下载：
+% \begin{center}
+% \url{http://tug.org/texlive/}
+% \end{center}
 %
 % \begin{note}
 % 由于本模板采用{\XeLaTeX}引擎处理，所以{\TeX}源文件应使用\textbf{UTF-8}编码。
@@ -243,18 +294,16 @@
 %
 % \subsubsection{生成模板}
 %
-% \begin{note}
 % 默认的发行包中已经包含了所有文件，可以直接使用。如果对如何由|*.dtx|生成模板文件以及模板文
 % 档不感兴趣，请跳过本小节。
-% \end{note}
 %
 % 模板解压缩后生成文件夹|njuthesis-VERSION|，其中|VERSION|为版本号。该文件夹中包括：
-% \begin{description}
-% \item[模板源文件] |njuthesis.ins|和|njuthesis.dtx|
-% \item[参考文献样式] |njuthesis.bst|
-% \item[南京大学校徽和校名图片] |njulogo.eps|和|njuname.eps|
-% \item[示例文档] |sample.tex|、|sample.bib|和|figure|目录
-% \end{description}
+% \begin{itemize}
+% \item 模板源文件：|njuthesis.ins|和|njuthesis.dtx|
+% \item 参考文献样式：|njuthesis.bst|
+% \item 南京大学校徽和校名图片：|njulogo.eps|和|njuname.eps|
+% \item 示例文档：|sample.tex|、|sample.bib|和|figure|目录
+% \end{itemize}
 %
 % 在使用之前需要先生成模板文件和配置文件，具体命令细节请参考|README|和|Makefile|。下面是
 % 在Linux或Mac系统中生成模板所需执行的|shell|命令：
@@ -322,10 +371,14 @@
 % \end{example}
 %   表\ref{table:fontnames}中列出了默认配置下使用不同字体选项时所采用的实际字体
 %   名称。系统中必须正确安装了相应的字体才能正常编译文档。\\
-%   Adobe的宋体和黑体可以在其公司网站免费下载：\\
+%   Adobe的宋体和黑体可以在其公司网站免费下载：
+%   \begin{center}
 %   \url{http://www.adobe.com/support/downloads/detail.jsp?ftpID=4421}
-%   楷体无免费下载，但在网上可以找到。下面的网址提供了一个打包下载的地址：\\
+%   \end{center}
+%   楷体无免费下载，但在网上可以找到。下面的网址提供了一个打包下载的地址：
+%   \begin{center}
 %   \url{http://tinker-bot.googlecode.com/files/cfonts.tar.gz}
+%   \end{center}
 %   \begin{table}
 %     \centering\noindent\small
 %     \begin{tabular}[t]{ccccc}
@@ -341,12 +394,14 @@
 %     \caption{默认配置下不同字体选项所使用的实际字体名称}
 %     \label{table:fontnames}
 %   \end{table}
-% \item[nobackinfo] 该选项用于控制是否在封面背面打印导师签名信息。如果设置了此选项，则
-%   \textbf{不在}封面背面打印导师签名信息。此选项默认不被设置，一般情况下也无需设置
+%
+% \item[nobackinfo] 该选项用于控制是否在封面背面打印导师签名信息。如果设置了此选
+%   项，则不在封面背面打印导师签名信息。此选项默认不被设置，一般情况下也无需设置
 %   该选项。
 % \begin{example}
 % \documentclass[adobefonts,nobackinfo]{njuthesis}
 % \end{example}
+%
 % \item[phd, master, bachelor] 用于设置申请的学位级别。当选择|phd|时，生成南京大学博
 % 士学位论文，包含国家图书馆格式的封面，但不包括书脊，书脊需要单独制作；选择|master|时，
 % 生成南京大学硕士学位论文；选择|bachelor|时，生成南京大学学士学位论文。
@@ -356,6 +411,7 @@
 % \begin{note}
 % 这三个选项必须设置一个且只能设置一个。
 % \end{note}
+%
 % \item[showcomments] 如果设置了此选项，则文档中的注释会被显示出来，否则所有注释
 % 都会被隐藏。此选项默认不被设置。
 % \begin{example}
@@ -363,14 +419,15 @@
 % \end{example}
 % \begin{note}
 % 由composing选项切换到无该选项编译文档时可能会出现pgf宏包的错误，这可能是因为上次带
-% composing选项编译时中间文件中存在使用|\comment| 命令而由|todonotes|宏包引入的pgf
+% composing选项编译时中间文件中存在使用\cs{comment}命令而由|todonotes|宏包引入的pgf
 % 指令，简单跳过编译或者清除上次编译的中间文件然后执行全新的编译即能顺利进行。
 % \end{note}
+%
 % \end{description}
 %
 % \begin{note}
-% 本模板不提供对字号和单双面打印的选择选项。因为国内的学位论文基本上都要求使用小四号宋体，
-% 并双面打印。
+% 本模板不再提供对字号、字体和单双面打印的选择选项。因为国内各大学的学位论文基本上都要求
+% 使用小四号宋体，双面打印。
 % \end{note}
 %
 % \subsection{命令和环境}
@@ -381,12 +438,18 @@
 %
 % \subsubsection{格式控制命令}
 %
-% \myentry{字体} 字体采用下述字体选择命令
+% \myentry{中文字体}
 % \DescribeMacro{\songti}
 % \DescribeMacro{\heiti}
 % \DescribeMacro{\kaishu}
 % \DescribeMacro{\fangsong}
-% 等分别用来切换宋体、黑体、楷书和仿宋体。
+% 可采用下述命令选择中文字体
+% \begin{itemize}
+% \item \cs{songti} 切换宋体
+% \item \cs{heiti} 切换黑体
+% \item \cs{kaishu} 切换楷书
+% \item \cs{fangsong} 切换仿宋体
+% \end{itemize}
 %
 % \begin{example}
 % {\songti 乾：元，亨，利贞}
@@ -397,9 +460,12 @@
 %
 % \myentry{字号}
 % \DescribeMacro{\zihao}
-% 用于选择字号。使用方法为：|\zihao{n}|，其中参数n为要使用的字号，在n前加负号$-$表示小号
-% 字体。目前提供的字号包括：
-% \begin{compactitem}
+% \cs{zihao}命令可用于选择字号。其语法为：
+% \begin{syntax}
+% \cs{zihao}\marg{n}
+% \end{syntax}
+% 其中参数\meta{n}为要使用的字号；在\meta{n}前加负号$-$表示小号字体。目前提供的字号包括：
+% \begin{itemize}
 % \item 初号(|\zihao{0}|)、小初号(|\zihao{-0}|)
 % \item 一号(|\zihao{1}|)、小一号(|\zihao{-1}|)
 % \item 二号(|\zihao{2}|)、小二号(|\zihao{-2}|)
@@ -409,7 +475,7 @@
 % \item 六号(|\zihao{6}|)、小六号(|\zihao{-6}|)
 % \item 七号(|\zihao{7}|)
 % \item 八号(|\zihao{8}|)
-% \end{compactitem}
+% \end{itemize}
 %
 % \begin{example}
 % {\zihao{2} 二号} {\zihao{3} 三号} {\zihao{4} 四号} {\zihao{-4} 小四}
@@ -417,7 +483,11 @@
 %
 % \myentry{字距}
 % \DescribeMacro{\ziju}
-% 更改汉字之间默认的距离，使用格式为 |\ziju{距离}|，其中的距离只要是合格的{\TeX}距离即可。
+% \cs{ziju}命令可用于更改汉字之间默认的距离。其语法为：
+% \begin{syntax}
+% \cs{ziju}\marg{width}
+% \end{syntax}
+% 其中的参数\meta{width}只要是合格的{\TeX}距离即可。
 %
 % \begin{example}
 % {\ziju{4bp}调整字距示例}
@@ -426,15 +496,20 @@
 % \myentry{缩进}
 % \DescribeMacro{\indent}
 % \DescribeMacro{\noindent}
-% |\indent|命令将当前行正常的缩进两个汉字字宽的距离，同时在汉字大小和字距改变的情况都
-% 可以自动修改缩进距离。|\noindent|则取消缩进。
+% \cs{indent}命令将当前行正常的缩进两个汉字字宽的距离，同时在汉字大小和字距改变的情况都
+% 可以自动修改缩进距离。
+%
+% \cs{noindent}则取消缩进。
 %
 % \myentry{破折号}
 % \DescribeMacro{\zhdash}
 % 中文破折号在CJK-{\LaTeX}里没有很好的处理，我们平时输入的都是两个小短线，比如这样，
 % ``{中国——中华人民共和国}''。这不符合中文习惯。所以这里定义了一个命令生成更好看的破折号。
-% 不过这似乎不是一个好的解决办法，比如不能用在 |\section| 等命令中使用。简单的办法是可以
-% 提供一个不带破折号的段标题：|\cs{section}\oarg{没有破折号精简标题}\marg{带破折号的标题}|。
+% 不过这似乎不是一个好的解决办法，比如不能用在\cs{section}等命令中使用。简单的办法是可以
+% 提供一个不带破折号的段标题：
+% \begin{syntax}
+% \cs{section}\oarg{没有破折号精简标题}\marg{带破折号的标题}
+% \end{syntax}
 %
 % \begin{example}
 % 测试--中文破折号
@@ -447,37 +522,41 @@
 % \item 测试{\zhdash}中文破折号
 % \end{itemize}
 %
-% \subsubsection{国家图书馆封面命令}
+% \subsubsection{国家图书馆封面内容替换命令}
 %
-% 下面是论文的国家图书馆封面的内容替换命令。
-%
-% \begin{note}
-% 只有博士学位论文才需要提供国家图书馆封面。若申请的学位为硕士或学士，则可完全忽略此章节所
-% 描述的命令。
-% \end{note}
+% 本节描述论文的国家图书馆封面的内容替换命令。只有博士学位论文才需要提供国家图书
+% 馆封面。若申请的学位为硕士或学士，则可完全忽略本节所描述的命令。
 %
 % \myentry{分类号}
-% \DescribeMacro{\classification}设置论文按照《中国图书资料分类法》的分类编号。此属性
+% \DescribeMacro{\classification}
+% 命令\cs{classification}用于设置论文按照《中国图书资料分类法》的分类编号。此属性
 % 必须被设置。具体的分类号需咨询学校图书馆的老师。
+%
 % \begin{example}
 %   \classification{O175.2}
 % \end{example}
 %
 % \myentry{密级}
-% \DescribeMacro{\confidential}设置论文的密级。此属性必须被设置。
+% \DescribeMacro{\confidential}
+% 命令\cs{confidential}设置论文的密级。此属性必须被设置。
+%
 % \begin{example}
 % \confidential{机密}
 % \end{example}
 %
-% \myentry{UDC}
-% \DescribeMacro{\udc}设置论文按照《国际十进分类法UDC》的分类编号。国际十进分类
-% 法（Universal Decimal Classification，简称UDC），又称为通用十进制分类法，是世
-% 界上规模最大、用户最多、影响最广泛的一部文献资料分类法。自1899--1905年比利时学
-% 者奥特勒和拉封丹共同主编、出版UDC法文第一版以来，现已有20多种语言的各种详略版
-% 本。近百年来，UDC已被世界上几十个国家的10多万个图书馆和情报机构采用。UDC目前已
-% 成为名符其实的国际通用文献分类法。此属性可选，默认值为空白。论文的具体UDC编号
-% 需咨询学校图书馆的老师，或在下面网址查询：\\
+% \myentry{UDC编号}
+% \DescribeMacro{\udc}
+% 命令\cs{udc}用于设置论文按照《国际十进分类法UDC》的分类编号。此属性可选，默认值为空白。
+%
+% 国际十进分类法（Universal Decimal Classification，简称UDC），又称为通用十进制
+% 分类法，是世界上规模最大、用户最多、影响最广泛的一部文献资料分类法。自
+% 1899--1905年比利时学者奥特勒和拉封丹共同主编、出版UDC法文第一版以来，现已有20
+% 多种语言的各种详略版本。近百年来，UDC已被世界上几十个国家的10多万个图书馆和情
+% 报机构采用。UDC目前已成为名符其实的国际通用文献分类法。
+%
+% 论文的具体UDC编号需咨询学校图书馆的老师，或在下面网址查询：\\
 % \url{http://www.udcc.org/udcsummary/php/index.php?lang=chi}
+%
 % \begin{example}
 % \udc{004.72}
 % \end{example}
@@ -485,31 +564,33 @@
 % \myentry{论文标题及副标题}
 % \DescribeMacro{\nlctitlea}
 % \DescribeMacro{\nlctitleb}
-% \DescribeMacro{\nlctitlec}分别用于设置国家图书馆封面的论文标题及副标题的第一行、
-% 第二行和第三行。|\nlctitlea|属性必须被设置，|\nlctitleb|和|\nlctitlec|属性为可
-% 选，其默认值为空白。这三个命令是为了让用户在论文标题较长时手动进行分割换行。
+% \DescribeMacro{\nlctitlec}
+% 命令\cs{nlctitlea}、\cs{nlctitleb}和\cs{nlctitlec}分别用于设置国家图书馆封面的
+% 论文标题及副标题的第一行、第二行和第三行。其中，\cs{nlctitlea}为可选，默认值为
+% 用户通过\cs{title}命令设置的中文标题；\cs{nlctitleb}和\cs{nlctitlec}亦为可选，
+% 其默认值为空白。这三个命令是为了让用户在论文标题较长时手动进行分割换行。
+%
 % \begin{note}
-% |\nlctitlea|、|nlctitleb|和|nlctitlec|命令的参数中都不能出现换行。
+% \cs{nlctitlea}、\cs{nlctitleb}和\cs{nlctitlec}命令的参数中都不能再出现换行。
 % \end{note}
+%
 % \begin{example}
 % \nlctitlea{基于小世界理论的}
 % \nlctitleb{数据中心网络模型研究}
 % \end{example}
 %
-% \begin{note}
-% |\nlctitlea|、|\nlctitleb|和|\nlctitlec|命令的参数中不能换行。若标
-% 题太长，请自行将其分割，最多分为三行。
-% \end{note}
-%
 % \myentry{导师信息}
-% \DescribeMacro{\supervisorinfo}设置论文作者的导师的单位名称及地址。此属性必须
-% 被设置。
+% \DescribeMacro{\supervisorinfo}
+% 命令\cs{supervisorinfo}用于设置论文作者的导师的单位名称及联系地址。此属性必须被设置。
+%
 % \begin{example}
 % \supervisorinfo{南京大学计算机科学与技术系，南京市汉口路22号，210093}
 % \end{example}
 %
 % \myentry{答辩委员会主席}
-% \DescribeMacro{\chairman}设置论文答辩委员会主席的姓名和职称。此属性必须被设置。
+% \DescribeMacro{\chairman}
+% 命令\cs{chairman}用于设置论文答辩委员会主席的姓名和职称。此属性必须被设置。
+%
 % \begin{example}
 % \chairman{王重阳\hspace{1em}教授}
 % \end{example}
@@ -518,224 +599,290 @@
 % \DescribeMacro{\reviewera}
 % \DescribeMacro{\reviewerb}
 % \DescribeMacro{\reviewerc}
-% \DescribeMacro{\reviewerd}分别设置论文的第一、第二、第三和第四评阅人的姓名和职称。此
-% 属性为可选，默认值为空白。
+% \DescribeMacro{\reviewerd}
+% 命令\cs{reviewera}、\cs{reviewerb}、\cs{reviewerc}、\cs{reviewerd}分别用于设置
+% 论文的第一、第二、第三和第四评阅人的姓名和职称。这四个命令为可选，默认值为空白。
+%
 % \begin{example}
-% \reviewera{张三丰\hspace{1em}教授}
-% \reviewerb{张无忌\hspace{1em}副教授}
-% \reviewerc{黄裳\hspace{1em}教授}
-% \reviewerd{郭靖\hspace{1em}研究员}
+% \reviewera{张三丰~~教授}
+% \reviewerb{张无忌~~副教授}
+% \reviewerc{黄裳~~教授}
+% \reviewerd{郭靖~~研究员}
 % \end{example}
 %
-% \subsubsection{中文封面命令}
+% \subsubsection{中文封面内容替换命令}
 %
-% 下面是论文的中文封面的内容替换命令。
+% 本节描述论文中文封面的内容替换命令。
 %
 % \myentry{论文标题}
-% \DescribeMacro{\title}设置论文的中文标题。此属性必须被设置。
+% \DescribeMacro{\title}
+% 命令\cs{title}用于设置论文的中文标题。此属性必须被设置。
+%
 % \begin{note}
-% |\title|的参数中不可换行，也不能使用|\thanks|脚注。
+% \cs{title}的参数中不可换行，也不能使用\cs{thanks}脚注。
 % \end{note}
+%
 % \begin{example}
 % \title{基于小世界理论的数据中心网络模型}
 % \end{example}
 %
 % \myentry{作者姓名}
-% \DescribeMacro{\author}设置论文作者的姓名。此属性必须被设置。
+% \DescribeMacro{\author}
+% 命令\cs{author}用于设置论文作者的姓名。此属性必须被设置。
+%
 % \begin{note}
-% |\author|的参数中不可换行，也不能使用|\thanks|脚注。
+% \cs{author}的参数中不可换行，也不能使用\cs{thanks}脚注。
 % \end{note}
+%
 % \begin{example}
 % \author{张三}
 % \end{example}
 %
 % \myentry{作者电话}
-% \DescribeMacro{\telphone}设置论文作者的电话号码。此属性必须被设置。
+% \DescribeMacro{\telphone}
+% 命令\cs{telphone}用于设置论文作者的电话号码。此属性必须被设置。
+%
 % \begin{example}
 % \telphone{13671413272}
 % \end{example}
 %
 % \myentry{作者邮件}
-% \DescribeMacro{\email}设置论文作者的电子邮件地址。此属性必须被设置。
+% \DescribeMacro{\email}
+% 命令\cs{email}用于设置论文作者的电子邮件地址。此属性必须被设置。
+%
 % \begin{example}
 % \email{san.zhang@gmail.com}
 % \end{example}
 %
 % \myentry{作者学号}
-% \DescribeMacro{\studentnum}设置论文作者的学号。此属性必须被设置。
-% \begin{note}
-% |\studentnum|的参数中不可换行。
-% \end{note}
+% \DescribeMacro{\studentnum}
+% 命令\cs{studentnum}用于设置论文作者的学号。此属性必须被设置。
+%
 % \begin{example}
 % \studentnum{MGXXXXXXX}
 % \end{example}
 %
 % \myentry{入学年份}
-% \DescribeMacro{\grade}设置论文作者的入学年份（即年级），用一个阿拉伯数字表示。此属性
+% \DescribeMacro{\grade}
+% 命令\cs{grade}用于设置论文作者的入学年份（即年级），用一个阿拉伯数字表示。此属性
 % 必须被设置。
+%
 % \begin{example}
 % \grade{2012}
 % \end{example}
 %
 % \myentry{导师姓名职称}
-% \DescribeMacro{\supervisor}设置论文作者的导师的姓名和职称。此属性必须被设置。
-% \begin{note}
-% |\supervisor|的参数中不可换行。
-% \end{note}
+% \DescribeMacro{\supervisor}
+% 命令\cs{supervisor}用于设置论文作者的导师的姓名和职称。此属性必须被设置。
+%
 % \begin{example}
 % \supervisorname{李四~~教授}
 % \end{example}
 %
 % \myentry{导师电话}
-% \DescribeMacro{\supervisortelphone}设置论文作者的导师的姓名和职称。此属性必须被设置。
+% \DescribeMacro{\supervisortelphone}
+% 命令\cs{supervisortelphone}用于设置论文作者的导师的姓名和职称。此属性必须被设置。
+%
 % \begin{example}
 % \supervisortelphone{13671607471}
 % \end{example}
 %
 % \myentry{学科专业}
-% \DescribeMacro{\major}设置论文作者的学科与专业方向。此属性必须被设置。
+% \DescribeMacro{\major}
+% 命令\cs{major}用于设置论文作者的学科与专业方向。此属性必须被设置。
+%
 % \begin{note}
-% |\major|的参数中不可换行。
+% \cs{major}的参数中不可换行。
 % \end{note}
+%
 % \begin{example}
 % \major{计算机软件与理论}
 % \end{example}
 %
 % \myentry{研究方向}
-% \DescribeMacro{\researchfield}设置论文作者的研究方向。此属性必须被设置。
+% \DescribeMacro{\researchfield}
+% 命令\cs{researchfield}用于设置论文作者的研究方向。此属性必须被设置。
+%
 % \begin{note}
-% |\researchfield|的参数中不可换行。
+% \cs{researchfield}的参数中不可换行。
 % \end{note}
+%
 % \begin{example}
 % \major{计算机网络与信息安全}
 % \end{example}
 %
 % \myentry{院系名称}
-% \DescribeMacro{\department}设置论文作者所在院系的中文名称。此属性必须被设置。
+% \DescribeMacro{\department}
+% 命令\cs{department}用于设置论文作者所在院系的中文名称。此属性必须被设置。
+%
 % \begin{note}
-% |\department|的参数中不可换行。
+% \cs{department}的参数中不可换行。
 % \end{note}
+%
 % \begin{example}
 % \department{计算机科学与技术系}
 % \end{example}
 %
 % \myentry{学校名称}
-% \DescribeMacro{\institute}设置论文作者所在学校或机构的名称，该学校或机构也是所申请学
-% 位的颁发机构。此属性为可选，默认值为``南京大学''。
+% \DescribeMacro{\institute}
+% 命令\cs{institute}用于设置论文作者所在学校或机构的名称，该学校或机构也是所申请学
+% 位的颁发机构。此命令为可选，默认值为``南京大学''。
+%
 % \begin{note}
-% |\institute|的参数中不可换行。
+% \cs{institute}的参数中不可换行。
 % \end{note}
+%
 % \begin{example}
 % \institute{南京大学}
 % \end{example}
 %
 % \myentry{提交日期}
-% \DescribeMacro{\submitdate}设置论文的提交日期，需设置年、月、日。此属性必须被设置。
+% \DescribeMacro{\submitdate}
+% 命令\cs{submitdate}用于设置论文的提交日期，需设置年、月、日。此属性必须被设置。
+%
 % \begin{example}
 % \submitdate{2013年6月10日}
 % \end{example}
 %
 % \myentry{答辩日期}
-% \DescribeMacro{\defenddate}设置论文的答辩日期，需设置年、月、日。此属性必须被设置。
+% \DescribeMacro{\defenddate}
+% 命令\cs{defenddate}用于设置论文的答辩日期，需设置年、月、日。此属性必须被设置。
+%
 % \begin{example}
-% \submitdate{2013年6月27日}
+% \defenddate{2013年6月27日}
 % \end{example}
 %
 % \myentry{定稿日期}
-% \DescribeMacro{\date}设置论文的定稿日期，该日期将出现在中文封面下方以及书脊下方。需设
+% \DescribeMacro{\date}
+% 命令\cs{date}用于设置论文的定稿日期，该日期将出现在中文封面下方以及书脊下方。需设
 % 置年、月、日。此属性可选，默认值为最后一次编译时的日期，精确到日。
+%
 % \begin{example}
 % \date{2013年5月27日}
 % \end{example}
 %
-% \subsubsection{英文封面命令}
+% \subsubsection{英文封面内容替换命令}
 %
-% 下面是论文的英文封面的内容替换命令。
+% 本节描述论文的英文封面的内容替换命令。
 %
 % \myentry{论文标题}
-% \DescribeMacro{\entitle}设置论文的英文标题。如果标题太长，可在此命令参数中换行。
-% 此属性必须被设置。
-% \begin{example}
-% \englishtitle{Network Models of Data Centers\\
-% Based on the Small World Theory}
-% \end{example}
+% \DescribeMacro{\englishtitle}
+% 命令\cs{englishtitle}用于设置论文的英文标题。此属性必须被设置。
 %
 % \begin{note}
-% 不能在|\englishtitle{}|中使用|\thanks|脚注。
+% \cs{englishtitle}的参数中不可换行，也不能使用\cs{thanks}脚注。
 % \end{note}
 %
+% \begin{example}
+% \englishtitle{Network Models of Data Centers based on the Small World Theory}
+% \end{example}
+%
 % \myentry{作者姓名}
-% \DescribeMacro{\englishauthor}设置论文的作者姓名的拼音，此属性必须被设置。
+% \DescribeMacro{\englishauthor}
+% 命令\cs{englishauthor}用于设置论文的作者姓名的拼音，此属性必须被设置。
+%
+% \begin{note}
+% \cs{englishauthor}的参数中不可换行，也不能使用\cs{thanks}脚注。
+% \end{note}
+%
 % \begin{example}
 % \englishauthor{Sang Zhang}
 % \end{example}
 %
-% \begin{note}
-% 不能在|\englishauthor{}|中使用|\thanks|脚注。
-% \end{note}
-%
 % \myentry{导师姓名职称}
-% \DescribeMacro{\englishsupervisor}设置论文作者的导师的姓名的拼音和职称的英文翻译。
-% 此属性必须被设置。
+% \DescribeMacro{\englishsupervisor}
+% 命令\cs{englishsupervisor}用于设置论文作者的导师的姓名的拼音和职称的英文翻译。此属
+% 性必须被设置。
+%
 % \begin{example}
 % \englishsupervisor{Professor Si Li}
 % \end{example}
 %
 % \myentry{作者专业}
-% \DescribeMacro{\englishmajor}设置论文作者的学科与专业方向的英文名。此属性必须被设置。
+% \DescribeMacro{\englishmajor}
+% 命令\cs{englishmajor}用于设置论文作者的学科与专业方向的英文名。此属性必须被设置。
+%
+% \begin{note}
+% \cs{englishmajor}的参数中不可换行。
+% \end{note}
+%
 % \begin{example}
 % \englishmajor{Compuer Software and Theory}
 % \end{example}
 %
 % \myentry{院系名称}
-% \DescribeMacro{\englishdepartment}设置论文作者所在院系的英文名称。此属性必须被设置。
+% \DescribeMacro{\englishdepartment}
+% 命令\cs{englishdepartment}用于设置论文作者所在院系的英文名称。此属性必须被设置。
+%
+% \begin{note}
+% \cs{englishdepartment}的参数中不可换行。
+% \end{note}
+%
 % \begin{example}
 % \englishdepartment{Department of Computer Science and Technology}
 % \end{example}
 %
 % \myentry{学校名称}
-% \DescribeMacro{\englishinstitute}设置论文作者所在学校或机构的英文名称，此学校或机构
+% \DescribeMacro{\englishinstitute}
+% 命令\cs{englishinstitute}用于设置论文作者所在学校或机构的英文名称，此学校或机构
 % 也是所申请学位的颁发机构。此属性可选，默认值为``Nanjing University''。
+%
+% \begin{note}
+% \cs{englishinstitute}的参数中不可换行。
+% \end{note}
+%
 % \begin{example}
 % \englishinstitute{Nanjing University}
 % \end{example}
 %
 % \myentry{完成日期}
-% \DescribeMacro{\englishdate}设置论文完成日期的英文形式，它将出现在英文封面下方。需设
-% 置年、月、日。日期格式使用美国的日期格式，即``Month day, year''，其中``Month''为月份
-% 的英文名全称，首字母大写；``day''为该月中日期的阿拉伯数字表示；``year''为年份的四位阿
-% 拉伯数字表示。此属性可选，默认值为最后一次编译时的日期。
+% \DescribeMacro{\englishdate}
+% 命令\cs{englishdate}用于设置论文完成日期的英文形式，它将出现在英文封面下方。需
+% 设置年、月、日。日期格式使用美国的日期格式，即``Month day, year''，其中
+% ``Month''为月份的英文名全称，首字母大写；``day''为该月中日期的阿拉伯数字表示；
+% ``year''为年份的四位阿拉伯数字表示。此属性可选，默认值为最后一次编译时的日期。
+%
 % \begin{example}
 % \englishdate{May 1, 2013}
 % \end{example}
 %
-% \subsubsection{中文摘要页命令}
+% \subsubsection{中文摘要页内容替换命令}
+%
+% 本节描述论文的中文摘要页的内容替换命令。
 %
 % \myentry{标题及副标题}
 % \DescribeMacro{\abstracttitlea}
-% \DescribeMacro{\abstracttitleb}分别用于设置中文摘要页面的论文标题及副标题的第一行和
-% 第二行。|\abstracttitlea|属性为可选，其默认值为使用|\title|命令所设置的论文标题；
-% |\abstracttitleb|属性为可选，其默认值为空白。这两个命令是为了让用户在论文标题较长时
-% 手动进行分割换行。
+% \DescribeMacro{\abstracttitleb}
+% 命令\cs{abstracttitlea}和\cs{abstracttitleb}分别用于设置中文摘要页面的论文标题
+% 及副标题的第一行和第二行。\cs{abstracttitlea}命令为可选，其默认值为使用\cs{title}
+% 命令所设置的论文标题；\cs{abstracttitleb}命令为可选，其默认值为空白。这两个命令
+% 是为了让用户在论文标题较长时手动进行分割换行。
+%
 % \begin{note}
-% |\abstracttitlea|和|abstracttitleb|命令的参数中都不能出现换行。
+% \cs{abstracttitlea}和\cs{abstracttitleb}命令的参数中都不能出现换行。
 % \end{note}
+%
 % \begin{example}
 % \abstracttitlea{基于小世界理论的}
 % \abstracttitleb{数据中心网络模型研究}
 % \end{example}
 %
-% \subsubsection{英文摘要页命令}
+% \subsubsection{英文摘要页内容替换命令}
+%
+% 本节描述论文的英文摘要页的内容替换命令。
 %
 % \myentry{标题及副标题}
 % \DescribeMacro{\englishabstracttitlea}
-% \DescribeMacro{\englishabstracttitleb}分别用于设置英文摘要页面的论文标题及副标题的
-% 第一行和第二行。|\englishabstracttitlea|属性为可选，其默认值为使用|\entitle|命令所
-% 设置的论文英文标题；|\englishabstracttitleb|属性为可选，其默认值为空白。这两个命令
-% 是为了让用户在论文标题较长时手动进行分割换行。
+% \DescribeMacro{\englishabstracttitleb}
+% 命令\cs{abstracttitlea}和\cs{abstracttitleb}分别用于设置英文摘要页面的论文标题
+% 及副标题的第一行和第二行。\cs{englishabstracttitlea}命令为可选，其默认值为使用
+% \cs{englishtitle}命令所设置的论文英文标题；\cs{englishabstracttitleb}命令为可
+% 选，其默认值为空白。这两个命令是为了让用户在论文标题较长时手动进行分割换行。
+%
 % \begin{note}
-% |\englishabstracttitlea|和|englishabstracttitleb|命令的参数中都不能出现换行。
+% \cs{englishabstracttitlea}和\cs{englishabstracttitleb}命令的参数中都不能换行。
 % \end{note}
+%
 % \begin{example}
 % \englishabstracttitlea{A Network Model of Data Centers}
 % \englishabstracttitleb{Based on the Small World Theory}
@@ -743,22 +890,32 @@
 %
 % \subsubsection{文档结构命令和环境}
 %
-% \myentry{生成中文封面}
-% \DescribeMacro{\maketitle} 此命令用于生成中文封面。此命令必须被放在{\TeX}文档的导
-% 言区。
+% 本节描述论文中可能用到的其他文档结构命令和环境。
+%
+% \myentry{生成中文封面和国家图书馆封面}
+% \DescribeMacro{\maketitle}
+% 命令\cs{maketitle}用于生成论文的中文封面，若论文类型为博士论文，也同时生成论文
+% 的国家图书馆封面。此命令必须被用在{\TeX}文档的\cs{begin{document}}命令之后和
+% \cs{frontmatter}命令之前。
+%
 % \begin{example}
 % \maketitle
 % \end{example}
 %
 % \myentry{生成英文封面}
-% \DescribeMacro{\makeenglishtitle} 此命令用于生成英文封面。此命令必须被放在{\TeX}
-% 文档的导言区。
+% \DescribeMacro{\makeenglishtitle}
+% 命令\cs{makeenglishtitle}用于生成论文的英文封面。此命令必须被用在{\TeX}文档的
+% \cs{maketitle}命令之后和\cs{frontmatter}命令之前。
+%
 % \begin{example}
 % \makeenglishtitle
 % \end{example}
 %
 % \myentry{中文摘要}
-% \DescribeMacro{\abstract} 为中文摘要环境。此环境必须被放在{\TeX}文档的导言区。
+% \DescribeEnv{abstract}
+% \env{abstract}为中文摘要环境。此环境必须被用在{\TeX}文档的\cs{frontmatter}命令之后和
+% \cs{mainmatter}命令之前。
+%
 % \begin{example}
 % \begin{abstract}
 % 本文基于小世界理论，研究了数据中心的网络模型。………………
@@ -766,8 +923,10 @@
 % \end{example}
 %
 % \myentry{中文关键词}
-% \DescribeMacro{\keywords} 此命令用于设置中文关键词。此命令必须被放在|abstract|环境
-% 中使用。关键词之间用中文全角分号隔开。
+% \DescribeMacro{\keywords}
+% 命令\cs{keywords}用于设置中文关键词。此命令必须被用在\env{abstract}环境中。关键词
+% 之间用中文全角分号隔开。
+%
 % \begin{example}
 % \begin{abstract}
 % 本文基于小世界理论，研究了数据中心的网络模型。………………
@@ -776,7 +935,10 @@
 % \end{example}
 %
 % \myentry{英文摘要}
-% \DescribeMacro{\englishabstract} 为英文摘要环境。此环境必须被放在{\TeX}文档的导言区。
+% \DescribeEnv{englishabstract}
+% \env{englishabstract}为英文摘要环境。此环境必须被用在{\TeX}文档的
+% \env{abstract}环境之后和\cs{mainmatter}命令之前。
+%
 % \begin{example}
 % \begin{englishabstract}
 % In this paper, we studied the network model of data centers,
@@ -785,8 +947,10 @@
 % \end{example}
 %
 % \myentry{英文关键词}
-% \DescribeMacro{\englishkeywords} 此命令用于设置英文关键词。此命令必须被放在
-% |englishabstract|环境中使用。关键词之间用英文半角逗号隔开。
+% \DescribeMacro{\englishkeywords}
+% 命令\cs{englishkeywords}用于设置英文关键词。此命令必须被用在\env{englishabstract}
+% 环境中。关键词之间用英文半角逗号隔开。
+%
 % \begin{example}
 % \begin{englishabstract}
 % In this paper, we studied the network model of data centers,
@@ -795,34 +959,86 @@
 % \end{englishabstract}
 % \end{example}
 %
+% \myentry{前言}
+% \DescribeEnv{preface}
+% \env{preface}为论文前言环境。此环境必须被用在{\TeX}文档的
+% \env{englishabstract}环境之后和\cs{tableofcontents}命令之前。
+%
+% \begin{example}
+% \begin{preface}
+%  复杂网络的研究可上溯到20世纪60年代对ER网络的研究。90年后代随着Internet
+%  的发展，以及对人类社会、通信网络、生物网络、社交网络等各领域研究的深入，
+%  发现了小世界网络和无尺度现象等普适现象与方法。对复杂网络的定性定量的科
+%  学理解和分析，已成为如今网络时代科学研究的一个重点课题。
+%
+%  在此背景下，由于云计算时代的到来，本文针对面向云计算的数据中心网络基础
+%  设施设计中的若干问题，进行了几方面的研究。本文的创造性研究成果主要如下
+%  几方面：
+%
+%  ………
+%
+%
+%  \vspace{1cm}
+%  \begin{flushright}
+%   韦小宝\\
+%   2013年夏于南京大学南苑
+%  \end{flushright}
+% \end{preface}
+% \end{example}
+%
 % \myentry{目录}
-% \DescribeMacro{\tableofcontents} 此命令生成论文目录。此命令为必需命令。
+% \DescribeMacro{\tableofcontents}
+% 命令\cs{tableofcontents}用于生成论文目录。此命令必须被用在{\TeX}文档的
+% \env{preface}环境之后和\cs{mainmatter}命令之前。
+%
 % \begin{example}
 % \tableofcontents
 % \end{example}
 %
 % \myentry{表格目录}
-% \DescribeMacro{\listoftables} 此命令生成论文表格目录。此命令为可选命令。
+% \DescribeMacro{\listoftables}
+% 命令\cs{listoftables}用于生成论文表格目录。此命令为可选命令。此命令必须被用在
+% {\TeX}文档的\cs{tableofcontents}命令之后和\cs{mainmatter}命令之前。
+%
 % \begin{example}
 % \listoftables
 % \end{example}
 %
 % \myentry{插图目录}
-% \DescribeMacro{\listoffigures} 此命令生成论文插图目录。此命令为可选命令。
+% \DescribeMacro{\listoffigures}
+% 命令\cs{listoffigures}用于生成论文插图目录。此命令为可选命令。此命令必须被用在
+% {\TeX}文档的\cs{tableofcontents}命令之后和\cs{mainmatter}命令之前。
+%
 % \begin{example}
 % \listoffigures
 % \end{example}
 %
+% \myentry{致谢章节}
+% \DescribeEnv{acknowledgement}
+% \env{acknowledgement}环境用于生成致谢章节。此环境必须被用在论文的最后一章（通
+% 常是“结论”章节）之后以及{\TeX}文档的\cs{appendix}命令和\cs{backmatter}命令之前。
+%
+% \begin{example}
+% \begin{acknowledgement}
+% 首先感谢我的母亲韦春花对我的支持。其次感谢我的导师陈近南对我的精心指导和热心帮助。接
+% 下来，感谢我的师兄茅十八和风际中，他们阅读了我的论文草稿并提出了很有价值的修改建议。
+%
+% 最后，感谢我亲爱的老婆们：双儿、苏荃、阿珂、沐剑屏、曾柔、建宁公主、方怡，感谢你们在
+% 生活上对我无微不至的关怀和照顾。
+% \end{acknowledgement}
+% \end{example}
+%
 % \myentry{简历与科研成果}
-% \DescribeMacro{\resume}
-% \DescribeMacro{\authorinfo}
-% \DescribeMacro{\education}
-% \DescribeMacro{\publications}
-% \DescribeMacro{\projects}
-% |resume|环境用于生成致谢章节。此环境必须被放在{\TeX}文档的附件部分。|authorinfo|环境
-% 用于生成论文作者简介；|education|环境用于生成论文作者教育经历列表；|publications|环境
-% 用于生成论文作者在攻读学位期间发表的论文的列表；|projects|环境用于生成论文作者在攻读学
-% 位期间参与的科研课题的列表。
+% \DescribeEnv{resume}
+% \DescribeEnv{authorinfo}
+% \DescribeEnv{education}
+% \DescribeEnv{publications}
+% \DescribeEnv{projects}
+% \env{resume}环境用于生成致谢章节。此环境必须被放在{\TeX}文档的\cs{backmatter}
+% 命令之后。\env{authorinfo}环境用于生成论文作者简介；\env{education}环境用于生
+% 成论文作者教育经历列表；\env{publications}环境用于生成论文作者在攻读学位期间发
+% 表的论文的列表；\env{projects}环境用于生成论文作者在攻读学位期间参与的科研课题
+% 的列表。
 %
 % \begin{example}
 % \begin{resume}
@@ -855,21 +1071,11 @@
 % \end{resume}
 % \end{example}
 %
-% \myentry{致谢章节}
-% \DescribeMacro{\acknowledgement}此环境用于生成致谢章节。
-% \begin{example}
-% \begin{acknowledgement}
-% 首先感谢我的母亲韦春花对我的支持。其次感谢我的导师陈近南对我的精心指导和热心帮助。接
-% 下来，感谢我的师兄茅十八和风际中，他们阅读了我的论文草稿并提出了很有价值的修改建议。
-%
-% 最后，感谢我亲爱的老婆们：双儿、苏荃、阿珂、沐剑屏、曾柔、建宁公主、方怡，感谢你们在
-% 生活上对我无微不至的关怀和照顾。
-% \end{acknowledgement}
-% \end{example}
-%
 % \myentry{生成《学位论文出版授权书》}
-% \DescribeMacro{\makelicense}该命令用于生成《学位论文出版授权书》。该授权书中的一些字
-% 段将根据用户所设置的文档属性自动填写。
+% \DescribeMacro{\makelicense}
+% 命令\cs{makelicense}用于生成《学位论文出版授权书》。该授权书中的一些字段将根据
+% 用户所设置的文档属性自动填写，其他字段需由作者将论文打印出来后用笔手工填写。此命令应该
+% 用于{\TeX}文档的\cs{end{document}}命令之前。
 % \begin{example}
 % \makelicense
 % \end{example}
@@ -880,26 +1086,33 @@
 % \DescribeEnv{itemize}
 % \DescribeEnv{enumerate}
 % \DescribeEnv{description}
-% 为了适合中文习惯，模板将这三个常用的列表环境用|paralist|对应的压缩环境替
-% 换。一方面满足了多余空间的清楚，另一方面可以自己指定标签的样式和符号。细节请参
-% 看|paralist|文档，此处不再赘述。
+% 为了适合中文习惯，{\njuthesis}文档类使用|paralist|宏包重新定义了|itemize|、
+% |enumerate|和|description|这三个常用的列表环境。一方面满足了多余空间的清楚，另
+% 一方面可以自己指定标签的样式和符号。
 %
-% \myentry{写作时标注}
-% \DescribeMacro{\comment}用来插入写作时的批注，该批注在|showcomments|选项下才可见，
+% 使用的细节请参看|paralist|文档，此处不再赘述。
+%
+% \myentry{批注}
+% \DescribeMacro{\comment}
+% 命令\cs{comment}用来插入写作时的批注，该批注在|showcomments|选项下才可见，
 % 提交最终版本时去掉|showcomments|选项，所有批注都不显示。该命令使用语法为：
-% |\comment{被注释文本}{添加注释的作者名}{注释内容}|。
+% \begin{syntax}
+% \cs{comment}\marg{被注释文本}\marg{添加注释的作者名}\marg{注释内容}
+% \end{syntax}
+%
 % \begin{example}
 % 倒是作者分析到湘西的苗人的“仇外”避汉，这种思想其实并非是针对民族的，
 % \comment{而是阶层性的}{张三}{为什么时阶层性的呢？这里有待查资料}，
-% 因为当时官吏的主体无疑是统治阶级的民族――这种历史背景，导致了民族性质的被强调。
+% 因为当时官吏的主体无疑是统治阶级的民族{\zhdash}这种历史背景，导致了
+% 民族性质的被强调。
 % \end{example}
 %
 % \subsection{数学环境}
 %
-% {\njuthesis}定义了常用的数学环境：
+% {\njuthesis}宏包预定义了一些数学定理环境，如表\ref{table:math-env}所示。
 %
-% \begin{center}
-% \noindent
+% \begin{table}
+% \noindent\centering
 % \begin{tabular}{*{7}{l}}
 %   \hline
 %   axiom  & theorem   & definition & proposition & lemma     & conjecture &\\
@@ -908,20 +1121,20 @@
 %   proof  & corollary & example    & exercise    & assumption & remark  & problem \\
 %   证明   & 推论       & 例子       & 练习        & 假设       & 评注       & 问题\\
 %   \hline
-%   algorithm   &      &          &         &         &       &  \\
-%   算法        &      &           &         &        &        & \\
-%   \hline
 % \end{tabular}
-% \end{center}
+% \caption{预定义的数学定理环境}\label{table:math-env}
+% \end{table}
 %
-% 比如：
+% 例如：
 % \begin{example}
 % \begin{definition}
 % 小世界网络是指其平均路径长度和其节点总数成对数关系的网络。
 % \end{definition}
 % \end{example}
-% 产生（自动编号）：\\[5pt]
-% \fbox{{\heiti 定义~1.1~~~} {小世界网络是指其平均路径长度和其节点总数成对数关系的网络。}}
+% 上述代码将产生（自动编号）：
+% \begin{flushleft}
+% {\heiti 定义~1.1~~~} {小世界网络是指其平均路径长度和其节点总数成对数关系的网络。}
+% \end{flushleft}
 %
 % 列举出来的数学环境毕竟是有限的，如果想用{\heiti 胡说}这样的数学环境，那么很容易定义：
 % \begin{example}
@@ -934,38 +1147,32 @@
 % 契丹武士要来中原夺武林秘笈。\zhdash 慕容博
 % \end{nonsense}
 % \end{example}
-% 产生（自动编号）：\\[5pt]
-% \fbox{{\heiti 胡说~1.1~~~} {契丹武士要来中原夺武林秘笈。\kern0.3ex\rule[0.8ex]{2em}{0.1ex}\kern0.3ex 慕容博}}
+% 上述代码将产生（自动编号）：
+% \begin{flushleft}
+% {\heiti 胡说~1.1~~~} {契丹武士要来中原夺武林秘笈。\zhdash 慕容博}
+% \end{flushleft}
 %
 % \subsection{自定义以及其它}
 %
 % 模板的配置文件|njuthesis.cfg|中定义了很多固定词汇，一般无须修改。如果有特殊需求，
-% 推荐在导言区使用 \cs{renewcommand}。当然，导言区里可以直接使用中文。
+% 推荐在导言区使用\cs{renewcommand}。当然，导言区里可以直接使用中文。
 %
 % \section{实现细节}
 %
-% \subsection{基本信息}
-%    \begin{macrocode}
-%<cls>\NeedsTeXFormat{LaTeX2e}[1999/12/01]
-%<cls>\ProvidesClass{njuthesis}
-%<cfg>\ProvidesFile{njuthesis.cfg}
-%<cls|cfg>[2013/08/24 1.0.0 Documents Class for Degree Papers of Nanjing University.]
-%    \end{macrocode}
-%
 % \subsection{定义选项}
 %
-%  默认选项为|oneside|, |adobefonts|。
+% {\njuthesis}宏包的默认选项为|adobefonts|。
 %    \begin{macrocode}
 %<*cls>
-\newif\ifnjut@adobefonts \njut@adobefontstrue
-\newif\ifnjut@winfonts \njut@winfontsfalse
-\newif\ifnjut@linuxfonts \njut@linuxfontsfalse
-\newif\ifnjut@macfonts \njut@macfontsfalse
-\newif\ifnjut@backinfo \njut@backinfotrue
-\newif\ifnjut@phd \njut@phdfalse
-\newif\ifnjut@master \njut@masterfalse
-\newif\ifnjut@bachelor \njut@bachelorfalse
-\newif\ifnjut@showcomments \njut@showcommentsfalse
+\newif\ifnjut@adobefonts\njut@adobefontstrue
+\newif\ifnjut@winfonts\njut@winfontsfalse
+\newif\ifnjut@linuxfonts\njut@linuxfontsfalse
+\newif\ifnjut@macfonts\njut@macfontsfalse
+\newif\ifnjut@backinfo\njut@backinfotrue
+\newif\ifnjut@phd\njut@phdfalse
+\newif\ifnjut@master\njut@masterfalse
+\newif\ifnjut@bachelor\njut@bachelorfalse
+\newif\ifnjut@showcomments\njut@showcommentsfalse
 \DeclareOption{adobefonts}{\njut@adobefontstrue
   \njut@winfontsfalse
   \njut@linuxfontsfalse
@@ -990,14 +1197,13 @@
 \DeclareOption{showcomments}{\njut@showcommentstrue}
 %    \end{macrocode}
 %
-% 把没有定义的选项传递给底层的文档类，在这里为|article|。
+% 把没有定义的选项传递给底层的文档类，在这里为|book|。
 %
 %    \begin{macrocode}
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
 %    \end{macrocode}
 %
-% 处理选项。
-%
+% 处理选项：
 %    \begin{macrocode}
 \ProcessOptions\relax
 %    \end{macrocode}
@@ -1005,10 +1211,9 @@
 % \subsection{底层文档类}
 %
 % 文档基于{\LaTeX}的标准|book|类。正文使用小四字号（对应于12.05pt，这里近似使用12pt），
-% 纸张使用A4。
-%
+% 纸张使用A4，双面打印。
 %    \begin{macrocode}
-\LoadClass[12pt,a4paper]{book}
+\LoadClass[12pt,a4paper,doubleside]{book}
 %    \end{macrocode}
 %
 % \subsection{装载宏包}
@@ -1070,7 +1275,7 @@
 \RequirePackage{longtable}
 %    \end{macrocode}
 %
-% |booktabs|宏包可生成三线表，支持|\toprule|，|\midrule|，|\bottomrulle|等命令。
+% |booktabs|宏包可生成三线表，支持\cs{toprule}，\cs{midrule}，\cs{bottomrulle}等命令。
 %    \begin{macrocode}
 \RequirePackage{booktabs}
 %    \end{macrocode}
@@ -1113,11 +1318,6 @@
 \RequirePackage[amsmath,thmmarks,hyperref]{ntheorem}
 %    \end{macrocode}
 %
-% |makeidx|宏包支持建立索引。
-%    \begin{macrocode}
-\RequirePackage{makeidx}
-%    \end{macrocode}
-%
 % |setspace|宏包支持行距控制。
 % \begin{note}
 % |setspace|宏包需要在|hyperref|宏包之前加载，避免脚注超链接失效。
@@ -1136,7 +1336,7 @@
 \RequirePackage{fancyhdr}
 %    \end{macrocode}
 %
-% |shortvrb|提供了一个|\MakeShortVerb|命令，可将某个符号定义为|\verb|命令的缩写。
+% |shortvrb|提供了一个\cs{MakeShortVerb}命令，可将某个符号定义为\cs{verb}命令的缩写。
 %    \begin{macrocode}
 \RequirePackage{shortvrb}
 %    \end{macrocode}
@@ -1146,9 +1346,8 @@
 \RequirePackage{xltxtra}
 %    \end{macrocode}
 %
-% 使用|xeCJK|宏包处理中文。宏包选项|BoldFont|表示启用CJK粗体字；|SlantFont|表示启用
-% CJK斜体字；|CJKnumber|表示调用|CJKnumber|宏包处理中文数字；|CJKchecksingle|表示
-% 避免单个汉字单独占一行。
+% 使用|xeCJK|宏包处理中文。宏包选项|CJKnumber|表示调用|CJKnumber|宏包处理中文数
+% 字；|CJKchecksingle|表示避免单个汉字单独占一行。
 % \begin{note}
 %   |xeCJK|宏包必须放在|amssymb|之后，否则会有冲突。
 % \end{note}
@@ -1171,7 +1370,7 @@
 \punctstyle{plain}
 %    \end{macrocode}
 %
-% |CJKfntef|宏包提供了中文下划线。
+% |CJKfntef|宏包提供了中文下划线命令\cs{CJKunderline}，它将在制作论文封面时用到。
 %    \begin{macrocode}
 \RequirePackage{CJKfntef}
 %    \end{macrocode}
@@ -1186,13 +1385,21 @@
 \RequirePackage{indentfirst}
 %    \end{macrocode}
 %
+% |hyperref|宏包可根据交叉引用生成超链接，同时生成PDF文档的书签。
+%    \begin{macrocode}
+\RequirePackage{hyperref}
+%    \end{macrocode}
+%
 % 设置|hyperref|宏包参数。
 % \begin{note}
 % |hyperref|配合{\XeTeX}使用时不能开启Unicode选项。
 % \end{note}
 %    \begin{macrocode}
-\RequirePackage{hyperref}
 \hypersetup{%
+    unicode=false,
+    hyperfootnotes=true,
+    hyperindex=true,
+    pageanchor=true,
     CJKbookmarks=true,
     bookmarksnumbered=true,
     bookmarksopen=true,
@@ -1201,16 +1408,16 @@
     colorlinks=false,
     plainpages=false,
     pdfpagelabels,
-    pdfborder=0 0 0}
+    pdfborder=0 0 0%
+}
 %    \end{macrocode}
 %
-% 设置 url 样式，与上下文一致
+% 设置URL样式，使其与上下文一致。
 %    \begin{macrocode}
 \urlstyle{same}
 %    \end{macrocode}
 %
 % 美化参考文献排序和引用格式的宏包|natbib|。
-%
 %    \begin{macrocode}
 \RequirePackage[sort&compress,numbers]{natbib}
 %    \end{macrocode}
@@ -1226,12 +1433,17 @@
 \RequirePackage{tabularx}
 %    \end{macrocode}
 %
+% |makeidx|宏包支持建立索引。
+%    \begin{macrocode}
+\RequirePackage{makeidx}
+%    \end{macrocode}
+%
 % |glossaries|宏包可用于制作术语表。但该宏包必须在|hyperref|之后载入。
 %    \begin{macrocode}
 \RequirePackage{glossaries}
 %    \end{macrocode}
 %
-% |ifthen|宏包提供了|\ifthenelse|命令，本模板将使用该命令定义一些其他命令。
+% |ifthen|宏包提供了\cs{ifthenelse}命令，本模板将使用该命令定义一些其他命令。
 %    \begin{macrocode}
 \RequirePackage{ifthen}
 %    \end{macrocode}
@@ -1249,7 +1461,7 @@
 %
 % \subsection{字符串常量定义}
 %
-% 定义中文标题名称字符串常量：
+% 定义论文中各章节的中文标题名称字符串常量：
 %    \begin{macrocode}
 %<*cfg>
 \newcommand*{\njut@cap@abstractname}{摘\hspace{2em}要}
@@ -1265,9 +1477,17 @@
 \newcommand*{\njut@cap@indexname}{索\hspace{2em}引}
 \newcommand*{\njut@cap@figurename}{图}
 \newcommand*{\njut@cap@tablename}{表}
-\newcommand*{\njut@cap@chaptername}{\if@mainmatter{第\CJKnumber{\thechapter}章}\fi}
+\newcommand*{\njut@cap@preface}{前\hspace{2em}言}
 \newcommand*{\njut@cap@acknowledgementname}{致\hspace{2em}谢}
 \newcommand*{\njut@cap@appendixname}{附录\thechapter}
+%    \end{macrocode}
+%
+% 定义用于重定义\cs{chaptername}命令的常量。若当前所处位置是文档的|mainmatter|部分，ze
+% 将其定义为``第XX章''的形式，否则将其定义为空字符串。
+%    \begin{macrocode}
+\newcommand*{\njut@cap@chaptername}{%
+  \if@mainmatter{第\CJKnumber{\thechapter}章}\fi%
+}
 %    \end{macrocode}
 %
 % 定义常用数学定理环境的字符串常量：
@@ -1313,12 +1533,14 @@
 \newcommand*{\njut@cap@nlc@classification}{分类号}
 \newcommand*{\njut@cap@nlc@confidential}{密级}
 \newcommand*{\njut@cap@nlc@udc}{UDC}
-\newcommand*{\njut@cap@nlc@title}%
-{学\hspace{1em}位\hspace{1em}论\hspace{1em}文}
+\newcommand*{\njut@cap@nlc@title}{%
+学\hspace{1em}位\hspace{1em}论\hspace{1em}文%
+}
 \newcommand*{\njut@cap@nlc@quotetitle}{（题名和副题名）}
 \newcommand*{\njut@cap@nlc@author}{（作者姓名）}
-\newcommand*{\njut@cap@nlc@supervisor}%
-{指导教师姓名、职务、职称、学位、单位名称及地址}
+\newcommand*{\njut@cap@nlc@supervisor}{%
+指导教师姓名、职务、职称、学位、单位名称及地址%
+}
 \newcommand*{\njut@cap@nlc@degree}{申请学位级别}
 \newcommand*{\njut@cap@nlc@major}{专业名称}
 \newcommand*{\njut@cap@nlc@submitdate}{论文提交日期}
@@ -1353,9 +1575,10 @@
 % 定义南京大学学位论文英文封面的字符串常量：
 %    \begin{macrocode}
 \newcommand*{\njut@cap@cover@en@supervisor}{Directed by}
-\newcommand*{\njut@cap@cover@en@statement}%
-            {Submitted in partial fulfilment of the requirements\\
-for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
+\newcommand*{\njut@cap@cover@en@statement}{%
+Submitted in partial fulfilment of the requirements\\
+for the degree of {\njut@value@en@degree} in {\njut@value@en@major}%
+}
 %    \end{macrocode}
 %
 % 定义南京大学学位论文中文摘要页的字符串常量：
@@ -1389,22 +1612,25 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 \newcommand*{\njut@cap@resume@chaptername}{简历与科研成果}
 \newcommand*{\njut@cap@resume@authorinfo}{基本信息}
 \newcommand*{\njut@cap@resume@education}{教育背景}
-\newcommand*{\njut@cap@resume@publications}%
-            {攻读{\njut@value@degree}学位期间完成的学术成果}
-\newcommand*{\njut@cap@resume@projects}%
-            {攻读{\njut@value@degree}学位期间参与的科研课题}
+\newcommand*{\njut@cap@resume@publications}{%
+攻读{\njut@value@degree}学位期间完成的学术成果%
+}
+\newcommand*{\njut@cap@resume@projects}{%
+攻读{\njut@value@degree}学位期间参与的科研课题%
+}
 %    \end{macrocode}
 %
 % 定义《学位论文出版授权书》中的字符串常量：
 %    \begin{macrocode}
 \newcommand*{\njut@cap@license@chaptername}{学位论文出版授权书}
-\newcommand*{\njut@cap@license@declaration}{本人完全同意《中国优秀%
-博硕士学位论文全文数据库出版章程》（以下简称“章程” ），愿意将本人的学%
-位论文提交“中国学术期刊（光盘版）电子杂志社”在《中国博士学位论文全文数%
-据库》、《中国优秀硕士学位论文全文数据库》中全文发表。《中国博士学位论文%
-全文数据库》、《中国优秀硕士学位论文全文数据库》可以以电子、网络及其他数%
-字媒体形式公开出版，并同意编入《中国知识资源总库》，在《中国博硕士学位论%
-文评价数据库》中使用和在互联网上传播，同意按“章程”规定享受相关权益。}
+\newcommand*{\njut@cap@license@declaration}{%
+本人完全同意《中国优秀博硕士学位论文全文数据库出版章程》（以下简称“章程”），%
+愿意将本人的学位论文提交“中国学术期刊（光盘版）电子杂志社”在《中国博士学位论%
+文全文数据库》、《中国优秀硕士学位论文全文数据库》中全文发表。《中国博士学位论%
+文全文数据库》、《中国优秀硕士学位论文全文数据库》可以以电子、网络及其他数字媒%
+体形式公开出版，并同意编入《中国知识资源总库》，在《中国博硕士学位论文评价数据%
+库》中使用和在互联网上传播，同意按“章程”规定享受相关权益。%
+}
 \newcommand*{\njut@cap@license@sign}{作者签名：}
 \newcommand*{\njut@cap@license@confidential}{论文涉密情况：}
 \newcommand*{\njut@cap@license@public}{不保密}
@@ -1423,8 +1649,9 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 \newcommand*{\njut@cap@license@categoryphd}{博士}
 \newcommand*{\njut@cap@license@categorymasterspec}{硕士专业学位}
 \newcommand*{\njut@cap@license@categoryphdspec}{博士专业学位}
-\newcommand*{\njut@cap@license@remark}{注：请将该授权书填写后装订在%
-学位论文最后一页（南大封面）。}
+\newcommand*{\njut@cap@license@remark}{%
+注：请将该授权书填写后装订在学位论文最后一页（南大封面）。%
+}
 %    \end{macrocode}
 %
 % 定义学位颁发机构的校徽和校名图片文件名：
@@ -1440,11 +1667,12 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 \newcommand*{\njut@value@nlc@classification}{(分类)}
 \newcommand*{\njut@value@nlc@confidential}{(密级)}
 \newcommand*{\njut@value@nlc@udc}{}
-\newcommand*{\njut@value@nlc@titlea}{(论文标题)}
+\newcommand*{\njut@value@nlc@titlea}{\njut@value@title}
 \newcommand*{\njut@value@nlc@titleb}{}
 \newcommand*{\njut@value@nlc@titlec}{}
-\newcommand*{\njut@value@nlc@supervisorinfo}{(导师的职务、%
-职称、学位、单位名称及地址)}
+\newcommand*{\njut@value@nlc@supervisorinfo}{%
+(导师的职务、职称、学位、单位名称及地址)%
+}
 \newcommand*{\njut@value@nlc@chairman}{(答辩主席)}
 \newcommand*{\njut@value@nlc@reviewera}{(评审人)}
 \newcommand*{\njut@value@nlc@reviewerb}{}
@@ -1463,7 +1691,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
        \ifnjut@bachelor
           \newcommand*{\njut@value@degree}{\njut@cap@bachelor}
        \else
-          \newcommand*{\njut@value@degree}{(未知)}
+          \ClassError{njuthesis}{No degree was selected.}{}
        \fi
     \fi
 \fi
@@ -1481,8 +1709,9 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 \newcommand*{\njut@value@institute}{南京大学}
 \newcommand*{\njut@value@submitdate}{xxxx年xx月xx日}
 \newcommand*{\njut@value@defenddate}{xxxx年xx月xx日}
-\newcommand*{\njut@value@date}%
-            {{\number\year}年{\number\month}月{\number\day}日}
+\newcommand*{\njut@value@date}{%
+{\number\year}年{\number\month}月{\number\day}日%
+}
 %    \end{macrocode}
 %
 % 定义南京大学学位论文英文封面中要填写的字段的默认值：
@@ -1496,7 +1725,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
        \ifnjut@bachelor
           \newcommand*{\njut@value@en@degree}{\njut@cap@en@bachelor}
        \else
-          \newcommand*{\njut@value@en@degree}{(degree)}
+          \ClassError{njuthesis}{No degree was selected.}{}
        \fi
     \fi
 \fi
@@ -1506,21 +1735,22 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 \newcommand*{\njut@value@en@major}{Author's Major}
 \newcommand*{\njut@value@en@department}{(Department's Name)}
 \newcommand*{\njut@value@en@institute}{Nanjing University}
-\newcommand*{\njut@value@en@date}%
-            {\ifcase\month\or
-              January\or
-              February\or
-              March\or
-              April\or
-              May\or
-              June\or
-              July\or
-              August\or
-              September\or
-              October\or
-              November\or
-              December\fi
-              \number\day, \number\year}
+\newcommand*{\njut@value@en@date}{
+\ifcase\month\or
+January\or
+February\or
+March\or
+April\or
+May\or
+June\or
+July\or
+August\or
+September\or
+October\or
+November\or
+December\fi
+\number\day, \number\year%
+}
 %    \end{macrocode}
 %
 % 定义南京大学学位论文中文摘要页中要填写的字段的默认值：
@@ -1596,11 +1826,11 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 % \end{shell}
 % \end{note}
 %
-% 定义注释的颜色：|\commentlinecolor|控制注释的线条颜色；|\commentbordercolor|控
-% 制注释盒子的边框颜色；|\commentbackgroundcolor|控制注释盒子的背景颜
-% 色；|\commenttextcolor|控制被注释的文本的颜色。所有颜色值必须是|xcolor|宏包所支
-% 持的颜色名称常量。可以通过|\renewcommand|修改这些颜色值。修改过后下次再调
-% 用|\comment|命令会应用新修改的颜色值。
+% 定义注释的颜色：\cs{commentlinecolor}控制注释的线条颜色；\cs{commentbordercolor}控
+% 制注释盒子的边框颜色；\cs{commentbackgroundcolor}控制注释盒子的背景颜
+% 色；\cs{commenttextcolor}控制被注释的文本的颜色。所有颜色值必须是|xcolor|宏包所支
+% 持的颜色名称常量。可以通过\cs{renewcommand}修改这些颜色值。修改过后下次再调
+% 用\cs{comment}命令会应用新修改的颜色值。
 %    \begin{macrocode}
 \newcommand*{\commentlinecolor}{orange}
 \newcommand*{\commentbordercolor}{black}
@@ -1659,7 +1889,8 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 \setCJKfamilyfont{kai}{\njut@zhfn@kaishu}
 \setCJKfamilyfont{fangsong}{\njut@zhfn@fangsong}
 \setCJKmainfont[BoldFont={\njut@zhfn@heiti},%
-                ItalicFont={\njut@zhfn@kaishu}]{\njut@zhfn@songti}
+                ItalicFont={\njut@zhfn@kaishu}]%
+               {\njut@zhfn@songti}
 \setCJKsansfont{\njut@zhfn@heiti}
 \setCJKmonofont{\njut@zhfn@fangsong}
 %    \end{macrocode}
@@ -1928,19 +2159,30 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
   \@setfontsize\Huge{\njut@fs@szero}{\njut@fs@szeroskip}}
 %    \end{macrocode}
 %
-% 定义中文字距修改命令，直接修改|\CJKglue|即可。
+% 定义中文字距修改命令，直接修改\cs{CJKglue}即可。
 %    \begin{macrocode}
-\newcommand*{\ziju}[1]{\renewcommand{\CJKglue}{\hskip {#1}}}
+\newcommand*{\ziju}[1]{\renewcommand*{\CJKglue}{\hskip {#1}}}
 %    \end{macrocode}
 %
 % \subsection{数学公式和定理}
 %
-% 重定义公式、图、表编号为"3-1"的形式，即分隔符由.变为短杠。子图和子表的应用序号
-% 外加小括号，如图 1-2(a)。
+% 按照南京大学学位论文的格式要求，重定义公式、图、表的编号格式。例如：
+% \begin{itemize}
+% \item 图1.2
+% \item 表2.3
+% \item 附注 1)
+% \item 文献[4]
+% \item 式(6.3)
+% \end{itemize}
+% 子图和子表的应用序号外加小括号，例如
+% \begin{itemize}
+% \item 图1.2(a)
+% \item 表3.4(b)
+% \end{itemize}
 %    \begin{macrocode}
-\renewcommand*{\theequation}{\arabic{section}--\arabic{equation}}
-\renewcommand*{\thefigure}{\arabic{section}--\arabic{figure}}
-\renewcommand*{\thetable}{\arabic{section}--\arabic{table}}
+\renewcommand*{\thefigure}{\arabic{chapter}.\arabic{figure}}
+\renewcommand*{\thetable}{\arabic{chapter}.\arabic{table}}
+\renewcommand*{\theequation}{(\arabic{chapter}.\arabic{equation})}
 \renewcommand*{\thesubfigure}{(\alph{subfigure})}
 \renewcommand*{\thesubtable}{(\alph{subtable})}
 %    \end{macrocode}
@@ -1966,7 +2208,6 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
                       {\hfill\ensuremath{\square}\vspace{1em}}
 \newenvironment{solution}{\noindent\textbf{{\njut@cap@solution}：}}
                          {\vspace{1em}}
-\newtheorem{algorithm}{\njut@cap@algorithm}[chapter]
 %    \end{macrocode}
 %
 % \subsection{设置浮动环境格式}
@@ -1977,8 +2218,8 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 \renewcommand*{\textfraction}{0.05}
 %    \end{macrocode}
 % 有时如果多个浮动环境连续放在一起，{\LaTeX}会将它们分在几个不同页，即使它们可在同一页放
-% 得下。我们可以通过修改|\topfraction|和|\bottomfraction|分别设置顶端和底端的浮动环境
-% 的最大比例。
+% 得下。我们可以通过修改\cs{topfraction}和\cs{bottomfraction}分别设置顶端和底端的浮动
+% 环境的最大比例。
 %    \begin{macrocode}
 \renewcommand*{\topfraction}{0.9}
 \renewcommand*{\bottomfraction}{0.8}
@@ -1986,7 +2227,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 % 有时{\LaTeX}会把一个浮动环境单独放在一页，我们要求这个环境至少要占据$85\%$才能单独放在
 % 一页。
 % \begin{note}
-% |\floatpagefraction|的数值必须小于|\topfraction|。
+% \cs{floatpagefraction}的数值必须小于\cs{topfraction}。
 % \end{note}
 %    \begin{macrocode}
 \renewcommand*{\floatpagefraction}{0.85}
@@ -2016,107 +2257,74 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 %
 % 设置章节格式如下：
 % \begin{description}
-% \item[零级节标题] 命令为|\chapter|，格式为一号黑体，居中排列，段前空4ex，段后空3ex；
-% \item[一级节标题] 命令为|\section|，格式为小二号黑体，左排列，段前空3.5ex，段后空2.3ex；
-% \item[二级节标题] 命令为|\subsection|，格式为三号黑体，左排列，段前空3.0ex，段后空1.5ex；
-% \item[三级节标题] 命令为|\subsubsection|，格式为小三号黑体，左排列，段前空2.5ex，段后空1.5ex；
-% \item[四级节标题] 命令为|\paragraph|，格式为四号黑体，左排列，段前空2.0ex，段后空1ex；
-% \item[五级节标题] 命令为|\subparagraph|，格式为小四号黑体，左排列，段前空1.5ex，段后空1ex；
+% \item[零级节标题] 命令为\cs{chapter}，格式为一号黑体，居中排列，段前空4ex，段后空3ex；
+% \item[一级节标题] 命令为\cs{section}，格式为小二号黑体，左排列，段前空3.5ex，段后空2.3ex；
+% \item[二级节标题] 命令为\cs{subsection}，格式为三号黑体，左排列，段前空3.0ex，段后空1.5ex；
+% \item[三级节标题] 命令为\cs{subsubsection}，格式为小三号黑体，左排列，段前空2.5ex，段后空1.5ex；
+% \item[四级节标题] 命令为\cs{paragraph}，格式为四号黑体，左排列，段前空2.0ex，段后空1ex；
+% \item[五级节标题] 命令为\cs{subparagraph}，格式为小四号黑体，左排列，段前空1.5ex，段后空1ex；
 % \end{description}
 %
-% 使用|titlesec|宏包提供的|\titleformat|命令可以方便地设置标题格式：
+% 使用|titlesec|宏包提供的\cs{titleformat}和\cs{titlespacing}命令可以方便地设置标题
+% 的样式：
 %    \begin{macrocode}
 \titleformat{\chapter}[hang]
             {\centering\zihao{1}\bfseries}
             {\chaptertitlename}{1em}{}
+\titlespacing{\chapter}
+             {0pt}
+             {*4}
+             {*3}
 \titleformat{\section}[hang]
             {\zihao{-2}\bfseries}
             {\thesection}{1em}{}
+\titlespacing{\section}
+             {0pt}
+             {*3.5}
+             {*2.3}
 \titleformat{\subsection}[hang]
             {\zihao{3}\bfseries}
             {\thesubsection}{1em}{}
+\titlespacing{\subsection}
+             {0pt}
+             {*3}
+             {*1.5}
 \titleformat{\subsubsection}[hang]
             {\zihao{-3}\bfseries}
             {\thesubsubsection}{1em}{}
+\titlespacing{\subsubsection}
+             {0pt}
+             {*2.5}
+             {*1.5}
 \titleformat{\paragraph}[hang]
             {\zihao{4}\bfseries}
             {\theparagraph}{1em}{}
+\titlespacing{\paragraph}
+             {0pt}
+             {*2}
+             {*1}
 \titleformat{\subparagraph}[hang]
             {\zihao{-4}\bfseries}
             {\thesubparagraph}{1em}{}
-
-%% \renewcommand{\section}{%
-%%   \@startsection{section}{1}%
-%%                 {\z@}%
-%%                 {-3.5ex \@plus -1ex \@minus -.2ex}%
-%%                 {2.3ex \@plus .2ex}%
-%%                 {\zihao{-2}\bfseries}}
-%% \renewcommand{\subsection}{%
-%%   \@startsection{subsection}{2}%
-%%                 {\z@}%
-%%                 {-3.0ex \@plus -1ex \@minus -.2ex}%
-%%                 {1.5ex \@plus .2ex}%
-%%                 {\zihao{3}\bfseries}}
-%% \renewcommand{\subsubsection}{%
-%%   \@startsection{subsubsection}{3}%
-%%                 {\z@}%
-%%                 {-2.5ex \@plus -1ex \@minus -.2ex}%
-%%                 {1.5ex \@plus .2ex}%
-%%                 {\zihao{-3}\bfseries}}
-%% \renewcommand{\paragraph}{%
-%%   \@startsection{paragraph}{4}%
-%%                 {\z@}%
-%%                 {-2.0ex \@plus -1ex \@minus -.2ex}%
-%%                 {1ex \@plus .2ex}%
-%%                 {\normalfont\zihao{4}\bfseries}}
-%% \renewcommand{\subparagraph}{%
-%%   \@startsection{subparagraph}{5}%
-%%                 {\z@}%
-%%                 {-1.5ex \@plus -1ex \@minus -.2ex}%
-%%                 {1ex \@plus .2ex}%
-%%                 {\normalfont\zihao{-4}\bfseries}}
+\titlespacing{\subparagraph}
+             {0pt}
+             {*1.5}
+             {*1}
 %    \end{macrocode}
 %
-% \begin{macro}{\njut@titleformat}
-% 文档标题使用小一号黑体。用|\njut@titleformat|保存对标题格式的定义。
-%    \begin{macrocode}
-\newcommand{\njut@titleformat}{\zihao{-1}\bfseries}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\njut@authorformat}
-% 文档作者使用小四号宋体。用|\njut@authorformat|保存对作者格式的定义。
-%    \begin{macrocode}
-\newcommand{\njut@authorformat}{\zihao{-4}}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\njut@dateformat}
-% 文档日期使用小四号宋体。用|\njut@dateformat|保存对日期格式的定义。
-%    \begin{macrocode}
-\newcommand{\njut@dateformat}{\zihao{-4}}
-%    \end{macrocode}
-% \end{macro}
-%
-% 设置章节标题深度最大为4层。
+% 设置章节标题编号最多到第4层（即\cs{subsubsection}），超过第四层的章节不再自动编号。
 %    \begin{macrocode}
 \setcounter{secnumdepth}{4}
 %    \end{macrocode}
 %
 % \begin{macro}{\today}
-% 重新定义中文化的|\today|格式。
+% 重新定义中文化的\cs{today}格式。
 %    \begin{macrocode}
 \renewcommand*{\today}{{\number\year}年{\number\month}月{\number\day}日}
 %    \end{macrocode}
 % \end{macro}
 %
 % \subsection{浮动环境}
-%
-% 设置浮动表格和插图的编号格式：
-%    \begin{macrocode}
-\renewcommand*{\thefigure}{\thechapter.\arabic{figure}}
-\renewcommand*{\thetable}{\thechapter.\arabic{table}}
-%    \end{macrocode}
 %
 % 设置浮动环境标题的字体大小。根据学位论文格式要求，插图和表格标题字体需要比正文字体略小。
 %    \begin{macrocode}
@@ -2133,17 +2341,18 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 %
 % \subsection{页幅设置}
 %
-% 正文统一用小四号字，间距为固定值20pt。|\linestrech|的值为$1$时为单倍行距， $1.2$时是
+% 正文统一用小四号字，间距为固定值20pt。\cs{linestrech}的值为$1$时为单倍行距， $1.2$时是
 % 一倍半行距， 而为$1.6$时是双倍行距。其实不同尺寸的字体行间距都不相同，而是成比例关系。这
 % 个20pt是对正文主要字体来说的。
 %
-% 在{\TeX}中基本的行间距是|\baselineskip|, 对于12pt的字体，这个值等于14.5pt, 而真正的
-% 行间距是|\baselineskip * \baselinestretch| ，|\baselinestretch|默认为$1$, 但我
-% 们可以重新设置它的值，如|\renewcommand{\baselinestretch}{1.38}| 就得到真正的行间距
-% 为14.5pt*1.38≈20pt。而这样定义之后，对不同尺寸的字体都会按同样的比例因子1.38放大行间
-% 距，使得全文排版能协调一致。
+% 在{\TeX}中基本的行间距是\cs{baselineskip}, 对于12pt的字体，这个值等于14.5pt,
+% 而真正的行间距是\cs{baselineskip}$\times$\cs{baselinestretch}，
+% \cs{baselinestretch}默认为$1$, 但我们可以重新设置它的值，如
+% |\renewcommand{\baselinestretch}{1.38}|就得到真正的行间距为14.5pt*1.38≈20pt。
+% 而这样定义之后，对不同尺寸的字体都会按同样的比例因子1.38放大行间距，使得全文排
+% 版能协调一致。
 %
-% 采用|setspace|宏包提供的|\setstretch|命令实现行距控制。
+% 采用|setspace|宏包提供的\cs{setstretch}命令实现行距控制。
 %    \begin{macrocode}
 \setstretch{1.38}
 %    \end{macrocode}
@@ -2165,7 +2374,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 % 我们使用|fancyhdr|宏包来设置页眉页脚。|fancyhdr|宏包提供了一个|fancy|页面风格，
 % 在该风格下，章节的起始页（即包含“第XX章”标题的页面）的页眉页脚将使用|plain|风
 % 格，而章节的后继页面的页眉页脚将使用|fancy|风格的默认定义或用户通过
-% |\fancyhead|或|\fancyfoot|命令定义的样式。
+% \cs{fancyhead}或\cs{fancyfoot}命令定义的样式。
 %
 % 首先，我们需要修改|plain|风格的页眉页脚，将其页脚默认的页码去掉。
 %    \begin{macrocode}
@@ -2210,8 +2419,8 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 %    \end{macrocode}
 %
 % 设置|fancy|风格的页眉，令偶数页右上角和奇数页左上角分别显示当前章信息和当前节
-% 信息；但若当前页面尚未开始本章的第一节（即|\rightmark|为空），则奇数页左上角也
-% 显示当前章信息（即|\leftmark|）。
+% 信息；但若当前页面尚未开始本章的第一节（即\cs{rightmark}为空），则奇数页左上角也
+% 显示当前章信息（即\cs{leftmark}）。
 %    \begin{macrocode}
 \fancyhead[RE]{\leftmark}
 \fancyhead[LO]{%
@@ -2227,7 +2436,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 %    \end{macrocode}
 %
 % 重新定义|chaptermark|，让其显示当前章信息和当前节信息。注意下面的重定义必须放
-% 在第一次调用|\pagestyle{fancy}|之后，因为第一次调用该命令会设置|chaptermark|。
+% 在第一次调用|\pagestyle{fancy}|之后，因为第一次调用该命令会设置\cs{chaptermark}。
 %    \begin{macrocode}
 \renewcommand{\chaptermark}[1]{\markboth{%
  \bfseries\if@mainmatter\chaptertitlename.\hspace{1em}\fi{#1}%
@@ -2235,7 +2444,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 %    \end{macrocode}
 %
 % 重新定义|sectionmark|，让其显示当前节信息。注意下面的重定义必须放在第一次调用
-% |\pagestyle{fancy}|之后，因为第一次调用该命令会设置|sectionmark|。
+% |\pagestyle{fancy}|之后，因为第一次调用该命令会设置\cs{sectionmark}。
 %    \begin{macrocode}
 \renewcommand{\sectionmark}[1]{\markright{%
  \bfseries\if@mainmatter\thesection.\hspace{1em}\fi{#1}%
@@ -2243,42 +2452,11 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 %    \end{macrocode}
 %
 % 另一个麻烦的问题是：默认的|fancy|风格会在每一章最后的空白页（由于是双面打印）
-% 也加上页眉页脚，但我们通常不希望如此。解决方法是修改{\LaTeX}内部的|\cleardoublepage|
+% 也加上页眉页脚，但我们通常不希望如此。解决方法是修改{\LaTeX}内部的\cs{cleardoublepage}
 % 命令的定义如下：
 %    \begin{macrocode}
-%% Patch for blank pages between chapters which disables the current page style
 \def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
   \hbox{}\thispagestyle{empty}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
-%    \end{macrocode}
-%
-% \subsection{脚注}
-%
-% 使用|footmisc|重新定义脚注样式。
-% \begin{note}
-% 此脚注样式只支持每页18个脚注，多于18个将无法编号。
-% \end{note}
-%    \begin{macrocode}
-\DefineFNsymbolsTM*{hurst}{%
-    \textdagger       \dagger
-      \textdaggerdbl  \ddagger
-      \textsection      \mathsection
-      \textparagraph  \mathparagraph
-      \textbardbl       \|%
-      {\textasteriskcentered\textasteriskcentered}{**}%
-      {\textdagger\textdagger}{\dagger\dagger}%
-      {\textdaggerdbl\textdaggerdbl}{\dagger\dagger}%
-      {\textsection\textsection}{\mathsection\mathsection}%
-      {\textparagraph\textparagraph}{\mathparagraph\mathparagraph}%
-      {\textasteriskcentered\textasteriskcentered\textasteriskcentered}{***}%
-      {\textdagger\textdagger\textdagger}{\dagger\dagger\dagger}%
-      {\textdaggerdbl\textdaggerdbl\textdaggerdbl}{\ddagger\ddagger\ddagger}%
-      {\textsection\textsection\textsection}%
-      {\mathsection\mathsection\mathsection}%
-      {\textparagraph\textparagraph\textparagraph}%
-      {\mathparagraph\mathparagraph\mathparagraph}%
-      \textasteriskcentered  *
-}%
-\setfnsymbol{hurst}
 %    \end{macrocode}
 %
 % \subsection{列表环境}
@@ -2307,7 +2485,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 %
 % 设置无序列表的标签符号。
 %    \begin{macrocode}
-\setlist[itemize,1]{label=$\medbullet$}
+\setlist[itemize,1]{label=$\bullet$}
 \setlist[itemize,2]{label=$\blacksquare$}
 \setlist[itemize,3]{label=$\Diamondblack$}
 %    \end{macrocode}
@@ -2415,7 +2593,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 % \end{macro}
 %
 % \begin{macro}{\tableofcontents}
-% 修改|\tableofcontents|命令用于生成目录页。
+% 修改\cs{tableofcontents}命令用于生成目录页，将目录本身也被加入目录中。
 %    \begin{macrocode}
 \renewcommand*{\tableofcontents}{%
     \if@twocolumn
@@ -2432,7 +2610,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 % \end{macro}
 %
 % \begin{macro}{\listoftables}
-% 修改|\listoftables|命令，使得表格列表被加入目录中。
+% 修改\cs{listoftables}命令，使得表格列表被加入目录中。
 %    \begin{macrocode}
 \renewcommand*{\listoftables}{%
     \if@twocolumn
@@ -2449,7 +2627,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 % \end{macro}
 %
 % \begin{macro}{\listoffigures}
-% 修改|\listoffigures|命令，使得插图列表被加入目录中。
+% 修改\cs{listoffigures}命令，使得插图列表被加入目录中。
 %    \begin{macrocode}
 \renewcommand*{\listoffigures}{%
     \if@twocolumn
@@ -2565,7 +2743,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 %
 % 英文封面字段设置：
 %    \begin{macrocode}
-\newcommand{\englishtitle}[1]{%
+\newcommand*{\englishtitle}[1]{%
   \renewcommand{\njut@value@en@title}{#1}}
 \newcommand*{\englishauthor}[1]{%
   \renewcommand{\njut@value@en@author}{#1}}
@@ -2619,11 +2797,11 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
     \njutunderline[9em]{\njut@value@nlc@titlec}\\
     }
     \vskip \stretch{1}
-    \kaishu\zihao{4}\njut@cap@nlc@quotetitle
+    {\kaishu\zihao{4}\njut@cap@nlc@quotetitle}
     \vskip \stretch{1}
-    \kaishu\zihao{1}\njutunderline{\njut@value@author}
+    {\kaishu\zihao{1}\njutunderline{\njut@value@author}}
     \vskip \stretch{1}
-    \kaishu\zihao{4}\njut@cap@nlc@author
+    {\kaishu\zihao{4}\njut@cap@nlc@author}
   \end{center}
   {\kaishu\zihao{4}
     \vskip \stretch{1}
@@ -2675,7 +2853,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
     \vskip 5mm
     {\bf\kaishu\zihao{1}（\makebox[7em][s]{\njut@cap@cover@apply}）}\\
     \vskip\stretch{1}
-    \bf\kaishu\zihao{3}
+    {\bf\kaishu\zihao{3}
     \def\tabcolsep{1pt}
     \def\arraystretch{1.5}
     \begin{tabular}{p{7.3em}c}
@@ -2689,7 +2867,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
       & \njutunderline[310pt]{\njut@value@supervisor}\\
       \makebox[7em][s]{\njut@cap@cover@researchfield}
       & \njutunderline[310pt]{\njut@value@researchfield}\\
-    \end{tabular}\\
+    \end{tabular}}\\
     \vskip \stretch{1}
     {\bf\kaishu\zihao{4}\njut@value@date}
   \end{center}
@@ -2715,8 +2893,8 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 % \end{macro}
 %
 % \begin{macro}{\maketitle}
-%   重新定义{\LaTeX}提供的|\maketitle|命令，使其生成南京大学学术论文所需的中文封面。
-% 注意我们使用了前面修改过的|\cleardoublepage|命令来插入无页眉页脚的空白页。
+%   重新定义{\LaTeX}提供的\cs{maketitle}命令，使其生成南京大学学术论文所需的中文封面。
+% 注意我们使用了前面修改过的\cs{cleardoublepage}命令来插入无页眉页脚的空白页。
 %    \begin{macrocode}
 \renewcommand*{\maketitle}{%
   \ifnjut@phd
@@ -2736,7 +2914,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 % \end{macro}
 %
 % \begin{macro}{\makeenglishtitle}
-% 定义生成英文封面的命令。注意我们使用了前面修改过的|\cleardoublepage|命令来插入无页眉
+% 定义生成英文封面的命令。注意我们使用了前面修改过的\cs{cleardoublepage}命令来插入无页眉
 % 页脚的空白页。
 %    \begin{macrocode}
 \newcommand*{\makeenglishtitle}{%
@@ -2785,19 +2963,19 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{abstract}
+% \begin{environment}{abstract}
 % 定义中文摘要环境。该环境自动生成南京大学中文摘要页。注意我们使用了前面修改过的
-% |\cleardoublepage|命令来插入无页眉页脚的空白页。
+% \cs{cleardoublepage}命令来插入无页眉页脚的空白页。
 %    \begin{macrocode}
 \newenvironment{abstract}{%
   \thispagestyle{empty}
   \pdfbookmark[0]{\njut@cap@abstract}{abstract}
   \begin{center}
-    \bf\kaishu\zihao{-2}%
-    \njutunderline{\njut@cap@abstract@chaptername}
+    {\bf\kaishu\zihao{-2}%
+     \njutunderline{\njut@cap@abstract@chaptername}}
   \end{center}
   \vspace{3mm}
-  \kaishu\zihao{4}%
+  {\kaishu\zihao{4}%
   \noindent\njut@cap@abstract@title{：}%
   \njutunderline[318pt]{\njut@value@abstract@titlea}\\
   \noindent\njutunderline[\textwidth]{\njut@value@abstract@titleb}\\
@@ -2808,19 +2986,21 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
   \njutunderline[61pt]{\njut@value@author}\\
   \noindent\njut@cap@abstract@supervisor{：}%
   \njutunderline[248pt]{\njut@value@supervisor}\\
+  }
   \vspace{5mm}
   \begin{center}
     {\heiti\zihao{-3}\njut@cap@abstract@abstractname}
-  \end{center}\par
+  \end{center}%
+  \normalsize\par%
 }{%
   \cleardoublepage
 }
 %    \end{macrocode}
-% \end{macro}
+% \end{environment}
 %
 % \begin{macro}{\keywords}
-% 定义生成中文摘要关键词的命令。此命令必须放在|abstract|环境内的末尾使用。中文关键词之间应
-% 以中文全角分号隔开，末尾不需要加标点。
+% 定义生成中文摘要关键词的命令。此命令必须放在\env{abstract}环境内的末尾使用。中
+% 文关键词之间应以中文全角分号隔开，末尾不需要加标点。
 %    \begin{macrocode}
 \newcommand{\keywords}[1]{%
   \renewcommand*{\njut@value@abstract@keywords}{#1}%
@@ -2848,9 +3028,9 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{englishabstract}
+% \begin{environment}{englishabstract}
 % 定义英文摘要环境。该环境自动生成南京大学英文摘要页。注意我们使用了前面修改过的
-% |\cleardoublepage|命令来插入无页眉页脚的空白页。
+% \cs{cleardoublepage}命令来插入无页眉页脚的空白页。
 %    \begin{macrocode}
 \newenvironment{englishabstract}{%
   \thispagestyle{empty}
@@ -2873,16 +3053,17 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
   \vspace{5mm}
   \begin{center}
     {\bf\zihao{-3}\njut@cap@abstract@en@abstractname}
-  \end{center}\par
+  \end{center}%
+  \normalsize\par%
 }{%
   \cleardoublepage
 }
 %    \end{macrocode}
-% \end{macro}
+% \end{environment}
 %
 % \begin{macro}{\englishkeywords}
-% 定义生成中文摘要关键词的命令。此命令必须放在|abstract|环境内的末尾使用。英文关键词之间应
-% 以英文半角逗号隔开，末尾不需要加标点。
+% 定义生成中文摘要关键词的命令。此命令必须放在\env{englishabstract}环境内的末尾
+% 使用。英文关键词之间应以英文半角逗号隔开，末尾不需要加标点。
 %    \begin{macrocode}
 \newcommand{\englishkeywords}[1]{%
   \renewcommand*{\njut@value@abstract@en@keywords}{#1}%
@@ -2892,27 +3073,49 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 %    \end{macrocode}
 % \end{macro}
 %
+% \subsection{前言章节}
+%
+% \begin{environment}{preface}
+% 该环境用于``致谢''页。
+%    \begin{macrocode}
+\newenvironment{preface}{%
+  \nchapter{\njut@cap@preface}
+}{}
+%    \end{macrocode}
+% \end{environment}
+%
+% \subsection{致谢章节}
+%
+% \begin{environment}{acknowledgement}
+% 该环境用于``致谢''页。
+%    \begin{macrocode}
+\newenvironment{acknowledgement}{%
+  \nchapter{\njut@cap@acknowledgementname}
+}{}
+%    \end{macrocode}
+% \end{environment}
+%
 % \subsection{简历与科研成果页}
 %
-% \begin{macro}{resume}
+% \begin{environment}{resume}
 % 该环境用于生成作者简历与科研成果页。
 %    \begin{macrocode}
 \newenvironment{resume}{%
   \nchapter{\njut@cap@resume@chaptername}
 }{}
 %    \end{macrocode}
-% \end{macro}
+% \end{environment}
 %
-% \begin{macro}{authorinfo}
+% \begin{environment}{authorinfo}
 % 定义作者基本信息环境。该环境自动生成作者基本信息段落。此环境必须被放在|resume|环境中。
 %    \begin{macrocode}
 \newenvironment{authorinfo}{%
   \paragraph*{\njut@cap@resume@authorinfo}
 }{}
 %    \end{macrocode}
-% \end{macro}
+% \end{environment}
 %
-% \begin{macro}{education}
+% \begin{environment}{education}
 % 定义作者教育背景列表环境。此环境必须被放在|resume|环境中。
 %    \begin{macrocode}
 \newenvironment{education}{%
@@ -2922,9 +3125,9 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
   \end{description}
 }
 %    \end{macrocode}
-% \end{macro}
+% \end{environment}
 %
-% \begin{macro}{publications}
+% \begin{environment}{publications}
 % 定义作者攻读学位期间发表论文列表环境。此环境必须被放在|resume|环境中。
 %    \begin{macrocode}
 \newenvironment{publications}{%
@@ -2934,9 +3137,9 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
   \end{enumerate}
 }
 %    \end{macrocode}
-% \end{macro}
+% \end{environment}
 %
-% \begin{macro}{projects}
+% \begin{environment}{projects}
 % 定义作者攻读学位期间参与的科研课题列表环境。此环境必须被放在|resume|环境中。
 %    \begin{macrocode}
 \newenvironment{projects}{%
@@ -2946,18 +3149,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
   \end{enumerate}
 }
 %    \end{macrocode}
-% \end{macro}
-%
-% \subsection{致谢页}
-%
-% \begin{macro}{acknowledgement}
-% 该环境用于``致谢''页。
-%    \begin{macrocode}
-\newenvironment{acknowledgement}{%
-  \nchapter{\njut@cap@acknowledgementname}
-}{}
-%    \end{macrocode}
-% \end{macro}
+% \end{environment}
 %
 % \subsection{学位论文出版授权书}
 %
@@ -3065,8 +3257,9 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 % \end{macro}
 %
 % \begin{macro}{\cell}
-% |\cell{width}{height}{text}|用于定义一个宽度为width，高度为height，内容为text的
-% 的单元格。该单元格可放在表格中，用于控制表格单元格的大小。
+% \cs{cell}\marg{width}\marg{height}\marg{text}用于定义一个宽度为\meta{width}，
+% 高度为\meta{height}，内容为\meta{text}的的单元格。该单元格可放在表格中，用于控
+% 制表格单元格的大小。
 %    \begin{macrocode}
 \newcommand{\cell}[3]{\parbox[c][#2][c]{#1}{\makebox[#1]{#3}}}
 %    \end{macrocode}
@@ -3075,9 +3268,9 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 % \begin{macro}{C}
 % 定义一个新的表格列模式，|C{width}|，表示将内容居中，且列宽度为|width|。
 % \begin{note}
-% |array|环境中的|\centering|命令会改变|\newline|的定义，因此我们需要用
-% |\arraybackslash|将其恢复；另外，我们也可能会在列内容中使用|\newline|，因此在
-% |\centering|后重新定义了|\newline|。
+% |array|环境中的\cs{centering}命令会改变\cs{newline}的定义，因此我们需要用
+% \cs{arraybackslash}将其恢复；另外，我们也可能会在列内容中使用\cs{newline}，因此在
+% \cs{centering}后重新定义了\cs{newline}。
 % \end{note}
 %    \begin{macrocode}
 \newcolumntype{C}[1]{>{\centering\let\newline\\%
@@ -3085,7 +3278,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\arabicenum}
+% \begin{environment}{arabicenum}
 % 阿拉伯数字列表环境。该列表最多三层。
 %    \begin{macrocode}
 \newlist{arabicenum}{enumerate}{3}
@@ -3096,28 +3289,28 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 \setlist[arabicenum,3]{label=\textnormal%
   {\textnormal{(\arabic{arabicenumi}.\arabic{arabicenumii}.\arabic*)}}}
 %    \end{macrocode}
-% \end{macro}
+% \end{environment}
 %
-% \begin{macro}{\romanenum}
+% \begin{environment}{romanenum}
 % 罗马数字列表环境。该列表最多两层。
 %    \begin{macrocode}
 \newlist{romanenum}{enumerate}{2}
 \setlist[romanenum,1]{label={\textnormal{\roman*.}}}
 \setlist[romanenum,2]{label={\textnormal{\alph*\,)}}}
 %    \end{macrocode}
-% \end{macro}
+% \end{environment}
 %
-% \begin{macro}{\romanenum}
+% \begin{environment}{romanenum}
 % 小写字母列表环境。该列表最多两层。
 %    \begin{macrocode}
 \newlist{alphaenum}{enumerate}{2}
 \setlist[alphaenum,1]{label={\textnormal{\alph*\,)}}}
 \setlist[alphaenum,2]{label={\textnormal{\alph{alphaenumi}.\arabic*\,)}}}
 %    \end{macrocode}
-% \end{macro}
+% \end{environment}
 %
 % \begin{macro}{\comment}
-% 定义|\comment|命令以产生批注，批注的可见性由|showcomments|文档选项控制。当定义了
+% 定义\cs{comment}命令以产生批注，批注的可见性由|showcomments|文档选项控制。当定义了
 % |showcomments|文档选项时批注可见，否则批注不可见。
 %    \begin{macrocode}
 \newcommand{\comment}[3]{#1}
@@ -3149,12 +3342,12 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 %    \end{macrocode}
 % \end{macro}
 %
-% 在文档的|\begin{document}|之后立即调用|\njut@setpdfinfo|命令设置PDF文档属性。
+% 在文档的\cs{begin{document}}之后立即调用\cs{njut@setpdfinfo}命令设置PDF文档属性。
 %    \begin{macrocode}
 \AtBeginDocument{\njut@setpdfinfo}
 %</cls>
 %    \end{macrocode}
-%
+% \StopEventually{\PrintIndex}
 % \Finale
 %
 % \iffalse
@@ -3177,21 +3370,27 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 \RequirePackage{titling}
 \RequirePackage{fancyhdr}
 \RequirePackage{geometry}
-\RequirePackage{hyperref}
-\hypersetup{%
-  unicode=false,
-  CJKbookmarks=false,
-  bookmarksnumbered=true,
-  bookmarksopen=true,
-  bookmarksopenlevel=1,
-  breaklinks=true,
-  linkcolor=blue,
-  plainpages=false,
-  pdfpagelabels,
-  pdfborder=0 0 0}
-\RequirePackage{url}
 \RequirePackage{indentfirst}
 \RequirePackage[CJKnumber,CJKchecksingle]{xeCJK}
+\RequirePackage{compsci}
+\RequirePackage{hypdoc} % it will load hyperref package
+\RequirePackage{url}
+
+\hypersetup{%
+    unicode=false,
+    hyperfootnotes=true,
+    hyperindex=true,
+    pageanchor=true,
+    CJKbookmarks=true,
+    bookmarksnumbered=true,
+    bookmarksopen=true,
+    bookmarksopenlevel=0,
+    breaklinks=true,
+    colorlinks=false,
+    plainpages=false,
+    pdfpagelabels,
+    pdfborder=0 0 0%
+}
 
 % 定义英文字体名称。
 \newcommand*{\njut@enfn@main}{Times New Roman}
@@ -3258,7 +3457,8 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
   % numbersep=-1em
 }
 \renewcommand{\contentsname}{目\hspace{2em}录}
-\renewcommand{\indexname}{{\hfill}索\hspace{2em}引{\hfill}}
+\renewcommand{\abstractname}{摘\hspace{2em}要}
+\renewcommand{\indexname}{索\hspace{2em}引}
 \renewcommand{\figurename}{图}
 \renewcommand{\tablename}{表}
 \renewcommand{\refname}{参考文献}
@@ -3289,7 +3489,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 \long\def\myentry#1{\vskip5pt\par\noindent\llap{{\color{blue}\fangsong #1}}%
   \marginpar{\strut}\hskip\parindent}
 
-% 使用|titlesec|宏包提供的|\titleformat|命令设置标题格式：
+% 使用|titlesec|宏包提供的\titleformat命令设置标题格式：
 \titleformat*{\section}{\Large\bfseries}
 \titleformat*{\subsection}{\large\bfseries}
 \titleformat*{\subsubsection}{\normalsize\bfseries}
@@ -3305,7 +3505,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 \predate{\begin{center}\large}
 \postdate{\par\end{center}}
 
-% 修改|\tableofcontents|命令用于生成目录页。
+% 修改\cs{tableofcontents}命令用于生成目录页。
 \renewcommand{\tableofcontents}{%
     \if@twocolumn
       \@restonecoltrue\onecolumn
@@ -3322,8 +3522,12 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
     \arraybackslash\hspace{0pt}}p{#1}}
 
 \newenvironment{note}
-               {\noindent\textbf{注意：}}
+               {\par\noindent\textbf{注意：}}
                {}
+
+\newenvironment{syntax}
+               {\begin{center}}
+               {\end{center}}
 
 % 重新设置默认的列表的格式。
 \setlist{%
@@ -3343,7 +3547,7 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 \setlist[itemize,3]{label=$\Diamondblack$}
 
 % 默认的|fancy|风格会在每一章最后的空白页（由于是双面打印）也加上页眉页脚，但我
-% 们通常不希望如此。解决方法是修改{\LaTeX}内部的|\cleardoublepage|命令的定义如下：
+% 们通常不希望如此。解决方法是修改{\LaTeX}内部的\cleardoublepage命令的定义如下：
 \makeatletter
 \def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
   \hbox{}\thispagestyle{empty}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
@@ -3354,11 +3558,39 @@ for the degree of {\njut@value@en@degree} in {\njut@value@en@major}}
 \geometry{headheight=2.6cm,headsep=3mm,footskip=13mm}
 \geometry{top=3.5cm,bottom=3.5cm,left=3.2cm,right=3.2cm}
 
-\renewcommand{\abstractname}{摘~~~~要}
-\renewcommand{\contentsname}{目~~~~录}
+%% \newcommand{\env}[1]{\texttt{#1}}
+
+% 修改\tableofcontents命令用于生成目录页，将目录本身也被加入目录中。
+\makeatletter
+\renewcommand*{\tableofcontents}{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \section*{\hfill\contentsname\hfill}%
+    \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
+    \addcontentsline{toc}{section}{\contentsname}%
+    \@starttoc{toc}%
+    \if@restonecol\twocolumn\fi
+}
+\makeatother
+
+% 设置索引页面的样式
+\IndexPrologue{\clearpage\section*{\hfill\indexname\hfill}%
+\markboth{\indexname}{\indexname}%
+\addcontentsline{toc}{section}{\indexname}%
+斜体数字表示对应项的描述所在页面的页码， %
+带下划线的数字表示对应项的定义所在的代码行号，%
+其他数字表示对应项所被引用的代码行号。%
+}
+
+% 设置索引页面的栏数
+\setcounter{IndexColumns}{2}
 
 
 %</dtx-style>
 %    \end{macrocode}
 % \fi
 \endinput
+g

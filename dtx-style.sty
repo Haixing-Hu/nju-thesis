@@ -39,21 +39,27 @@
 \RequirePackage{titling}
 \RequirePackage{fancyhdr}
 \RequirePackage{geometry}
-\RequirePackage{hyperref}
-\hypersetup{%
-  unicode=false,
-  CJKbookmarks=false,
-  bookmarksnumbered=true,
-  bookmarksopen=true,
-  bookmarksopenlevel=1,
-  breaklinks=true,
-  linkcolor=blue,
-  plainpages=false,
-  pdfpagelabels,
-  pdfborder=0 0 0}
-\RequirePackage{url}
 \RequirePackage{indentfirst}
 \RequirePackage[CJKnumber,CJKchecksingle]{xeCJK}
+\RequirePackage{compsci}
+\RequirePackage{hypdoc} % it will load hyperref package
+\RequirePackage{url}
+
+\hypersetup{%
+    unicode=false,
+    hyperfootnotes=true,
+    hyperindex=true,
+    pageanchor=true,
+    CJKbookmarks=true,
+    bookmarksnumbered=true,
+    bookmarksopen=true,
+    bookmarksopenlevel=0,
+    breaklinks=true,
+    colorlinks=false,
+    plainpages=false,
+    pdfpagelabels,
+    pdfborder=0 0 0%
+}
 
 \newcommand*{\njut@enfn@main}{Times New Roman}
 \newcommand*{\njut@enfn@sans}{Arial}
@@ -114,7 +120,8 @@
   % numbersep=-1em
 }
 \renewcommand{\contentsname}{目\hspace{2em}录}
-\renewcommand{\indexname}{{\hfill}索\hspace{2em}引{\hfill}}
+\renewcommand{\abstractname}{摘\hspace{2em}要}
+\renewcommand{\indexname}{索\hspace{2em}引}
 \renewcommand{\figurename}{图}
 \renewcommand{\tablename}{表}
 \renewcommand{\refname}{参考文献}
@@ -175,8 +182,12 @@
     \arraybackslash\hspace{0pt}}p{#1}}
 
 \newenvironment{note}
-               {\noindent\textbf{注意：}}
+               {\par\noindent\textbf{注意：}}
                {}
+
+\newenvironment{syntax}
+               {\begin{center}}
+               {\end{center}}
 
 \setlist{%
   topsep=0.3em,             % 列表顶端的垂直空白
@@ -201,8 +212,32 @@
 \geometry{headheight=2.6cm,headsep=3mm,footskip=13mm}
 \geometry{top=3.5cm,bottom=3.5cm,left=3.2cm,right=3.2cm}
 
-\renewcommand{\abstractname}{摘~~~~要}
-\renewcommand{\contentsname}{目~~~~录}
+%% \newcommand{\env}[1]{\texttt{#1}}
+
+\makeatletter
+\renewcommand*{\tableofcontents}{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \section*{\hfill\contentsname\hfill}%
+    \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
+    \addcontentsline{toc}{section}{\contentsname}%
+    \@starttoc{toc}%
+    \if@restonecol\twocolumn\fi
+}
+\makeatother
+
+\IndexPrologue{\clearpage\section*{\hfill\indexname\hfill}%
+\markboth{\indexname}{\indexname}%
+\addcontentsline{toc}{section}{\indexname}%
+斜体数字表示对应项的描述所在页面的页码， %
+带下划线的数字表示对应项的定义所在的代码行号，%
+其他数字表示对应项所被引用的代码行号。%
+}
+
+\setcounter{IndexColumns}{2}
 
 \endinput
 %%
