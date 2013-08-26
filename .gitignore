@@ -31,3 +31,4 @@
 *.xdy
 *.tdo
 *.thm
+.DS_Store
