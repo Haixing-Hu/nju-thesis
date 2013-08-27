@@ -25,7 +25,7 @@
 %% through LaTeX.
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{njuthesis.cls}
-[2013/08/25 v1.0.6 Document Class for the Degree Papers of Nanjing University]
+[2013/08/27 v1.0.7 Document Class for the Degree Papers of Nanjing University]
 \newif\ifnjut@adobefonts\njut@adobefontstrue
 \newif\ifnjut@winfonts\njut@winfontsfalse
 \newif\ifnjut@linuxfonts\njut@linuxfontsfalse
@@ -86,6 +86,7 @@
 \RequirePackage{amssymb}
 \RequirePackage{bm}
 \RequirePackage{mathrsfs}
+\RequirePackage{wasysym}
 \RequirePackage{txfonts}
 \RequirePackage[amsmath,thmmarks,hyperref]{ntheorem}
 \RequirePackage{setspace}
@@ -692,9 +693,9 @@
     {\kaishu\zihao{-0} \njut@cap@nlc@title}
     {\kaishu\zihao{1}
     \vskip \stretch{1}
-    \njutunderline[9em]{\njut@value@nlc@titlea}\\
-    \njutunderline[9em]{\njut@value@nlc@titleb}\\
-    \njutunderline[9em]{\njut@value@nlc@titlec}\\
+    \njutunderline[12em]{\njut@value@nlc@titlea}\\
+    \njutunderline[12em]{\njut@value@nlc@titleb}\\
+    \njutunderline[12em]{\njut@value@nlc@titlec}\\
     }
     \vskip \stretch{1}
     {\kaishu\zihao{4}\njut@cap@nlc@quotetitle}
@@ -939,10 +940,22 @@
   \cell{2.2cm}{1.5cm}{\njut@cap@license@category}
   & \multicolumn{3}{c}{
     \begin{tabular*}{5.6cm}{p{2.8cm}p{2.8cm}}
-       $\square$\njut@cap@license@categorymaster
-      & $\square$\njut@cap@license@categorymasterspec \\
-       $\square$\njut@cap@license@categoryphd
-      & $\square$\njut@cap@license@categoryphdspec \\
+       \ifnjut@master%
+           {{\zihao{-4}$\CheckedBox$}}%
+       \else%
+           {{\zihao{4}$\Square$}}%
+       \fi%
+       \njut@cap@license@categorymaster
+      & {\zihao{4}$\Square$}%
+       \njut@cap@license@categorymasterspec \\
+       \ifnjut@phd%
+           {{\zihao{-4}$\CheckedBox$}}%
+       \else%
+           {{\zihao{4}$\Square$}}%
+       \fi%
+       \njut@cap@license@categoryphd
+      & {\zihao{4}$\Square$}%
+       \njut@cap@license@categoryphdspec \\
     \end{tabular*}}
   & \multicolumn{3}{c|}{%
     \raisebox{-1em}{\njut@cap@license@categoryhint}}\\
@@ -966,14 +979,24 @@
   \par\vspace{1em}
   \njut@license@maketable
   \par\vspace{1em}
-  \noindent\njut@cap@license@securitylevel
-  \begin{itemize}[label=$\square$]
-  \item {\njut@cap@license@public}
-  \item {\njut@cap@license@secret}
-    \njut@cap@datefield~~\njut@cap@to~~\njut@cap@datefield
-  \end{itemize}
+  \noindent\njut@cap@license@securitylevel\par
+  \noindent\ifthenelse{\equal{\njut@value@nlc@securitylevel}
+                             {\njut@cap@nlc@openlevel}}
+                      {{\zihao{-4}$\CheckedBox$}}
+                      {{\zihao{4}$\Square$}}%
+  {\njut@cap@license@public}\par
+  \noindent\ifthenelse{\equal{\njut@value@nlc@securitylevel}
+                             {\njut@cap@nlc@openlevel}}
+                      {{\zihao{4}$\Square$}}
+                      {{\zihao{-4}$\CheckedBox$}}%
+  {\njut@cap@license@secret}%
+  \njut@cap@datefield\hspace{0.5em}%
+  \njut@cap@to\hspace{0.5em}%
+  \njut@cap@datefield\par
   \vspace{1em}
-  \noindent\njut@cap@license@remark
+  \noindent\njut@cap@license@remark%
+  \normalfont
+  \cleardoublepage
 }
 \newcommand{\zhdash}{\kern0.3ex\rule[0.8ex]{2em}{0.1ex}\kern0.3ex}
 \newcommand{\cell}[3]{\parbox[c][#2][c]{#1}{\makebox[#1]{#3}}}

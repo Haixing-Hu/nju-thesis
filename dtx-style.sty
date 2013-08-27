@@ -189,6 +189,9 @@
                {\begin{center}}
                {\end{center}}
 
+\newenvironment{suggestion}
+               {\par\noindent\textbf{建议：}}{}
+
 \setlist{%
   topsep=0.3em,             % 列表顶端的垂直空白
   partopsep=0pt,            % 列表环境前面紧接着一个空白行时其顶端的额外垂直空白
@@ -211,6 +214,8 @@
 
 \geometry{headheight=2.6cm,headsep=3mm,footskip=13mm}
 \geometry{top=3.5cm,bottom=3.5cm,left=3.2cm,right=3.2cm}
+
+\newcommand*{\std}[1]{{\normalfont #1}}
 
 %% \newcommand{\env}[1]{\texttt{#1}}
 

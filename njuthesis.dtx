@@ -23,7 +23,7 @@
 %<cls>\NeedsTeXFormat{LaTeX2e}[1995/12/01]
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
-%<cls|cfg>[2013/08/25 v1.0.6 Document Class for the Degree Papers of Nanjing University]
+%<cls|cfg>[2013/08/27 v1.0.7 Document Class for the Degree Papers of Nanjing University]
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
 \usepackage{dtx-style}
@@ -153,7 +153,7 @@
 %  v1.0.0 & 2013/08/24 & 胡海星 & 完成第一个可工作版本 \\
 %  v1.0.1 & 2013/08/25 & 胡海星 & 增加了一些PDF文档的元信息\\
 %  v1.0.2 & 2013/08/25 & 胡海星 & 合并了国家图书馆封面上的导师信息\newline
-%                                使用\cs{makebox}\oarg{width}\oarg{s}\marg{text}
+%                                使用|\makebox|\oarg{width}\oarg{s}\marg{text}
 %                                使得封面标签可以自动两端对其分布\newline
 %                                修改了学位论文和用户手册的样式\\
 %  v1.0.3 & 2013/08/25 & 胡海星 & 增加了《学位论文出版授权书》页面\\
@@ -161,18 +161,19 @@
 %                                规定 (试行)》的要求修改了学位论文的一些排版格式\newline
 %                                修复了页眉页脚的问题\\
 %  v1.0.5 & 2013/08/25 & 胡海星 & 按照dtx的写作规范修改了手册的排版\newline
-%                                增加了\env{preface}环境\newline
+%                                增加了|preface|环境\newline
 %                                删除了脚注样式的设置\newline
-%                                删除了\env{algorithm}环境的定义，因为很多情况下
+%                                删除了|algorithm|环境的定义，因为很多情况下
 %                                其他算法和代码排版宏包都会定义该环境\\
 %  v1.0.6 & 2013/08/25 & 胡海星 & 修复了生成学士学位论文的bug\newline
 %                                增加了对国家标准的参考\newline
-%                                增加了\textbf{GB/T 7156-2003}标准所定义的文献
+%                                增加了\std{GB/T 7156-2003}标准所定义的文献
 %                                密级\newline
-%                                将论文密级设置命令\cs{confidential}更名为
-%                                \cs{securitylevel}\newline
+%                                将论文密级设置命令|\confidential|更名为
+%                                |\securitylevel|\newline
 %                                修改了国家图书馆封面和英文封面的样式\newline
 %                                将生成国家图书馆封面的命令独立了出来\\
+%  v1.0.7 & 2013/08/26 & 胡海星 & 修改了国家图书馆封面和论文出版授权书的一些细节\\
 % \bottomrule
 % \end{tabular*}
 % \end{center}
@@ -226,12 +227,14 @@
 %
 % {\njuthesis}所参照的中华人民共和国国家标准如下：
 % \begin{itemize}
-% \item \textbf{GB/T 7714-2005 文后参考文献著录规则}
-% \item \textbf{GB/T 7713.1-2006 学位论文编写规则}
-% \item \textbf{GB/T 7713.3-2009 科技报告编写规则}
-% \item \textbf{GB/T 7713-1987 科学技术报告、学位论文和学术论文的编写格式},
-% （已被\textbf{GB/T 7713.1-2006}和\textbf{GB/T 7713.3-2009}替代）
-% \item \textbf{GB/T 7156-2003 文献保密等级代码与标识}
+% \item \std{GB/T 7714-2005}\textsl{文后参考文献著录规则}
+% \item \std{GB/T 7713.1-2006}\textsl{学位论文编写规则}
+% \item \std{GB/T 7713.3-2009}\textsl{科技报告编写规则}
+% \item \std{GB/T 7713-1987}\textsl{科学技术报告、学位论文和学术论文的编写格式},
+% 该标准已被\std{GB/T 7713.1-2006}和\std{GB/T 7713.3-2009}部分替代
+% \item \std{GB/T 7156-2003}\textsl{文献保密等级代码与标识}
+% \item \std{GB/T 16159-2012}\textsl{汉语拼音正词法基本规则}，
+% 该标准取代了\std{GB/T 16159-1996}
 % \end{itemize}
 %
 % 上述标准的电子版可在{\njuthesis}项目主页的源码库中找到。
@@ -294,7 +297,7 @@
 %     |multirow| & |hyperref|    & |enumitem| & |xcolor|   & |amsmath|   & |amsfonts| \\
 %     |amssymb|  & |bm|          & |mathrsfs| & |txfonts|  & |ntheorem|  & |makeidx|  \\
 %     |setspace| & |footmisc|    & |hypernat| & |fancyhdr| & |natbib|    & |tabularx| \\
-%     |titlesec| & |glossaries|  & |ifthen|   & |etex|     & |todonotes| &  \\
+%     |titlesec| & |glossaries|  & |ifthen|   & |etex|     & |todonotes| & |wasysym| \\
 %   \hline
 %   \end{tabular*}
 %   \caption{{\njuthesis}用到的宏包}\label{table:dependence}
@@ -565,10 +568,10 @@
 % \DescribeMacro{\confidentiallevel}
 % \DescribeMacro{\clasifiedlevel}
 % \DescribeMacro{\mostconfidentiallevel}
-% 命令\cs{securitylevel}设置论文的密级。论文的密级必须按照\textbf{GB/T 7156-2003}标准
+% 命令\cs{securitylevel}设置论文的密级。论文的密级必须按照\std{GB/T 7156-2003}标准
 % 进行填写。
 %
-% 根据\textbf{GB/T 7156-2003}标准，文献保密等级分为$5$级,即“公开级”、“限制级”、
+% 根据\std{GB/T 7156-2003}标准，文献保密等级分为$5$级,即“公开级”、“限制级”、
 % “秘密级”、“机密级”、“绝密级”。本模板中预定义了该标准中文献保密等级的五个等级的
 % 代码常量：
 % \begin{enumerate}
@@ -596,8 +599,10 @@
 % 多种语言的各种详略版本。近百年来，UDC已被世界上几十个国家的10多万个图书馆和情
 % 报机构采用。UDC目前已成为名符其实的国际通用文献分类法。
 %
-% 论文的具体UDC编号需咨询学校图书馆的老师，或在下面网址查询：\\
+% 论文的具体UDC编号需咨询学校图书馆的老师，或在下面网址查询：
+% \begin{center}
 % \url{http://www.udcc.org/udcsummary/php/index.php?lang=chi}
+% \end{center}
 %
 % \begin{example}
 % \udc{004.72}
@@ -821,20 +826,26 @@
 %
 % \myentry{作者姓名}
 % \DescribeMacro{\englishauthor}
-% 命令\cs{englishauthor}用于设置论文的作者姓名的拼音，此属性必须被设置。
+% 命令\cs{englishauthor}用于设置论文的作者姓名的汉语拼音，此属性必须被设置。
+% \begin{suggestion}
+% 作者姓名的汉语拼音必须遵循\std{GB/T 16159-2012}标准。
+% \end{suggestion}
 %
 % \begin{note}
 % \cs{englishauthor}的参数中不可换行，也不能使用\cs{thanks}脚注。
 % \end{note}
 %
 % \begin{example}
-% \englishauthor{WEI Xiao-Bao}
+% \englishauthor{Wei Xiaobao}
 % \end{example}
 %
 % \myentry{导师姓名职称}
 % \DescribeMacro{\englishsupervisor}
-% 命令\cs{englishsupervisor}用于设置论文作者的导师的姓名的拼音和职称的英文翻译。此属
-% 性必须被设置。
+% 命令\cs{englishsupervisor}用于设置论文作者的导师姓名的汉语拼音和导师职称的英文翻译。
+% 此属性必须被设置。
+% \begin{suggestion}
+% 导师姓名的汉语拼音必须遵循\std{GB/T 16159-2012}标准。
+% \end{suggestion}
 %
 % \begin{example}
 % \englishsupervisor{Professor CHEN Jin-Nan}
@@ -1362,6 +1373,11 @@
 \RequirePackage{amssymb}
 \RequirePackage{bm}
 \RequirePackage{mathrsfs}
+%    \end{macrocode}
+%
+% |wasysym|宏包提供特殊符号支持。
+%    \begin{macrocode}
+\RequirePackage{wasysym}
 %    \end{macrocode}
 %
 % |txfonts|宏包用自己的typewriter字体替换系统Courier字体，它必须在{\AmSTeX}之后引入。
@@ -2866,9 +2882,9 @@ December\fi
     {\kaishu\zihao{-0} \njut@cap@nlc@title}
     {\kaishu\zihao{1}
     \vskip \stretch{1}
-    \njutunderline[9em]{\njut@value@nlc@titlea}\\
-    \njutunderline[9em]{\njut@value@nlc@titleb}\\
-    \njutunderline[9em]{\njut@value@nlc@titlec}\\
+    \njutunderline[12em]{\njut@value@nlc@titlea}\\
+    \njutunderline[12em]{\njut@value@nlc@titleb}\\
+    \njutunderline[12em]{\njut@value@nlc@titlec}\\
     }
     \vskip \stretch{1}
     {\kaishu\zihao{4}\njut@cap@nlc@quotetitle}
@@ -3249,10 +3265,22 @@ December\fi
   \cell{2.2cm}{1.5cm}{\njut@cap@license@category}
   & \multicolumn{3}{c}{
     \begin{tabular*}{5.6cm}{p{2.8cm}p{2.8cm}}
-       $\square$\njut@cap@license@categorymaster
-      & $\square$\njut@cap@license@categorymasterspec \\
-       $\square$\njut@cap@license@categoryphd
-      & $\square$\njut@cap@license@categoryphdspec \\
+       \ifnjut@master%
+           {{\zihao{-4}$\CheckedBox$}}%
+       \else%
+           {{\zihao{4}$\Square$}}%
+       \fi%
+       \njut@cap@license@categorymaster
+      & {\zihao{4}$\Square$}%
+       \njut@cap@license@categorymasterspec \\
+       \ifnjut@phd%
+           {{\zihao{-4}$\CheckedBox$}}%
+       \else%
+           {{\zihao{4}$\Square$}}%
+       \fi%
+       \njut@cap@license@categoryphd
+      & {\zihao{4}$\Square$}%
+       \njut@cap@license@categoryphdspec \\
     \end{tabular*}}
   & \multicolumn{3}{c|}{%
     \raisebox{-1em}{\njut@cap@license@categoryhint}}\\
@@ -3283,14 +3311,24 @@ December\fi
   \par\vspace{1em}
   \njut@license@maketable
   \par\vspace{1em}
-  \noindent\njut@cap@license@securitylevel
-  \begin{itemize}[label=$\square$]
-  \item {\njut@cap@license@public}
-  \item {\njut@cap@license@secret}
-    \njut@cap@datefield~~\njut@cap@to~~\njut@cap@datefield
-  \end{itemize}
+  \noindent\njut@cap@license@securitylevel\par
+  \noindent\ifthenelse{\equal{\njut@value@nlc@securitylevel}
+                             {\njut@cap@nlc@openlevel}}
+                      {{\zihao{-4}$\CheckedBox$}}
+                      {{\zihao{4}$\Square$}}%
+  {\njut@cap@license@public}\par
+  \noindent\ifthenelse{\equal{\njut@value@nlc@securitylevel}
+                             {\njut@cap@nlc@openlevel}}
+                      {{\zihao{4}$\Square$}}
+                      {{\zihao{-4}$\CheckedBox$}}%
+  {\njut@cap@license@secret}%
+  \njut@cap@datefield\hspace{0.5em}%
+  \njut@cap@to\hspace{0.5em}%
+  \njut@cap@datefield\par
   \vspace{1em}
-  \noindent\njut@cap@license@remark
+  \noindent\njut@cap@license@remark%
+  \normalfont
+  \cleardoublepage
 }
 %    \end{macrocode}
 % \end{macro}
@@ -3566,16 +3604,22 @@ December\fi
     \if@restonecol\twocolumn\fi
 }
 
+% 增加一种新的表格列对齐方式 C{width}，表示该列内容居中且宽度为width
 \newcolumntype{C}[1]{>{\centering\let\newline\\%
     \arraybackslash\hspace{0pt}}p{#1}}
 
+% note 环境表示需特别注意的内容
 \newenvironment{note}
                {\par\noindent\textbf{注意：}}
                {}
 
+% syntax 环境表示语法描述
 \newenvironment{syntax}
                {\begin{center}}
                {\end{center}}
+
+\newenvironment{suggestion}
+               {\par\noindent\textbf{建议：}}{}
 
 % 重新设置默认的列表的格式。
 \setlist{%
@@ -3606,6 +3650,11 @@ December\fi
 \geometry{headheight=2.6cm,headsep=3mm,footskip=13mm}
 \geometry{top=3.5cm,bottom=3.5cm,left=3.2cm,right=3.2cm}
 
+
+% \std{code}表示国家标准编号
+\newcommand*{\std}[1]{{\normalfont #1}}
+
+% 增加环境命令： \env{name} 表示名为 name 的环境
 %% \newcommand{\env}[1]{\texttt{#1}}
 
 % 修改\tableofcontents命令用于生成目录页，将目录本身也被加入目录中。
