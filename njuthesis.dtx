@@ -173,7 +173,8 @@
 %                                |\securitylevel|\newline
 %                                修改了国家图书馆封面和英文封面的样式\newline
 %                                将生成国家图书馆封面的命令独立了出来\\
-%  v1.0.7 & 2013/08/26 & 胡海星 & 修改了国家图书馆封面和论文出版授权书的一些细节\\
+%  v1.0.7 & 2013/08/26 & 胡海星 & 修改了国家图书馆封面和论文出版授权书的一些细节\newline
+%                                完善了|njuthesis|手册\\
 % \bottomrule
 % \end{tabular*}
 % \end{center}
@@ -198,24 +199,24 @@
 % 由于作者水平有限，虽然现在的这个版本基本上满足了学位论文的撰写需求，但难免还存在不足之
 % 处，欢迎大家积极反馈意见。
 %
-% 本模板的编写过程中参考了以下文档，这里一并向这些文档的作者表示感谢：
+% 本模板的编写过程中参考了以下代码和文档，这里一并向这些代码和文档的作者表示感谢：
 %
 % \begin{itemize}
-% \item \textsl{南京大学学位论文模板}，杨文博，\\
-% \url{https://code.google.com/p/njuthesis/}
-% \item \textsl{清华大学学位论文模板}, 薛瑞尼
-% \item \textsl{武汉理工大学学位论文模板}, 胡卫谊
-% \item \textsl{CTeX宏包}, \url{http://www.ctex.org}
-% \item \textsl{{\LaTeXe} for class and package writers}, The {\LaTeX}3 Project
-% \item \textsl{The {\LaTeX} Companion, second edition}, Frank Mittelbach,
-% Michel Gooseens.
-% \item \textsl{How to Package Your {\LaTeX} Package}, Scott Pakin,\\
-% \url{http://www.iitg.ernet.in/trivedi/LatexHelp/Latex%20Manual/dtxtut.pdf}
+% \item 杨文博. \textsl{南京大学学位论文模板}. \url{https://code.google.com/p/njuthesis/}.
+% \item 薛瑞尼. \textsl{清华大学学位论文模板}.
+% \item 胡卫谊. \textsl{武汉理工大学学位论文模板}.
+% \item 吴凯. \textsl{GBT7714-2005NLang.bst}. v1.0 beta 2. 2006.
+% \item \textsl{CTeX宏包}. \url{http://www.ctex.org}.
+% \item The {\LaTeX}3 Project. \textsl{{\LaTeXe} for class and package writers}.
+% \item Frank Mittelbach, Michel Gooseens. \textsl{The {\LaTeX} Companion}. 2nd ed.
+% \item Scott Pakin. \textsl{How to Package Your {\LaTeX} Package}.
+% \url{http://www.iitg.ernet.in/trivedi/LatexHelp/Latex%20Manual/dtxtut.pdf}.
+% \item Oren Patashnik. \textsl{Designing \BitTeX Styles}. 1988.
 % \end{itemize}
 %
-% \section{遵循的标准}
+% \section{遵循的要求和标准}
 %
-% {\njuthesis}所参照的南京大学研究生院的要求如下：
+% {\njuthesis}所遵循的南京大学研究生院的要求如下：
 % \begin{itemize}
 % \item \textsl{南京大学硕士答辩流程及相关材料下载}，\\
 % \url{http://gs.nju.edu.cn/content/xw/ss3.htm}
@@ -225,7 +226,7 @@
 % \url{http://grawww.nju.edu.cn/content/xw/lwgf.doc}
 % \end{itemize}
 %
-% {\njuthesis}所参照的中华人民共和国国家标准如下：
+% {\njuthesis}所遵循的中华人民共和国国家标准如下：
 % \begin{itemize}
 % \item \std{GB/T 7714-2005}\textsl{文后参考文献著录规则}
 % \item \std{GB/T 7713.1-2006}\textsl{学位论文编写规则}
@@ -237,7 +238,11 @@
 % 该标准取代了\std{GB/T 16159-1996}
 % \end{itemize}
 %
-% 上述标准的电子版可在{\njuthesis}项目主页的源码库中找到。
+% 上述要求和标准的电子版可在{\njuthesis}项目主页的源码库中找到。
+%
+% \begin{note}
+% 如上述要求和标准之间有冲突，以南京大学研究生院的要求为准。
+% \end{note}
 %
 % \section{安装}
 %
@@ -256,24 +261,24 @@
 %     \toprule
 %     \textbf{文件（夹）}        & \textbf{功能描述}\\
 %     \midrule
-%     njuthesis.ins             & 模板驱动文件 \\
-%     njuthesis.dtx             & 模板文档代码的混合文件\\
-%     njuthesis.cls             & 模板类文件\\
-%     njuthesis.cfg             & 模板配置文件\\
-%     njuthesis.bst             & 参考文献样式文件\\
-%     dtx-style.sty             & 用户手册样式文件\\
-%     njulogo.eps               & 南京大学校徽图片\\
-%     njuname.eps               & 南京大学校名图片\\
+%     |njuthesis.ins|             & 模板驱动文件 \\
+%     |njuthesis.dtx|             & 模板文档代码的混合文件\\
+%     |njuthesis.cls|             & 模板类文件\\
+%     |njuthesis.cfg|             & 模板配置文件\\
+%     |GBT7714-2005.bst|          & 符合国标\std{GB/T 7714-2005}的参考文献样式文件\\
+%     |dtx-style.sty|             & 用户手册样式文件\\
+%     |njulogo.eps|               & 南京大学校徽图片\\
+%     |njuname.eps|               & 南京大学校名图片\\
 %     \hline
-%     sample.tex                & 示例文档，亦可作为学位论文的基本模板 \\
-%     sample.bib                & 示例文档的参考文献数据库 \\
-%     figures/                  & 示例文档图片目录\\
+%     |sample.tex|                & 示例文档，亦可作为学位论文的基本模板 \\
+%     |sample.bib|                & 示例文档的参考文献数据库 \\
+%     |figures/|                  & 示例文档图片目录\\
 %     \hline
-%     Makefile                  & make 脚本 \\
-%     make.bat                  & Windows 下的批处理工具\\
+%     |Makefile|                  & make 脚本 \\
+%     |get_texmf_dir.sh|          & 获取本地|textmf|目录路径的脚本\\
 %     \hline
-%     README.md                 & 说明文件 \\
-%     njuthesis.pdf             & 用户手册（本文档）\\
+%     |README.md|                 & 说明文件 \\
+%     |njuthesis.pdf|             & 用户手册（本文档）\\
 %     \bottomrule
 %   \end{tabular*}
 %   \caption{{\njuthesis}的主要文件及其功能}\label{table:component}
@@ -352,22 +357,44 @@
 %
 % \begin{shell}
 % $ cd njuthesis-VERSION
-% # 建立文档类目录
-% $ mkdir -p ${TEXMFLOCAL}/tex/latex/nju
-% # 复制文档类文件
-% $ cp njuthesis.dtx ${TEXMFLOCAL}/tex/latex/ascent/
-% $ cp njuthesis.cls ${TEXMFLOCAL}/tex/latex/ascent/
-% $ cp njuthesis.cfg ${TEXMFLOCAL}/tex/latex/ascent/
-% $ cp njuthesis.bst ${TEXMFLOCAL}/tex/latex/ascent/
-% $ cp njulogo.eps  ${TEXMFLOCAL}/tex/latex/ascent/
-% $ cp njuname.eps  ${TEXMFLOCAL}/tex/latex/ascent/
-% # 建立文档类手册目录
-% $ mkdir -p ${TETEXMFLOCALXMF}/doc/latex/nju
-% # 复制文档类手册和示例文档
-% $ cp *.pdf ${TEXMFLOCAL}/doc/latex/nju/
+% # 建立njuthesis文档类目录
+% $ mkdir -p ${TEXMFLOCAL}/tex/latex/njuthesis
+% # 复制njuthesis文档类文件
+% $ cp njuthesis.cls ${TEXMFLOCAL}/tex/latex/njuthesis/
+% $ cp njuthesis.cfg ${TEXMFLOCAL}/tex/latex/njuthesis/
+% $ cp njulogo.eps  ${TEXMFLOCAL}/tex/latex/njuthesis/
+% $ cp njuname.eps  ${TEXMFLOCAL}/tex/latex/njuthesis/
+% # 复制njuthesis文档类的源码，此过程可选
+% $ cp njuthesis.ins ${TEXMFLOCAL}/tex/latex/njuthesis/
+% $ cp njuthesis.dtx ${TEXMFLOCAL}/tex/latex/njuthesis/
+% # 创建本地的BibTeX样式文件目录
+% $ mkdir -p ${TEXMFLOCAL}/bibtex/bst
+% # 复制GB/T 7714-2005参考文献样式
+% $ cp GBT7714-2005.bst ${TEXMFLOCAL}/bibtex/bst/
+% # 建立njuthesis文档类手册目录
+% $ mkdir -p ${TETEXMFLOCALXMF}/doc/latex/njuthesis
+% # 复制njuthesis文档类手册和示例文档
+% $ cp njuthesis.pdf ${TEXMFLOCAL}/doc/latex/njuthesis/
+% $ cp sample.pdf ${TEXMFLOCAL}/doc/latex/njuthesis/
 % # 刷新tex文件名数据库
-% $ sudo texhash
+% $ texhash
 % \end{shell}
+%
+% \begin{note}
+% 上面的某些命令可能需要管理员权限，或通过|sudo|执行。
+% \end{note}
+%
+% 当然，也可以直接使用|Makefile|提供的|install|操作进行安装：
+% \begin{shell}
+% $ sudo make install
+% \end{shell}
+%
+% \begin{note}
+% |Makefile|使用了脚本|get_texmf_dir.sh|来获取当前机器上所安装的{\TeX}系统的本地
+% |textmf|目录（通常是{\TeX}安装目录下的|textmf-local|目录）。用户最好在执行
+% |make install|之前先执行一下|get_texmf_dir.sh|脚本，看看输出的目录路径是否正确。
+% 如不正确，可以手工修改|Makefile|中对|TEXMFLOCAL|变量的定义。
+% \end{note}
 %
 % \section{使用说明}
 %
@@ -3461,6 +3488,7 @@ December\fi
 \RequirePackage{compsci}
 \RequirePackage{hypdoc} % it will load hyperref package
 \RequirePackage{url}
+\RequirePackage{dtklogos}
 
 \hypersetup{%
     unicode=false,
@@ -3690,4 +3718,3 @@ December\fi
 %    \end{macrocode}
 % \fi
 \endinput
-g
