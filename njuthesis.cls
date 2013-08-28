@@ -25,7 +25,7 @@
 %% through LaTeX.
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{njuthesis.cls}
-[2013/08/27 v1.0.7 Document Class for the Degree Papers of Nanjing University]
+[2013/08/28 v1.0.8 Document Class for the Degree Papers of Nanjing University]
 \newif\ifnjut@adobefonts\njut@adobefontstrue
 \newif\ifnjut@winfonts\njut@winfontsfalse
 \newif\ifnjut@linuxfonts\njut@linuxfontsfalse
@@ -595,7 +595,7 @@
      {\def\@noitemerr
        {\@latex@warning{Empty `thebibliography' environment}}%
       \endlist}
-\bibliographystyle{njuthesis}
+\bibliographystyle{GBT7714-2005}
 \newcommand*{\classification}[1]{%
   \renewcommand*{\njut@value@nlc@classification}{#1}}
 \newcommand*{\securitylevel}[1]{%
@@ -998,6 +998,7 @@
   \normalfont
   \cleardoublepage
 }
+\newcommand{\njuthesis}{\texttt{NJU-Thesis}}
 \newcommand{\zhdash}{\kern0.3ex\rule[0.8ex]{2em}{0.1ex}\kern0.3ex}
 \newcommand{\cell}[3]{\parbox[c][#2][c]{#1}{\makebox[#1]{#3}}}
 \newcolumntype{C}[1]{>{\centering\let\newline\\%

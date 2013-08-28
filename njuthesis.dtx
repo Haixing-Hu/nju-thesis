@@ -23,7 +23,7 @@
 %<cls>\NeedsTeXFormat{LaTeX2e}[1995/12/01]
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
-%<cls|cfg>[2013/08/27 v1.0.7 Document Class for the Degree Papers of Nanjing University]
+%<cls|cfg>[2013/08/28 v1.0.8 Document Class for the Degree Papers of Nanjing University]
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
 \usepackage{dtx-style}
@@ -106,7 +106,7 @@
 % \DoNotIndex{\usecounter,\widowpenalty,\year,\color,\clubpenalty,\chaptermark}
 % \DoNotIndex{\chaptertitlename,\geometry,\l@chapter,\l@part}
 %
-% \GetFileInfo{njuthesis.cls}
+% \GetFileInfo{njuthesis}
 %
 % \MakeShortVerb{\|}
 % \newcommand*{\njuthesis}{\texttt{NJU-Thesis}}
@@ -175,6 +175,7 @@
 %                                将生成国家图书馆封面的命令独立了出来\\
 %  v1.0.7 & 2013/08/26 & 胡海星 & 修改了国家图书馆封面和论文出版授权书的一些细节\newline
 %                                完善了|njuthesis|手册\\
+%  v1.0.8 & 2013/08/28 & 胡海星 & 修复了拼写错误和文件重命名导致的bug\\
 % \bottomrule
 % \end{tabular*}
 % \end{center}
@@ -211,7 +212,7 @@
 % \item Frank Mittelbach, Michel Gooseens. \textsl{The {\LaTeX} Companion}. 2nd ed.
 % \item Scott Pakin. \textsl{How to Package Your {\LaTeX} Package}.
 % \url{http://www.iitg.ernet.in/trivedi/LatexHelp/Latex%20Manual/dtxtut.pdf}.
-% \item Oren Patashnik. \textsl{Designing \BitTeX Styles}. 1988.
+% \item Oren Patashnik. \textsl{Designing \BibTeX Styles}. 1988.
 % \end{itemize}
 %
 % \section{遵循的要求和标准}
@@ -330,7 +331,7 @@
 % 模板解压缩后生成文件夹|njuthesis-VERSION|，其中|VERSION|为版本号。该文件夹中包括：
 % \begin{itemize}
 % \item 模板源文件：|njuthesis.ins|和|njuthesis.dtx|
-% \item 参考文献样式：|njuthesis.bst|
+% \item 参考文献样式：|GBT7714-2005.bst|
 % \item 南京大学校徽和校名图片：|njulogo.eps|和|njuname.eps|
 % \item 示例文档：|sample.tex|、|sample.bib|和|figure|目录
 % \end{itemize}
@@ -403,7 +404,7 @@
 %
 % \subsection{\njuthesis{} 示例文件}
 %
-% 模板核心文件只有三个：|njuthesis.cls|，|njuthesis.cfg|和 |njuthesis.bst|，但
+% 模板核心文件只有三个：|njuthesis.cls|，|njuthesis.cfg|和 |GBT7714-2005.bst|，但
 % 是如果没有示例文档用户会发现很难下手。所以推荐新用户从模板自带的示例文档入手，
 % 里面包括了文档写作用到的所有命令及其使用方法，只需要用自己的内容进行相应替换就
 % 可以。对于不清楚的命令可以查阅本手册。具体内容可以参考模板附带的|sample.tex|和
@@ -2781,9 +2782,9 @@ December\fi
 %    \end{macrocode}
 % \end{environment}
 %
-% 使用|njuthesis.bst|作为参考文献样式。
+% 使用|GBT7714-2005.bst|作为参考文献样式。
 %    \begin{macrocode}
-\bibliographystyle{njuthesis}
+\bibliographystyle{GBT7714-2005}
 %    \end{macrocode}
 %
 % \subsection{封面字段设置}
@@ -3361,6 +3362,13 @@ December\fi
 % \end{macro}
 %
 % \subsection{其他自定义命令和环境}
+%
+% \begin{macro}{\njuthesis}
+% 定义{\njuthesis}文档类的logo。
+%    \begin{macrocode}
+\newcommand{\njuthesis}{\texttt{NJU-Thesis}}
+%    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\zhdash}
 % 定义中文破折号。

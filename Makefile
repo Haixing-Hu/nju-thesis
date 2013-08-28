@@ -12,7 +12,7 @@
 PACKAGE=njuthesis
 SOURCES=$(PACKAGE).dtx $(PACKAGE).ins
 CLS=$(PACKAGE).cls $(PACKAGE).cfg dtx-style.sty
-BST=$(PACKAGE).bst
+BST=GBT7714-2005.bst
 SAMPLE=sample
 SAMPLECONTENTS=$(SAMPLE).tex
 SAMPLEBIB=$(SAMPLE).bib
