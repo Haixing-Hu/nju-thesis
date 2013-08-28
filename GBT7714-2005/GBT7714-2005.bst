@@ -68,10 +68,8 @@ ENTRY                                             % class Entry {
                                                   %   //  declare integer variables
                                                   %
 } {                                               %   //  declare string variables
-    label                                         %   string label;
-    extra.label                                   %   string extra_label;
-    sort.label                                    %   string sort_label;
-    short.List                                    %   string short_label;
+    label                                         %   string label;           //  label for the entry
+    mark                                          %   string mark;
                                                   %   //  there is ahidden entry variable sort.key$
                                                   %   string sort_key;
 }                                                 % }
@@ -79,26 +77,16 @@ ENTRY                                             % class Entry {
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
 INTEGERS {                                        % //  declare global int variables
-  output.state                                    % int output_state;
-  before.all                                      % int before_all;
-  mid.sentence                                    % int mid_sentence;
-  after.sentence                                  % int after_sentence;
-  after.block                                     % int after_block;
-  number.label                                    % int number_label;
-  longest.label.width                             % int longest_label_width;
-  longest.label.width                             % int longest_label_width;
-  nameptr                                         % int nameptr;
-  namesleft                                       % int nameleft;
-  numnames                                        % int numnames;
+  debug.enabled                                   % int debug_enabled;        // enable/disable debugging
+  entry.count                                     % int entry_count;          // number of entries
+  longest.label.width                             % int longest_label_width;  // width of the longest label
 }                                                 %
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
 STRINGS {                                         % //  declare global String variables
-  longest.label                                   % string longest_label;
-  bibinfo                                         % string bibinfo;
-  s                                               % string s;
-  t                                               % string t;
+  longest.label                                   % string longest_label;     //  the longest label
+  debug.log.msg                                   % string debug_log_msg;     //  used by debug_log function
 }                                                 %
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -148,68 +136,67 @@ FUNCTION {or}                                     % int or(int x, int y) {
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
-FUNCTION {new.block}                              % void new_block() {
-{ output.state before.all =                       %   if (output_state == before_all) {
-    'skip$                                        %     ;
-                                                  %   } else {
-    { after.block 'output.state := }              %     output_state = after_block;
-  if$                                             %   }
+FUNCTION {debug.log.str} {                        % String Entry::debug_log_str(String value, String name)
+  debug.enabled {                                 %   if (debug_enabled == 1) {
+    "DEBUG: " swap$ * 'debug.log.msg :=           %     debug_log_msg = "DEBUG: " + name;
+    debug.log.msg " - " * 'debug.log.msg :=       %     debug_log_msg = debug_log_msg + " - ";
+    duplicate$                                    %     String tmp = value;
+    debug.log.msg swap$ * 'debug.log.msg :=       %     debug_log_msg = debug_log_message + tmp;
+    'debug.log.msg top$                           %     log(debug_log_msg);
+                                                  %     return value;
+  } {                                             %   } else {
+    pop$                                          %     return value;
+  } if$                                           %   }
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
-FUNCTION {output.bibitem}                         % String Entry::output_bibitem() {
-{ newline$                                        %   writeln();
-  "\bibitem{" write$                              %   write("\bibitem{");
-  cite$ write$                                    %   write(this.cite);
-  "}" write$                                      %   write("}");
+FUNCTION {debug.log.int} {                        % int Entry::debug_log_int(int value, String name)
+  debug.enabled {                                 %   if (debug_enabled == 1) {
+    "DEBUG: " swap$ * 'debug.log.msg :=           %     debug_log_msg = "DEBUG: " + name;
+    debug.log.msg " - " * 'debug.log.msg :=       %     debug_log_msg = debug_log_msg + " - ";
+    duplicate$ int.to.str$                        %     String tmp = int_to_str(value);
+    debug.log.msg swap$ * 'debug.log.msg :=       %     debug_log_msg = debug_log_message + tmp;
+    'debug.log.msg top$                           %     log(debug_log_msg);
+                                                  %     return value;
+  } {                                             %   } else {
+    pop$                                          %     return value;
+  } if$                                           %   }
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+FUNCTION {start.bibitem} {                        % void Entry::start_bibitem() {
   newline$                                        %   writeln();
-  before.all 'output.state :=                     %   output_state = before_all;
-  ""                                              %   return "";
+  "\bibitem{" cite$ * "}" * write$                %   write("\bibitem{" + this.cite + "}");
+  newline$                                        %   writeln();
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
-FUNCTION {output.nonnull}                         % String Entry::output_nonnull(String str1, String str2) {
-{ 's :=                                           %   s := str2;
-  output.state mid.sentence =                     %   if (output_state == mid_sentence) {
-    { ", " * write$ }                             %     write(str1 + ", ");
-                                                  %   } else {
-    {   output.state after.block =                %     if (output_state == after_block) {
-        { add.period$ write$                      %       write(add_period(str1));
-          newline$                                %       writeln();
-          "\newblock " write$                     %       write("\newblock ");
-        }                                         %     } else {
-        { output.state before.all =               %       if (output_state == before_all) {
-            'write$                               %         write(str1);
-                                                  %       } else {
-            { add.period$ " " * write$ }          %         write(add_period(str1) + " ");
-          if$ }                                   %       }
-      if$                                         %     }
-      mid.sentence 'output.state := }             %     output_state = mid_sentence;
-  if$                                             %   }
-  s                                               %   return s;
+FUNCTION {add.brace} {                            % String Entry::add_brace(String str) {
+  "}" * "{" swap$ *                               %   return "{" + str + "}";
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
-FUNCTION {output.check}                           % void Entry::output_check(String value, String field) {
-{ 't :=                                           %   String t = field;
-  duplicate$ empty$                               %   if (empty(value)) {
-    {pop$ "empty " t * " in " * cite$ * warning$} %     warning("empty " + t + " in " + this.cite);
-                                                  %   } else {
-    'output.nonnull                               %     output_nonnull(value);
-  if$                                             %   }
+FUNCTION {output.bibinfo} {                       % void Entry::output_bibinfo(String info, String type) {
+  add.brace                                       %   type = add_brace(type);
+  swap$ add.brace swap$                           %   info = add_brace(info);
+  "\bibinfo{" swap$ * "}" *                       %   String tmp = "\bibinfo{" + type + "}";
+  swap$ *                                         %   return tmp + info;
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
-FUNCTION {output}                                 % String output(String str1, String strs) {
-{ duplicate$ empty$                               %   if (empty(str2)) {
-    'pop$                                         %     return str1;
-                                                  %   } else {
-    'output.nonnull                               %     return output_nonnull(str1, str2);
-  if$                                             %   }
+FUNCTION {new.block} {                            % void new_block() {
+  "\newblock " write$                             %   write("\newblock ");
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+FUNCTION {end.block} {                            % void end_block() {
+  ". " write$                                     %   write(". ");
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -229,63 +216,152 @@ FUNCTION {format.url}                             % String format_url(Entry entr
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+                                                  %
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+FUNCTION {output.author} {                        % void Entry::output_author(String author) {
+  format.author write$                            %   write(format_author(author));
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+FUNCTION {output.editor} {                        % void Entry::output_editor(String editor) {
+  format.author write$                            %   write(format_author(author));
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+FUNCTION {output.translator} {                    % void Entry::output_translator(String translator) {
+  format.author write$                            %   write(format_author(author));
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+FUNCTION {output.title} {                         % void Entry::output_title(String title) {
+  format.title                                    %   title = format_title(title);
+  "title" output_bibinfo                          %   output_bibinfo(title, "title");
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+FUNCTION {output.mark} {                          % void Entry::output_mark(String mark) {
+  url missing$ url empty$ or {                    %   if (missing(this.url) || empty(this.url)) {
+    "[" swap$ * "]" *                             %     mark = "[" + mark + "]";
+  } {                                             %   } else {
+    "[" swap$ * "/OL]" *                          %     mark = "[" + mark + "/OL]";
+  } if$                                           %   }
+  "mark" output_bibinfo                           %   output_bibinfo(mark, "mark");
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
 FUNCTION {book} {                                 % void Entry::book() {
-  output.bibitem                                  %   output_bibitem();
-  author missing$ author empty$ or {              %   if (missing(this.author) || empth(this.author)) {
-    "No autor: " cite$ * warning$                 %     warning("No author: " + this.cite);
+  start.bibitem                                   %   start_bibitem();
+                                                  %
+  author missing$ author empty$ or {              %   if (missing(this.author) || empty(this.author)) {
+    editor missing$ editor empty$ or {            %     if (missing(this.editor) || empty(this.editor)) {
+      "No author or editor: " cite$ * warning$    %       warning("No author or editor: " + this.cite);
+    } {                                           %     } else {
+      editor output.author                        %       output_author(this.editor);
+      end.block                                   %       end_block();
+    } if$                                         %     }
   } {                                             %   } else {
     author output.author                          %     output_author(this.author);
-    new.block                                     %     new_block();
+    end.block                                     %     end_block();
   } if$                                           %   }
+                                                  %
   title missing$ title empty$ or {                %   if (missing(this.title) || empty(this.title)) {
     "No title: " cite$ * warning$                 %     warning("No title: " + this.cite);
   } {                                             %   } else {
+    new.block                                     %     new_block();
     title output.title                            %     output_title(this.title);
-    new.block                                     %     new_block();
+    "M" output.mark                               %     output_mark("M");
+    end.block                                     %     end_block();
   } if$                                           %   }
+                                                  %
   editor missing$ editor empty$ or not {          %   if (! (missing(this.editor) || empty(this.editor))) {
-    editor output.author                          %     output_author(this.editor);
+    editor output.editor                          %     output_editor(this.editor);
     new.block                                     %     new_block();
-  } {                                             %   } else {
-    'skip$                                        %     ;
-  } if$                                           %   }
+  } 'skip$ if$                                    %   }
+                                                  %
+  translator missing$ translator empty$ or not {  %   if (! (missing(this.translator) || empty(this.translator))) {
+    translator output.translator                  %     output_translator(this.translator);
+    new.block                                     %     new_block();
+  } 'skip$ if$                                    %   }
+                                                  %
   edition missing$ edition empty$ or not {        %   if (! (missing(this.edition) || empty(this.edition))) {
-    edition output.edition                        %     output_edition(this.edition);
     new.block                                     %     new_block();
+    edition output.edition                        %     output_edition(this.edition);
+    end.block                                     %     end_block();
+  } 'skip$ if$                                    %   }
+                                                  %
+  publisher missing$ publisher empty$ or {        %   if (missing(this.publisher) || empty(this.publisher)) {
+    "No publisher: " cite$ * warning$             %     warning("No publisher: " + this.cite);
   } {                                             %   } else {
-    'skip$                                        %     ;
-  } if$                                           %   }
+    new.block                                     %     new_block();
 
-}
+    end.block                                     %     end_block();
+  } if$                                           %   }
                                                   %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                                  %
-FUNCTION {default.type}                           % void Entry::default_type() {
-{ "Unsupported entry type for " cite$ * warning$  %   warning("Unsupported entry type for " + this.cite);
+  url missing$ url empty$ or not {                %   if (! (missing(this.url) || empty(this.url))) {
+    new.block                                     %     new_block();
+    url output.url                                %     output_url(this.url);
+    end.block                                     %     end_block();
+  } 'skip$ if$                                    %   }
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
-FUNCTION {init.state.consts}                      % void init_state_consts() {
-{ #0 'before.all :=                               %   before_all = 0;
-  #1 'mid.sentence :=                             %   mid_sentence = 1;
-  #2 'after.sentence :=                           %   after_sentence = 2;
-  #3 'after.block :=                              %   after_block = 3;
+FUNCTION {default.type} {                         % void Entry::default_type() {
+  "Unsupported entry type for " cite$ * warning$  %   warning("Unsupported entry type for " + this.cite);
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
-FUNCTION {begin.bib}                              % void begin_bib() {
-{ preamble$ empty$                                %   if (empty(premble)) {
-    'skip$                                        %     ;
-    {                                             %   } else {
-      preamble$ write$                            %     write(premeable);
-      newline$ }                                  %     writeln();
-  if$                                             %   }
+FUNCTION {longest.label.pass} {                   % void longest_label_pass(Entry entry) {
+  entry.count #1 + 'entry.count :=                %   entry_count = entry_count + 1;
+  entry.count int.to.str$ 'label :=               %   this.label = int_to_str(entry_count);
+  label width$ longest.label.width > {            %   if (width(this.label) > longest_label_width) {
+    label 'longest.label :=                       %     longest_label = this.label;
+    label width$ 'longest.label.width :=          %     longest_label_width = width(this.label);
+  } 'skip$ if$                                    %   }
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+FUNCTION {begin.bib} {                            % void begin_bib() {
+  preamble$ empty$ not {                          %   if (! empty(premble)) {
+    preamble$ write$                              %     write(premeable);
+    newline$                                      %     writeln();
+  } 'skip$ if$                                    %   }
   "\begin{thebibliography}{" longest.label *      %
       "}" * write$                                %   write("\begin{thebibliography}{" + longest_label + "}")
   newline$                                        %   writeln();
@@ -293,22 +369,36 @@ FUNCTION {begin.bib}                              % void begin_bib() {
   newline$                                        %   writeln();
   "\providecommand{\urlprefix}{URL }" write$      %   write("\providecommand{\urlprefix}{URL }");
   newline$                                        %   writeln();
+  "\providecommand{\bibinfo}[2]{#2}" write$       %   write("\providecommand{\bibinfo}[2]{#1}");
+  newline$                                        %   writeln();
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
-FUNCTION {end.bib}                                % void end_bib() {
-{ newline$                                        %   writeln();
+FUNCTION {end.bib} {                              % void end_bib() {
+  newline$                                        %   writeln();
   "\end{thebibliography}" write$                  %   write("\end{thebibliography}");
   newline$                                        %   writeln();
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
+FUNCTION {initialize} {                           % void initialize() {
+  #1 'debug.enabled :=                            %   debug_enabled = 1;
+  #0 'entry.count :=                              %   entry_count = 0;
+  #0 'longest.label.width :=                      %   longest_label_width = 0;
+  "" 'longest.label :=                            %   longest_label = "";
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
                                                   % void main() {
+EXECUTE {initialize}                              %   initialize();
 READ                                              %   List<Entry> entryList = read("<file>.bib");
+ITERATE {longest.label.pass}                      %   for (Entry entry : entryList) {
+                                                  %     longest_label_pass(entry);
+                                                  %   }
 EXECUTE {begin.bib}                               %   begin_bib();
-EXECUTE {init.state.consts}                       %   init_state_consts();
 ITERATE {call.type$}                              %   for (Entry entry : entryList) {
                                                   %     switch (typeof(entry)) {
                                                   %     case "book":
