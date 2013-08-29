@@ -1,11 +1,11 @@
 %%
 %% This is file `model2-names.bst',
-%% 
+%%
 %% Copyright 2009 Elsevier Ltd
-%% 
+%%
 %% This file is part of the 'Elsarticle Bundle'.
 %% ---------------------------------------------
-%% 
+%%
 %% It may be distributed under the conditions of the LaTeX Project Public
 %% License, either version 1.2 of this license or (at your option) any
 %% later version.  The latest version of this license is in
@@ -16,7 +16,7 @@
 %% $Id: model2-names.bst 140 2009-10-07 12:24:29Z rishi $
 %%
 %% $URL: http://lenova.river-valley.com/svn/elsbst/trunk/New-Model-2/model2-names.bst $
-%% 
+%%
 
 ENTRY
   { address
@@ -56,7 +56,7 @@ FUNCTION {init.state.consts}
 STRINGS { s t}
 FUNCTION {output.comma}
 { ", " * write$}
-   
+
 FUNCTION {output.nonnull}
 { 's :=
   output.state mid.sentence =
