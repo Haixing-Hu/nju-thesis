@@ -16,7 +16,11 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{acknowledgement}
+% 使用\verb{text}命令的缩写形式|text|
+\MakeShortVerb{\|}
 
+% \std{xxxx}表示标准号
+\newcommand{\std}[1]{\texttt{#1}}
 
-\end{acknowledgement}
+% ``注意''环境
+\newenvironment{note}{\par\textbf{注意：}}{}

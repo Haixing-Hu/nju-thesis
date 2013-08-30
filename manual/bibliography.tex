@@ -1,3 +1,21 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  
+%% 文档类 NJU-Thesis 用户手册
+%%
+%% 作者：胡海星，starfish (at) gmail (dot) com
+%% 项目主页: https://github.com/Haixing-Hu/nju-thesis
+%%
+%% This file may be distributed and/or modified under the conditions of the
+%% LaTeX Project Public License, either version 1.2 of this license or (at your
+%% option) any later version. The latest version of this license is in:
+%%
+%% http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.2 or later is part of all distributions of LaTeX version
+%% 1999/12/01 or later.
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \chapter{参考文献数据库}\label{chap:bib}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -10,100 +28,395 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{文献类型}\label{sec:bib-type}
 
-\subsection{书籍}
+本节将介绍{\njuthesis}文档类所支持的参考文献类型。
 
-书籍类文献所对应的{\BibTeX}文献项类型为|book|。
+\begin{note}
+因为要遵循\std{GB/T 7714-2005}规范\cite{gbt7714-2005}，所以本节所描述的文献类型
+和标准{\BibTeX}文献类型有所差别。
+\end{note}
+
+\subsection{专著}\label{subsec:bibtype-book}
+
+专著包括书籍、教材等。它所对应的{\BibTeX}文献项类型为|book|。
 
 \subsubsection{必需字段}
 
 \begin{itemize}
-\item |author|：表示书籍的作者，其格式参见\ref{subsec:author}。此字段和|editor|字段至少
-要有一个存在，也可以两个都存在。
-\item |editor|：表示书籍的编辑者，其格式参见\ref{subsec:editor}。此字段和|author|字段至
-少要有一个存在，也可以两个都存在。
-\item |title|：表示书籍的标题，其格式参见\ref{subsec:title}。主标题和副标题之间用冒号
-``:''隔开。
-\item |address|：表示书籍的出版地，其格式参见\ref{subsec:address}。如果该字段不存在，
-{\BibTeX}排版时将会用``[S.l.]''或``[出版地不详]''替代。
-\item |publisher|：表示书籍的出版者，其格式参见\ref{subsec:publisher}。如果该字段不存在，
-{\BibTeX}排版时将会用``[s.n.]''或``[出版者不详]''替代。
-\item |year|表示书籍的出版年代，其格式参见\ref{subsec:year}。
+\item |author|：表示专著的作者，其格式参见\ref{subsec:bibfield-author}。此字段和
+  |editor|字段至少要有一个存在，也可以两个都存在。
+\item |editor|：表示专著的编辑者，其格式参见\ref{subsec:bibfield-editor}。此字段
+  和|author|字段至少要有一个存在，也可以两个都存在。
+\item |title|：表示专著的标题，其格式参见\ref{subsec:bibfield-title}。主标题和副
+  标题之间用冒号``:''隔开。
+\item |address|：表示专著的出版地，其格式参见\ref{subsec:bibfield-address}。如果
+  该字段不存在，{\BibTeX}排版时将会用``[S.l.]''或``[出版地不详]''替代。
+\item |publisher|：表示专著的出版者，其格式参见\ref{subsec:bibfield-publisher}。
+  如果该字段不存在，{\BibTeX}排版时将会用``[s.n.]''或``[出版者不详]''替代。
+\item |year|：表示专著的出版年，其格式参见\ref{subsec:bibfield-year}。
 \end{itemize}
 
 \subsubsection{可选字段}
 
 \begin{itemize}
-\item |translator|：表示书籍的翻译者，其格式参见\ref{subsec:translator}。
-\item |edition|：表示书籍的版本，其格式参见\ref{subsec:edition}。
-\item |pages|表示引文所处的页码或页码范围，其格式参见\ref{subsec:pages}。
-\item |citedate|：表示在线版书籍的引用日期，其格式参见\ref{subsec:citedate}。
-\item |url|：表示在线版书籍的引用URL，其格式参见\ref{subsec:url}。
-\item |doi|：表示书籍的DOI编码，其格式参见\ref{subsec:doi}
-\item |language|：表示书籍的语言，其格式参见\ref{subsec:language}。若书籍为中文，此项
-必须填|zh|；否则，此项可省略。
+\item |translator|：表示专著的翻译者，其格式参见\ref{subsec:translator}。
+\item |edition|：表示专著的版本，其格式参见\ref{subsec:bibfield-edition}。
+\item |pages|表示引文所处的页码或页码范围，其格式参见\ref{subsec:bibfield-pages}。
+\item |citedate|：表示在线版专著的引用日期，其格式参见\ref{subsec:bibfield-citedate}。
+\item |url|：表示在线版专著的引用URL，其格式参见\ref{subsec:bibfield-url}。
+\item |doi|：表示专著的DOI编码，其格式参见\ref{subsec:bibfield-doi}
+\item |language|：表示专著的语言，其格式参见\ref{subsec:bibfield-language}。若语
+  言为中文，此项必须填|zh|；否则，此项可省略。
 \item 其他字段将不起作用。
 \end{itemize}
 
-\subsection{书籍中的析出文献}
+\subsection{专著中的析出文献}\label{subsec:bibtype-incollection}
 
-书籍中的析出文献所对应的{\BibTeX}文献项类型为|incollection|。
+专著中的析出文献是指专著中某一具有独立标题和作者的章节。它所对应的{\BibTeX}文献项类
+型为|incollection|。
 
 \subsubsection{必需字段}
 
 \begin{itemize}
-\item |author|：表示引文的作者，其格式参见\ref{subsec:author}。
-\item |title|：表示引文的标题，其格式参见\ref{subsec:title}。
-\item |booktitle|：表示引文所在书籍的标题，其格式参见\ref{subsec:title}。
-\item |editor|：表示引文所在书籍的编辑者或作者，其格式参见\ref{subsec:editor}。
-\item |address|：表示引文所在书籍的出版地，其格式参见\ref{subsec:address}。如果该字段不存在，
-{\BibTeX}排版时将会用``[S.l.]''或``[出版地不详]''替代。
-\item |publisher|：表示引文所在书籍的出版者，其格式参见\ref{subsec:publisher}。如果该字段不存在，
-{\BibTeX}排版时将会用``[s.n.]''或``[出版者不详]''替代。
-\item |year|表示引文所在书籍的出版年代，其格式参见\ref{subsec:year}。
-\item |pages|表示引文所处的页码或页码范围，其格式参见\ref{subsec:pages}。
+\item |author|：表示引文的作者，其格式参见\ref{subsec:bibfield-author}。
+\item |title|：表示引文的标题，其格式参见\ref{subsec:bibfield-title}。
+\item |booktitle|：表示引文所在专著的标题，其格式参见\ref{subsec:bibfield-title}。
+\item |editor|：表示引文所在专著的编辑者或作者，其格式参见\ref{subsec:bibfield-editor}。
+\item |address|：表示引文所在专著的出版地，其格式参见
+  \ref{subsec:bibfield-address}。如果该字段不存在，{\BibTeX}排版时将会用
+  ``[S.l.]''或``[出版地不详]''替代。
+\item |publisher|：表示引文所在专著的出版者，其格式参见
+  \ref{subsec:bibfield-publisher}。如果该字段不存在，{\BibTeX}排版时将会用
+  ``[s.n.]''或``[出版者不详]''替代。
+\item |year|：表示引文所在专著的出版年，其格式参见\ref{subsec:bibfield-year}。
+\item |pages|：表示引文所处的页码或页码范围，其格式参见\ref{subsec:bibfield-pages}。
+\end{itemize}
+
+\begin{note}
+根据{\BibTeX}的标准，|inbook|类型表示专著中析出的\emph{无独立标题}的章节。但
+\std{GB/T 7714-2005}规范\cite{gbt7714-2005}未对此类型文献做规定。因此暂时不支持
+此类型文献。
+\end{note}
+
+\subsubsection{可选字段}
+
+\begin{itemize}
+\item |translator|：表示该专著的翻译者，其格式参见\ref{subsec:translator}。
+\item |edition|：表示该专著的版本，其格式参见\ref{subsec:bibfield-edition}。
+\item |citedate|：表示该专著在线版的引用日期，其格式参见\ref{subsec:bibfield-citedate}。
+\item |url|：表示该专著在线版的引用URL，其格式参见\ref{subsec:bibfield-url}。
+\item |doi|：表示该专著的DOI编码，其格式参见\ref{subsec:bibfield-doi}
+\item |language|：表示专著的语言，其格式参见\ref{subsec:bibfield-language}。若语
+  言为中文，此项必须填|zh|；否则，此项可省略。
+\item 其他字段将不起作用。
+\end{itemize}
+
+%% \subsection{期刊}\label{subsec:bibtype-journal}
+%% 
+%% 期刊是指一种载有卷期号或年月顺序号、计划无限期地连续出版发行的出版物。它所对应的
+%% 它所对应的{\BibTeX}文献项类型为|journal|。
+%% 
+%% \begin{note}
+%% |journal|不是{\BibTeX}的标准类型，但它在\std{GB/T 7714-2005}规范
+%% \cite{gbt7714-2005}中有规定，因此我们添加了这个扩展类型。如果引文是整个期刊的某
+%% 一期或某几期，则应使用此类型； 如果引用的文献是期刊中的文章，请使用|article|类型，
+%% 具体参见\ref{subsec:bibtype-article}。
+%% \end{note}
+
+%% \subsubsection{必需字段}
+%% 
+%% \begin{itemize}
+%% \item |author|：表示期刊的发行者，通常是一个机构。其格式参见\ref{subsec:bibfield-author}。
+%% \item |title|：表示期刊的标题，其格式参见\ref{subsec:bibfield-title}。主标题和副
+%%   标题之间用冒号``:''隔开。
+%% \item |address|：表示期刊的出版地，其格式参见\ref{subsec:bibfield-address}。如果
+%%   该字段不存在，{\BibTeX}排版时将会用``[S.l.]''或``[出版地不详]''替代。
+%% \item |publisher|：表示期刊的出版者，其格式参见\ref{subsec:bibfield-publisher}。
+%%   如果该字段不存在，{\BibTeX}排版时将会用``[s.n.]''或``[出版者不详]''替代。
+%% \item |year|表示期刊的出版年，其格式参见\ref{subsec:bibfield-year}。
+%% \end{itemize}
+%% 
+%% \subsubsection{可选字段}
+%% 
+%% \begin{itemize}
+%% \item |citedate|：表示在线版期刊的引用日期，其格式参见\ref{subsec:bibfield-citedate}。
+%% \item |url|：表示在线版期刊的引用URL，其格式参见\ref{subsec:bibfield-url}。
+%% \item |doi|：表示期刊的DOI编码，其格式参见\ref{subsec:bibfield-doi}
+%% \item |language|：表示期刊的语言，其格式参见\ref{subsec:bibfield-language}。若语
+%%   言为中文，此项必须填|zh|；否则，此项可省略。
+%% \item 其他字段将不起作用。
+%% \end{itemize}
+
+\subsection{期刊中的析出文献}\label{subsec:bibtype-article}
+
+期刊中的析出文献即指期刊中的某篇论文。它所对应的{\BibTeX}文献项类型为|article|。
+
+\subsubsection{必需字段}
+
+\begin{itemize}
+\item |author|：表示论文的作者，其格式参见\ref{subsec:bibfield-author}。
+\item |title|：表示论文的标题，其格式参见\ref{subsec:bibfield-title}。
+\item |journal|：表示期刊的名称，其格式参见\ref{subsec:bibfield-journal}。
+\item |year|：表示论文所发表的那一期期刊的出版年，其格式参见\ref{subsec:bibfield-year}。
 \end{itemize}
 
 \subsubsection{可选字段}
 
 \begin{itemize}
-\item |translator|：表示书籍的翻译者，其格式参见\ref{subsec:translator}。
-\item |edition|：表示书籍的版本，其格式参见\ref{subsec:edition}。
-\item |citedate|：表示在线版书籍的引用日期，其格式参见\ref{subsec:citedate}。
-\item |url|：表示在线版书籍的引用URL，其格式参见\ref{subsec:url}。
-\item |doi|：表示书籍的DOI编码，其格式参见\ref{subsec:doi}
-\item |language|：表示书籍的语言，其格式参见\ref{subsec:language}。若书籍为中文，此项
-必须填|zh|；否则，此项可省略。
+\item |volume|: 表示论文所发表的那一期期刊的卷号，其格式参见\ref{subsec:bibfield-volume}。
+\item |number|: 表示论文所发表的那一期期刊的期号，其格式参见\ref{subsec:bibfield-number}。
+\item |pages|表示论文在期刊中所处的页码或页码范围，其格式
+  参见\ref{subsec:bibfield-pages}。
+\item |citedate|：表示在线版论文的引用日期，其格式参见\ref{subsec:bibfield-citedate}。
+\item |url|：表示在线版论文的引用URL，其格式参见\ref{subsec:bibfield-url}。
+\item |doi|：表示论文的DOI编码，其格式参见\ref{subsec:bibfield-doi}
+\item |language|：表示论文的语言，其格式参见\ref{subsec:bibfield-language}。若语
+  言为中文，此项必须填|zh|；否则，此项可省略。
 \item 其他字段将不起作用。
 \end{itemize}
 
-\subsection{小册子}
+\subsection{会议论文集}\label{subsec:bibtype-proceedings}
 
-\subsection{手册}
+会议论文集所对应的{\BibTeX}文献项类型为|proceedings|或|conference|。
 
-\subsection{学位论文}
+\subsubsection{必需字段}
+
+\begin{itemize}
+\item |title|：表示会议的标题或会议论文集的标题，其格式参见\ref{subsec:bibfield-title}。
+\item |editor|：表示会议论文集的编辑或作者，其格式参见\ref{subsec:bibfield-editor}。
+\item |address|：表示会议论文集的出版地，其格式参见
+  \ref{subsec:bibfield-address}。如果该字段不存在，{\BibTeX}排版时将会用
+  ``[S.l.]''或``[出版地不详]''替代。
+\item |publisher|：表示会议论文集的出版者，其格式参见
+  \ref{subsec:bibfield-publisher}。如果该字段不存在，{\BibTeX}排版时将会用
+  ``[s.n.]''或``[出版者不详]''替代。
+\item |year|：表示会议论文集的出版年，其格式参见\ref{subsec:bibfield-year}。
+\end{itemize}
+
+\subsubsection{可选字段}
+
+\begin{itemize}
+\item |citedate|：表示该论文集在线版的引用日期，其格式参见\ref{subsec:bibfield-citedate}。
+\item |url|：表示该论文集在线版的引用URL，其格式参见\ref{subsec:bibfield-url}。
+\item |doi|：表示该论文集的DOI编码，其格式参见\ref{subsec:bibfield-doi}
+\item |language|：表示论文集的语言，其格式参见\ref{subsec:bibfield-language}。若
+  语言为中文，此项必须填|zh|；否则，此项可省略。
+\item 其他字段将不起作用。
+\end{itemize}
+
+\subsection{会议论文集中的析出文献}\label{subsec:bibtype-inproceedings}
+
+会议论文所对应的{\BibTeX}文献项类型为|inproceedings|。
+
+\subsubsection{必需字段}
+
+\begin{itemize}
+\item |author|：表示论文的作者，其格式参见\ref{subsec:bibfield-author}。
+\item |title|：表示论文的标题，其格式参见\ref{subsec:bibfield-title}。
+\item |booktitle|：表示会议的标题或会议论文集的标题，其格式参见\ref{subsec:bibfield-title}。
+\item |editor|：表示会议论文集的编辑或作者，其格式参见\ref{subsec:bibfield-editor}。
+\item |address|：表示会议论文集的出版地，其格式参见
+  \ref{subsec:bibfield-address}。如果该字段不存在，{\BibTeX}排版时将会用
+  ``[S.l.]''或``[出版地不详]''替代。
+\item |publisher|：表示会议论文集的出版者，其格式参见
+  \ref{subsec:bibfield-publisher}。如果该字段不存在，{\BibTeX}排版时将会用
+  ``[s.n.]''或``[出版者不详]''替代。
+\item |year|：表示会议论文集的出版年，其格式参见\ref{subsec:bibfield-year}。
+\end{itemize}
+
+\subsubsection{可选字段}
+
+\begin{itemize}
+\item |citedate|：表示该文献在线版的引用日期，其格式参见\ref{subsec:bibfield-citedate}。
+\item |url|：表示该文献在线版的引用URL，其格式参见\ref{subsec:bibfield-url}。
+\item |doi|：表示该文献的DOI编码，其格式参见\ref{subsec:bibfield-doi}
+\item |language|：表示文献的语言，其格式参见\ref{subsec:bibfield-language}。若语
+  言为中文，此项必须填|zh|；否则，此项可省略。
+\item 其他字段将不起作用。
+\end{itemize}
+
+\subsection{汇编}\label{subsec:bibtype-collection}
+
+\subsection{汇编中的析出文献}\label{subsec:bibtype-proceedings}
+
+\subsection{学位论文}\label{subsec:bibtype-thesis}
+
+学位论文所对应的{\BibTeX}文献项类型为|phdthesis|、|masterthesis|或
+|bachelorthesis|，分别表示博士学位论文，硕士学位论文和学士学位论文。其中
+|bachelorthesis|不是{\BibTeX}的标准类型，而是{\njuthesis}的扩展。
+
+\subsubsection{必需字段}
+
+\begin{itemize}
+\item |author|：表示学位论文的作者，其格式参见\ref{subsec:bibfield-author}。
+\item |title|：表示学位论文的标题，其格式参见\ref{subsec:bibfield-title}。
+\item |address|：表示颁发学位的学校的地址，通常是城市名称，其格式参见\ref{subsec:bibfield-address}。
+\item |school|：表示颁发学位的学校，其格式参见\ref{subsec:bibfield-school}。
+\item |year|：表示学位论文的提交或发布年，其格式参见\ref{subsec:bibfield-year}。
+\end{itemize}
+
+\subsubsection{可选字段}
+
+\begin{itemize}
+\item |citedate|：表示该文献在线版的引用日期，其格式参见\ref{subsec:bibfield-citedate}。
+\item |url|：表示该文献在线版的引用URL，其格式参见\ref{subsec:bibfield-url}。
+\item |doi|：表示该文献的DOI编码，其格式参见\ref{subsec:bibfield-doi}
+\item |language|：表示文献的语言，其格式参见\ref{subsec:bibfield-language}。若语
+  言为中文，此项必须填|zh|；否则，此项可省略。
+\item 其他字段将不起作用。
+\end{itemize}
+
+\subsection{科技报告}\label{subsec:bibtype-techreport}
+
+科技报告所对应的{\BibTeX}文献项类型为|techreport|。
+
+\subsubsection{必需字段}
+
+\begin{itemize}
+\item |author|：表示科技报告的作者，其格式参见\ref{subsec:bibfield-author}。
+\item |title|：表示科技报告的标题，其格式参见\ref{subsec:bibfield-title}。
+\item |institution|：表示发布科技报告的单位，其格式参见\ref{subsec:bibfield-institution}。
+\item |address|：表示发布科技报告的单位的地址，通常是城市名称，其格式参见
+  \ref{subsec:bibfield-address}。
+\item |year|：表示科技报告的发布年，其格式参见\ref{subsec:bibfield-year}。
+\end{itemize}
+
+\subsubsection{可选字段}
+
+\begin{itemize}
+\item |citedate|：表示该文献在线版的引用日期，其格式参见\ref{subsec:bibfield-citedate}。
+\item |url|：表示该文献在线版的引用URL，其格式参见\ref{subsec:bibfield-url}。
+\item |doi|：表示该文献的DOI编码，其格式参见\ref{subsec:bibfield-doi}
+\item |language|：表示文献的语言，其格式参见\ref{subsec:bibfield-language}。若语
+  言为中文，此项必须填|zh|；否则，此项可省略。
+\item 其他字段将不起作用。
+\end{itemize}
+
+\subsection{技术标准}\label{subsec:bibtype-standard}
+
+技术标准是指由某个团体或机构所定义的技术方面的标准。它所对应的{\BibTeX}文献项类
+型为|standard|。
+
+\subsubsection{必需字段}
+
+\begin{itemize}
+\item |author|：表示该标准的制定者，通常是一个机构名称，其格式参见\ref{subsec:bibfield-author}。
+\item |title|：表示标准的名称，其格式参见\ref{subsec:bibfield-title}。通常是由标准号
+ 加标准全称构成，标准号和标准全称之间应该用冒号``:''隔开。
+\item |year|：表示该标准的出版年，其格式参见\ref{subsec:bibfield-year}。
+\end{itemize}
+
+\subsubsection{可选字段}
+
+\begin{itemize}
+\item |translator|：表示该标准的翻译者，其格式参见\ref{subsec:translator}。
+\item |address|：表示该标准的出版地，其格式参见\ref{subsec:bibfield-address}。
+\item |publisher|：表示该标准的出版者，其格式参见\ref{subsec:bibfield-publisher}。
+\item |pages|表示引文所处的页码或页码范围，其格式参见\ref{subsec:bibfield-pages}。
+\item |citedate|：表示在线版文献的引用日期，其格式参见\ref{subsec:bibfield-citedate}。
+\item |url|：表示在线版文献的引用URL，其格式参见\ref{subsec:bibfield-url}。
+\item |doi|：表示该文献的DOI编码，其格式参见\ref{subsec:bibfield-doi}
+\item |language|：表示该文献的语言，其格式参见\ref{subsec:bibfield-language}。若语
+  言为中文，此项必须填|zh|；否则，此项可省略。
+\item 其他字段将不起作用。
+\end{itemize}
+
+\subsection{专利文献}\label{subsec:bibtype-patent}
+
+专利文献对应的{\BibTeX}文献项类型为|patent|。此类型不是{\BibTeX}的标准类型，而是
+{\njuthesis}的扩展。
+
+\subsubsection{必需字段}
+
+\begin{itemize}
+\item |author|：表示该专利的申请者或所有者，可以是个人或单位，其格式参见
+  \ref{subsec:bibfield-author}。
+\item |title|：表示该专利的名称，其格式参见\ref{subsec:bibfield-title}。
+\item |country|：表示该专利的国别，其格式参见\ref{subsec:bibfield-country}。
+\item |patentid|：表示该专利的专利号，其格式参加\ref{subsec:bibfield-patentid}。
+\item |date|：表示该专利的公告日期或公开日期，其格式参见\ref{subsec:bibfield-citedate}。
+\end{itemize}
+
+\subsubsection{可选字段}
+
+\begin{itemize}
+\item |citedate|：表示该专利文献在线版的引用日期，其格式参见\ref{subsec:bibfield-citedate}。
+\item |url|：表示该专利文献在线版的引用URL，其格式参见\ref{subsec:bibfield-url}。
+\item |language|：表示该专利文献的语言，其格式参见\ref{subsec:bibfield-language}。
+  若语言为中文，此项必须填|zh|；否则，此项可省略。
+\item 其他字段将不起作用。
+\end{itemize}
+
+\subsection{网页文档}\label{subsec:bibtype-webpage}
+
+网页文档对应的{\BibTeX}文献项类型为|online|。此类型不是{\BibTeX}的标准类型，而是
+{\njuthesis}的扩展。
+
+\subsubsection{必需字段}
+
+\begin{itemize}
+\item |title|：表示该网页的标题，其格式参见\ref{subsec:bibfield-title}。
+\item |citedate|：表示引用该网页的日期，其格式参见\ref{subsec:bibfield-citedate}。
+\item |url|：表示该网页的URL，其格式参见\ref{subsec:bibfield-url}。
+\end{itemize}
+
+\subsubsection{可选字段}
+
+\begin{itemize}
+\item |author|：表示该网页的作者，可以是个人或单位，其格式参见
+  \ref{subsec:bibfield-author}。
+\item |address|：表示该网页的发布者（通常是某个机构）的地址，其格式参见
+  \ref{subsec:bibfield-address}。
+\item |publisher|：表示该网页的发布者，通常是某个机构，其格式参见
+  \ref{subsec:bibfield-publisher}。
+\item |year|：表示该网页的发布年（首发年），其格式参见
+  \ref{subsec:bibfield-year}。
+\item |modifydate|：表示该网页的最后一次修改日期，其具体格式参见
+  \ref{subsec:bibfield-modifydate}。
+\item |language|：表示该网页的语言，其格式参见\ref{subsec:bibfield-language}。若
+  语言为中文，此项必须填|zh|；否则，此项可省略。
+\item 其他字段将不起作用。
+\end{itemize}
 
 
-\subsection{}
+\subsection{手册}\label{subsec:bibtype-manual}
 
-\subsection{期刊论文}
+\subsection{未发表论文}\label{subsec:bibtype-unpublished}
 
-\subsection{会议论文}
+\subsection{新闻报道}\label{subsec:bibtype-newspaper}
 
-\subsection{技术报告}
+新闻报道是指刊登在（实体）报纸上的报道。它所对应的{\BibTeX}文献项类型为|newspaper|。
 
-\subsection{未发表论文}
+|newspaper|不是{\BibTeX}的标准类型，它是依据\std{GB/T 7714-2005}规范
+\cite{gbt7714-2005}的扩展类型。
 
-\subsection{标准}
+\subsubsection{必需字段}
 
-\subsection{专利}
+\begin{itemize}
+\item |author|：表示新闻报道的作者，其格式参见\ref{subsec:bibfield-author}。
+\item |title|：表示新闻报道的标题，其格式参见\ref{subsec:bibfield-title}。
+\item |journal|：表示刊登该新闻报道的报纸的名称，其格式参见\ref{subsec:bibfield-journal}。
+\item |date|：表示刊登该新闻报道的那一期报纸的发行日期，其格式参见\ref{subsec:bibfield-date}。
+\item |number|: 表示刊登该新闻报道的那一期报纸的期号，其格式参见\ref{subsec:bibfield-number}。
+\end{itemize}
 
-\subsection{网页}
+\subsubsection{可选字段}
+
+\begin{itemize}
+\item |citedate|：表示在线版新闻报道的引用日期，其格式参见\ref{subsec:bibfield-citedate}。
+\item |url|：表示在线版新闻报道的引用URL，其格式参见\ref{subsec:bibfield-url}。
+\item |language|：表示该新闻报道的语言，其格式参见\ref{subsec:bibfield-language}。
+  若语言为中文，此项必须填|zh|；否则，此项可省略。
+\item 其他字段将不起作用。
+\end{itemize}
+
+\subsection{计算机程序}\label{subsec:bibtype-program}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{文献项字段}\label{sec:bib-field}
 
-\subsection{language}\label{subsec:language}
+\subsection{language}\label{subsec:bibfield-language}
 
 |language|字段用于说明该文献项对应的文献所使用的语言。例如：
 \begin{itemize}
@@ -118,7 +431,7 @@
 选择文献语言的基本原则是，若该文献本身是中文的（即使是翻译版），其对应项的语言就应该选|zh|，
 其标题、作者等也应该尽量以中文填写。
 
-\subsection{author}\label{subsec:author}
+\subsection{author}\label{subsec:bibfield-author}
 
 |author|字段表示文献的作者。
 
@@ -162,15 +475,16 @@
 凡是对文献负责的机关团体名称通常根据著录信息源著录。用拉丁文书写的机关团体名称应由上至下分级著录 
 
 如果文献的主要责任者是某个组织，例如公司或政府部门，其对应的文献项的|author|字段
-应该填写该组织的名称。机关团体名称应由上至下分级著录。例如：``中国科学院数学研究所''，``Stanford University, Department of Civil Engineering''。
-
-为了防止{\BibLaTeX}将其识别为一个姓名，应该在组织名称两端用``{}''将其括起来。例如：
+应该填写该组织的名称。机关团体名称应由上至下分级著录。为了防止{\BibTeX}将其识
+别为一个姓名，应该在组织名称两端用``{}''将其括起来。例如：
 \begin{itemize}
 \item |author = {{American Chemical Society}}|
+\item |author = {{Stanford University, Department of Civil Engineering}}|
+\item |author = {{中国科学院数学研究所}}|
 \item |author = {{广西壮族自治区林业厅}}|
 \end{itemize}
 
-\subsection{editor}\label{subsec:editor}
+\subsection{editor}\label{subsec:bibfield-editor}
 
 |editor|字段表示文献的编辑者。其格式的具体要求与|author|字段类似。
 
@@ -184,7 +498,7 @@
   \item 如果论文中引用的是全书中由某个作者写的某个章节，则应该将文献作为
     |inbook|或|incollection|类型（取决于该章节是否有自己的标题，详见
     \ref{sec:bib-type}的解释），其|author|字段为该章节作者，|editor|字段为
-    书籍的编辑者。
+    专著的编辑者。
   \end{itemize}
 \item 如果文献是会议论文集，此时：
   \begin{itemize}
@@ -209,7 +523,7 @@
 \item |translator = {Bill Gates and Bill Clinton}|
 \end{itemize}
 
-\subsection{title}\label{subsec:title}
+\subsection{title}\label{subsec:bibfield-title}
 
 |title|字段表示文献的标题。如果该文献是析出文献（即某个专著中的某一章、某一节或某篇文章），
 则|title|字段应该是被引用的析出文章或章节的标题；否则，|title|字段应该是被引用的文献的标题。
@@ -223,19 +537,19 @@
 \item |title = {马克思恩格斯全集: 第44卷}|
 \end{itemize}
 
-\subsection{booktitle}\label{subsec:booktitle}
+\subsection{booktitle}\label{subsec:bibfield-booktitle}
 
 |booktitle|字段表示析出文献所在的专著的标题。其要求与|title|字段类似。
 
-\subsection{edition}\label{subsec:edition}
+\subsection{edition}\label{subsec:bibfield-edition}
 
-|edition|字段表示书籍的版本号。
+|edition|字段表示专著的版本号。
 
 该字段值有两种可取类型：
 \begin{itemize}
-\item 如果该字段的值是一个整数，则该整数表示书籍的版本号。{\BibTeX}会使用类似``3版''或
+\item 如果该字段的值是一个整数，则该整数表示专著的版本号。{\BibTeX}会使用类似``3版''或
 ``3rd ed''这样的方式排版版本号；
-\item 如果书籍是第一版，则无需此字段；
+\item 如果专著是第一版，则无需此字段；
 \item 如果该字段不是一个整数，则被当做一个字符串。{\BibTeX}会直接把该字符串排版在版本号的位置，
 不做任何处理。
 \item 如果是用英文表示的版本，通常应该以`` ed''结尾；如果是中文表示的版本，通常应该
@@ -250,11 +564,35 @@
 \item 其他版本号：|edition = {石印本}|
 \end{itemize}
 
-\subsection{address}\label{subsec:address}
+\subsection{address}\label{subsec:bibfield-address}
 
-\subsection{publisher}\label{subsec:publisher}
+|address|字段表示文献的出版地。
 
-\subsection{year}\label{subsec:year}
+出版地著录出版者所在地的城市名称。对同名异地或不为人们熟悉的城市名，应在城市名后
+附省名、州名或国名等限定语。例如：
+\begin{itemize}
+\item |address = {北京}|
+\item |address = {London}|
+\item |addrees = {Cambridge, Eng}|
+\item |address = {Cambridge, Mas}|
+\end{itemize}
+
+文献中载有多个出版地,只著录第一个或处于显要位置的出版地。例如：
+\begin{itemize}
+\item ``科学出版杜 北京 上海 2000''应著录为：|address = {北京}|, |publisher =
+  {科学出版杜}|, |year = {2000}|
+\item ``Buterworths London Boston Sydney Welington Durban Toronto 1978''应著
+  录为：|address = {London}|, |publisher = {Buterworths}|, |year = {1978}|
+\end{itemize}
+
+若该类型的文献需要出版地，但其{\BibTeX}项中缺少|address|字段，则{\BibTeX}排版后
+会用``[S.l.]'' （外文文献）或``[出版地不详]''（中文文献）替代。
+
+\subsection{publisher}\label{subsec:bibfield-publisher}
+
+\subsection{organization}\label{subsec:bibfield-organization}
+
+\subsection{year}\label{subsec:bibfield-year}
 
 |year|字段表示文献的出版年。
 
@@ -273,7 +611,7 @@
 \item 估计的出版年：|year = {[1936]}|
 \end{itemize}
 
-\subsection{pages}\label{subsec:pages}
+\subsection{pages}\label{subsec:bibfield-pages}
 
 |pages|字段表示析出文献所在的页码或页码范围。页码用阿拉伯数字表示。页码范围用两个阿拉伯数字
 分别表示起始页页码和结束页页码，两者之间用一个短横隔开。注意，页码字段不要包含诸如``p.''，
@@ -283,10 +621,10 @@
 \item |pages = {128--234}|
 \end{itemize}
 
-\subsection{citedate}\label{subsec:citedate}
+\subsection{citedate}\label{subsec:bibfield-citedate}
 
-|citedate|表示在线版文献的引用日期。此字段不是标准的{\BibTeX}字段，而是由{\njuthesis}
-文档类所扩展的字段。
+|citedate|表示在线版文献的引用日期。此字段不是标准的{\BibTeX}字段，而是
+{\njuthesis}的扩展。
 
 引用日期必须以阿拉伯数字表示年、月、日。“年”用四位阿拉伯数字表示；“月”用两位阿拉伯数字表示，
 不足补零；“日”用两位阿拉伯数字表示，不足补零。三个部分之间用一个短横隔开。
@@ -297,19 +635,23 @@
 
 如果文献项有|url|或|doi|字段，则也应有相应的|citedate|字段。
 
-\subsection{url}\label{subsec:url}
+\subsection{url}\label{subsec:bibfield-url}
 
-|url|字段表示文献的在线URL地址。例如：
-\begin{itemize}
-\item |url = {http://www.di.ens.fr/users/longo/download.html}|
-\end{itemize}
+|url|字段表示文献的在线URL地址。
 
 如果某文献项有|url|字段，则该文献被认为是在线文献。{\BibTeX}处理后，会在其文献类型后增
 加``/OL''，表示其属于在线文献。
 
 如果某文献项有|url|字段，则它也应该有对应的|citedate|字段。
 
-\subsection{doi}\label{subsec:doi}
+例如：
+\begin{itemize}
+\item |url = {http://www.di.ens.fr/users/longo/download.html}|
+\item |url = {http://www.bjyouth.com.cn/20000412/GB/4216%5ED0412B1401.htm}|
+\end{itemize}
+
+
+\subsection{doi}\label{subsec:bibfield-doi}
 
 |doi|字段表示文献的``数字对象标识号(Digital Object Identifier)''。例如：
 \begin{itemize}
