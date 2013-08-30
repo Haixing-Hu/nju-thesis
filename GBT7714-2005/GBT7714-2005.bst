@@ -72,12 +72,17 @@ ENTRY                                             % class Entry {
 INTEGERS {                                        % //  declare global int variables
   entry.count                                     % static int entry_count;          // number of entries
   longest.label.width                             % static int longest_label_width;  // width of the longest label
+  i                                               % static int i;
+  j                                               % static int j;
+  k                                               % static int k;
 }                                                 %
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
 StringS {                                         % //  declare global String variables
   longest.label                                   % static String longest_label;     //  the longest label
+  s                                               % static String s;
+  t                                               % static String t;
 }                                                 %
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -109,13 +114,16 @@ FUNCTION {cap.no.publisher.en} {"[s.n.]"}         % static String const cap_no_p
 FUNCTION {cap.no.publisher.zh} {"[出版者不详]"}     % static String const cap_no_publiser_zh = "[出版者不详]";
 FUNCTION {cap.et.al.en} {", et al"}               % static String const cap_et_al_en = ", et al";
 FUNCTION {cap.et.al.zh} {", 等"}                   % static String const cap_et_al_zh = ", 等";
-FUNCTION {cap.translate.en} {", translate"}       % static String const cap_translate_en = ", translate";
-FUNCTION {cap.translate.zh} {", 译"}               % static String const cap_translate_zh = ", 译";
+FUNCTION {cap.translate.en} {"Translated by "}    % static String const cap_translate_en = "Translated by ";
+FUNCTION {cap.translate.zh} {"译"}                 % static String const cap_translate_zh = "译";
 FUNCTION {cap.doi.url} {"http://dx.doi.org/"}     % static String const cap_dor_url = "http://dx.doi.org/";
 FUNCTION {cap.st.en} {"st"}                       % static String const cap_st_en = "st";
 FUNCTION {cap.nd.en} {"nd"}                       % static String const cap_nd_en = "nd";
 FUNCTION {cap.rd.en} {"rd"}                       % static String const cap_rd_en = "rd";
 FUNCTION {cap.th.en} {"th"}                       % static String const cap_th_en = "th";
+FUNCTION {nameformat.en} { "{jj,~}{vv~}{ll}{ f}" }
+FUNCTION {nameformat.zh} { "{jj,~}{vv~}{ll}{ f}" }
+
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
@@ -432,48 +440,97 @@ FUNCTION {format.bibinfo} {                       % String Entry::format_bibinfo
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+INTEGERS { nameindex namecount }                  % static int nameindex, namecount;
+STRINGS  { namelist nameformat }                  % static String namelist, nameformat;
+STRINGS  { firstname lastname jrname vonname}     % static String firstname, lastname, jrname, vonname;
+                                                  %
+FUNCTION {format.names} {                         % String Entry::format_names(String names) {
+  'namelist :=                                    %   namelist = names;
+  namelist num.names$ 'namecount :=               %   namecount = num_names(namelist);
+  ""                                              %   String result = "";
+  #0 'nameindex :=                                %   nameindex = 0;
+  {nameindex namecount < nameindex #3 < and} {    %   while ((nameindex < namecount) && (nameindex < 3)) {
+    nameindex #1 + 'nameindex :=                  %     nameindex = nameindex + 1;
+    nameindex #1 > {                              %     if (nameindex > 1) {
+      ", " *                                      %       result = result + ", ";
+    } 'skip$ if$                                  %     }
+    namelist nameindex "{vv}" format.name$        %     String tmp = format_name(namelist, nameindex, "{vv}");
+   'vonname :=                                    %     vonname = tmp;
+    namelist nameindex "{jj}" format.name$        %     tmp = format_name(namelist, nameindex, "{jj}");
+    remove.dots 'jrname :=                        %     jrname = remove_dots(tmp);
+    namelist nameindex "{f}" format.name$         %     tmp = format_name(namelist, nameindex, "{f}");
+    remove.dots                                   %     tmp = remove_dots(tmp);
+    "u" change.case$ 'firstname :=                %     firstname = change_case(tmp, "u");
+    namelist nameindex "{ll}" format.name$        %     tmp = format_name(namelist, nameindex, "{ll}");
+    "u" change.case$ 'lastname :=                 %     lastname = change_case(tmp, "u");
+    jrname empty$ not {                           %     if (! empty(jrname)) {
+      jrname * " " *                              %       result = result + jrname + " "
+    } 'skip$ if$                                  %     }
+    vonname empty$ not {                          %     if (! empty(vonname)) {
+      vonname * " " *                             %       result = result + vonname + " "
+    } 'skip$ if$                                  %     }
+    lastname empty$ not {                         %     if (! empty(lastname)) {
+      lastname * " " *                            %       result = result + lastname + " "
+    } 'skip$ if$                                  %     }
+    firstname empty$ not {                        %     if (! empty(firstname)) {
+      firstname * " " *                           %       result = result + firstname + " "
+    } 'skip$ if$                                  %     }
+  } while$                                        %   }
+  nameindex namecount < {                         %   if (nameindex < namecount) {
+    cap.et.al *                                   %     result = result + cap_et_al();
+  } 'skip$ if$                                    %   }
+}                                                 % }
+                                                  %
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   % // format English names
 FUNCTION {format.names.en} {                      % String Entry::format_names_en(String names) {
-  skip$                                           %   return names;
+  format.names                                    %   format_names(names);
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   % // format Chinese names
 FUNCTION {format.names.zh} {                      % String Entry::format_names_zh(String names) {
-  skip$                                           %   return names;
+  format.names                                    %   format_names(names);
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
-FUNCTION {format.author} {                        % String Emtry::format_author(String author) {
+FUNCTION {format.author} {                        % String Emtry::format_author(String authors) {
   is.in.chinese {                                 %   if (is_in_chinese) {
-    format.names.zh                               %     author = format_names_zh(author);
+    format.names.zh                               %     authors = format_names_zh(authors);
   } {                                             %   } else {
-    format.name.en                                %     author = format_names_en(author);
+    format.names.en                               %     authors = format_names_en(authors);
   } if$                                           %   }
-  "author" format.bibinfo                         %   return format_bibinfo(author, "author");
+  "author" format.bibinfo                         %   return format_bibinfo(authors, "author");
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
-FUNCTION {format.editor} {                        % String Emtry::format_author(String editor) {
+FUNCTION {format.editor} {                        % String Emtry::format_author(String editors) {
   is.in.chinese {                                 %   if (is_in_chinese) {
-    format.names.zh                               %     editor = format_names_zh(editor);
+    format.names.zh                               %     editors = format_names_zh(editors);
   } {                                             %   } else {
-    format.name.en                                %     editor = format_names_en(editor);
+    format.names.en                               %     editors = format_names_en(editors);
   } if$                                           %   }
-  "editor" format.bibinfo                         %   return format_bibinfo(editor, "editor");
+  "editor" format.bibinfo                         %   return format_bibinfo(editors, "editor");
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
-FUNCTION {format.translator} {                    % String Emtry::format_translator(String translator) {
+FUNCTION {format.translator} {                    % String Emtry::format_translator(String translators) {
   is.in.chinese {                                 %   if (is_in_chinese) {
-    format.names.zh                               %     translator = format_names_zh(translator);
+    duplicate$                                    %     String names = translators;
+    format.names.zh                               %     translators = format_names_zh(translators);
+    swap$ num.names$ #3 > {                       %   if (num_names(names) > 3) {
+      cap.translate.zh *                          %     translators = translators + cap_translate_zh;
+    } {                                           %   } else {
+      ", " * cap.translate.zh *                   %     translators = translators + ", " + cap_translate_zh;
+    } if$                                         %   }
   } {                                             %   } else {
-    format.name.en                                %     translator = format_names_en(translator);
+    format.names.en                               %     translators = format_names_en(translators);
+    cap.translate.en swap$ *                      %     translators = cap.translate.en + translators;
   } if$                                           %   }
-  cap.translate *                                 %   translator = translator + cap_translate();
   "translator" format.bibinfo                     %   return format_bibinfo(translator, "translator");
 }                                                 % }
                                                   %
@@ -555,6 +612,7 @@ FUNCTION {output.author} {                        % void Entry::output_author(in
   'required :=                                    %   this.required = required;
   author empty$ not {                             %   if (! empty(this.author)) {
     author format.author write$                   %     write(format_author(this.author));
+    ". " write$                                   %     write(". ");
   } {                                             %   } else {
     required {                                    %     if (required == 1) {
       "No author: " cite$ * warning$              %       warning("No author: " + this.cite);
@@ -568,9 +626,11 @@ FUNCTION {output.author.or.editor} {              % void Entry::output_author_or
   'required :=                                    %   this.required = required;
   author empty$ not {                             %   if (! empty(this.author)) {
     author format.author write$                   %     write(format_author(this.author));
+    ". " write$                                   %     write(". ");
   } {                                             %   } else {
     editor empty$ not {                           %     if (! empty(this.editor)) {
       editor format.editor write$                 %       write(format_editor(this.editor));
+      ". " write$                                 %       write(". ");
     } {                                           %     } else {
       required {                                  %       if (required == 1) {
         "No author or editor: " cite$ * warning$  %         warning("No author or editor: " + this.cite);
@@ -584,8 +644,8 @@ FUNCTION {output.author.or.editor} {              % void Entry::output_author_or
 FUNCTION {output.editor} {                        % void Entry::output_editor(int required) {
   'required :=                                    %   this.required = required;
   editor empty$ not {                             %   if (! empty(this.editor)) {
-    ". " write$                                   %     write(". ");
     editor format.editor write$                   %     write(format_editor(this.editor));
+    ". " write$                                   %     write(". ");
   } {                                             %   } else {
     required {                                    %     if (required == 1) {
       "No editor: " cite$ * warning$              %       warning("No editor: " + this.cite);
@@ -598,8 +658,8 @@ FUNCTION {output.editor} {                        % void Entry::output_editor(in
 FUNCTION {output.translator} {                    % void Entry::output_translator(int required) {
   'required :=                                    %   this.required = required;
   translator empty$ not {                         %   if (! empty(this.translator)) {
-    ". " write$                                   %     write(". ");
     translator format.translator write$           %     write(format_translator(this.translator));
+    ". " write$                                   %     write(". ");
   } {                                             %   } else {
     required {                                    %     if (required == 1) {
       "No translator: " cite$ * warning$          %       warning("No translator: " + this.cite);
@@ -612,9 +672,9 @@ FUNCTION {output.translator} {                    % void Entry::output_translato
 FUNCTION {output.title} {                         % void Entry::output_title(int required) {
   'required :=                                    %   this.required = required;
   title empty$ not {                              %   if (! empty(this.title)) {
-    ". " write$                                   %     write(". ");
     title format.title write$                     %     write(format_title(this.title));
     mark format.mark write$                       %     write(format_mark(this.mark));
+    ". " write$                                   %     write(". ");
   } {                                             %   } else {
     required {                                    %     if (required == 1) {
       "No title: " cite$ * warning$               %       warning("No title: " + this.cite);
@@ -627,8 +687,8 @@ FUNCTION {output.title} {                         % void Entry::output_title(int
 FUNCTION {output.booktitle} {                     % void Entry::output_booktitle(int required) {
   'required :=                                    %   this.required = required;
   booktitle empty$ not {                          %   if (! empty(this.booktitle)) {
-    ". " write$                                   %     write(". ");
     booktitle format.booktitle write$             %     write(format_booktitle(this.booktitle));
+    ". " write$                                   %     write(". ");
   } {                                             %   } else {
     required {                                    %     if (required == 1) {
       "No booktitle: " cite$ * warning$           %       warning("No booktitle: " + this.cite);
@@ -641,8 +701,8 @@ FUNCTION {output.booktitle} {                     % void Entry::output_booktitle
 FUNCTION {output.edition} {                       % void Entry::output_edition(int required) {
   'required :=                                    %   this.required = required;
   edition empty$ not {                            %   if (! empty(this.edition)) {
-    ". " write$                                   %     write(". ");
     edition format.edition write$                 %     write(format_edition(this.edition));
+    ". " write$                                   %     write(". ");
   } {                                             %   } else {
     required {                                    %     if (required == 1) {
       "No edition: " cite$ * warning$             %       warning("No edition: " + this.cite);
@@ -655,13 +715,13 @@ FUNCTION {output.edition} {                       % void Entry::output_edition(i
 FUNCTION {output.address} {                       % void Entry::output_address(int required) {
   'required :=                                    %   this.required = required;
   address empty$ not {                            %   if (! empty(this.address)) {
-    ". " write$                                   %     write(". ");
     address format.address write$                 %     write(format_address(this.address));
+    ": " write$                                   %     write(": ");
   } {                                             %   } else {
     required {                                    %     if (required == 1) {
       "No address: " cite$ * warning$             %       warning("No address: " + this.cite);
-      ". " write$                                 %       write(". ");
       cap.no.address format.address write$        %       write(format_address(cap_no_address()));
+      ": " write$                                 %       write(": ");
     } 'skip$ if$                                  %     }
   } if$                                           %   }
 }                                                 % }
@@ -671,12 +731,10 @@ FUNCTION {output.address} {                       % void Entry::output_address(i
 FUNCTION {output.publisher} {                     % void Entry::output_publiser(int required) {
   'required :=                                    %   this.required = required;
   publisher empty$ not {                          %   if (! empty(this.publisher)) {
-    ": " write$                                   %     write(": ");
     publisher format.publisher write$             %     write(format_publisher(this.publisher));
   } {                                             %   } else {
     required {                                    %     if (required == 1) {
       "No publisher: " cite$ * warning$           %       warning("No publiser: " + this.cite);
-      ": " write$                                 %       write(": ");
       cap.no.publisher format.publisher write$    %       write(format_publisher(cap_no_publisher()));
     } 'skip$ if$                                  %     }
   } if$                                           %   }
@@ -701,7 +759,7 @@ FUNCTION {output.year} {                          % void Entry::output_year(int 
 FUNCTION {output.pages} {                         % void Entry::output_pages(int required) {
   'required :=                                    %   this.required = required;
   pages empty$ not {                              %   if (! empty(this.pages)) {
-    ": " write$                                   %     write(": ");
+    ":" write$                                    %     write(":");
     pages format.pages write$                     %     write(format_pages(this.pages));
   } {                                             %   } else {
     required {                                    %     if (required == 1) {
@@ -732,6 +790,7 @@ FUNCTION {output.url} {                           % void Entry::output_url(int r
     url format.url write$                         %     write(format_url(this.url));
   } {                                             %   } else {
     doi empty$ not {                              %     if (! empty(this.doi)) {
+      ". " write$                                 %       write(". ");
       cap.doi.url doi * format.url write$         %       write(format_url(cap_doi_url + this.doi));
     } {                                           %     } else {
       required {                                  %       if (required == 1) {
@@ -762,6 +821,31 @@ FUNCTION {book} {                                 % void Entry::book() {
   end.bibitem                                     %   end_bibitem();
 }                                                 % }
                                                   %
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+FUNCTION {incollection} {                         % void Entry::incollection() {
+  "M" set.mark                                    %   set_mark("M");
+  start.bibitem                                   %   start_bibitem();
+  true output.author                              %   output_author(true);
+  true output.title                               %   output_title(true);
+  false output.translator                         %   output_translator(false);
+  "// " write$                                    %   write("// ");
+  true output.editor                              %   output_editor(true);
+  true output.booktitle                           %   output_booktitle(true);
+  false output.edition                            %   output_edition(false);
+  true output.address                             %   output_address(true);
+  true output.publisher                           %   output_publiser(true);
+  true output.year                                %   output_year(true);
+  false output.pages                              %   output_pages(false);
+  is.online output.citedate                       %   output_citedate(is_online());
+  false output.url                                %   output_url(false);
+  end.bibitem                                     %   end_bibitem();
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+                                                  %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
 FUNCTION {default.type} {                         % void Entry::default_type() {
@@ -788,8 +872,6 @@ FUNCTION {begin.bib} {                            % void begin_bib() {
   } 'skip$ if$                                    %   }
   "\begin{thebibliography}{" longest.label *      %
       "}" * write$                                %   write("\begin{thebibliography}{" + longest_label + "}")
-  newline$                                        %   writeln();
-  "\providecommand{\url}[1]{\texttt{#1}}" write$  %   write("\providecommand{\url}[1]{\texttt{#1}}");
   newline$                                        %   writeln();
   "\providecommand{\bibinfo}[2]{#2}" write$       %   write("\providecommand{\bibinfo}[2]{#1}");
   newline$                                        %   writeln();
