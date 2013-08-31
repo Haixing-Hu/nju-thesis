@@ -1351,8 +1351,10 @@ FUNCTION {patent} {                               % void Entry::patent() {
 FUNCTION {program} {                              % void Entry::program() {
   "CP" set.mark                                   %   set_mark("CP");
   start.bibitem                                   %   start_bibitem();
-  true output.author                              %   output_author(true);
-  cap.period write$                               %   write(cap_period);
+  author empty$ not {                             %   if (! empty(this.author)) {
+    true output.author                            %     output_author(true);
+    cap.period write$                             %     write(cap_period);
+  } 'skip$ if$                                    %   }
   true output.title                               %   output_title(true);
   true output.mark                                %   output_mark(true);
   cap.period write$                               %   write(cap_period);
