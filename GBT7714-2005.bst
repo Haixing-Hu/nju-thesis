@@ -64,6 +64,12 @@ ENTRY                                             % class Entry {
 } {                                               %   //  declare String variables
   label                                           %   String label;           //  label for the entry
   mark                                            %   String mark;
+  startyear                                       %   String startyear;
+  endyear                                         %   String endyear;
+  startvolume                                     %   String startvolume;
+  endvolume                                       %   String endvolume;
+  startnumber                                     %   String startnumber;
+  endnumber                                       %   String endnumber;
                                                   %   //  there is ahidden entry variable sort.key$
                                                   %   String sort_key;
 }                                                 % }
@@ -80,7 +86,7 @@ INTEGERS {                                        % //  declare global int varia
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
-StringS {                                         % //  declare global String variables
+STRINGS {                                         % //  declare global String variables
   longest.label                                   % static String longest_label;     //  the longest label
   s                                               % static String s;
   t                                               % static String t;
@@ -88,22 +94,6 @@ StringS {                                         % //  declare global String va
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
-MACRO {jan} {"January"}
-MACRO {feb} {"February"}
-MACRO {mar} {"March"}
-MACRO {apr} {"April"}
-MACRO {may} {"May"}
-MACRO {jun} {"June"}
-MACRO {jul} {"July"}
-MACRO {aug} {"August"}
-MACRO {sep} {"September"}
-MACRO {oct} {"October"}
-MACRO {nov} {"November"}
-MACRO {dec} {"December"}
-                                                  %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                                  %
-
 FUNCTION {true} {#1}                              % static int const true = 1;
 FUNCTION {false} {#0}                             % static int const false = 0;
 FUNCTION {debug.enabled} {true}                   % static int const debug_enabled = true;
@@ -124,15 +114,17 @@ FUNCTION {cap.rd.en} {"rd"}                       % static String const cap_rd_e
 FUNCTION {cap.th.en} {"th"}                       % static String const cap_th_en = "th";
 FUNCTION {cap.period} {"\@. "}                    % static String const cap_period = "\@. ";
 FUNCTION {cap.comma} {", "}                       % static String const cap_comma = ", ";
-FUNCTION {cap.colon} {": "}                       % static String const cap_colon = ": ";
-FUNCTION {cap.double.backslash} {"\\~"}           % static String const cap_double_backslash = "\\~";
+FUNCTION {cap.colon} {"~: "}                      % static String const cap_colon = "~: ";
+FUNCTION {cap.double.slash} {"//~"}               % static String const cap_double_slash = "//~";
+FUNCTION {cap.dash} {"\,--\,"}                    % static String const cap_dash = "\,--\,";
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
 FUNCTION {log.str} {                              % void Entry::log_str(String value, String message)
   debug.enabled {                                 %   if (debug_enabled == 1) {
-    "DEBUG: " swap$ * " - " *                     %     message = "DEBUG: " + message + " - ";
+    "DEBUG: " swap$ * " - '" *                    %     message = "DEBUG: " + message + " - '";
     swap$ *                                       %     message = message + value;
+    "'" *                                         %     message = message + "'";
     top$                                          %     log(message);
   } {                                             %   } else {
     pop$ pop$                                     %     return;
@@ -182,6 +174,30 @@ FUNCTION {or} {                                   % int or(int x, int y) {
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  % //  calculate the length in characters of a string
+                                                  % //  We need this function since text.length$ is NOT
+                                                  % //  the length in characters.
+INTEGERS {length.i}                               % static int length_i;
+FUNCTION {length} {                               % int length(String str) {
+  duplicate$ empty$ {                             %   if (empty(str)) {
+    pop$ #0                                       %     return 0;
+  } {                                             %   } else {
+    #1 'length.i :=                               %     length_i = 1;
+    false                                         %     int stop = false;
+    {not} {                                       %     while (! stop) {
+      duplicate$ length.i #1 substring$           %       String tmp = substring(str, length_i, 1);
+      "" = {                                      %       if (tmp == "") {
+        true                                      %         stop = true;
+      } {                                         %       } else {
+        length.i #1 + 'length.i :=                %         length_i = length_i + 1;
+        false                                     %         stop = false;
+      } if$                                       %       }
+    } while$                                      %     }
+    pop$ length.i #1 -                            %     return length_i - 1;
+  } if$                                           %   }
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
 FUNCTION {is.digit} {                             % int is_digit(String ch) {
   chr.to.int$                                     %   int ascii = chr_to_int(ch);
@@ -215,7 +231,7 @@ FUNCTION {is.number} {                            % int is_number(String str) {
                                                   % // extract the number prefix of str
 FUNCTION {extract.number} {                       % String extract_number(String str) {
   duplicate$                                      %   String suffix = str;
-  duplicate$ text.length$ swap$                   %   int n = text_length(str);
+  duplicate$ length swap$                         %   int n = length(str);
   duplicate$ empty$                               %   int stop = empty(suffix);
   { not } {                                       %   while (! stop) {
     duplicate$ #1 #1 substring$ is.digit {        %     if (is_digit(substring(suffix, 1, 1))) {
@@ -225,14 +241,14 @@ FUNCTION {extract.number} {                       % String extract_number(String
       true                                        %       stop = true;
     } if$                                         %     }
   } while$                                        %   }
-  text.length$ -                                  %   int n = n - text_length(suffix);
+  length -                                        %   int n = n - length(suffix);
   #1 swap$ substring$                             %   return substring(str, 1, n);
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
 FUNCTION {get.last.chr} {                         % String get_last_chr(String str) {
-  duplicate$ text.length$                         %   int n = text_length(str);
+  duplicate$ length                               %   int n = length(str);
   duplicate$ #0 = {                               %   if (n == 0) {
     pop$                                          %     return str;
   } {                                             %   } else {
@@ -310,6 +326,101 @@ FUNCTION {add.bracket} {                          % String Entry::bracket(String
                                                   %
 FUNCTION {add.squarebracket} {                    % String Entry::add_squarebracket(String str) {
   "]" * "[" swap$ *                               %   return "[" + str + "]";
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  % // test if str contains a dash '-'
+FUNCTION {contain.dash} {                         % int contain_dash(String str) {
+  false swap$                                     %   int result = false;
+  { duplicate$ empty$ not} {                      %   while (! empty(str)) {
+    duplicate$ #1 #1 substring$ "-" = {           %     if (substring(str, 1, 1) == "-") {
+      pop$ pop$ true                              %       result = true;
+      ""                                          %       str = "";
+    } {                                           %     } else {
+      #2 global.max$ substring$                   %       str = substring(str, 2, global_max);
+    } if$                                         %     }
+  } while$                                        %   }
+  pop$                                            %   return result;
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  % // extract the substring before the first '-'
+                                                  % // returns the string itself if no '-'
+FUNCTION {extract.before.first.dash} {            % String extract_before_first_dash(String str) {
+  duplicate$                                      %   String suffix = str;
+  duplicate$ length swap$                         %   int n = length(str);
+  duplicate$ empty$                               %   int stop = empty(suffix);
+  { not } {                                       %   while (! stop) {
+    duplicate$ #1 #1 substring$ "-" = {           %     if (substring(suffix, 1, 1) == "-") {
+      true                                        %       stop = true;
+    } {                                           %     } else {4r
+      #2 global.max$ substring$                   %       suffix = substring(suffix, 2, global_max);
+      duplicate$ empty$                           %       stop = empty(suffix);
+    } if$                                         %     }
+  } while$                                        %   }
+  length -                                        %   int n = n - length(suffix);
+  #1 swap$ substring$                             %   return substring(str, 1, n);
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  % // extract the substring after the first '-'
+                                                  % // returns the string itself if no '-'
+FUNCTION {extract.after.first.dash} {             % String extract_after_first_dash(String str) {
+  duplicate$                                      %   String suffix = str;
+  duplicate$ empty$                               %   int stop = empty(suffix);
+  { not } {                                       %   while (! stop) {
+    duplicate$ #1 #1 substring$ "-" = {           %     if (substring(suffix, 1, 1) == "-") {
+      true                                        %       stop = true;
+    } {                                           %     } else {4r
+      #2 global.max$ substring$                   %       suffix = substring(suffix, 2, global_max);
+      duplicate$ empty$                           %       stop = empty(suffix);
+    } if$                                         %     }
+  } while$                                        %   }
+  duplicate$ empty$ {                             %   if (empty(suffix)) {
+    pop$                                          %     return str;
+  } {                                             %   } else {
+    swap$ pop$ #2 global.max$ substring$          %     return substring(suffix, 2, global_max);
+  } if$                                           %   }
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  % // extract the substring after the last '-'
+                                                  % // returns the empty string if no '-'
+FUNCTION {extract.after.last.dash} {              % String extract_after_last_dash(String str) {
+  duplicate$ contain.dash not {                   %   if (! contain_dash(str)) {
+    pop$ ""                                       %     return "";
+  } {                                             %   } else {
+    {duplicate$ contain.dash} {                   %     while (contain_dash(str)) {
+      extract.after.first.dash                    %       str = extract_after_first_dash(str);
+    } while$                                      %     }
+                                                  %     return str;
+  } if$                                           %   }
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+FUNCTION {trim.start} {                           % String trim_start(String str) {
+  {duplicate$ #1 #1 substring$ " " =} {           %   while (substring(str, 1, 1) == " ") {
+    #2 global.max$ substring$                     %     str = substring(str, 2, global_max);
+  } while$                                        %   }
+                                                  %   return str;
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+FUNCTION {trim.end} {                             % String trim_end(String str) {
+  {duplicate$ get.last.chr " " =} {               %   while (get_last_chr(str) == " ") {
+    duplicate$ length #1 -                        %     int n = length(str) - 1;
+    #1 swap$ substring$                           %     str = substring(str, 1, n);
+  } while$                                        %   }
+                                                  %   return str;
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+FUNCTION {trim} {                                 % String trim(String str) {
+  trim.start                                      %   str = trim_start(str);
+  trim.end                                        %   return trim_end(str);
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -472,6 +583,7 @@ FUNCTION {format.names} {                         % String Entry::format_names(S
     firstname empty$ not {                        %     if (! empty(firstname)) {
       firstname * " " *                           %       result = result + firstname + " "
     } 'skip$ if$                                  %     }
+    trim.end                                      %     result = trim_end(result);
   } while$                                        %   }
   nameindex namecount < {                         %   if (nameindex < namecount) {
     cap.et.al *                                   %     result = result + cap_et_al();
@@ -952,7 +1064,14 @@ FUNCTION {output.number} {                        % void Entry::output_number(in
 FUNCTION {output.pages} {                         % void Entry::output_pages(int required) {
   'required :=                                    %   this.required = required;
   pages empty$ not {                              %   if (! empty(this.pages)) {
-    pages format.pages write$                     %     write(format_pages(this.pages));
+    pages contain.dash {                          %     if (contain_dash(this.pages)) {
+      pages extract.before.first.dash             %       String p1 = extract_before_first_dash(this.pages);
+      pages extract.after.last.dash               %       String p2 = extract_after_last_dash(this.pages);
+      cap.dash swap$ * *                          %       String str = p1 + cap_dash + p2;
+      format.pages write$                         %       write(format_pages(str));
+    } {                                           %     } else {
+      pages format.pages write$                   %     write(format_pages(this.pages));
+    } if$                                         %   }
   } {                                             %   } else {
     required {                                    %     if (required == 1) {
       "No pages: " cite$ * warning$               %       warning("No pages: " + this.cite);
@@ -1012,13 +1131,17 @@ FUNCTION {book} {                                 % void Entry::book() {
     true output.edition                           %     output_edition(true);
     cap.period write$                             %     write(cap_period);
   } 'skip$ if$                                    %   }
-  true output.address                             %   output_address(true);
-  cap.colon write$                                  %   write(cap_colon);
-  true output.publisher                           %   output_publiser(true);
-  cap.comma write$                                %   write(cap_comma);
+  publisher empty$ not {                          %   if (! empty(this.publisher)) {
+    true output.address                           %     output_address(true);
+    cap.colon write$                              %     write(cap_colon);
+    true output.publisher                         %     output_publiser(true);
+    cap.comma write$                              %     write(cap_comma);
+  } {                                             %   } else {
+    "No publisher: " cite$ * warning$             %     warning("No publisher: " + this.cite);
+  } if$                                           %   }
   true output.year                                %   output_year(true);
   pages empty$ not {                              %   if (! empty(this.pages)) {
-    cap.colon write$                                %     write(cap_colon);
+    cap.colon write$                              %     write(cap_colon);
     true output.pages                             %     output_pages(true);
   } 'skip$ if$                                    %   }
   is.online {                                     %   if (is_online()) {
@@ -1032,7 +1155,7 @@ FUNCTION {book} {                                 % void Entry::book() {
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
-FUNCTION {incollection} {                         % void Entry::incollection() {
+FUNCTION {inbook} {                               % void Entry::inbook() {
   "M" set.mark                                    %   set_mark("M");
   start.bibitem                                   %   start_bibitem();
   true output.author                              %   output_author(true);
@@ -1044,7 +1167,7 @@ FUNCTION {incollection} {                         % void Entry::incollection() {
     true output.translator                        %     output_translator(true);
     cap.period write$                             %     write(cap_period);
   } 'skip$ if$                                    %   }
-  cap.double.backslash write$                     %   write(cap_double_backslash);
+  cap.double.slash write$                         %   write(cap_double_slash);
   true output.editor                              %   output_editor(true);
   cap.period write$                               %   write(cap_period);
   true output.booktitle                           %   output_booktitle(true);
@@ -1053,11 +1176,110 @@ FUNCTION {incollection} {                         % void Entry::incollection() {
     true output.edition                           %     output_edition(true);
     cap.period write$                             %     write(cap_period);
   } 'skip$ if$                                    %   }
-  true output.address                             %   output_address(true);
-  cap.colon write$                                %   write(cap_colon);
-  true output.publisher                           %   output_publiser(true);
+  publisher empty$ not {                          %   if (! empty(this.publisher)) {
+    true output.address                           %     output_address(true);
+    cap.colon write$                              %     write(cap_colon);
+    true output.publisher                         %     output_publiser(true);
+    cap.comma write$                              %     write(cap_comma);
+  } {                                             %   } else {
+    "No publisher: " cite$ * warning$             %     warning("No publisher: " + this.cite);
+  } if$                                           %   }
+  true output.year                                %   output_year(true);
+  pages empty$ not {                              %   if (! empty(this.pages)) {
+    cap.colon write$                              %     write(cap_colon);
+    false output.pages                            %     output_pages(false);
+  } 'skip$ if$                                    %   }
+  is.online {                                     %   if (is_online()) {
+    true output.citedate                          %     output_citedate(true);
+    cap.period write$                             %     write(cap_period);
+    true output.url                               %     output_url(true);
+  } 'skip$ if$                                    %   }
+  cap.period write$                               %   write(cap_period);
+  end.bibitem                                     %   end_bibitem();
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+FUNCTION {periodical} {                           % void Entry::periodical() {
+  "J" set.mark                                    %   set_mark("J");
+  start.bibitem                                   %   start_bibitem();
+  true output.author                              %   output_author(true);
+  cap.period write$                               %   write(cap_period);
+  true output.title                               %   output_title(true);
+  true output.mark                                %   output_mark(true);
+  cap.period write$                               %   write(cap_period);
+  year empty$ not {                               %   if (! empty(this.year)) {
+    year extract.before.first.dash                %     String tmp = extract_before_first_dash(year);
+    format.year write$                            %     write(format_year(tmp));
+  } {                                             %   } else {
+    "No year: " cite$ * warning$                  %     warning("No year: " + this.cite);
+  } if$                                           %   }
+  volume empty$ not {                             %   if (! empty(this.volume)) {
+    cap.comma write$                              %     write(cap_comma);
+    volume extract.before.first.dash              %     String tmp = extract_before_first_dash(this.volume);
+    format.volume write$                          %     write(format_volume(tmp));
+  } 'skip$ if$                                    %   }
+  number empty$ not {                             %   if (! empty(this.number)) {
+    number extract.before.first.dash              %     String tmp = extract_before_first_dash(this.number);
+    format.number write$                          %     write(format_number(tmp));
+  } 'skip$ if$                                    %   }
+  cap.dash write$                                 %   write(cap_dash);
+  year contain.dash {                             %   if (contain_dash(this.year)) {
+    year extract.after.last.dash                  %     String tmp = extract_after_last_dash(this.year);
+    format.year write$                            %     write(format_year(tmp));
+    volume empty$ not {                           %     if (! empty(this.volume)) {
+      cap.comma write$                            %       write(cap_comma);
+      volume extract.after.last.dash              %       tmp = extract_after_last_dash(this.volume);
+      format.volume write$                        %       write(format_volume(tmp));
+    } 'skip$ if$                                  %     }
+    number empty$ not {                           %     if (! empty(this.number)) {
+      number extract.after.last.dash              %       tmp = extract_after_last_dash(this.number);
+      format.number write$                        %       write(format_number(tmp));
+    } 'skip$ if$                                  %     }
+  } 'skip$ if$                                    %   }
+  cap.period write$                               %   write(cap_period);
+  publisher empty$ not {                          %   if (! empty(this.publisher)) {
+    true output.address                           %     output_address(true);
+    cap.colon write$                              %     write(cap_colon);
+    true output.publisher                         %     output_publiser(true);
+    cap.comma write$                              %     write(cap_comma);
+  } {                                             %   } else {
+    "No publisher: " cite$ * warning$             %     warning("No publisher: " + this.cite);
+  } if$                                           %   }
+  year extract.before.first.dash                  %   String tmp = extract_before_first_dash(year);
+  format.year write$                              %   write(format_year(tmp));
+  cap.dash write$                                 %   write(cap_dash);
+  year contain.dash {                             %   if (contain_dash(this.year)) {
+    year extract.after.last.dash                  %     String tmp = extract_after_last_dash(year);
+    format.year write$                            %     write(format_year(tmp));                                            %
+  } 'skip$ if$                                    %   }
+  is.online {                                     %   if (is_online()) {
+    true output.citedate                          %     output_citedate(true);
+    cap.period write$                             %     write(cap_period);
+    true output.url                               %     output_url(true);
+  } 'skip$ if$                                    %   }
+  cap.period write$                               %   write(cap_period);
+  end.bibitem                                     %   end_bibitem();
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+FUNCTION {article} {                              % void Entry::article() {
+  "J" set.mark                                    %   set_mark("J");
+  start.bibitem                                   %   start_bibitem();
+  true output.author                              %   output_author(true);
+  cap.period write$                               %   write(cap_period);
+  true output.title                               %   output_title(true);
+  true output.mark                                %   output_mark(true);
+  cap.period write$                               %   write(cap_period);
+  true output.journal                             %   output_journal(true);
   cap.comma write$                                %   write(cap_comma);
   true output.year                                %   output_year(true);
+  volume empty$ not {                             %   if (! empty(this.volume)) {
+    cap.comma write$                              %     write(cap_comma);
+    true output.volume                            %     output_volume(true);
+  } 'skip$ if$                                    %   }
+  false output.number                             %   output_number(false);
   pages empty$ not {                              %   if (! empty(this.pages)) {
     cap.colon write$                              %     write(cap_colon);
     false output.pages                            %     output_pages(false);
@@ -1081,10 +1303,14 @@ FUNCTION {proceedings} {                          % void Entry::proceedings() {
   true output.title                               %   output_title(true);
   true output.mark                                %   output_mark(true);
   cap.period write$                               %   write(cap_period);
-  true output.address                             %   output_address(true);
-  cap.colon write$                                %   write(cap_colon);
-  true output.publisher                           %   output_publiser(true);
-  cap.comma write$                                %   write(cap_comma);
+  publisher empty$ not {                          %   if (! empty(this.publisher)) {
+    true output.address                           %     output_address(true);
+    cap.colon write$                              %     write(cap_colon);
+    true output.publisher                         %     output_publiser(true);
+    cap.comma write$                              %     write(cap_comma);
+  } {                                             %   } else {
+    "No publisher: " cite$ * warning$             %     warning("No publisher: " + this.cite);
+  } if$                                           %   }
   true output.year                                %   output_year(true);
   pages empty$ not {                              %   if (! empty(this.pages)) {
     cap.colon write$                              %     write(cap_colon);
@@ -1115,47 +1341,24 @@ FUNCTION {inproceedings} {                        % void Entry::inproceedings() 
   true output.title                               %   output_title(true);
   true output.mark                                %   output_mark(true);
   cap.period write$                               %   write(cap_period);
-  cap.double.backslash write$                     %   write(cap_double_backslash);
-  true output.editor                              %   output_editor(true);
-  cap.period write$                               %   write(cap_period);
+  cap.double.slash write$                         %   write(cap_double_slash);
+  editor empty$ not {                             %   if (! empty(this.editor)) {
+    true output.editor                            %     output_editor(true);
+    cap.period write$                             %     write(cap_period);
+  } {                                             %   } else {
+    "No editor: " cite$ * warning$                %     warning("No editor: " + this.cite);
+  } if$                                           %   }
   true output.booktitle                           %   output_booktitle(true);
   cap.period write$                               %   write(cap_period);
-  true output.address                             %   output_address(true);
-  cap.colon write$                                %   write(cap_colon);
-  true output.publisher                           %   output_publiser(true);
-  cap.comma write$                                %   write(cap_comma);
-  true output.year                                %   output_year(true);
-  pages empty$ not {                              %   if (! empty(this.pages)) {
+  publisher empty$ not {                          %   if (! empty(this.publisher)) {
+    true output.address                           %     output_address(true);
     cap.colon write$                              %     write(cap_colon);
-    false output.pages                            %     output_pages(false);
-  } 'skip$ if$                                    %   }
-  is.online {                                     %   if (is_online()) {
-    true output.citedate                          %     output_citedate(true);
-    cap.period write$                             %     write(cap_period);
-    true output.url                               %     output_url(true);
-  } 'skip$ if$                                    %   }
-  cap.period write$                               %   write(cap_period);
-  end.bibitem                                     %   end_bibitem();
-}                                                 % }
-                                                  %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                                  %
-FUNCTION {article} {                              % void Entry::article() {
-  "J" set.mark                                    %   set_mark("J");
-  start.bibitem                                   %   start_bibitem();
-  true output.author                              %   output_author(true);
-  cap.period write$                               %   write(cap_period);
-  true output.title                               %   output_title(true);
-  true output.mark                                %   output_mark(true);
-  cap.period write$                               %   write(cap_period);
-  true output.journal                             %   output_journal(true);
-  cap.comma write$                                %   write(cap_comma);
-  true output.year                                %   output_year(true);
-  volume empty$ not {                             %   if (! empty(this.volume)) {
+    true output.publisher                         %     output_publiser(true);
     cap.comma write$                              %     write(cap_comma);
-    true output.volume                            %     output_volume(true);
-  } 'skip$ if$                                    %   }
-  false output.number                             %   output_number(false);
+  } {                                             %   } else {
+    "No publisher: " cite$ * warning$             %     warning("No publisher: " + this.cite);
+  } if$                                           %   }
+  true output.year                                %   output_year(true);
   pages empty$ not {                              %   if (! empty(this.pages)) {
     cap.colon write$                              %     write(cap_colon);
     false output.pages                            %     output_pages(false);
@@ -1241,8 +1444,12 @@ FUNCTION {techreport} {                           % void Entry::techreport() {
     cap.period write$                             %     write(cap_period);
   } 'skip$ if$                                    %   }
   institution empty$ not {                        %   if (! empty(this.institution)) {
-    true output.address                           %     output_address(true);
-    cap.colon write$                              %     write(cap_colon);
+    address empty$ not {                          %     if (! empty(this.address)) {
+      true output.address                         %       output_address(true);
+      cap.colon write$                            %       write(cap_colon);
+    } {                                           %     } else {
+      "No address: " cite$ * warning$             %       warning("No address: " + this.cite);
+    } if$                                         %     }
     true output.institution                       %     output_institution(true);
     cap.comma write$                              %     write(cap_comma);
   } 'skip$ if$                                    %   }
@@ -1298,7 +1505,7 @@ FUNCTION {bachelorthesis} {                       % void Entry::bachelorthesis()
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
-FUNCTION {online} {                               % void Entry::newspaper() {
+FUNCTION {online} {                               % void Entry::online() {
   "EB" set.mark                                   %   set_mark("EB");
   start.bibitem                                   %   start_bibitem();
   author empty$ not {                             %   if (! empty(this.author)) {
@@ -1314,7 +1521,11 @@ FUNCTION {online} {                               % void Entry::newspaper() {
     true output.publisher                         %     output_publiser(true);
     cap.comma write$                              %     write(cap_comma);
     true output.year                              %     output_year(true);
-  } 'skip$ if$                                    %   }
+  } {                                             %   } else {
+    year empty$ not {                             %     if (! empty(this.year)) {
+      true output.year                            %       output_year(true);
+    } 'skip$ if$                                  %     }
+  } if$                                           %   }
   false output.modifydate                         %   output_modifydate(false);
   true output.citedate                            %   output_citedate(true);
   cap.period write$                               %   write(cap_period);
@@ -1351,8 +1562,10 @@ FUNCTION {patent} {                               % void Entry::patent() {
 FUNCTION {program} {                              % void Entry::program() {
   "CP" set.mark                                   %   set_mark("CP");
   start.bibitem                                   %   start_bibitem();
-  true output.author                              %   output_author(true);
-  cap.period write$                               %   write(cap_period);
+  author empty$ not {                             %   if (! empty(this.author)) {
+    true output.author                            %     output_author(true);
+    cap.period write$                             %     write(cap_period);
+  } 'skip$ if$                                    %   }
   true output.title                               %   output_title(true);
   true output.mark                                %   output_mark(true);
   cap.period write$                               %   write(cap_period);
@@ -1361,8 +1574,12 @@ FUNCTION {program} {                              % void Entry::program() {
     cap.colon write$                              %     write(cap_colon);
     true output.publisher                         %     output_publisher(true);
     cap.comma write$                              %     write(cap_comma);
-  } 'skip$ if$                                    %   }
-  true output.year                                %   output_year(true);
+    true output.year                              %     output_year(true);
+  } {                                             %   } else {
+    year empty$ not {                             %     if (! empty(this.year)) {
+      true output.year                            %       output_year(true);
+    } 'skip$ if$                                  %     }
+  } if$                                           %   }
   is.online {                                     %   if (is_online()) {
     true output.citedate                          %     output_citedate(true);
     cap.period write$                             %     write(cap_period);
