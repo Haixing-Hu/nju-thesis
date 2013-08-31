@@ -1111,8 +1111,7 @@ FUNCTION {output.url} {                           % void Entry::output_url(int r
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
-FUNCTION {book} {                                 % void Entry::book() {
-  "M" set.mark                                    %   set_mark("M");
+FUNCTION {book.impl} {                            % void Entry::book_impl() {
   start.bibitem                                   %   start_bibitem();
   true output.author.or.editor                    %   output_author_or_editor(true);
   cap.period write$                               %   write(cap_period);
@@ -1155,8 +1154,14 @@ FUNCTION {book} {                                 % void Entry::book() {
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
-FUNCTION {inbook} {                               % void Entry::inbook() {
+FUNCTION {book} {                                 % void Entry::book() {
   "M" set.mark                                    %   set_mark("M");
+  book.impl                                       %   book_impl();
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+FUNCTION {inbook.impl} {                          % void Entry::inbook_impl() {
   start.bibitem                                   %   start_bibitem();
   true output.author                              %   output_author(true);
   cap.period write$                               %   write(cap_period);
@@ -1168,8 +1173,12 @@ FUNCTION {inbook} {                               % void Entry::inbook() {
     cap.period write$                             %     write(cap_period);
   } 'skip$ if$                                    %   }
   cap.double.slash write$                         %   write(cap_double_slash);
-  true output.editor                              %   output_editor(true);
-  cap.period write$                               %   write(cap_period);
+  editor empty$ not {                             %   if (! empty(this.editor)) {
+    true output.editor                            %     output_editor(true);
+    cap.period write$                             %     write(cap_period);
+  } {                                             %   } else {
+    "No editor: " cite$ * warning$                %     warning("No editor: " + this.cite);
+  } if$                                           %   }
   true output.booktitle                           %   output_booktitle(true);
   cap.period write$                               %   write(cap_period);
   edition empty$ not {                            %   if (! empty(this.edition)) {
@@ -1196,6 +1205,28 @@ FUNCTION {inbook} {                               % void Entry::inbook() {
   } 'skip$ if$                                    %   }
   cap.period write$                               %   write(cap_period);
   end.bibitem                                     %   end_bibitem();
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+FUNCTION {inbook} {                               % void Entry::inbook() {
+  "M" set.mark                                    %   set_mark("M");
+  inbook.impl                                     %   inbook_impl();
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+FUNCTION {collection} {                           % void Entry::collection() {
+  "G" set.mark                                    %   set_mark("G");
+  book.impl                                       %   book_impl();
+}                                                 % }
+                                                  %
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+FUNCTION {incollection} {                         % void Entry::incollection() {
+  "G" set.mark                                    %   set_mark("G");
+  inbook.impl                                     %   inbook_impl();
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
