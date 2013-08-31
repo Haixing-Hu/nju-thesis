@@ -346,6 +346,33 @@
 \item 其他字段将不起作用。
 \end{itemize}
 
+\subsection{新闻报道}\label{subsec:bibtype-newspaper}
+
+新闻报道是指刊登在（实体）报纸上的报道。它所对应的{\BibTeX}文献项类型为|newspaper|。
+
+|newspaper|不是{\BibTeX}的标准类型，它是依据\std{GB/T 7714-2005}规范
+\cite{gbt7714-2005}的扩展类型。
+
+\subsubsection{必需字段}
+
+\begin{itemize}
+\item |author|：表示新闻报道的作者，其格式参见\ref{subsec:bibfield-author}。
+\item |title|：表示新闻报道的标题，其格式参见\ref{subsec:bibfield-title}。
+\item |journal|：表示刊登该新闻报道的报纸的名称，其格式参见\ref{subsec:bibfield-journal}。
+\item |date|：表示刊登该新闻报道的那一期报纸的发行日期，其格式参见\ref{subsec:bibfield-date}。
+\item |number|: 表示刊登该新闻报道的那一期报纸的期号，其格式参见\ref{subsec:bibfield-number}。
+\end{itemize}
+
+\subsubsection{可选字段}
+
+\begin{itemize}
+\item |citedate|：表示在线版新闻报道的引用日期，其格式参见\ref{subsec:bibfield-citedate}。
+\item |url|：表示在线版新闻报道的引用URL，其格式参见\ref{subsec:bibfield-url}。
+\item |language|：表示该新闻报道的语言，其格式参见\ref{subsec:bibfield-language}。
+  若语言为中文，此项必须填|zh|；否则，此项可省略。
+\item 其他字段将不起作用。
+\end{itemize}
+
 \subsection{网页文档}\label{subsec:bibtype-webpage}
 
 网页文档对应的{\BibTeX}文献项类型为|online|。此类型不是{\BibTeX}的标准类型，而是
@@ -377,40 +404,40 @@
 \item 其他字段将不起作用。
 \end{itemize}
 
-
 \subsection{手册}\label{subsec:bibtype-manual}
 
 \subsection{未发表论文}\label{subsec:bibtype-unpublished}
 
-\subsection{新闻报道}\label{subsec:bibtype-newspaper}
 
-新闻报道是指刊登在（实体）报纸上的报道。它所对应的{\BibTeX}文献项类型为|newspaper|。
+\subsection{计算机程序}\label{subsec:bibtype-program}
 
-|newspaper|不是{\BibTeX}的标准类型，它是依据\std{GB/T 7714-2005}规范
-\cite{gbt7714-2005}的扩展类型。
+计算机程序对应的{\BibTeX}文献项类型为|program|。此类型不是{\BibTeX}的标准类型，而是
+{\njuthesis}的扩展。
 
 \subsubsection{必需字段}
 
 \begin{itemize}
-\item |author|：表示新闻报道的作者，其格式参见\ref{subsec:bibfield-author}。
-\item |title|：表示新闻报道的标题，其格式参见\ref{subsec:bibfield-title}。
-\item |journal|：表示刊登该新闻报道的报纸的名称，其格式参见\ref{subsec:bibfield-journal}。
-\item |date|：表示刊登该新闻报道的那一期报纸的发行日期，其格式参见\ref{subsec:bibfield-date}。
-\item |number|: 表示刊登该新闻报道的那一期报纸的期号，其格式参见\ref{subsec:bibfield-number}。
+\item |title|：表示该程序所产生的系统的名称，其格式参见\ref{subsec:bibfield-title}。
+\item |author|：表示该程序的作者，可以是个人或单位，其格式参见
+  \ref{subsec:bibfield-author}。
+\item |year|：表示该程序的发布年，其格式参见\ref{subsec:bibfield-year}。
 \end{itemize}
 
 \subsubsection{可选字段}
 
 \begin{itemize}
-\item |citedate|：表示在线版新闻报道的引用日期，其格式参见\ref{subsec:bibfield-citedate}。
-\item |url|：表示在线版新闻报道的引用URL，其格式参见\ref{subsec:bibfield-url}。
-\item |language|：表示该新闻报道的语言，其格式参见\ref{subsec:bibfield-language}。
-  若语言为中文，此项必须填|zh|；否则，此项可省略。
+\item |address|：表示该程序的发布者（通常是某个机构）的地址，其格式参见
+  \ref{subsec:bibfield-address}。
+\item |publisher|：表示该程序的发布者，通常是某个机构，其格式参见
+  \ref{subsec:bibfield-publisher}。
+\item |citedate|：表示引用该程序的在线版的日期，其格式参见\ref{subsec:bibfield-citedate}。
+\item |url|：表示该程序的在线版的URL，其格式参见\ref{subsec:bibfield-url}。
+\item |media|：表示该程序的载体。若该程序对应的{\BibTeX}项有|url|属性，则此属性值将被忽略。
+否则，此属性值将著录该程序的载体的编码。具体的编码参见\ref{subsec:bibfield-media}。
+\item |language|：表示该网页的语言，其格式参见\ref{subsec:bibfield-language}。若
+  语言为中文，此项必须填|zh|；否则，此项可省略。
 \item 其他字段将不起作用。
 \end{itemize}
-
-\subsection{计算机程序}\label{subsec:bibtype-program}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -579,8 +606,8 @@
 
 文献中载有多个出版地,只著录第一个或处于显要位置的出版地。例如：
 \begin{itemize}
-\item ``科学出版杜 北京 上海 2000''应著录为：|address = {北京}|, |publisher =
-  {科学出版杜}|, |year = {2000}|
+\item ``科学出版杜 北京 上海 2000''应著录为：|address = {北京}|, 
+  |publisher = {科学出版杜}|, |year = {2000}|
 \item ``Buterworths London Boston Sydney Welington Durban Toronto 1978''应著
   录为：|address = {London}|, |publisher = {Buterworths}|, |year = {1978}|
 \end{itemize}
@@ -623,8 +650,8 @@
 
 \subsection{citedate}\label{subsec:bibfield-citedate}
 
-|citedate|表示在线版文献的引用日期。此字段不是标准的{\BibTeX}字段，而是
-{\njuthesis}的扩展。
+|citedate|表示在线版文献的引用日期。此字段不是标准的{\BibTeX}字段，而是{\njuthesis}
+的扩展。
 
 引用日期必须以阿拉伯数字表示年、月、日。“年”用四位阿拉伯数字表示；“月”用两位阿拉伯数字表示，
 不足补零；“日”用两位阿拉伯数字表示，不足补零。三个部分之间用一个短横隔开。
@@ -650,7 +677,6 @@
 \item |url = {http://www.bjyouth.com.cn/20000412/GB/4216%5ED0412B1401.htm}|
 \end{itemize}
 
-
 \subsection{doi}\label{subsec:bibfield-doi}
 
 |doi|字段表示文献的``数字对象标识号(Digital Object Identifier)''。例如：
@@ -675,6 +701,35 @@
 \url{http://dx.doi.org/}合成其在线URL地址。
 
 如果某文献项有|doi|字段，则它也应该有对应的|citedate|字段。
+
+\subsection{media}\label{subsec:bibfield-media}
+
+|media|字段表示引用文献的载体。此字段不是标准的{\BibTeX}字段，而是{\njuthesis}的扩展。
+
+若引用文献对应的{\BibTeX}项有|url|或|doi|字段，此字段将被忽略，且该文献的载体将
+被自动设置为|OL|，表示联机网络。
+
+若引用文献对应的{\BibTeX}项没有|media|字段，则默认该文献的载体为一般纸质媒体。
+
+否则，引用文献对应的{\BibTeX}项的|media|字段应该按照表\ref{tab:media-code}填写。
+
+\begin{table}
+\centering
+\begin{tabular}{|C{5cm}|C{5cm}|}
+\toprule
+  \textbf{载体类型} & \textbf{标识代码} \\
+\midrule
+  磁带(magnetic tape) & MT \\
+\hline
+  磁盘(disk)  & DK \\
+\hline
+  光盘(CD-ROM) & CD \\
+\hline
+  联机网络(online) & OL \\
+\bottomrule
+\end{tabular}
+\caption{电子文献载体和标志编码}\label{tab:media-code}
+\end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

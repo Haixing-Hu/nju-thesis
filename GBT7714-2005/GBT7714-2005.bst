@@ -12,7 +12,6 @@
 %      ftp://tug.ctan.org/pub/tex-archive/biblio/bibtex/contrib/doc/btxdoc.pdf
 %  [3] PATASHNIK O. Designing BibTeX Styles[R/OL]. 1998[2013-08-27].
 %      ftp://tug.ctan.org/pub/tex-archive/biblio/bibtex/contrib/doc/btxhak.pdf
-
 %
 %  This file may be distributed and/or modified under the conditions of the
 %  LaTeX Project Public License, either version 1.2 of this license or (at your
@@ -58,6 +57,7 @@ ENTRY                                             % class Entry {
   key                                             %   String key;
   country                                         %   String country;
   patentid                                        %   String patentid;
+  media                                           %   String media;
 } {                                               %   //  declare integer variables
   required                                        %   int required;
   block                                           %   int block;
@@ -122,14 +122,10 @@ FUNCTION {cap.st.en} {"st"}                       % static String const cap_st_e
 FUNCTION {cap.nd.en} {"nd"}                       % static String const cap_nd_en = "nd";
 FUNCTION {cap.rd.en} {"rd"}                       % static String const cap_rd_en = "rd";
 FUNCTION {cap.th.en} {"th"}                       % static String const cap_th_en = "th";
-FUNCTION {nameformat.en} { "{jj,~}{vv~}{ll}{ f}" }
-FUNCTION {nameformat.zh} { "{jj,~}{vv~}{ll}{ f}" }
-
-                                                  %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                                  %
-                                                  %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+FUNCTION {cap.period} {"\@. "}                    % static String const cap_period = "\@. ";
+FUNCTION {cap.comma} {", "}                       % static String const cap_comma = ", ";
+FUNCTION {cap.colon} {": "}                       % static String const cap_colon = ": ";
+FUNCTION {cap.double.backslash} {"\\~"}           % static String const cap_double_backslash = "\\~";
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
@@ -375,7 +371,11 @@ FUNCTION {set.mark} {                             % void Entry::set_mark(String 
   'mark :=                                        %   this.mark = mark;
   is.online {                                     %   if (is_online()) {
     mark "/OL" * 'mark :=                         %     this.mark = this.mark + "/OL";
-  } 'skip$ if$                                    %   }
+  } {                                             %   } else {
+    media empty$ not {                            %     if (! empty(this.media)) {
+      mark "/" * media * 'mark :=                 %       this.mark = this.mark + "/" + this.media;
+    } 'skip$ if$                                  %     }
+  } if$                                           %   }
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -449,7 +449,7 @@ FUNCTION {format.names} {                         % String Entry::format_names(S
   {nameindex namecount < nameindex #3 < and} {    %   while ((nameindex < namecount) && (nameindex < 3)) {
     nameindex #1 + 'nameindex :=                  %     nameindex = nameindex + 1;
     nameindex #1 > {                              %     if (nameindex > 1) {
-      ", " *                                      %       result = result + ", ";
+      cap.comma *                                 %       result = result + cap_comma;
     } 'skip$ if$                                  %     }
     namelist nameindex "{vv}" format.name$        %     String tmp = format_name(namelist, nameindex, "{vv}");
    'vonname :=                                    %     vonname = tmp;
@@ -522,7 +522,7 @@ FUNCTION {format.translator} {                    % String Emtry::format_transla
     swap$ num.names$ #3 > {                       %   if (num_names(names) > 3) {
       cap.translate.zh *                          %     translators = translators + cap_translate_zh;
     } {                                           %   } else {
-      ", " * cap.translate.zh *                   %     translators = translators + ", " + cap_translate_zh;
+      cap.comma * cap.translate.zh *              %     translators = translators + cap_comma + cap_translate_zh;
     } if$                                         %   }
   } {                                             %   } else {
     format.names.en                               %     translators = format_names_en(translators);
@@ -996,37 +996,37 @@ FUNCTION {book} {                                 % void Entry::book() {
   "M" set.mark                                    %   set_mark("M");
   start.bibitem                                   %   start_bibitem();
   true output.author.or.editor                    %   output_author_or_editor(true);
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   true output.title                               %   output_title(true);
   true output.mark                                %   output_mark(true);
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   author empty$ not editor empty$ not and {       %   if ((! empty(this.author)) && (! empty(this.editor))) {
     true output.editor                            %     output_editor(true);
-    "\@. " write$                                 %     write("\@. ");
+    cap.period write$                             %     write(cap_period);
   } 'skip$ if$                                    %   }
   translator empty$ not {                         %   if (! empty(this.translator)) {
     true output.translator                        %     output_translator(true);
-    "\@. " write$                                 %     write("\@. ");
+    cap.period write$                             %     write(cap_period);
   } 'skip$ if$                                    %   }
   edition empty$ not {                            %   if (! empty(this.edition)) {
     true output.edition                           %     output_edition(true);
-    "\@. " write$                                 %     write("\@. ");
+    cap.period write$                             %     write(cap_period);
   } 'skip$ if$                                    %   }
   true output.address                             %   output_address(true);
-  "\,:\," write$                                  %   write("\,:\,");
+  cap.colon write$                                  %   write(cap_colon);
   true output.publisher                           %   output_publiser(true);
-  ", " write$                                     %   write(", ");
+  cap.comma write$                                %   write(cap_comma);
   true output.year                                %   output_year(true);
   pages empty$ not {                              %   if (! empty(this.pages)) {
-    "\,:\," write$                                %     write("\,:\,");
+    cap.colon write$                                %     write(cap_colon);
     true output.pages                             %     output_pages(true);
   } 'skip$ if$                                    %   }
   is.online {                                     %   if (is_online()) {
     true output.citedate                          %     output_citedate(true);
-    "\@. " write$                                 %     write("\@. ");
+    cap.period write$                             %     write(cap_period);
     true output.url                               %     output_url(true);
   } 'skip$ if$                                    %   }
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   end.bibitem                                     %   end_bibitem();
 }                                                 % }
                                                   %
@@ -1036,38 +1036,38 @@ FUNCTION {incollection} {                         % void Entry::incollection() {
   "M" set.mark                                    %   set_mark("M");
   start.bibitem                                   %   start_bibitem();
   true output.author                              %   output_author(true);
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   true output.title                               %   output_title(true);
   true output.mark                                %   output_mark(true);
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   translator empty$ not {                         %   if (! empty(this.translator)) {
     true output.translator                        %     output_translator(true);
-    "\@. " write$                                 %     write("\@. ");
+    cap.period write$                             %     write(cap_period);
   } 'skip$ if$                                    %   }
-  "//~" write$                                    %   write("//~");
+  cap.double.backslash write$                     %   write(cap_double_backslash);
   true output.editor                              %   output_editor(true);
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   true output.booktitle                           %   output_booktitle(true);
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   edition empty$ not {                            %   if (! empty(this.edition)) {
     true output.edition                           %     output_edition(true);
-    "\@. " write$                                 %     write("\@. ");
+    cap.period write$                             %     write(cap_period);
   } 'skip$ if$                                    %   }
   true output.address                             %   output_address(true);
-  "\,:\," write$                                  %   write("\,:\,");
+  cap.colon write$                                %   write(cap_colon);
   true output.publisher                           %   output_publiser(true);
-  ", " write$                                     %   write(", ");
+  cap.comma write$                                %   write(cap_comma);
   true output.year                                %   output_year(true);
   pages empty$ not {                              %   if (! empty(this.pages)) {
-    "\,:\," write$                                %     write("\,:\,");
+    cap.colon write$                              %     write(cap_colon);
     false output.pages                            %     output_pages(false);
   } 'skip$ if$                                    %   }
   is.online {                                     %   if (is_online()) {
     true output.citedate                          %     output_citedate(true);
-    "\@. " write$                                 %     write("\@. ");
+    cap.period write$                             %     write(cap_period);
     true output.url                               %     output_url(true);
   } 'skip$ if$                                    %   }
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   end.bibitem                                     %   end_bibitem();
 }                                                 % }
                                                   %
@@ -1077,25 +1077,25 @@ FUNCTION {proceedings} {                          % void Entry::proceedings() {
   "C" set.mark                                    %   set_mark("C");
   start.bibitem                                   %   start_bibitem();
   true output.editor                              %   output_editor(true);
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   true output.title                               %   output_title(true);
   true output.mark                                %   output_mark(true);
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   true output.address                             %   output_address(true);
-  "\,:\," write$                                  %   write("\,:\,");
+  cap.colon write$                                %   write(cap_colon);
   true output.publisher                           %   output_publiser(true);
-  ", " write$                                     %   write(", ");
+  cap.comma write$                                %   write(cap_comma);
   true output.year                                %   output_year(true);
   pages empty$ not {                              %   if (! empty(this.pages)) {
-    "\,:\," write$                                %     write("\,:\,");
+    cap.colon write$                              %     write(cap_colon);
     false output.pages                            %     output_pages(false);
   } 'skip$ if$                                    %   }
   is.online {                                     %   if (is_online()) {
     true output.citedate                          %     output_citedate(true);
-    "\@. " write$                                 %     write("\@. ");
+    cap.period write$                             %     write(cap_period);
     true output.url                               %     output_url(true);
   } 'skip$ if$                                    %   }
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   end.bibitem                                     %   end_bibitem();
 }                                                 % }
                                                   %
@@ -1111,29 +1111,30 @@ FUNCTION {inproceedings} {                        % void Entry::inproceedings() 
   "C" set.mark                                    %   set_mark("C");
   start.bibitem                                   %   start_bibitem();
   true output.author                              %   output_author(true);
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   true output.title                               %   output_title(true);
   true output.mark                                %   output_mark(true);
-  "\@. //~" write$                                %   write("\@. //~");
+  cap.period write$                               %   write(cap_period);
+  cap.double.backslash write$                     %   write(cap_double_backslash);
   true output.editor                              %   output_editor(true);
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   true output.booktitle                           %   output_booktitle(true);
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   true output.address                             %   output_address(true);
-  "\,:\," write$                                  %   write("\,:\,");
+  cap.colon write$                                %   write(cap_colon);
   true output.publisher                           %   output_publiser(true);
-  ", " write$                                     %   write(", ");
+  cap.comma write$                                %   write(cap_comma);
   true output.year                                %   output_year(true);
   pages empty$ not {                              %   if (! empty(this.pages)) {
-    "\,:\," write$                                %     write("\,:\,");
+    cap.colon write$                              %     write(cap_colon);
     false output.pages                            %     output_pages(false);
   } 'skip$ if$                                    %   }
   is.online {                                     %   if (is_online()) {
     true output.citedate                          %     output_citedate(true);
-    "\@. " write$                                 %     write("\@. ");
+    cap.period write$                             %     write(cap_period);
     true output.url                               %     output_url(true);
   } 'skip$ if$                                    %   }
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   end.bibitem                                     %   end_bibitem();
 }                                                 % }
                                                   %
@@ -1143,28 +1144,28 @@ FUNCTION {article} {                              % void Entry::article() {
   "J" set.mark                                    %   set_mark("J");
   start.bibitem                                   %   start_bibitem();
   true output.author                              %   output_author(true);
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   true output.title                               %   output_title(true);
   true output.mark                                %   output_mark(true);
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   true output.journal                             %   output_journal(true);
-  ", " write$                                     %   write(", ");
+  cap.comma write$                                %   write(cap_comma);
   true output.year                                %   output_year(true);
   volume empty$ not {                             %   if (! empty(this.volume)) {
-    ", " write$                                   %     write(", ");
+    cap.comma write$                              %     write(cap_comma);
     true output.volume                            %     output_volume(true);
   } 'skip$ if$                                    %   }
   false output.number                             %   output_number(false);
   pages empty$ not {                              %   if (! empty(this.pages)) {
-    "\,:\," write$                                %     write("\,:\,");
+    cap.colon write$                              %     write(cap_colon);
     false output.pages                            %     output_pages(false);
   } 'skip$ if$                                    %   }
   is.online {                                     %   if (is_online()) {
     true output.citedate                          %     output_citedate(true);
-    "\@. " write$                                 %     write("\@. ");
+    cap.period write$                             %     write(cap_period);
     true output.url                               %     output_url(true);
   } 'skip$ if$                                    %   }
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   end.bibitem                                     %   end_bibitem();
 }                                                 % }
                                                   %
@@ -1174,20 +1175,20 @@ FUNCTION {newspaper} {                            % void Entry::newspaper() {
   "N" set.mark                                    %   set_mark("N");
   start.bibitem                                   %   start_bibitem();
   true output.author                              %   output_author(true);
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   true output.title                               %   output_title(true);
   true output.mark                                %   output_mark(true);
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   true output.journal                             %   output_journal(true);
-  ", " write$                                     %   write(", ");
+  cap.comma write$                                %   write(cap_comma);
   true output.date                                %   output_date(true);
   false output.number                             %   output_number(false);
   is.online {                                     %   if (is_online()) {
     true output.citedate                          %     output_citedate(true);
-    "\@. " write$                                 %     write("\@. ");
+    cap.period write$                             %     write(cap_period);
     true output.url                               %     output_url(true);
   } 'skip$ if$                                    %   }
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   end.bibitem                                     %   end_bibitem();
 }                                                 % }
                                                   %
@@ -1197,31 +1198,31 @@ FUNCTION {standard} {                             % void Entry::standard() {
   "S" set.mark                                    %   set_mark("S");
   start.bibitem                                   %   start_bibitem();
   true output.author                              %   output_author(true);
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   true output.title                               %   output_title(true);
   true output.mark                                %   output_mark(true);
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   translator empty$ not {                         %   if (! empty(this.translator)) {
     true output.translator                        %     output_translator(true);
-    "\@. " write$                                 %     write("\@. ");
+    cap.period write$                             %     write(cap_period);
   } 'skip$ if$                                    %   }
   publisher empty$ not {                          %   if (! empty(this.publisher)) {
     true output.address                           %     output_address(true);
-    "\,:\," write$                                %     write("\,:\,");
+    cap.colon write$                              %     write(cap_colon);
     true output.publisher                         %     output_publiser(true);
-    ", " write$                                   %     write(", ");
+    cap.comma write$                              %     write(cap_comma);
   } 'skip$ if$                                    %   }
   true output.year                                %   output_year(true);
   pages empty$ not {                              %   if (! empty(this.pages)) {
-    "\,:\," write$                                %     write("\,:\,");
+    cap.colon write$                              %     write(cap_colon);
     false output.pages                            %     output_pages(false);
   } 'skip$ if$                                    %   }
   is.online {                                     %   if (is_online()) {
     true output.citedate                          %     output_citedate(true);
-    "\@. " write$                                 %     write("\@. ");
+    cap.period write$                             %     write(cap_period);
     true output.url                               %     output_url(true);
   } 'skip$ if$                                    %   }
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   end.bibitem                                     %   end_bibitem();
 }                                                 % }
                                                   %
@@ -1231,27 +1232,27 @@ FUNCTION {techreport} {                           % void Entry::techreport() {
   "R" set.mark                                    %   set_mark("R");
   start.bibitem                                   %   start_bibitem();
   true output.author                              %   output_author(true);
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   true output.title                               %   output_title(true);
   true output.mark                                %   output_mark(true);
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   translator empty$ not {                         %   if (! empty(this.translator)) {
     true output.translator                        %     output_translator(true);
-    "\@. " write$                                 %     write("\@. ");
+    cap.period write$                             %     write(cap_period);
   } 'skip$ if$                                    %   }
   institution empty$ not {                        %   if (! empty(this.institution)) {
     true output.address                           %     output_address(true);
-    "\,:\," write$                                %     write("\,:\,");
+    cap.colon write$                              %     write(cap_colon);
     true output.institution                       %     output_institution(true);
-    ", " write$                                   %     write(", ");
+    cap.comma write$                              %     write(cap_comma);
   } 'skip$ if$                                    %   }
   true output.year                                %   output_year(true);
   is.online {                                     %   if (is_online()) {
     true output.citedate                          %     output_citedate(true);
-    "\@. " write$                                 %     write("\@. ");
+    cap.period write$                             %     write(cap_period);
     true output.url                               %     output_url(true);
   } 'skip$ if$                                    %   }
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   end.bibitem                                     %   end_bibitem();
 }                                                 % }
                                                   %
@@ -1261,25 +1262,25 @@ FUNCTION {phdthesis} {                            % void Entry::phdthesis() {
   "D" set.mark                                    %   set_mark("D");
   start.bibitem                                   %   start_bibitem();
   true output.author                              %   output_author(true);
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   true output.title                               %   output_title(true);
   true output.mark                                %   output_mark(true);
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   translator empty$ not {                         %   if (! empty(this.translator)) {
     true output.translator                        %     output_translator(true);
-    "\@. " write$                                 %     write("\@. ");
+    cap.period write$                             %     write(cap_period);
   } 'skip$ if$                                    %   }
   true output.address                             %   output_address(true);
-  "\,:\," write$                                  %   write("\,:\,");
+  cap.colon write$                                %   write(cap_colon);
   true output.school                              %   output_school(true);
-  ", " write$                                     %   write(", ");
+  cap.comma write$                                %   write(cap_comma);
   true output.year                                %   output_year(true);
   is.online {                                     %   if (is_online()) {
     true output.citedate                          %     output_citedate(true);
-    "\@. " write$                                 %     write("\@. ");
+    cap.period write$                             %     write(cap_period);
     true output.url                               %     output_url(true);
   } 'skip$ if$                                    %   }
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   end.bibitem                                     %   end_bibitem();
 }                                                 % }
                                                   %
@@ -1302,21 +1303,21 @@ FUNCTION {online} {                               % void Entry::newspaper() {
   start.bibitem                                   %   start_bibitem();
   author empty$ not {                             %   if (! empty(this.author)) {
     true output.author                            %     output_author(true);
-    "\@. " write$                                 %     write("\@. ");
+    cap.period write$                             %     write(cap_period);
   } 'skip$ if$                                    %   }
   true output.title                               %   output_title(true);
   true output.mark                                %   output_mark(true);
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   publisher empty$ not {                          %   if (! empty(this.publisher)) {
     true output.address                           %     output_address(true);
-    "\,:\," write$                                %     write("\,:\,");
+    cap.colon write$                              %     write(cap_colon);
     true output.publisher                         %     output_publiser(true);
-    ", " write$                                   %     write(", ");
+    cap.comma write$                              %     write(cap_comma);
     true output.year                              %     output_year(true);
   } 'skip$ if$                                    %   }
   false output.modifydate                         %   output_modifydate(false);
   true output.citedate                            %   output_citedate(true);
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   true output.url                                 %   output_url(true);
   end.bibitem                                     %   end_bibitem();
 }                                                 % }
@@ -1327,21 +1328,47 @@ FUNCTION {patent} {                               % void Entry::patent() {
   "P" set.mark                                    %   set_mark("P");
   start.bibitem                                   %   start_bibitem();
   true output.author                              %   output_author(true);
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   true output.title                               %   output_title(true);
-  "\,:\," write$                                  %   write("\,:\,");
+  cap.colon write$                                %   write(cap_colon);
   true output.country                             %   output_country(true);
-  ", " write$                                     %   write(", ");
+  cap.comma write$                                %   write(cap_comma);
   true output.patentid                            %   output_patentid(true);
   true output.mark                                %   output_mark(true);
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
   true output.date                                %   output_date(true);
   is.online {                                     %   if (is_online()) {
     true output.citedate                          %     output_citedate(true);
-    "\@. " write$                                 %     write("\@. ");
+    cap.period write$                             %     write(cap_period);
     true output.url                               %     output_url(true);
   } 'skip$ if$                                    %   }
-  "\@. " write$                                   %   write("\@. ");
+  cap.period write$                               %   write(cap_period);
+  end.bibitem                                     %   end_bibitem();
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+FUNCTION {program} {                              % void Entry::program() {
+  "CP" set.mark                                   %   set_mark("CP");
+  start.bibitem                                   %   start_bibitem();
+  true output.author                              %   output_author(true);
+  cap.period write$                               %   write(cap_period);
+  true output.title                               %   output_title(true);
+  true output.mark                                %   output_mark(true);
+  cap.period write$                               %   write(cap_period);
+  publisher empty$ not {                          %   if (! empty(this.publisher)) {
+    true output.address                           %     output_address(true);
+    cap.colon write$                              %     write(cap_colon);
+    true output.publisher                         %     output_publisher(true);
+    cap.comma write$                              %     write(cap_comma);
+  } 'skip$ if$                                    %   }
+  true output.year                                %   output_year(true);
+  is.online {                                     %   if (is_online()) {
+    true output.citedate                          %     output_citedate(true);
+    cap.period write$                             %     write(cap_period);
+    true output.url                               %     output_url(true);
+  } 'skip$ if$                                    %   }
+  cap.period write$                               %   write(cap_period);
   end.bibitem                                     %   end_bibitem();
 }                                                 % }
                                                   %

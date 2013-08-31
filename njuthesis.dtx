@@ -23,12 +23,15 @@
 %<cls>\NeedsTeXFormat{LaTeX2e}[1995/12/01]
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
-%<cls|cfg>[2013/08/28 v1.0.8 Document Class for the Degree Papers of Nanjing University]
+%<*cls>
+ [2013/08/31 v1.1.0 Document Class for the Degree Papers of Nanjing University]
+%</cls>
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
 \usepackage{dtx-style}
 \EnableCrossrefs
 \CodelineIndex
+\GetFileInfo{njuthesis.dtx}
 \begin{document}
   \DocInput{njuthesis.dtx}
 \end{document}
@@ -106,8 +109,6 @@
 % \DoNotIndex{\usecounter,\widowpenalty,\year,\color,\clubpenalty,\chaptermark}
 % \DoNotIndex{\chaptertitlename,\geometry,\l@chapter,\l@part}
 %
-% \GetFileInfo{njuthesis}
-%
 % \MakeShortVerb{\|}
 % \newcommand*{\njuthesis}{\texttt{NJU-Thesis}}
 % \newcommand*{\texlive}{{\TeX}\ Live\ 2012}
@@ -176,6 +177,8 @@
 %  v1.0.7 & 2013/08/26 & 胡海星 & 修改了国家图书馆封面和论文出版授权书的一些细节\newline
 %                                完善了|njuthesis|手册\\
 %  v1.0.8 & 2013/08/28 & 胡海星 & 修复了拼写错误和文件重命名导致的bug\\
+%  v1.1.0 & 2013/08/31 & 胡海星 & 重写了符合\std{GB/T 7714-2005}规范
+%                                的{\BibTeX}样式文件\\
 % \bottomrule
 % \end{tabular*}
 % \end{center}
