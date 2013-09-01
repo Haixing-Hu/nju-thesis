@@ -25,7 +25,7 @@
 %% through LaTeX.
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{njuthesis.cls}
- [2013/08/31 v1.1.0 Document Class for the Degree Papers of Nanjing University]
+ [2013/09/01 v1.1.1 Document Class for the Degree Papers of Nanjing University]
 \newif\ifnjut@adobefonts\njut@adobefontstrue
 \newif\ifnjut@winfonts\njut@winfontsfalse
 \newif\ifnjut@linuxfonts\njut@linuxfontsfalse
@@ -90,7 +90,6 @@
 \RequirePackage{txfonts}
 \RequirePackage[amsmath,thmmarks,hyperref]{ntheorem}
 \RequirePackage{setspace}
-\RequirePackage[perpage,symbol*,stable]{footmisc}
 \RequirePackage{fancyhdr}
 \RequirePackage{shortvrb}
 \RequirePackage{xltxtra}
@@ -118,6 +117,7 @@
 }
 \urlstyle{same}
 \RequirePackage[sort&compress,numbers]{natbib}
+\setcitestyle{super,square}
 \RequirePackage{hypernat}
 \RequirePackage{tabularx}
 \RequirePackage{makeidx}
@@ -419,20 +419,23 @@
              {*1.5}
 \titleformat{\paragraph}[hang]
             {\zihao{4}\bfseries}
-            {\theparagraph}{1em}{}
+            {}{0em}{}
 \titlespacing{\paragraph}
              {0pt}
              {*2}
              {*1}
 \titleformat{\subparagraph}[hang]
             {\zihao{-4}\bfseries}
-            {\thesubparagraph}{1em}{}
+            {}{0em}{}
 \titlespacing{\subparagraph}
              {0pt}
              {*1.5}
              {*1}
 \setcounter{secnumdepth}{4}
-\renewcommand*{\today}{{\number\year}年{\number\month}月{\number\day}日}
+\renewcommand{\thechapter}{\arabic{chapter}}
+\renewcommand{\thesection}{\arabic{chapter}\thinspace.\thinspace\arabic{section}}
+\renewcommand{\thesubsection}{\thesection\thinspace.\thinspace\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection\thinspace.\thinspace\arabic{subsubsection}}
 \captionsetup{font=small}
 \captionsetup[table]{position=above}
 \captionsetup[figure]{position=below}
@@ -459,10 +462,10 @@
 }
 \pagestyle{fancy}
 \renewcommand{\chaptermark}[1]{\markboth{%
- \bfseries\if@mainmatter\chaptertitlename.\hspace{1em}\fi{#1}%
+ \bfseries\if@mainmatter\chaptertitlename\hspace{1em}\fi{#1}%
 }{}}
 \renewcommand{\sectionmark}[1]{\markright{%
- \bfseries\if@mainmatter\thesection.\hspace{1em}\fi{#1}%
+ \bfseries\if@mainmatter\thesection\hspace{1em}\fi{#1}%
 }}
 \def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
   \hbox{}\thispagestyle{empty}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}

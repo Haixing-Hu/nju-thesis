@@ -16,11 +16,37 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% 下面的宏包提供了\BibTeX的logo
+\usepackage{dtklogos}
+
 % 使用\verb{text}命令的缩写形式|text|
 \MakeShortVerb{\|}
 
 % \std{xxxx}表示标准号
 \newcommand{\std}[1]{\texttt{#1}}
 
-% ``注意''环境
-\newenvironment{note}{\par\textbf{注意：}}{}
+% \dangericon 表示警告的图标
+\font\manfnt=manfnt
+\newcommand*{\dangericon}{\manfnt\char127}
+
+% note 环境表示需特别注意的内容
+\newenvironment{note}
+{\vskip1.5ex\par\noindent\llap{\dangericon\hskip2mm}\textbf{注意：}}
+{\vskip1.5ex}
+
+% syntax 环境表示语法描述
+\newenvironment{syntax}{\begin{center}}{\end{center}}
+\usepackage{fancyvrb}
+
+\DefineVerbatimEnvironment{shell}{Verbatim}%
+  {frame=single,framerule=0.1mm,rulecolor=\color{black},%
+   framesep=2mm,fontsize=\small}
+
+\DefineVerbatimEnvironment{tex}{Verbatim}%
+  {frame=single,framerule=0.1mm,rulecolor=\color{black},%
+   framesep=2mm,baselinestretch=1.2,fontsize=\small}
+
+\newcommand{\cs}[1]{\textbackslash\texttt{#1}}
+\newcommand{\env}[1]{\texttt{#1}}
+
+

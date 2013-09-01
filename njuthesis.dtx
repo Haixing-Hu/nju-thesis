@@ -24,7 +24,7 @@
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
 %<*cls>
- [2013/08/31 v1.1.0 Document Class for the Degree Papers of Nanjing University]
+ [2013/09/01 v1.1.1 Document Class for the Degree Papers of Nanjing University]
 %</cls>
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
@@ -154,7 +154,7 @@
 %  v1.0.0 & 2013/08/24 & 胡海星 & 完成第一个可工作版本 \\
 %  v1.0.1 & 2013/08/25 & 胡海星 & 增加了一些PDF文档的元信息\\
 %  v1.0.2 & 2013/08/25 & 胡海星 & 合并了国家图书馆封面上的导师信息\newline
-%                                使用|\makebox|\oarg{width}\oarg{s}\marg{text}
+%                                使用\cs{makebox}\oarg{width}\oarg{s}\marg{text}
 %                                使得封面标签可以自动两端对其分布\newline
 %                                修改了学位论文和用户手册的样式\\
 %  v1.0.3 & 2013/08/25 & 胡海星 & 增加了《学位论文出版授权书》页面\\
@@ -170,8 +170,8 @@
 %                                增加了对国家标准的参考\newline
 %                                增加了\std{GB/T 7156-2003}标准所定义的文献
 %                                密级\newline
-%                                将论文密级设置命令|\confidential|更名为
-%                                |\securitylevel|\newline
+%                                将论文密级设置命令\cs{confidential}更名为
+%                                \cs{securitylevel}\newline
 %                                修改了国家图书馆封面和英文封面的样式\newline
 %                                将生成国家图书馆封面的命令独立了出来\\
 %  v1.0.7 & 2013/08/26 & 胡海星 & 修改了国家图书馆封面和论文出版授权书的一些细节\newline
@@ -179,6 +179,11 @@
 %  v1.0.8 & 2013/08/28 & 胡海星 & 修复了拼写错误和文件重命名导致的bug\\
 %  v1.1.0 & 2013/08/31 & 胡海星 & 重写了符合\std{GB/T 7714-2005}规范
 %                                的{\BibTeX}样式文件\\
+%  v1.1.1 & 2013/09/01 & 胡海星 & 增加了警告图标\newline
+%                                修改了参考文献引用的样式\newline
+%                                去除了\cs{paragraph}及以下级别章节的编号\newline
+%                                修改了章节编号的样式\newline
+%                                修改了一些本手册的排版细节\\
 % \bottomrule
 % \end{tabular*}
 % \end{center}
@@ -305,8 +310,8 @@
 %     |subfig|   & |caption|     & |float|    & |array|    & |longtable| & |booktabs| \\
 %     |multirow| & |hyperref|    & |enumitem| & |xcolor|   & |amsmath|   & |amsfonts| \\
 %     |amssymb|  & |bm|          & |mathrsfs| & |txfonts|  & |ntheorem|  & |makeidx|  \\
-%     |setspace| & |footmisc|    & |hypernat| & |fancyhdr| & |natbib|    & |tabularx| \\
-%     |titlesec| & |glossaries|  & |ifthen|   & |etex|     & |todonotes| & |wasysym| \\
+%     |setspace| & |wasysym|    & |hypernat| & |fancyhdr| & |natbib|    & |tabularx| \\
+%     |titlesec| & |glossaries|  & |ifthen|   & |etex|     & |todonotes| &  \\
 %   \hline
 %   \end{tabular*}
 %   \caption{{\njuthesis}用到的宏包}\label{table:dependence}
@@ -415,7 +420,7 @@
 %
 % \subsection{选项}
 %
-% 本模板提供了一些选项以方便使用：
+% 本文档类提供了一些选项以方便使用：
 % \begin{description}
 % \item[winfonts, linuxfonts, macfonts, adobefonts] |winfonts|选项使得文档使
 %   用Windows系统提供的字体；|linuxfonts|选项使得文档使用Linux系统提供的字
@@ -436,15 +441,15 @@
 %   \url{http://tinker-bot.googlecode.com/files/cfonts.tar.gz}
 %   \end{center}
 %   \begin{table}
-%     \centering\noindent\small
+%     \centering\noindent
 %     \begin{tabular}[t]{ccccc}
 %     \toprule
 %           & \textbf{adobefonts} &  \textbf{winfonts} & \textbf{linuxfonts} & \textbf{macfonts} \\
 %     \midrule
-%      \textbf{宋体} & |Adobe Song Std|  & |SimSun| & |AR PL SungtiL GB| &  |STSong| \\
-%      \textbf{黑体} & |Adobe Heiti Std| & |SimHei| & |WenQuanYi Zen Hei Mono| &  |STHeiti| \\
-%      \textbf{楷书} & |Adobe Kaiti Std| & |KaiTi|  & |AR PL KaitiM GB| & |STKaiti| \\
-%      \textbf{仿宋体} & |Adobe Fangsong Std| & |FangSong| & |STFangSong| & |STFangSong| \\
+%     \textbf{宋体} & {Adobe Song Std}  & {SimSun} & {AR PL SungtiL GB} &  {STSong} \\
+%     \textbf{黑体} & {Adobe Heiti Std} & {SimHei} & {WenQuanYi Zen Hei Mono} &  {STHeiti} \\
+%     \textbf{楷书} & {Adobe Kaiti Std} & {KaiTi}  & {AR PL KaitiM GB} & {STKaiti} \\
+%     \textbf{仿宋体} & {Adobe Fangsong Std} & {FangSong} & {STFangSong} & {STFangSong} \\
 %     \bottomrule
 %     \end{tabular}
 %     \caption{默认配置下不同字体选项所使用的实际字体名称}
@@ -455,14 +460,14 @@
 %   项，则不在封面背面打印导师签名信息。此选项默认不被设置，一般情况下也无需设置
 %   该选项。
 % \begin{example}
-% \documentclass[adobefonts,nobackinfo]{njuthesis}
+% \documentclass[winfonts,nobackinfo]{njuthesis}
 % \end{example}
 %
 % \item[phd, master, bachelor] 用于设置申请的学位级别。当选择|phd|时，生成南京大学博
 % 士学位论文，包含国家图书馆格式的封面，但不包括书脊，书脊需要单独制作；选择|master|时，
 % 生成南京大学硕士学位论文；选择|bachelor|时，生成南京大学学士学位论文。
 % \begin{example}
-% \documentclass[adobefonts,phd]{njuthesis}
+% \documentclass[winfonts,phd]{njuthesis}
 % \end{example}
 % \begin{note}
 % 这三个选项必须设置一个且只能设置一个。
@@ -471,7 +476,7 @@
 % \item[showcomments] 如果设置了此选项，则文档中的注释会被显示出来，否则所有注释
 % 都会被隐藏。此选项默认不被设置。
 % \begin{example}
-% \documentclass[twoside,winfonts,phd,showcomments]{njuthesis}
+% \documentclass[winfonts,phd,showcomments]{njuthesis}
 % \end{example}
 % \begin{note}
 % 由composing选项切换到无该选项编译文档时可能会出现pgf宏包的错误，这可能是因为上次带
@@ -481,14 +486,12 @@
 %
 % \end{description}
 %
-% \begin{note}
-% 本模板不再提供对字号、字体和单双面打印的选择选项。因为国内各大学的学位论文基本上都要求
+% 本文档类不再提供对字号、字体和单双面打印的选择选项。因为国内各大学的学位论文基本上都要求
 % 使用小四号宋体，双面打印。
-% \end{note}
 %
 % \subsection{命令和环境}
 %
-% 模板中的命令和环境分为三类：一是格式控制，二是内容替换，三是文档结构。格式控制如字体、字
+% 文档类中的命令和环境分为三类：一是格式控制，二是内容替换，三是文档结构。格式控制如字体、字
 % 号、字距和行距等；内容替换如文档名称、作者、项目、编号等；文档结构如中文摘要、中文关键词、
 % 英文摘要、英文关键词、作者简历、致谢等。
 %
@@ -603,7 +606,7 @@
 % 进行填写。
 %
 % 根据\std{GB/T 7156-2003}标准，文献保密等级分为$5$级,即“公开级”、“限制级”、
-% “秘密级”、“机密级”、“绝密级”。本模板中预定义了该标准中文献保密等级的五个等级的
+% “秘密级”、“机密级”、“绝密级”。本文档类中预定义了该标准中文献保密等级的五个等级的
 % 代码常量：
 % \begin{enumerate}
 % \item \cs{openlevel}，表示公开级：此级别的文献可在国内外发行和交换。
@@ -648,14 +651,14 @@
 % 用户通过\cs{title}命令设置的中文标题；\cs{nlctitleb}和\cs{nlctitlec}亦为可选，
 % 其默认值为空白。这三个命令是为了让用户在论文标题较长时手动进行分割换行。
 %
-% \begin{note}
-% \cs{nlctitlea}、\cs{nlctitleb}和\cs{nlctitlec}命令的参数中都不能再出现换行。
-% \end{note}
-%
 % \begin{example}
 % \nlctitlea{基于小世界理论的}
 % \nlctitleb{数据中心网络模型研究}
 % \end{example}
+%
+% \begin{note}
+% \cs{nlctitlea}、\cs{nlctitleb}和\cs{nlctitlec}命令的参数中都不能再出现换行。
+% \end{note}
 %
 % \myentry{导师信息}
 % \DescribeMacro{\supervisorinfo}
@@ -696,25 +699,25 @@
 % \DescribeMacro{\title}
 % 命令\cs{title}用于设置论文的中文标题。此属性必须被设置。
 %
-% \begin{note}
-% \cs{title}的参数中不可换行，也不能使用\cs{thanks}脚注。
-% \end{note}
-%
 % \begin{example}
 % \title{基于小世界理论的数据中心网络模型}
 % \end{example}
+%
+% \begin{note}
+% \cs{title}的参数中不可换行，也不能使用\cs{thanks}脚注。
+% \end{note}
 %
 % \myentry{作者姓名}
 % \DescribeMacro{\author}
 % 命令\cs{author}用于设置论文作者的姓名。此属性必须被设置。
 %
-% \begin{note}
-% \cs{author}的参数中不可换行，也不能使用\cs{thanks}脚注。
-% \end{note}
-%
 % \begin{example}
 % \author{张三}
 % \end{example}
+%
+% \begin{note}
+% \cs{author}的参数中不可换行，也不能使用\cs{thanks}脚注。
+% \end{note}
 %
 % \myentry{作者电话}
 % \DescribeMacro{\telphone}
@@ -769,50 +772,50 @@
 % \DescribeMacro{\major}
 % 命令\cs{major}用于设置论文作者的学科与专业方向。此属性必须被设置。
 %
-% \begin{note}
-% \cs{major}的参数中不可换行。
-% \end{note}
-%
 % \begin{example}
 % \major{计算机软件与理论}
 % \end{example}
+%
+% \begin{note}
+% \cs{major}的参数中不可换行。
+% \end{note}
 %
 % \myentry{研究方向}
 % \DescribeMacro{\researchfield}
 % 命令\cs{researchfield}用于设置论文作者的研究方向。此属性必须被设置。
 %
-% \begin{note}
-% \cs{researchfield}的参数中不可换行。
-% \end{note}
-%
 % \begin{example}
 % \major{计算机网络与信息安全}
 % \end{example}
+%
+% \begin{note}
+% \cs{researchfield}的参数中不可换行。
+% \end{note}
 %
 % \myentry{院系名称}
 % \DescribeMacro{\department}
 % 命令\cs{department}用于设置论文作者所在院系的中文名称。此属性必须被设置。
 %
-% \begin{note}
-% \cs{department}的参数中不可换行。
-% \end{note}
-%
 % \begin{example}
 % \department{计算机科学与技术系}
 % \end{example}
+%
+% \begin{note}
+% \cs{department}的参数中不可换行。
+% \end{note}
 %
 % \myentry{学校名称}
 % \DescribeMacro{\institute}
 % 命令\cs{institute}用于设置论文作者所在学校或机构的名称，该学校或机构也是所申请学
 % 位的颁发机构。此命令为可选，默认值为``南京大学''。
 %
-% \begin{note}
-% \cs{institute}的参数中不可换行。
-% \end{note}
-%
 % \begin{example}
 % \institute{南京大学}
 % \end{example}
+%
+% \begin{note}
+% \cs{institute}的参数中不可换行。
+% \end{note}
 %
 % \myentry{提交日期}
 % \DescribeMacro{\submitdate}
@@ -847,13 +850,13 @@
 % \DescribeMacro{\englishtitle}
 % 命令\cs{englishtitle}用于设置论文的英文标题。此属性必须被设置。
 %
-% \begin{note}
-% \cs{englishtitle}的参数中不可换行，也不能使用\cs{thanks}脚注。
-% \end{note}
-%
 % \begin{example}
 % \englishtitle{Network Models of Data Centers based on the Small World Theory}
 % \end{example}
+%
+% \begin{note}
+% \cs{englishtitle}的参数中不可换行，也不能使用\cs{thanks}脚注。
+% \end{note}
 %
 % \myentry{作者姓名}
 % \DescribeMacro{\englishauthor}
@@ -862,13 +865,13 @@
 % 作者姓名的汉语拼音必须遵循\std{GB/T 16159-2012}标准。
 % \end{suggestion}
 %
-% \begin{note}
-% \cs{englishauthor}的参数中不可换行，也不能使用\cs{thanks}脚注。
-% \end{note}
-%
 % \begin{example}
 % \englishauthor{Wei Xiaobao}
 % \end{example}
+%
+% \begin{note}
+% \cs{englishauthor}的参数中不可换行，也不能使用\cs{thanks}脚注。
+% \end{note}
 %
 % \myentry{导师姓名职称}
 % \DescribeMacro{\englishsupervisor}
@@ -886,38 +889,38 @@
 % \DescribeMacro{\englishmajor}
 % 命令\cs{englishmajor}用于设置论文作者的学科与专业方向的英文名。此属性必须被设置。
 %
-% \begin{note}
-% \cs{englishmajor}的参数中不可换行。
-% \end{note}
-%
 % \begin{example}
 % \englishmajor{Compuer Software and Theory}
 % \end{example}
+%
+% \begin{note}
+% \cs{englishmajor}的参数中不可换行。
+% \end{note}
 %
 % \myentry{院系名称}
 % \DescribeMacro{\englishdepartment}
 % 命令\cs{englishdepartment}用于设置论文作者所在院系的英文名称。此属性必须被设置。
 %
-% \begin{note}
-% \cs{englishdepartment}的参数中不可换行。
-% \end{note}
-%
 % \begin{example}
 % \englishdepartment{Department of Computer Science and Technology}
 % \end{example}
+%
+% \begin{note}
+% \cs{englishdepartment}的参数中不可换行。
+% \end{note}
 %
 % \myentry{学校名称}
 % \DescribeMacro{\englishinstitute}
 % 命令\cs{englishinstitute}用于设置论文作者所在学校或机构的英文名称，此学校或机构
 % 也是所申请学位的颁发机构。此属性可选，默认值为``Nanjing University''。
 %
-% \begin{note}
-% \cs{englishinstitute}的参数中不可换行。
-% \end{note}
-%
 % \begin{example}
 % \englishinstitute{Nanjing University}
 % \end{example}
+%
+% \begin{note}
+% \cs{englishinstitute}的参数中不可换行。
+% \end{note}
 %
 % \myentry{完成日期}
 % \DescribeMacro{\englishdate}
@@ -942,14 +945,14 @@
 % 命令所设置的论文标题；\cs{abstracttitleb}命令为可选，其默认值为空白。这两个命令
 % 是为了让用户在论文标题较长时手动进行分割换行。
 %
-% \begin{note}
-% \cs{abstracttitlea}和\cs{abstracttitleb}命令的参数中都不能出现换行。
-% \end{note}
-%
 % \begin{example}
 % \abstracttitlea{基于小世界理论的}
 % \abstracttitleb{数据中心网络模型研究}
 % \end{example}
+%
+% \begin{note}
+% \cs{abstracttitlea}和\cs{abstracttitleb}命令的参数中都不能出现换行。
+% \end{note}
 %
 % \subsubsection{英文摘要页内容替换命令}
 %
@@ -963,14 +966,14 @@
 % \cs{englishtitle}命令所设置的论文英文标题；\cs{englishabstracttitleb}命令为可
 % 选，其默认值为空白。这两个命令是为了让用户在论文标题较长时手动进行分割换行。
 %
-% \begin{note}
-% \cs{englishabstracttitlea}和\cs{englishabstracttitleb}命令的参数中都不能换行。
-% \end{note}
-%
 % \begin{example}
 % \englishabstracttitlea{A Network Model of Data Centers}
 % \englishabstracttitleb{Based on the Small World Theory}
 % \end{example}
+%
+% \begin{note}
+% \cs{englishabstracttitlea}和\cs{englishabstracttitleb}命令的参数中都不能换行。
+% \end{note}
 %
 % \subsubsection{文档结构命令和环境}
 %
@@ -1247,7 +1250,7 @@
 %
 % \subsection{自定义以及其它}
 %
-% 模板的配置文件|njuthesis.cfg|中定义了很多固定词汇，一般无须修改。如果有特殊需求，
+% 文档类的配置文件|njuthesis.cfg|中定义了很多固定词汇，一般无须修改。如果有特殊需求，
 % 推荐在导言区使用\cs{renewcommand}。当然，导言区里可以直接使用中文。
 %
 % \section{实现细节}
@@ -1421,17 +1424,9 @@
 \RequirePackage[amsmath,thmmarks,hyperref]{ntheorem}
 %    \end{macrocode}
 %
-% |setspace|宏包支持行距控制。
-% \begin{note}
-% |setspace|宏包需要在|hyperref|宏包之前加载，避免脚注超链接失效。
-% \end{note}
+% |setspace|宏包支持行距控制。它需要在|hyperref|宏包之前加载，避免脚注超链接失效。
 %    \begin{macrocode}
 \RequirePackage{setspace}
-%    \end{macrocode}
-%
-% |footmisc|宏包可以方便地更改脚注样式。
-%    \begin{macrocode}
-\RequirePackage[perpage,symbol*,stable]{footmisc}
 %    \end{macrocode}
 %
 % |fancyhdr|宏包支持自定义页眉页脚。
@@ -1450,10 +1445,8 @@
 %    \end{macrocode}
 %
 % 使用|xeCJK|宏包处理中文。宏包选项|CJKnumber|表示调用|CJKnumber|宏包处理中文数
-% 字；|CJKchecksingle|表示避免单个汉字单独占一行。
-% \begin{note}
-%   |xeCJK|宏包必须放在|amssymb|之后，否则会有冲突。
-% \end{note}
+% 字；|CJKchecksingle|表示避免单个汉字单独占一行。|xeCJK|宏包必须放在|amssymb|之后，
+% 否则会有冲突。
 % \begin{note}
 %   因为我们将使用黑体作为粗体，使用楷体作为斜体，因此载入|xeCJK|宏包时不需要开启
 %   |BoldFont|选项和|SlantFont|；否则的话，|xeCJK|会自动生成宋体的粗体和斜体，而那会
@@ -1493,10 +1486,7 @@
 \RequirePackage{hyperref}
 %    \end{macrocode}
 %
-% 设置|hyperref|宏包参数。
-% \begin{note}
-% |hyperref|配合{\XeTeX}使用时不能开启Unicode选项。
-% \end{note}
+% 设置|hyperref|宏包参数。|hyperref|配合{\XeTeX}使用时不能开启Unicode选项。
 %    \begin{macrocode}
 \hypersetup{%
     unicode=false,
@@ -1525,6 +1515,11 @@
 \RequirePackage[sort&compress,numbers]{natbib}
 %    \end{macrocode}
 %
+% 使用符合\std{GB/T 7714-2005}规范的参考文献引用样式。
+%    \begin{macrocode}
+\setcitestyle{super,square}
+%    \end{macrocode}
+%
 % |hypernat|可以让|hyperref|和|natbib|混合使用，但它需要放在这两者之后。
 %    \begin{macrocode}
 \RequirePackage{hypernat}
@@ -1546,7 +1541,7 @@
 \RequirePackage{glossaries}
 %    \end{macrocode}
 %
-% |ifthen|宏包提供了\cs{ifthenelse}命令，本模板将使用该命令定义一些其他命令。
+% |ifthen|宏包提供了\cs{ifthenelse}命令，本文档类将使用该命令定义一些其他命令。
 %    \begin{macrocode}
 \RequirePackage{ifthen}
 %    \end{macrocode}
@@ -2413,14 +2408,14 @@ December\fi
              {*1.5}
 \titleformat{\paragraph}[hang]
             {\zihao{4}\bfseries}
-            {\theparagraph}{1em}{}
+            {}{0em}{}
 \titlespacing{\paragraph}
              {0pt}
              {*2}
              {*1}
 \titleformat{\subparagraph}[hang]
             {\zihao{-4}\bfseries}
-            {\thesubparagraph}{1em}{}
+            {}{0em}{}
 \titlespacing{\subparagraph}
              {0pt}
              {*1.5}
@@ -2432,12 +2427,13 @@ December\fi
 \setcounter{secnumdepth}{4}
 %    \end{macrocode}
 %
-% \begin{macro}{\today}
-% 重新定义中文化的\cs{today}格式。
+% 修改章节编号的样式：
 %    \begin{macrocode}
-\renewcommand*{\today}{{\number\year}年{\number\month}月{\number\day}日}
+\renewcommand{\thechapter}{\arabic{chapter}}
+\renewcommand{\thesection}{\arabic{chapter}\thinspace.\thinspace\arabic{section}}
+\renewcommand{\thesubsection}{\thesection\thinspace.\thinspace\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection\thinspace.\thinspace\arabic{subsubsection}}
 %    \end{macrocode}
-% \end{macro}
 %
 % \subsection{浮动环境}
 %
@@ -2554,7 +2550,7 @@ December\fi
 % 在第一次调用|\pagestyle{fancy}|之后，因为第一次调用该命令会设置\cs{chaptermark}。
 %    \begin{macrocode}
 \renewcommand{\chaptermark}[1]{\markboth{%
- \bfseries\if@mainmatter\chaptertitlename.\hspace{1em}\fi{#1}%
+ \bfseries\if@mainmatter\chaptertitlename\hspace{1em}\fi{#1}%
 }{}}
 %    \end{macrocode}
 %
@@ -2562,7 +2558,7 @@ December\fi
 % |\pagestyle{fancy}|之后，因为第一次调用该命令会设置\cs{sectionmark}。
 %    \begin{macrocode}
 \renewcommand{\sectionmark}[1]{\markright{%
- \bfseries\if@mainmatter\thesection.\hspace{1em}\fi{#1}%
+ \bfseries\if@mainmatter\thesection\hspace{1em}\fi{#1}%
 }}
 %    \end{macrocode}
 %
@@ -3391,11 +3387,11 @@ December\fi
 %
 % \begin{macro}{C}
 % 定义一个新的表格列模式，|C{width}|，表示将内容居中，且列宽度为|width|。
-% \begin{note}
+%
 % |array|环境中的\cs{centering}命令会改变\cs{newline}的定义，因此我们需要用
 % \cs{arraybackslash}将其恢复；另外，我们也可能会在列内容中使用\cs{newline}，因此在
 % \cs{centering}后重新定义了\cs{newline}。
-% \end{note}
+%
 %    \begin{macrocode}
 \newcolumntype{C}[1]{>{\centering\let\newline\\%
     \arraybackslash\hspace{0pt}}p{#1}}
@@ -3496,11 +3492,10 @@ December\fi
 \RequirePackage{geometry}
 \RequirePackage{indentfirst}
 \RequirePackage[CJKnumber,CJKchecksingle]{xeCJK}
-\RequirePackage{compsci}
+%% \RequirePackage{compsci}
 \RequirePackage{hypdoc} % it will load hyperref package
 \RequirePackage{url}
 \RequirePackage{dtklogos}
-
 \hypersetup{%
     unicode=false,
     hyperfootnotes=true,
@@ -3516,6 +3511,8 @@ December\fi
     pdfpagelabels,
     pdfborder=0 0 0%
 }
+
+\newcommand{\env}[1]{\texttt{#1}}
 
 % 定义英文字体名称。
 \newcommand*{\njut@enfn@main}{Times New Roman}
@@ -3550,44 +3547,12 @@ December\fi
 \newcommand*{\kaishu}{\CJKfamily{kai}}
 \newcommand*{\fangsong}{\CJKfamily{fangsong}}
 
-% listings 源代码显示宏包
-\RequirePackage{listings}
-\lstset{tabsize=4, %
-  frame=shadowbox, %把代码用带有阴影的框圈起来
-  commentstyle=\color{red!50!green!50!blue!50},%浅灰色的注释
-  rulesepcolor=\color{red!20!green!20!blue!20},%代码块边框为淡青色
-  keywordstyle=\color{blue!90}\bfseries, %代码关键字的颜色为蓝色，粗体
-  showstringspaces=false,%不显示代码字符串中间的空格标记
-  stringstyle=\ttfamily, % 代码字符串的特殊格式
-  keepspaces=true, %
-  breakindent=22pt, %
-  numbers=left,%左侧显示行号
-  stepnumber=1,%
-  numberstyle=\tiny, %行号字体用小号
-  basicstyle=\footnotesize, %
-  showspaces=false, %
-  flexiblecolumns=true, %
-  breaklines=true, %对过长的代码自动换行
-  breakautoindent=true,%
-  breakindent=4em, %
-  escapebegin=\begin{CJK*}{GBK}{kai},escapeend=\end{CJK*},
-  aboveskip=1em, %代码块边框
-  fontadjust,
-  captionpos=t,
-  framextopmargin=2pt,framexbottommargin=2pt,abovecaptionskip=-3pt,belowcaptionskip=3pt,
-  xleftmargin=4em,xrightmargin=4em, % 设定listing左右的空白
-  texcl=true,
-  % 设定中文冲突，断行，列模式，数学环境输入，listing数字的样式
-  extendedchars=false,columns=flexible,mathescape=true
-  % numbersep=-1em
-}
 \renewcommand{\contentsname}{目\hspace{2em}录}
 \renewcommand{\abstractname}{摘\hspace{2em}要}
 \renewcommand{\indexname}{索\hspace{2em}引}
 \renewcommand{\figurename}{图}
 \renewcommand{\tablename}{表}
 \renewcommand{\refname}{参考文献}
-\renewcommand{\lstlistingname}{代码}
 
 \setlength{\parskip}{4pt plus1pt minus0pt}
 \setlength{\topsep}{0pt}
@@ -3647,10 +3612,15 @@ December\fi
 \newcolumntype{C}[1]{>{\centering\let\newline\\%
     \arraybackslash\hspace{0pt}}p{#1}}
 
+
+% \dangericon 表示警告的图标
+\font\manfnt=manfnt
+\newcommand*{\dangericon}{\manfnt\char127}
+
 % note 环境表示需特别注意的内容
 \newenvironment{note}
-               {\par\noindent\textbf{注意：}}
-               {}
+               {\vskip1.5ex\par\noindent\llap{\dangericon\hskip2mm}\textbf{注意：}}
+               {\vskip1.5ex}
 
 % syntax 环境表示语法描述
 \newenvironment{syntax}

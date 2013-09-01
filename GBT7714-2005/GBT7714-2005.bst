@@ -3,7 +3,7 @@
 %  符合 GB/T 7714-2005 规范的 BibTeX 样式文件
 %
 %  作者：    胡海星   南京大学计算机科学与技术系
-%  版本：    v1.0.0  2013-08-27
+%  版本：    v1.0.1  2013-09-01
 %  项目主页: https://github.com/Haixing-Hu/nju-thesis
 %
 %  参考资料:
@@ -114,9 +114,9 @@ FUNCTION {cap.rd.en} {"rd"}                       % static String const cap_rd_e
 FUNCTION {cap.th.en} {"th"}                       % static String const cap_th_en = "th";
 FUNCTION {cap.period} {"\@. "}                    % static String const cap_period = "\@. ";
 FUNCTION {cap.comma} {", "}                       % static String const cap_comma = ", ";
-FUNCTION {cap.colon} {"~: "}                      % static String const cap_colon = "~: ";
-FUNCTION {cap.double.slash} {"//~"}               % static String const cap_double_slash = "//~";
-FUNCTION {cap.dash} {"\,--\,"}                    % static String const cap_dash = "\,--\,";
+FUNCTION {cap.colon} {"\thinspace:\thinspace"}    % static String const cap_colon = "\thinspace:\thinspace";
+FUNCTION {cap.double.slash} {"//\thinspace"}      % static String const cap_double_slash = "//\thinspace";
+FUNCTION {cap.dash} {"\thinspace--\thinspace"}    % static String const cap_dash = "\thinspace--\thinspace";
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %

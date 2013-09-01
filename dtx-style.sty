@@ -41,11 +41,10 @@
 \RequirePackage{geometry}
 \RequirePackage{indentfirst}
 \RequirePackage[CJKnumber,CJKchecksingle]{xeCJK}
-\RequirePackage{compsci}
+%% \RequirePackage{compsci}
 \RequirePackage{hypdoc} % it will load hyperref package
 \RequirePackage{url}
 \RequirePackage{dtklogos}
-
 \hypersetup{%
     unicode=false,
     hyperfootnotes=true,
@@ -61,6 +60,8 @@
     pdfpagelabels,
     pdfborder=0 0 0%
 }
+
+\newcommand{\env}[1]{\texttt{#1}}
 
 \newcommand*{\njut@enfn@main}{Times New Roman}
 \newcommand*{\njut@enfn@sans}{Arial}
@@ -90,43 +91,12 @@
 \newcommand*{\kaishu}{\CJKfamily{kai}}
 \newcommand*{\fangsong}{\CJKfamily{fangsong}}
 
-\RequirePackage{listings}
-\lstset{tabsize=4, %
-  frame=shadowbox, %把代码用带有阴影的框圈起来
-  commentstyle=\color{red!50!green!50!blue!50},%浅灰色的注释
-  rulesepcolor=\color{red!20!green!20!blue!20},%代码块边框为淡青色
-  keywordstyle=\color{blue!90}\bfseries, %代码关键字的颜色为蓝色，粗体
-  showstringspaces=false,%不显示代码字符串中间的空格标记
-  stringstyle=\ttfamily, % 代码字符串的特殊格式
-  keepspaces=true, %
-  breakindent=22pt, %
-  numbers=left,%左侧显示行号
-  stepnumber=1,%
-  numberstyle=\tiny, %行号字体用小号
-  basicstyle=\footnotesize, %
-  showspaces=false, %
-  flexiblecolumns=true, %
-  breaklines=true, %对过长的代码自动换行
-  breakautoindent=true,%
-  breakindent=4em, %
-  escapebegin=\begin{CJK*}{GBK}{kai},escapeend=\end{CJK*},
-  aboveskip=1em, %代码块边框
-  fontadjust,
-  captionpos=t,
-  framextopmargin=2pt,framexbottommargin=2pt,abovecaptionskip=-3pt,belowcaptionskip=3pt,
-  xleftmargin=4em,xrightmargin=4em, % 设定listing左右的空白
-  texcl=true,
-  % 设定中文冲突，断行，列模式，数学环境输入，listing数字的样式
-  extendedchars=false,columns=flexible,mathescape=true
-  % numbersep=-1em
-}
 \renewcommand{\contentsname}{目\hspace{2em}录}
 \renewcommand{\abstractname}{摘\hspace{2em}要}
 \renewcommand{\indexname}{索\hspace{2em}引}
 \renewcommand{\figurename}{图}
 \renewcommand{\tablename}{表}
 \renewcommand{\refname}{参考文献}
-\renewcommand{\lstlistingname}{代码}
 
 \setlength{\parskip}{4pt plus1pt minus0pt}
 \setlength{\topsep}{0pt}
@@ -182,9 +152,12 @@
 \newcolumntype{C}[1]{>{\centering\let\newline\\%
     \arraybackslash\hspace{0pt}}p{#1}}
 
+\font\manfnt=manfnt
+\newcommand*{\dangericon}{\manfnt\char127}
+
 \newenvironment{note}
-               {\par\noindent\textbf{注意：}}
-               {}
+               {\vskip1.5ex\par\noindent\llap{\dangericon\hskip2mm}\textbf{注意：}}
+               {\vskip1.5ex}
 
 \newenvironment{syntax}
                {\begin{center}}
