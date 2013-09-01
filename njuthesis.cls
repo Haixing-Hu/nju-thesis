@@ -25,7 +25,7 @@
 %% through LaTeX.
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{njuthesis.cls}
- [2013/09/01 v1.1.1 Document Class for the Degree Papers of Nanjing University]
+ [2013/09/01 v1.1.2 Document Class for the Degree Papers of Nanjing University]
 \newif\ifnjut@adobefonts\njut@adobefontstrue
 \newif\ifnjut@winfonts\njut@winfontsfalse
 \newif\ifnjut@linuxfonts\njut@linuxfontsfalse
@@ -117,7 +117,6 @@
 }
 \urlstyle{same}
 \RequirePackage[sort&compress,numbers]{natbib}
-\setcitestyle{super,square}
 \RequirePackage{hypernat}
 \RequirePackage{tabularx}
 \RequirePackage{makeidx}
@@ -599,6 +598,11 @@
        {\@latex@warning{Empty `thebibliography' environment}}%
       \endlist}
 \bibliographystyle{GBT7714-2005}
+\setcitestyle{super,square}
+\AtBeginDocument{%
+\let\oldref\ref%
+\renewcommand*{\ref}[1]{~\oldref{#1}}%
+}
 \newcommand*{\classification}[1]{%
   \renewcommand*{\njut@value@nlc@classification}{#1}}
 \newcommand*{\securitylevel}[1]{%

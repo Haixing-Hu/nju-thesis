@@ -24,7 +24,7 @@
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
 %<*cls>
- [2013/09/01 v1.1.1 Document Class for the Degree Papers of Nanjing University]
+ [2013/09/01 v1.1.2 Document Class for the Degree Papers of Nanjing University]
 %</cls>
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
@@ -184,6 +184,8 @@
 %                                去除了\cs{paragraph}及以下级别章节的编号\newline
 %                                修改了章节编号的样式\newline
 %                                修改了一些本手册的排版细节\\
+%  v1.1.2 & 2013/09/02 & 胡海星 & 重新定义\cs{ref}命令，
+%                                使其前面自动加一个``\textasciitilde''\\
 % \bottomrule
 % \end{tabular*}
 % \end{center}
@@ -1515,11 +1517,6 @@
 \RequirePackage[sort&compress,numbers]{natbib}
 %    \end{macrocode}
 %
-% 使用符合\std{GB/T 7714-2005}规范的参考文献引用样式。
-%    \begin{macrocode}
-\setcitestyle{super,square}
-%    \end{macrocode}
-%
 % |hypernat|可以让|hyperref|和|natbib|混合使用，但它需要放在这两者之后。
 %    \begin{macrocode}
 \RequirePackage{hypernat}
@@ -2786,6 +2783,20 @@ December\fi
 \bibliographystyle{GBT7714-2005}
 %    \end{macrocode}
 %
+% 使用符合\std{GB/T 7714-2005}规范的参考文献引用样式。
+%    \begin{macrocode}
+\setcitestyle{super,square}
+%    \end{macrocode}
+% 
+% 重新定义\cs{ref}命令，使其前面自动加一个``\textasciitilde''。因为|hyperref|宏包会通
+% 过\cs{AtBeginDocument}修改\cs{ref}的定义，因此我们对\cs{ref}的修改也必须使用
+% \cs{AtBeginDocument}命令进行。
+%    \begin{macrocode}
+\AtBeginDocument{%
+\let\oldref\ref%
+\renewcommand*{\ref}[1]{~\oldref{#1}}%
+}
+%    \end{macrocode}
 % \subsection{封面字段设置}
 %
 % 国家图书馆封面字段设置：

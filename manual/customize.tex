@@ -31,7 +31,7 @@
 
 % note 环境表示需特别注意的内容
 \newenvironment{note}
-{\vskip1.5ex\par\noindent\llap{\dangericon\hskip2mm}\textbf{注意：}}
+{\vskip1.5ex\par\noindent\llap{\dangericon\hskip2mm}\hskip\parindent\textbf{注意：}}
 {\vskip1.5ex}
 
 % syntax 环境表示语法描述
@@ -49,4 +49,5 @@
 \newcommand{\cs}[1]{\textbackslash\texttt{#1}}
 \newcommand{\env}[1]{\texttt{#1}}
 
-
+%% \newcommand{\nref}[1]{~\ref{#1}}
+%% \renewcommand{\ref}[1]{\nref{#1}}
