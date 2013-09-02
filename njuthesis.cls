@@ -25,7 +25,7 @@
 %% through LaTeX.
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{njuthesis.cls}
- [2013/09/01 v1.1.3 Document Class for the Degree Papers of Nanjing University]
+ [2013/09/01 v1.1.4 Document Class for the Degree Papers of Nanjing University]
 \newif\ifnjut@adobefonts\njut@adobefontstrue
 \newif\ifnjut@winfonts\njut@winfontsfalse
 \newif\ifnjut@linuxfonts\njut@linuxfontsfalse
@@ -82,13 +82,13 @@
 \RequirePackage{enumitem}
 \RequirePackage{xcolor}
 \RequirePackage{amsmath}
+\RequirePackage{amsthm}
 \RequirePackage{amsfonts}
 \RequirePackage{amssymb}
 \RequirePackage{bm}
 \RequirePackage{mathrsfs}
 \RequirePackage{wasysym}
 \RequirePackage{txfonts}
-\RequirePackage[amsmath,thmmarks,hyperref]{ntheorem}
 \RequirePackage{setspace}
 \RequirePackage{fancyhdr}
 \RequirePackage{shortvrb}
@@ -346,30 +346,47 @@
   \@setfontsize\Huge{\njut@fs@szero}{\njut@fs@szeroskip}}
 \newcommand*{\ziju}[1]{\renewcommand*{\CJKglue}{\hskip {#1}}}
 \renewcommand{\textsc}[1]{{\usefont{OT1}{cmr}{m}{sc}{#1}}}
-\renewcommand*{\thefigure}{\arabic{chapter}.\arabic{figure}}
-\renewcommand*{\thetable}{\arabic{chapter}.\arabic{table}}
-\renewcommand*{\theequation}{\arabic{chapter}.\arabic{equation}}
+\newcommand{\dashnumber}[2]%
+  {{#1}\kern.07em\rule[.5ex]{.4em}{.15ex}\kern.07em{#2}}
+\renewcommand*{\thefigure}{\dashnumber{\thechapter}{\arabic{figure}}}
+\renewcommand*{\thetable}{\dashnumber{\thechapter}{\arabic{table}}}
+\renewcommand*{\theequation}{\dashnumber{\thechapter}{\arabic{equation}}}
 \renewcommand*{\thesubfigure}{(\alph{subfigure})}
 \renewcommand*{\thesubtable}{(\alph{subtable})}
-\theoremstyle{plain}
-\theoremsymbol{}
-\theoremseparator{：}
-\newtheorem{assumption}{\njut@cap@assumption}[chapter]
+\newtheoremstyle{plain}% name
+                {1em}%      Space above, empty = `usual value'
+                {1em}%      Space below
+                {\normalfont}% Body font
+                {}%         Indent amount
+                {\normalfont\bfseries}% Thm head font
+                {}%         Punctuation after thm head
+                {1em}%      Space after thm head: \newline = linebreak
+                {}%         Thm head spec
 \newtheorem{definition}{\njut@cap@definition}[chapter]
-\newtheorem{proposition}{\njut@cap@proposition}[chapter]
-\newtheorem{lemma}{\njut@cap@lemma}[chapter]
 \newtheorem{theorem}{\njut@cap@theorem}[chapter]
+\newtheorem{lemma}[theorem]{\njut@cap@lemma}
+\newtheorem{corollary}[theorem]{\njut@cap@corollary}
+\newtheorem{proposition}[theorem]{\njut@cap@proposition}
+\newtheorem{fact}[theorem]{\njut@cap@fact}
+\newtheorem{assumption}[theorem]{\njut@cap@assumption}
+\newtheorem{conjecture}[theorem]{\njut@cap@conjecture}
 \newtheorem{axiom}{\njut@cap@axiom}[chapter]
-\newtheorem{corollary}{\njut@cap@corollary}[chapter]
+\newtheorem{principle}[axiom]{\njut@cap@principle}
+\newtheorem{problem}{\njut@cap@problem}[chapter]
 \newtheorem{exercise}{\njut@cap@exercise}[chapter]
 \newtheorem{example}{\njut@cap@example}[chapter]
 \newtheorem{remark}{\njut@cap@remark}[chapter]
-\newtheorem{problem}{\njut@cap@problem}[chapter]
-\newtheorem{conjecture}{\njut@cap@conjecture}[chapter]
-\newenvironment{proof}{\noindent\textbf{{\njut@cap@proof}：}}
-                      {\hfill\ensuremath{\square}\vspace{1em}}
-\newenvironment{solution}{\noindent\textbf{{\njut@cap@solution}：}}
+\renewenvironment{proof}{\noindent\textbf{{\njut@cap@proof}\hspace{1em}}}
+                        {\qedhere\vspace{1em}}
+\newenvironment{solution}{\noindent\textbf{{\njut@cap@solution}\hspace{1em}}}
                          {\vspace{1em}}
+\renewcommand*{\thedefinition}{\dashnumber{\thechapter}{\arabic{definition}}}
+\renewcommand*{\thetheorem}{\dashnumber{\thechapter}{\arabic{theorem}}}
+\renewcommand*{\theaxiom}{\dashnumber{\thechapter}{\arabic{axiom}}}
+\renewcommand*{\theproblem}{\dashnumber{\thechapter}{\arabic{problem}}}
+\renewcommand*{\theexercise}{\dashnumber{\thechapter}{\arabic{exercise}}}
+\renewcommand*{\theexample}{\dashnumber{\thechapter}{\arabic{example}}}
+\renewcommand*{\theremark}{\dashnumber{\thechapter}{\arabic{remark}}}
 \renewcommand*{\textfraction}{0.05}
 \renewcommand*{\topfraction}{0.9}
 \renewcommand*{\bottomfraction}{0.8}
@@ -432,7 +449,7 @@
              {*1}
 \setcounter{secnumdepth}{4}
 \renewcommand{\thechapter}{\arabic{chapter}}
-\renewcommand{\thesection}{\arabic{chapter}\thinspace.\thinspace\arabic{section}}
+\renewcommand{\thesection}{\thechapter\thinspace.\thinspace\arabic{section}}
 \renewcommand{\thesubsection}{\thesection\thinspace.\thinspace\arabic{subsection}}
 \renewcommand{\thesubsubsection}{\thesubsection\thinspace.\thinspace\arabic{subsubsection}}
 \captionsetup{font=small}
@@ -601,7 +618,8 @@
 \setcitestyle{super,square}
 \AtBeginDocument{%
 \let\oldref\ref%
-\renewcommand*{\ref}[1]{~\oldref{#1}}%
+\renewcommand*{\ref}[1]{\thinspace\oldref{#1}}%
+\renewcommand*{\eqref}[1]{(\oldref{#1})}
 }
 \newcommand*{\classification}[1]{%
   \renewcommand*{\njut@value@nlc@classification}{#1}}

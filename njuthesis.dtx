@@ -24,7 +24,7 @@
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
 %<*cls>
- [2013/09/01 v1.1.3 Document Class for the Degree Papers of Nanjing University]
+ [2013/09/01 v1.1.4 Document Class for the Degree Papers of Nanjing University]
 %</cls>
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
@@ -187,6 +187,9 @@
 %  v1.1.2 & 2013/09/02 & 胡海星 & 重新定义\cs{ref}命令，
 %                                使其前面自动加一个``\textasciitilde''\\
 %  v1.1.3 & 2013/09/02 & 胡海星 & 修复了公式自动编号多了一个括号的bug\\
+%  v1.1.4 & 2013/09/02 & 胡海星 & 修复了附录的节编号错误\newline
+%                                按照\std{CY/T 35-2001}规范修改了图、表、公式、
+%                                定理的编号样式\\
 % \bottomrule
 % \end{tabular*}
 % \end{center}
@@ -248,12 +251,13 @@
 % \item \std{GB/T 7156-2003}\textsl{文献保密等级代码与标识}
 % \item \std{GB/T 16159-2012}\textsl{汉语拼音正词法基本规则}，
 % 该标准取代了\std{GB/T 16159-1996}
+% \item \std{CY/T 35-2001}\textsl{科技文献的章节编号方法}
 % \end{itemize}
 %
 % 上述要求和标准的电子版可在{\njuthesis}项目主页的源码库中找到。
 %
 % \begin{note}
-% 如上述要求和标准之间有冲突，以南京大学研究生院的要求为准。
+% 如南京大学研究生院对学位论文的格式要求和国家标准之间有冲突，以国家标准的要求为准。
 % \end{note}
 %
 % \section{安装}
@@ -312,7 +316,7 @@
 %     |ifxetex|  & |indentfirst| & |xeCJK|    & |lastpage| & |geometry|  & |graphicx| \\
 %     |subfig|   & |caption|     & |float|    & |array|    & |longtable| & |booktabs| \\
 %     |multirow| & |hyperref|    & |enumitem| & |xcolor|   & |amsmath|   & |amsfonts| \\
-%     |amssymb|  & |bm|          & |mathrsfs| & |txfonts|  & |ntheorem|  & |makeidx|  \\
+%     |amssymb|  & |bm|          & |mathrsfs| & |txfonts|  & |amsthm|  & |makeidx|  \\
 %     |setspace| & |wasysym|    & |hypernat| & |fancyhdr| & |natbib|    & |tabularx| \\
 %     |titlesec| & |glossaries|  & |ifthen|   & |etex|     & |todonotes| &  \\
 %   \hline
@@ -1404,6 +1408,11 @@
 \RequirePackage{amsmath}
 %    \end{macrocode}
 %
+% |amsthm|宏包支持自定义数学定理环境。
+%    \begin{macrocode}
+\RequirePackage{amsthm}
+%    \end{macrocode}
+%
 % |amsfonts|宏包、|amssymb|宏包、|bm|宏包和|mathrsfs|宏包提供数学符号和字体支持。
 %    \begin{macrocode}
 \RequirePackage{amsfonts}
@@ -1420,11 +1429,6 @@
 % |txfonts|宏包用自己的typewriter字体替换系统Courier字体，它必须在{\AmSTeX}之后引入。
 %    \begin{macrocode}
 \RequirePackage{txfonts}
-%    \end{macrocode}
-%
-% |ntheorem|宏包支持自定义数学定理环境。
-%    \begin{macrocode}
-\RequirePackage[amsmath,thmmarks,hyperref]{ntheorem}
 %    \end{macrocode}
 %
 % |setspace|宏包支持行距控制。它需要在|hyperref|宏包之前加载，避免脚注超链接失效。
@@ -1588,18 +1592,20 @@
 %
 % 定义常用数学定理环境的字符串常量：
 %    \begin{macrocode}
-\newcommand*{\njut@cap@assumption}{假设}
 \newcommand*{\njut@cap@definition}{定义}
-\newcommand*{\njut@cap@proposition}{命题}
-\newcommand*{\njut@cap@lemma}{引理}
 \newcommand*{\njut@cap@theorem}{定理}
-\newcommand*{\njut@cap@axiom}{公理}
+\newcommand*{\njut@cap@lemma}{引理}
 \newcommand*{\njut@cap@corollary}{推论}
+\newcommand*{\njut@cap@proposition}{命题}
+\newcommand*{\njut@cap@fact}{事实}
+\newcommand*{\njut@cap@assumption}{假设}
+\newcommand*{\njut@cap@conjecture}{猜想}
+\newcommand*{\njut@cap@axiom}{公理}
+\newcommand*{\njut@cap@principle}{定律}
+\newcommand*{\njut@cap@problem}{问题}
 \newcommand*{\njut@cap@exercise}{练习}
 \newcommand*{\njut@cap@example}{例}
 \newcommand*{\njut@cap@remark}{评注}
-\newcommand*{\njut@cap@problem}{问题}
-\newcommand*{\njut@cap@conjecture}{猜想}
 \newcommand*{\njut@cap@proof}{证明}
 \newcommand*{\njut@cap@solution}{解}
 \newcommand*{\njut@cap@algorithm}{算法}
@@ -2274,48 +2280,69 @@ December\fi
 %
 % \subsection{数学公式和定理}
 %
-% 按照南京大学学位论文的格式要求，重定义公式、图、表的编号格式。例如：
+% 按照\std{CY/T 35-2001}规范的要求，重定义公式、图、表的编号格式。例如：
 % \begin{itemize}
-% \item 图1.2
-% \item 表2.3
+% \item 图\dashnumber{1}{2}
+% \item 表\dashnumber{2}{3}
 % \item 附注 1)
 % \item 文献[4]
-% \item 式(6.3)
+% \item 式(\dashnumber{6}{3})
 % \end{itemize}
 % 子图和子表的应用序号外加小括号，例如
 % \begin{itemize}
-% \item 图1.2(a)
-% \item 表3.4(b)
+% \item 图\dashnumber{1}{2}(a)
+% \item 表\dashnumber{2}{3}(b)
 % \end{itemize}
 %    \begin{macrocode}
-\renewcommand*{\thefigure}{\arabic{chapter}.\arabic{figure}}
-\renewcommand*{\thetable}{\arabic{chapter}.\arabic{table}}
-\renewcommand*{\theequation}{\arabic{chapter}.\arabic{equation}}
+\newcommand{\dashnumber}[2]%
+  {{#1}\kern.07em\rule[.5ex]{.4em}{.15ex}\kern.07em{#2}}
+\renewcommand*{\thefigure}{\dashnumber{\thechapter}{\arabic{figure}}}
+\renewcommand*{\thetable}{\dashnumber{\thechapter}{\arabic{table}}}
+\renewcommand*{\theequation}{\dashnumber{\thechapter}{\arabic{equation}}}
 \renewcommand*{\thesubfigure}{(\alph{subfigure})}
 \renewcommand*{\thesubtable}{(\alph{subtable})}
 %    \end{macrocode}
 %
-% 定义常用的数学定理环境。
+% 定义常用的数学定理环境及其样式。
 %    \begin{macrocode}
-\theoremstyle{plain}
-\theoremsymbol{}
-\theoremseparator{：}
-\newtheorem{assumption}{\njut@cap@assumption}[chapter]
+\newtheoremstyle{plain}% name
+                {1em}%      Space above, empty = `usual value'
+                {1em}%      Space below
+                {\normalfont}% Body font
+                {}%         Indent amount
+                {\normalfont\bfseries}% Thm head font
+                {}%         Punctuation after thm head
+                {1em}%      Space after thm head: \newline = linebreak
+                {}%         Thm head spec
 \newtheorem{definition}{\njut@cap@definition}[chapter]
-\newtheorem{proposition}{\njut@cap@proposition}[chapter]
-\newtheorem{lemma}{\njut@cap@lemma}[chapter]
 \newtheorem{theorem}{\njut@cap@theorem}[chapter]
+\newtheorem{lemma}[theorem]{\njut@cap@lemma}
+\newtheorem{corollary}[theorem]{\njut@cap@corollary}
+\newtheorem{proposition}[theorem]{\njut@cap@proposition}
+\newtheorem{fact}[theorem]{\njut@cap@fact}
+\newtheorem{assumption}[theorem]{\njut@cap@assumption}
+\newtheorem{conjecture}[theorem]{\njut@cap@conjecture}
 \newtheorem{axiom}{\njut@cap@axiom}[chapter]
-\newtheorem{corollary}{\njut@cap@corollary}[chapter]
+\newtheorem{principle}[axiom]{\njut@cap@principle}
+\newtheorem{problem}{\njut@cap@problem}[chapter]
 \newtheorem{exercise}{\njut@cap@exercise}[chapter]
 \newtheorem{example}{\njut@cap@example}[chapter]
 \newtheorem{remark}{\njut@cap@remark}[chapter]
-\newtheorem{problem}{\njut@cap@problem}[chapter]
-\newtheorem{conjecture}{\njut@cap@conjecture}[chapter]
-\newenvironment{proof}{\noindent\textbf{{\njut@cap@proof}：}}
-                      {\hfill\ensuremath{\square}\vspace{1em}}
-\newenvironment{solution}{\noindent\textbf{{\njut@cap@solution}：}}
+\renewenvironment{proof}{\noindent\textbf{{\njut@cap@proof}\hspace{1em}}}
+                        {\qedhere\vspace{1em}}
+\newenvironment{solution}{\noindent\textbf{{\njut@cap@solution}\hspace{1em}}}
                          {\vspace{1em}}
+%    \end{macrocode}
+%
+% 修改上面定义的各定理环境的编号样式：
+%    \begin{macrocode}
+\renewcommand*{\thedefinition}{\dashnumber{\thechapter}{\arabic{definition}}}
+\renewcommand*{\thetheorem}{\dashnumber{\thechapter}{\arabic{theorem}}}
+\renewcommand*{\theaxiom}{\dashnumber{\thechapter}{\arabic{axiom}}}
+\renewcommand*{\theproblem}{\dashnumber{\thechapter}{\arabic{problem}}}
+\renewcommand*{\theexercise}{\dashnumber{\thechapter}{\arabic{exercise}}}
+\renewcommand*{\theexample}{\dashnumber{\thechapter}{\arabic{example}}}
+\renewcommand*{\theremark}{\dashnumber{\thechapter}{\arabic{remark}}}
 %    \end{macrocode}
 %
 % \subsection{设置浮动环境格式}
@@ -2428,7 +2455,7 @@ December\fi
 % 修改章节编号的样式：
 %    \begin{macrocode}
 \renewcommand{\thechapter}{\arabic{chapter}}
-\renewcommand{\thesection}{\arabic{chapter}\thinspace.\thinspace\arabic{section}}
+\renewcommand{\thesection}{\thechapter\thinspace.\thinspace\arabic{section}}
 \renewcommand{\thesubsection}{\thesection\thinspace.\thinspace\arabic{subsection}}
 \renewcommand{\thesubsubsection}{\thesubsection\thinspace.\thinspace\arabic{subsubsection}}
 %    \end{macrocode}
@@ -2791,11 +2818,12 @@ December\fi
 % 
 % 重新定义\cs{ref}命令，使其前面自动加一个``\textasciitilde''。因为|hyperref|宏包会通
 % 过\cs{AtBeginDocument}修改\cs{ref}的定义，因此我们对\cs{ref}的修改也必须使用
-% \cs{AtBeginDocument}命令进行。
+% \cs{AtBeginDocument}命令进行。同时我们需要修改\cs{eqref}，使其括号前后不出现空隙。
 %    \begin{macrocode}
 \AtBeginDocument{%
 \let\oldref\ref%
-\renewcommand*{\ref}[1]{~\oldref{#1}}%
+\renewcommand*{\ref}[1]{\thinspace\oldref{#1}}%
+\renewcommand*{\eqref}[1]{(\oldref{#1})}
 }
 %    \end{macrocode}
 % \subsection{封面字段设置}
@@ -3706,6 +3734,9 @@ December\fi
 % 设置索引页面的栏数
 \setcounter{IndexColumns}{2}
 
+
+\newcommand{\dashnumber}[2]%
+  {{#1}\kern.07em\rule[.5ex]{.4em}{.1ex}\kern.07em{#2}}
 
 %</dtx-style>
 %    \end{macrocode}
