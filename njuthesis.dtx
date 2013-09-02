@@ -24,7 +24,7 @@
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
 %<*cls>
- [2013/09/01 v1.1.4 Document Class for the Degree Papers of Nanjing University]
+ [2013/09/01 v1.1.5 Document Class for the Degree Papers of Nanjing University]
 %</cls>
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
@@ -190,6 +190,9 @@
 %  v1.1.4 & 2013/09/02 & 胡海星 & 修复了附录的节编号错误\newline
 %                                按照\std{CY/T 35-2001}规范修改了图、表、公式、
 %                                定理的编号样式\\
+%  v1.1.4 & 2013/09/03 & 胡海星 & 修改了参考文献引用编号和脚注编号的样式，使其符合
+%                                \std{GB/T 7714-2005}规范\newline
+%                                去除了用处不大的批注功能\\
 % \bottomrule
 % \end{tabular*}
 % \end{center}
@@ -316,9 +319,9 @@
 %     |ifxetex|  & |indentfirst| & |xeCJK|    & |lastpage| & |geometry|  & |graphicx| \\
 %     |subfig|   & |caption|     & |float|    & |array|    & |longtable| & |booktabs| \\
 %     |multirow| & |hyperref|    & |enumitem| & |xcolor|   & |amsmath|   & |amsfonts| \\
-%     |amssymb|  & |bm|          & |mathrsfs| & |txfonts|  & |amsthm|  & |makeidx|  \\
+%     |amsthm|   & |amssymb|    & |bm|        & |mathrsfs| & |txfonts|  & |pifont|  \\
 %     |setspace| & |wasysym|    & |hypernat| & |fancyhdr| & |natbib|    & |tabularx| \\
-%     |titlesec| & |glossaries|  & |ifthen|   & |etex|     & |todonotes| &  \\
+%     |titlesec| & |glossaries|  & |ifthen|   & |makeidx| & |footmisc| &  \\
 %   \hline
 %   \end{tabular*}
 %   \caption{{\njuthesis}用到的宏包}\label{table:dependence}
@@ -478,17 +481,6 @@
 % \end{example}
 % \begin{note}
 % 这三个选项必须设置一个且只能设置一个。
-% \end{note}
-%
-% \item[showcomments] 如果设置了此选项，则文档中的注释会被显示出来，否则所有注释
-% 都会被隐藏。此选项默认不被设置。
-% \begin{example}
-% \documentclass[winfonts,phd,showcomments]{njuthesis}
-% \end{example}
-% \begin{note}
-% 由composing选项切换到无该选项编译文档时可能会出现pgf宏包的错误，这可能是因为上次带
-% composing选项编译时中间文件中存在使用\cs{comment}命令而由|todonotes|宏包引入的pgf
-% 指令，简单跳过编译或者清除上次编译的中间文件然后执行全新的编译即能顺利进行。
 % \end{note}
 %
 % \end{description}
@@ -1195,21 +1187,6 @@
 %
 % 使用的细节请参看|paralist|文档，此处不再赘述。
 %
-% \myentry{批注}
-% \DescribeMacro{\comment}
-% 命令\cs{comment}用来插入写作时的批注，该批注在|showcomments|选项下才可见，
-% 提交最终版本时去掉|showcomments|选项，所有批注都不显示。该命令使用语法为：
-% \begin{syntax}
-% \cs{comment}\marg{被注释文本}\marg{添加注释的作者名}\marg{注释内容}
-% \end{syntax}
-%
-% \begin{example}
-% 倒是作者分析到湘西的苗人的“仇外”避汉，这种思想其实并非是针对民族的，
-% \comment{而是阶层性的}{张三}{为什么时阶层性的呢？这里有待查资料}，
-% 因为当时官吏的主体无疑是统治阶级的民族{\zhdash}这种历史背景，导致了
-% 民族性质的被强调。
-% \end{example}
-%
 % \subsection{数学环境}
 %
 % {\njuthesis}宏包预定义了一些数学定理环境，如表\ref{table:math-env}所示。
@@ -1275,7 +1252,6 @@
 \newif\ifnjut@phd\njut@phdfalse
 \newif\ifnjut@master\njut@masterfalse
 \newif\ifnjut@bachelor\njut@bachelorfalse
-\newif\ifnjut@showcomments\njut@showcommentsfalse
 \DeclareOption{adobefonts}{\njut@adobefontstrue
   \njut@winfontsfalse
   \njut@linuxfontsfalse
@@ -1302,7 +1278,6 @@
 \DeclareOption{bachelor}{\njut@bachelortrue
   \njut@phdfalse
   \njut@masterfalse}
-\DeclareOption{showcomments}{\njut@showcommentstrue}
 %    \end{macrocode}
 %
 % 把没有定义的选项传递给底层的文档类，在这里为|book|。
@@ -1424,6 +1399,11 @@
 % |wasysym|宏包提供特殊符号支持。
 %    \begin{macrocode}
 \RequirePackage{wasysym}
+%    \end{macrocode}
+%
+% |pifont|宏包提供带圈的数字符号。
+%    \begin{macrocode}
+\RequirePackage{pifont}
 %    \end{macrocode}
 %
 % |txfonts|宏包用自己的typewriter字体替换系统Courier字体，它必须在{\AmSTeX}之后引入。
@@ -1548,14 +1528,9 @@
 \RequirePackage{ifthen}
 %    \end{macrocode}
 %
-% 引入|todonotes|宏包以支持编写论文时自己写批注，批注的可见性由|showcomments|文档选项控
-% 制。也就是定义了|showcomments|文档选项时批注可见，不定义时不可见。引入|etex|宏包以避免
-% |todonotes|和|listings|宏包冲突而导致``No room for a new count''错误。
+% |footmisc|宏包提供了对脚注样式的控制功能。
 %    \begin{macrocode}
-\ifnjut@showcomments
-    \RequirePackage{etex}
-    \RequirePackage[textwidth=2.5cm,shadow,textsize=footnotesize]{todonotes}
-\fi
+\RequirePackage[perpage,symbol*]{footmisc}
 %</cls>
 %    \end{macrocode}
 %
@@ -1933,18 +1908,6 @@ December\fi
 \newcommand*{\njut@enfn@main}{Times}
 \newcommand*{\njut@enfn@sans}{Helvetica}
 \newcommand*{\njut@enfn@mono}{Courier}
-%    \end{macrocode}
-%
-% 定义注释的颜色：\cs{commentlinecolor}控制注释的线条颜色；\cs{commentbordercolor}控
-% 制注释盒子的边框颜色；\cs{commentbackgroundcolor}控制注释盒子的背景颜
-% 色；\cs{commenttextcolor}控制被注释的文本的颜色。所有颜色值必须是|xcolor|宏包所支
-% 持的颜色名称常量。可以通过\cs{renewcommand}修改这些颜色值。修改过后下次再调
-% 用\cs{comment}命令会应用新修改的颜色值。
-%    \begin{macrocode}
-\newcommand*{\commentlinecolor}{orange}
-\newcommand*{\commentbordercolor}{black}
-\newcommand*{\commentbackgroundcolor}{yellow}
-\newcommand*{\commenttextcolor}{red}
 %</cfg>
 %    \end{macrocode}
 %
@@ -2815,6 +2778,17 @@ December\fi
 %    \begin{macrocode}
 \setcitestyle{super,square}
 %    \end{macrocode}
+%
+% 修改|natbib|内部的\cs{NAT@citesuper}命令，使其生成的上标引用编号可以正确地把
+% \cs{cite}命令的可选参数（通常是引文页码）也作为上标放在引文编号方框之后。
+%    \begin{macrocode}
+\renewcommand\NAT@citesuper[3]{%
+\ifNAT@swa%
+  \if*#2*\else#2\NAT@spacechar\fi%
+  \unskip\kern\p@\textsuperscript{\NAT@@open#1\NAT@@close#3}%
+\else #1\fi\endgroup%
+}
+%    \end{macrocode}
 % 
 % 重新定义\cs{ref}命令，使其前面自动加一个``\textasciitilde''。因为|hyperref|宏包会通
 % 过\cs{AtBeginDocument}修改\cs{ref}的定义，因此我们对\cs{ref}的修改也必须使用
@@ -2826,6 +2800,27 @@ December\fi
 \renewcommand*{\eqref}[1]{(\oldref{#1})}
 }
 %    \end{macrocode}
+%
+% \subsection{脚注}
+%
+% 使用|footmisc|宏包和|pifont|宏包设置符合\std{GB/T 7713.1-2006}规范的脚注样式。注意，
+% 由于|pifont|宏包提供的特殊符号的限制，一页之中最多只能有$10$个脚注。
+%    \begin{macrocode}
+\DefineFNsymbols*{circlednumber}[text]{%
+   {\ding{192}} %
+   {\ding{193}} %
+   {\ding{194}} %
+   {\ding{195}} %
+   {\ding{196}} %
+   {\ding{197}} %
+   {\ding{198}} %
+   {\ding{199}} %
+   {\ding{200}} %
+   {\ding{201}} %
+}%
+\setfnsymbol{circlednumber}
+%    \end{macrocode}
+%
 % \subsection{封面字段设置}
 %
 % 国家图书馆封面字段设置：
@@ -3468,23 +3463,6 @@ December\fi
 \setlist[alphaenum,2]{label={\textnormal{\alph{alphaenumi}.\arabic*\,)}}}
 %    \end{macrocode}
 % \end{environment}
-%
-% \begin{macro}{\comment}
-% 定义\cs{comment}命令以产生批注，批注的可见性由|showcomments|文档选项控制。当定义了
-% |showcomments|文档选项时批注可见，否则批注不可见。
-%    \begin{macrocode}
-\newcommand{\comment}[3]{#1}
-\ifnjut@showcomments
-    \renewcommand\comment[3]{%
-      \todo[linecolor={\commentlinecolor},
-            bordercolor={\commentbordercolor},
-            backgroundcolor={\commentbackgroundcolor}]
-            {{#3}\par\hfill\zhdash{#2}}
-            {\color{\commenttextcolor}#1}
-    }
-\fi
-%    \end{macrocode}
-% \end{macro}
 %
 % \subsection{设置PDF文档属性}
 %

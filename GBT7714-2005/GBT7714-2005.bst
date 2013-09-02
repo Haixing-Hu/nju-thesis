@@ -313,19 +313,37 @@ FUNCTION {remove.dots} {                          % String remove_dots(String st
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
 FUNCTION {add.brace} {                            % String Entry::add_brace(String str) {
-  "}" * "{" swap$ *                               %   return "{" + str + "}";
+  "{" swap$ * "}" *                               %   return "{" + str + "}";
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
 FUNCTION {add.bracket} {                          % String Entry::bracket(String str) {
-  ")" * "(" swap$ *                               %   return "(" + str + ")";
+  "(" swap$ * ")" *                               %   return "(" + str + ")";
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
 FUNCTION {add.squarebracket} {                    % String Entry::add_squarebracket(String str) {
-  "]" * "[" swap$ *                               %   return "[" + str + "]";
+  "[" swap$ * "]" *                               %   return "[" + str + "]";
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+FUNCTION {add.textsl} {                           % String Entry::add_textsl(String str) {
+  "\textsl{" swap$ * "}" *                        %   return "\textsl{" + str + "}";
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+FUNCTION {add.textit} {                           % String Entry::add_textit(String str) {
+  "\textit{" swap$ * "}" *                        %   return "\textit{" + str + "}";
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+FUNCTION {add.textbf} {                           % String Entry::add_textbf(String str) {
+  "\textbf{" swap$ * "}" *                        %   return "\textbf{" + str + "}";
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

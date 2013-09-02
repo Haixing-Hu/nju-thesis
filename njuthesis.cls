@@ -25,7 +25,7 @@
 %% through LaTeX.
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{njuthesis.cls}
- [2013/09/01 v1.1.4 Document Class for the Degree Papers of Nanjing University]
+ [2013/09/01 v1.1.5 Document Class for the Degree Papers of Nanjing University]
 \newif\ifnjut@adobefonts\njut@adobefontstrue
 \newif\ifnjut@winfonts\njut@winfontsfalse
 \newif\ifnjut@linuxfonts\njut@linuxfontsfalse
@@ -34,7 +34,6 @@
 \newif\ifnjut@phd\njut@phdfalse
 \newif\ifnjut@master\njut@masterfalse
 \newif\ifnjut@bachelor\njut@bachelorfalse
-\newif\ifnjut@showcomments\njut@showcommentsfalse
 \DeclareOption{adobefonts}{\njut@adobefontstrue
   \njut@winfontsfalse
   \njut@linuxfontsfalse
@@ -61,7 +60,6 @@
 \DeclareOption{bachelor}{\njut@bachelortrue
   \njut@phdfalse
   \njut@masterfalse}
-\DeclareOption{showcomments}{\njut@showcommentstrue}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
 \ProcessOptions\relax
 \LoadClass[12pt,a4paper,doubleside]{book}
@@ -88,6 +86,7 @@
 \RequirePackage{bm}
 \RequirePackage{mathrsfs}
 \RequirePackage{wasysym}
+\RequirePackage{pifont}
 \RequirePackage{txfonts}
 \RequirePackage{setspace}
 \RequirePackage{fancyhdr}
@@ -122,10 +121,7 @@
 \RequirePackage{makeidx}
 \RequirePackage{glossaries}
 \RequirePackage{ifthen}
-\ifnjut@showcomments
-    \RequirePackage{etex}
-    \RequirePackage[textwidth=2.5cm,shadow,textsize=footnotesize]{todonotes}
-\fi
+\RequirePackage[perpage,symbol*]{footmisc}
 \input{njuthesis.cfg}
 \ifnjut@adobefonts
   \newcommand*{\njut@zhfn@songti}{\njut@zhfn@songti@adobe}
@@ -616,11 +612,30 @@
       \endlist}
 \bibliographystyle{GBT7714-2005}
 \setcitestyle{super,square}
+\renewcommand\NAT@citesuper[3]{%
+\ifNAT@swa%
+  \if*#2*\else#2\NAT@spacechar\fi%
+  \unskip\kern\p@\textsuperscript{\NAT@@open#1\NAT@@close#3}%
+\else #1\fi\endgroup%
+}
 \AtBeginDocument{%
 \let\oldref\ref%
 \renewcommand*{\ref}[1]{\thinspace\oldref{#1}}%
 \renewcommand*{\eqref}[1]{(\oldref{#1})}
 }
+\DefineFNsymbols*{circlednumber}[text]{%
+   {\ding{192}} %
+   {\ding{193}} %
+   {\ding{194}} %
+   {\ding{195}} %
+   {\ding{196}} %
+   {\ding{197}} %
+   {\ding{198}} %
+   {\ding{199}} %
+   {\ding{200}} %
+   {\ding{201}} %
+}%
+\setfnsymbol{circlednumber}
 \newcommand*{\classification}[1]{%
   \renewcommand*{\njut@value@nlc@classification}{#1}}
 \newcommand*{\securitylevel}[1]{%
@@ -1041,16 +1056,6 @@
 \newlist{alphaenum}{enumerate}{2}
 \setlist[alphaenum,1]{label={\textnormal{\alph*\,)}}}
 \setlist[alphaenum,2]{label={\textnormal{\alph{alphaenumi}.\arabic*\,)}}}
-\newcommand{\comment}[3]{#1}
-\ifnjut@showcomments
-    \renewcommand\comment[3]{%
-      \todo[linecolor={\commentlinecolor},
-            bordercolor={\commentbordercolor},
-            backgroundcolor={\commentbackgroundcolor}]
-            {{#3}\par\hfill\zhdash{#2}}
-            {\color{\commenttextcolor}#1}
-    }
-\fi
 \newcommand*{\njut@setpdfinfo}{\hypersetup{%
         pdftitle={\njut@value@title},
         pdfauthor={\njut@value@author},

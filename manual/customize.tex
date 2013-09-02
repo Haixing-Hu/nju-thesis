@@ -19,6 +19,9 @@
 % 下面的宏包提供了\BibTeX的logo
 \usepackage{dtklogos}
 
+% 提供 framed 环境
+\usepackage{framed}
+
 % 使用\verb{text}命令的缩写形式|text|
 \MakeShortVerb{\|}
 
@@ -46,5 +49,10 @@
   {frame=single,framerule=0.1mm,rulecolor=\color{black},%
    framesep=2mm,baselinestretch=1.2,fontsize=\small}
 
-\newcommand{\cs}[1]{\textbackslash\texttt{#1}}
+\newcommand{\cs}[1]{\texttt{\textbackslash{}#1}}
 \newcommand{\env}[1]{\texttt{#1}}
+\newcommand{\meta}[1]{\ensuremath{\langle}\textit{#1}\ensuremath{\rangle}}
+\newcommand{\oarg}[1]{\texttt{[}\meta{#1}\texttt{]}}
+\newcommand{\marg}[1]{\texttt{\{}\meta{#1}\texttt{\}}}
+\newcommand{\parg}[1]{\texttt{(}\meta{#1}\texttt{)}}
+
