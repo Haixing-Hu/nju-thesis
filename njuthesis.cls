@@ -25,7 +25,7 @@
 %% through LaTeX.
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{njuthesis.cls}
- [2013/09/01 v1.1.2 Document Class for the Degree Papers of Nanjing University]
+ [2013/09/01 v1.1.3 Document Class for the Degree Papers of Nanjing University]
 \newif\ifnjut@adobefonts\njut@adobefontstrue
 \newif\ifnjut@winfonts\njut@winfontsfalse
 \newif\ifnjut@linuxfonts\njut@linuxfontsfalse
@@ -348,7 +348,7 @@
 \renewcommand{\textsc}[1]{{\usefont{OT1}{cmr}{m}{sc}{#1}}}
 \renewcommand*{\thefigure}{\arabic{chapter}.\arabic{figure}}
 \renewcommand*{\thetable}{\arabic{chapter}.\arabic{table}}
-\renewcommand*{\theequation}{(\arabic{chapter}.\arabic{equation})}
+\renewcommand*{\theequation}{\arabic{chapter}.\arabic{equation}}
 \renewcommand*{\thesubfigure}{(\alph{subfigure})}
 \renewcommand*{\thesubtable}{(\alph{subtable})}
 \theoremstyle{plain}

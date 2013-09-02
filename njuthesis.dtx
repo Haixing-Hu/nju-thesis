@@ -24,7 +24,7 @@
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
 %<*cls>
- [2013/09/01 v1.1.2 Document Class for the Degree Papers of Nanjing University]
+ [2013/09/01 v1.1.3 Document Class for the Degree Papers of Nanjing University]
 %</cls>
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
@@ -186,6 +186,7 @@
 %                                修改了一些本手册的排版细节\\
 %  v1.1.2 & 2013/09/02 & 胡海星 & 重新定义\cs{ref}命令，
 %                                使其前面自动加一个``\textasciitilde''\\
+%  v1.1.3 & 2013/09/02 & 胡海星 & 修复了公式自动编号多了一个括号的bug\\
 % \bottomrule
 % \end{tabular*}
 % \end{center}
@@ -2289,7 +2290,7 @@ December\fi
 %    \begin{macrocode}
 \renewcommand*{\thefigure}{\arabic{chapter}.\arabic{figure}}
 \renewcommand*{\thetable}{\arabic{chapter}.\arabic{table}}
-\renewcommand*{\theequation}{(\arabic{chapter}.\arabic{equation})}
+\renewcommand*{\theequation}{\arabic{chapter}.\arabic{equation}}
 \renewcommand*{\thesubfigure}{(\alph{subfigure})}
 \renewcommand*{\thesubtable}{(\alph{subtable})}
 %    \end{macrocode}
