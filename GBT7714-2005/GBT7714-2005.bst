@@ -3,8 +3,9 @@
 %  符合 GB/T 7714-2005 规范的 BibTeX 样式文件
 %
 %  作者：    胡海星   南京大学计算机科学与技术系
-%  版本：    v1.0.1  2013-09-01
+%  版本：    v1.0.2  2013年9月14日
 %  项目主页: https://github.com/Haixing-Hu/nju-thesis
+%
 %
 %  参考资料:
 %  [1] 中国国家标准化管理委员会. GB/T 7714-2005 文后参考文献着录规则[S]. 2005.
@@ -93,31 +94,59 @@ STRINGS {                                         % //  declare global String va
 }                                                 %
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                                  %
-FUNCTION {true} {#1}                              % static int const true = 1;
-FUNCTION {false} {#0}                             % static int const false = 0;
-FUNCTION {debug.enabled} {true}                   % static int const debug_enabled = true;
-FUNCTION {cap.edition.en} {" ed"}                 % static String const cap_edition_en = " ed";
-FUNCTION {cap.edition.zh} {"版"}                   % static String const cap_edition_zh = "版";
-FUNCTION {cap.no.address.en} {"[S.l.]"}           % static String const cap_no_address_en = "[S.l.]";
-FUNCTION {cap.no.address.zh} {"[出版地不详]"}       % static String const cap_no_address_zh = "[出版地不详]";
-FUNCTION {cap.no.publisher.en} {"[s.n.]"}         % static String const cap_no_publiser_en = "[s.n.]";
-FUNCTION {cap.no.publisher.zh} {"[出版者不详]"}     % static String const cap_no_publiser_zh = "[出版者不详]";
-FUNCTION {cap.et.al.en} {", et~al"}               % static String const cap_et_al_en = ", et~al";
-FUNCTION {cap.et.al.zh} {", 等"}                   % static String const cap_et_al_zh = ", 等";
-FUNCTION {cap.translate.en} {"Translated by "}    % static String const cap_translate_en = "Translated by ";
-FUNCTION {cap.translate.zh} {"译"}                 % static String const cap_translate_zh = "译";
-FUNCTION {cap.doi.url} {"http://dx.doi.org/"}     % static String const cap_dor_url = "http://dx.doi.org/";
-FUNCTION {cap.st.en} {"st"}                       % static String const cap_st_en = "st";
-FUNCTION {cap.nd.en} {"nd"}                       % static String const cap_nd_en = "nd";
-FUNCTION {cap.rd.en} {"rd"}                       % static String const cap_rd_en = "rd";
-FUNCTION {cap.th.en} {"th"}                       % static String const cap_th_en = "th";
-FUNCTION {cap.period} {"\@. "}                    % static String const cap_period = "\@. ";
-FUNCTION {cap.comma} {", "}                       % static String const cap_comma = ", ";
-FUNCTION {cap.colon} {"\thinspace:\thinspace"}    % static String const cap_colon = "\thinspace:\thinspace";
-FUNCTION {cap.double.slash} {"//\thinspace"}      % static String const cap_double_slash = "//\thinspace";
-FUNCTION {cap.dash} {"\thinspace--\thinspace"}    % static String const cap_dash = "\thinspace--\thinspace";
-                                                  %
+
+% define global static constants                                             
+FUNCTION {true} {#1}                            
+FUNCTION {false} {#0}                         
+FUNCTION {debug.enabled} {true}                
+FUNCTION {cap.edition.en} {" ed"}             
+FUNCTION {cap.edition.zh} {"版"}               
+FUNCTION {cap.no.address.en} {"[S.l.]"}         
+FUNCTION {cap.no.address.zh} {"[出版地不详]"}    
+FUNCTION {cap.no.publisher.en} {"[s.n.]"}       
+FUNCTION {cap.no.publisher.zh} {"[出版者不详]"}    
+FUNCTION {cap.et.al.en} {", et~al"}             
+FUNCTION {cap.et.al.zh} {", 等"}                 
+FUNCTION {cap.translate.en} {" trans"}  
+FUNCTION {cap.translate.zh} {"译"}              
+FUNCTION {cap.doi.url} {"http://dx.doi.org/"}    
+FUNCTION {cap.st.en} {"st"}                    
+FUNCTION {cap.nd.en} {"nd"}                   
+FUNCTION {cap.rd.en} {"rd"}             
+FUNCTION {cap.th.en} {"th"}            
+FUNCTION {cap.period} {"\@. "}       
+FUNCTION {cap.comma} {", "}              
+FUNCTION {cap.colon} {"\thinspace{}\textnormal{:}\thinspace{}"}
+FUNCTION {cap.double.slash} {"//\thinspace{}"}   
+FUNCTION {cap.dash} {"\thinspace{}\textnormal{--}\thinspace{}"}
+
+% Predefined latex command used to format the style of bibitems
+FUNCTION {env.bibbegin} { "\begin{thebibliography}" }
+FUNCTION {env.bibend}   { "\end{thebibliography}" }
+FUNCTION {cmd.bibauthor} { "\providecommand{\bibauthor}[1]{#1}" }
+FUNCTION {cmd.bibeditor} { "\providecommand{\bibeditor}[1]{#1}" }
+FUNCTION {cmd.bibtranslator} { "\providecommand{\bibtranslator}[1]{#1}" }
+FUNCTION {cmd.bibtitle} { "\providecommand{\bibtitle}[1]{#1}" }
+FUNCTION {cmd.bibbooktitle} { "\providecommand{\bibbooktitle}[1]{\textsl{#1}}" }
+FUNCTION {cmd.bibjournal} { "\providecommand{\bibjournal}[1]{\textsl{#1}}" }
+FUNCTION {cmd.bibmark} { "\providecommand{\bibmark}[1]{#1}" }
+FUNCTION {cmd.bibcountry} { "\providecommand{\bibcountry}[1]{#1}" }
+FUNCTION {cmd.bibpatentid} { "\providecommand{\bibpatentid}[1]{#1}" }
+FUNCTION {cmd.bibedition} { "\providecommand{\bibedition}[1]{#1}" }
+FUNCTION {cmd.biborganization} { "\providecommand{\biborganization}[1]{#1}" }
+FUNCTION {cmd.bibaddress} { "\providecommand{\bibaddress}[1]{#1}" }
+FUNCTION {cmd.bibpublisher} { "\providecommand{\bibpublisher}[1]{#1}" }
+FUNCTION {cmd.bibinstitution} { "\providecommand{\bibinstitution}[1]{#1}" }
+FUNCTION {cmd.bibschool} { "\providecommand{\bibschool}[1]{#1}" }
+FUNCTION {cmd.bibvolume} { "\providecommand{\bibvolume}[1]{#1}" }
+FUNCTION {cmd.bibnumber} { "\providecommand{\bibnumber}[1]{#1}" }
+FUNCTION {cmd.bibpages} { "\providecommand{\bibpages}[1]{#1}" }
+FUNCTION {cmd.bibmodifydate} { "\providecommand{\bibmodifydate}[1]{#1}" }
+FUNCTION {cmd.bibcitedate} { "\providecommand{\bibcitedate}[1]{#1}" }
+FUNCTION {cmd.bibyear} { "\providecommand{\bibyear}[1]{#1}" }
+FUNCTION {cmd.bibdate} { "\providecommand{\bibdate}[1]{#1}" }
+FUNCTION {cmd.biburl} { "\providecommand{\biburl}[1]{\url{#1}}" }
+                                                  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
 FUNCTION {log.str} {                              % void Entry::log_str(String value, String message)
@@ -326,12 +355,6 @@ FUNCTION {add.bracket} {                          % String Entry::bracket(String
                                                   %
 FUNCTION {add.squarebracket} {                    % String Entry::add_squarebracket(String str) {
   "[" swap$ * "]" *                               %   return "[" + str + "]";
-}                                                 % }
-                                                  %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                                  %
-FUNCTION {add.textsl} {                           % String Entry::add_textsl(String str) {
-  "\textsl{" swap$ * "}" *                        %   return "\textsl{" + str + "}";
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -560,9 +583,8 @@ FUNCTION {cap.translate} {                        % String Entry::cap_translate(
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
 FUNCTION {format.bibinfo} {                       % String Entry::format_bibinfo(String info, String type) {
-  add.brace                                       %   type = add_brace(type);
   swap$ add.brace swap$                           %   info = add_brace(info);
-  "\bibinfo" swap$ * swap$ *                      %   return "\bibinfo" + type + info;
+  "\bib" swap$ * swap$ *                          %   return "\bib" + type + info;
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -649,14 +671,19 @@ FUNCTION {format.translator} {                    % String Emtry::format_transla
   is.in.chinese {                                 %   if (is_in_chinese) {
     duplicate$                                    %     String names = translators;
     format.names.zh                               %     translators = format_names_zh(translators);
-    swap$ num.names$ #3 > {                       %   if (num_names(names) > 3) {
-      cap.translate.zh *                          %     translators = translators + cap_translate_zh;
-    } {                                           %   } else {
-      cap.comma * cap.translate.zh *              %     translators = translators + cap_comma + cap_translate_zh;
-    } if$                                         %   }
+    swap$ num.names$ #3 > {                       %     if (num_names(names) > 3) {
+      cap.translate.zh *                          %       translators = translators + cap_translate_zh;
+    } {                                           %     } else {
+      cap.comma * cap.translate.zh *              %       translators = translators + cap_comma + cap_translate_zh;
+    } if$                                         %     }
   } {                                             %   } else {
+    duplicate$                                    %     String names = translators;
     format.names.en                               %     translators = format_names_en(translators);
-    cap.translate.en swap$ *                      %     translators = cap.translate.en + translators;
+    swap$ num.names$ #3 > {                       %     if (num_names(names) > 3) {
+      cap.translate.en *                          %       translators = translators + cap_translate_en;
+    } {                                           %     } else {
+      cap.comma * cap.translate.en *              %       translators = translators + cap_comma + cap_translate_en;
+    } if$                                         %     }
   } if$                                           %   }
   "translator" format.bibinfo                     %   return format_bibinfo(translator, "translator");
 }                                                 % }
@@ -792,8 +819,8 @@ FUNCTION {format.citedate} {                      % String Emtry::format_citedat
                                                   %
                                                   % // NOTE: do not use the format_bibinfo() for URL,
                                                   % // since if the URL contains special symbols such
-                                                  % // as '%', the \bibinfo{}{} will be broken.
-FUNCTION {format.url} {                           % String Emtry::format_url(String url) {
+                                                  % // as '%', the \biburl{} will be broken.
+FUNCTION {format.url} {                           % String Emtry::format_url(String url) {  
   "\url{" swap$ * "}" *                           %   return "\url{" + url + "}";
 }                                                 % }
                                                   %
@@ -911,7 +938,12 @@ FUNCTION {output.patentid} {                      % void Entry::output_patentid(
 FUNCTION {output.booktitle} {                     % void Entry::output_booktitle(int required) {
   'required :=                                    %   this.required = required;
   booktitle empty$ not {                          %   if (! empty(this.booktitle)) {
-    booktitle format.booktitle write$             %     write(format_booktitle(this.booktitle));
+    series empty$ {                               %     if (empty(this.series)) {
+      booktitle format.booktitle write$           %       write(format_booktitle(this.booktitle));
+    } {                                           %     } else {
+      booktitle cap.colon * series *              %       String str = this.booktitle + cap_colon + this.series;
+      format.booktitle write$                     %       write(format_booktitle(str));
+    } if$                                         %     }
   } {                                             %   } else {
     required {                                    %     if (required == 1) {
       "No booktitle: " cite$ * warning$           %       warning("No booktitle: " + this.cite);
@@ -1133,7 +1165,18 @@ FUNCTION {book.impl} {                            % void Entry::book_impl() {
   start.bibitem                                   %   start_bibitem();
   true output.author.or.editor                    %   output_author_or_editor(true);
   cap.period write$                               %   write(cap_period);
-  true output.title                               %   output_title(true);
+  title empty$ not {                              %   if (! empty(this.title)) {
+    series empty$ {                               %     if (empty(this.series)) {
+      title format.booktitle write$               %       write(format_booktitle(this.title));
+    } {                                           %     } else {
+      title cap.colon * series *                  %       String str = this.title + cap_colon + this.series;
+      format.booktitle write$                     %       write(format_booktitle(str));
+    } if$                                         %     }
+  } {                                             %   } else {
+    required {                                    %     if (required == 1) {
+      "No title: " cite$ * warning$               %       warning("No title: " + this.cite);
+    } 'skip$ if$                                  %     }
+  } if$                                           %   }
   true output.mark                                %   output_mark(true);
   cap.period write$                               %   write(cap_period);
   author empty$ not editor empty$ not and {       %   if ((! empty(this.author)) && (! empty(this.editor))) {
@@ -1657,23 +1700,73 @@ FUNCTION {longest.label.pass} {                   % void longest_label_pass(Entr
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
+FUNCTION {write.style.commands} {                 % void write_style_commands() {
+  cmd.bibauthor write$                            %   write(cmd_bibauthor);
+  newline$                                        %   writeln();
+  cmd.bibeditor write$                            %   write(cmd_bibeditor);
+  newline$                                        %   writeln();
+  cmd.bibtranslator write$                        %   write(cmd_bibtranslator);
+  newline$                                        %   writeln();
+  cmd.bibtitle write$                             %   write(cmd_bibtitle);
+  newline$                                        %   writeln();
+  cmd.bibbooktitle write$                         %   write(cmd_bibbooktitle);
+  newline$                                        %   writeln();
+  cmd.bibjournal write$                           %   write(cmd_bibjournal);
+  newline$                                        %   writeln();
+  cmd.bibmark write$                              %   write(cmd_bibmark);
+  newline$                                        %   writeln();
+  cmd.bibcountry write$                           %   write(cmd_bibcountry);
+  newline$                                        %   writeln();
+  cmd.bibpatentid write$                          %   write(cmd_bibpatentid);
+  newline$                                        %   writeln();
+  cmd.bibedition write$                           %   write(cmd_bibedition);
+  newline$                                        %   writeln();
+  cmd.biborganization write$                      %   write(cmd_biborganization);
+  newline$                                        %   writeln();
+  cmd.bibaddress write$                           %   write(cmd_bibaddress);
+  newline$                                        %   writeln();
+  cmd.bibpublisher write$                         %   write(cmd_bibpublisher);
+  newline$                                        %   writeln();
+  cmd.bibinstitution write$                       %   write(cmd_bibinstitution);
+  newline$                                        %   writeln();
+  cmd.bibschool write$                            %   write(cmd_bibschool);
+  newline$                                        %   writeln();
+  cmd.bibvolume write$                            %   write(cmd_bibvolume);
+  newline$                                        %   writeln();
+  cmd.bibnumber write$                            %   write(cmd_bibnumber);
+  newline$                                        %   writeln();
+  cmd.bibpages write$                             %   write(cmd_bibpages);
+  newline$                                        %   writeln();
+  cmd.bibmodifydate write$                        %   write(cmd_bibmodifydate);
+  newline$                                        %   writeln();
+  cmd.bibcitedate write$                          %   write(cmd_bibcitedate);
+  newline$                                        %   writeln();
+  cmd.bibyear write$                              %   write(cmd_bibyear);
+  newline$                                        %   writeln();
+  cmd.bibdate write$                              %   write(cmd_bibdate);
+  newline$                                        %   writeln();
+  cmd.biburl write$                               %   write(cmd_biburl);
+  newline$                                        %   writeln();  
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
 FUNCTION {begin.bib} {                            % void begin_bib() {
   preamble$ empty$ not {                          %   if (! empty(premble)) {
     preamble$ write$                              %     write(premeable);
     newline$                                      %     writeln();
   } 'skip$ if$                                    %   }
-  "\begin{thebibliography}{" longest.label *      %
-      "}" * write$                                %   write("\begin{thebibliography}{" + longest_label + "}")
+  env.bibbegin write$                             %   write(env_bibbegin);
+  "{" longest.label * "}" * write$                %   write("{" + longest.label + "}");
   newline$                                        %   writeln();
-  "\providecommand{\bibinfo}[2]{#2}" write$       %   write("\providecommand{\bibinfo}[2]{#1}");
-  newline$                                        %   writeln();
+  write.style.commands                            %   write_style_commands();
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
 FUNCTION {end.bib} {                              % void end_bib() {
   newline$                                        %   writeln();
-  "\end{thebibliography}" write$                  %   write("\end{thebibliography}");
+  env.bibend write$                               %   write(env_bibend);
   newline$                                        %   writeln();
 }                                                 % }
                                                   %

@@ -10,8 +10,10 @@
 ###############################################################################
 
 PACKAGE=njuthesis
-BST=GBT7714-2005.bst
-SOURCES=$(PACKAGE).dtx $(PACKAGE).ins $(BST)
+BST_DIR=GBT7714-2005
+BST_FILE=GBT7714-2005.bst
+BST=$(BST_DIR)/$(BST_FILE) $(BST_FILE)
+SOURCES=$(PACKAGE).dtx $(PACKAGE).ins
 CLS=$(PACKAGE).cls $(PACKAGE).cfg dtx-style.sty
 SAMPLE=sample
 SAMPLECONTENTS=$(SAMPLE).tex
@@ -22,7 +24,13 @@ TEXMFLOCAL=$(shell get_texmf_dir.sh)
 
 .PHONY: all clean cls doc sample
 
-all: cls doc sample
+all: bst cls doc sample 
+
+###### update bst file
+bst:  $(BST_FILE)
+
+$(BST_FILE): $(BST_DIR)/$(BST_FILE)
+	cp -rvf $(BST_DIR)/$(BST_FILE) $(BST_FILE)
 
 ###### generate cls/cfg
 cls:  $(CLS)
@@ -52,13 +60,13 @@ $(SAMPLE).pdf: $(CLS) $(BST) $(SAMPLE).tex $(SAMPLEBIB)
 
 ###### install
 
-install: $(SOURCE) $(INSTITUTE_LOGO) $(INSTITUTE_NAME) $(CLS) $(PACKAGE).pdf $(SAMPLE).pdf
+install: $(SOURCE) $(INSTITUTE_LOGO) $(INSTITUTE_NAME) $(CLS) $(BST_FILE) $(PACKAGE).pdf $(SAMPLE).pdf
 	mkdir -p $(TEXMFLOCAL)/tex/latex/njuthesis
 	cp -rvf $(SOURCES) $(CLS) $(INSTITUTE_LOGO) $(INSTITUTE_NAME) $(TEXMFLOCAL)/tex/latex/njuthesis/
 	mkdir -p $(TEXMFLOCAL)/doc/latex/njuthesis
 	cp -rvf $(PACKAGE).pdf $(SAMPLE).pdf $(TEXMFLOCAL)/doc/latex/njuthesis/
 	mkdir -p $(TEXMFLOCAL)/bibtex/bst
-	cp -rvf $(BST) $(TEXMFLOCAL)/bibtex/bst/
+	cp -rvf $(BST_FILE) $(TEXMFLOCAL)/bibtex/bst/
 	texhash
 
 ###### clean
@@ -87,4 +95,5 @@ clean:
 		*.sty \
 		*.cfg \
 		*.cls \
-		*.sty
+		*.sty \
+		*.bst
