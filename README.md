@@ -20,6 +20,6 @@ nju-thesis
 下载
 ---
 
-请到[项目主页](http://haixing-hu.github.io/nju-thesis/)上下载NJU-Thesis模板的最新版本。
+请到[项目主页](http://haixing-hu.github.io/nju-thesis/)上打包下载NJU-Thesis模板的最新版本。
 
 
