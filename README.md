@@ -24,8 +24,8 @@ NJU-Thesis
 下载
 ---
 
-* [下载tar.gz压缩包](https://github.com/Haixing-Hu/nju-thesis/tarball/download)，适合Linux/Mac用户
-* [下载zip压缩包](https://github.com/Haixing-Hu/nju-thesis/zipball/download)，适合Windows用户
+* [下载tar.gz压缩包](https://github.com/Haixing-Hu/nju-thesis/tarball/master)，适合Linux/Mac用户
+* [下载zip压缩包](https://github.com/Haixing-Hu/nju-thesis/zipball/master)，适合Windows用户
 
 安装使用
 ---
