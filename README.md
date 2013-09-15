@@ -15,7 +15,7 @@ NJU-Thesis
 使用方法
 ---
 
-参见[使用手册](https://raw.github.com/Haixing-Hu/nju-thesis/master/manual/njuthesis-manual.pdf)的说明。
+参见[用户手册](https://raw.github.com/Haixing-Hu/nju-thesis/master/manual/njuthesis-manual.pdf)的说明。
 
 下载
 ---
