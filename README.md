@@ -1,4 +1,4 @@
-nju-thesis
+NJU-Thesis
 ==========
 
 南京大学学位论文XeLaTeX模板。
