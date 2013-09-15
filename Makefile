@@ -5,7 +5,7 @@
 # 	Copyright (C) 2013 Haixing Hu,
 #   Department of Computer Science and Technology, Nanjing University.
 #
-#	Home Page of the Project: https://github.com/Haixing-Hu/nju-thesis
+#	Home Page of the Project: http://haixing-hu.github.io/nju-thesis/
 #
 ###############################################################################
 

@@ -16,3 +16,10 @@ nju-thesis
 ---
 
 参见`manual/njuthesis-manual.pdf`的说明。
+
+下载
+---
+
+请到[项目主页](http://haixing-hu.github.io/nju-thesis/)上下载NJU-Thesis模板的最新版本。
+
+

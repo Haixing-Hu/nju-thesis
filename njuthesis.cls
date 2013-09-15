@@ -10,7 +10,7 @@
 %% Copyright (C) 2013, Haixing Hu.
 %% Department of Computer Science and Technology, Nanjing University.
 %% 
-%% Home Page of the Project: https://github.com/Haixing-Hu/nju-thesis
+%% Home Page of the Project: http://haixing-hu.github.io/nju-thesis/
 %% 
 %% It may be distributed and/or modified under the conditions of the LaTeX Project
 %% Public License, either version 1.2 of this license or (at your option) any
@@ -25,7 +25,7 @@
 %% through LaTeX.
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{njuthesis.cls}
- [2013/09/01 v1.1.5 Document Class for the Degree Papers of Nanjing University]
+ [2013/09/15 v1.1.6 Document Class for the Degree Papers of Nanjing University]
 \newif\ifnjut@adobefonts\njut@adobefontstrue
 \newif\ifnjut@winfonts\njut@winfontsfalse
 \newif\ifnjut@linuxfonts\njut@linuxfontsfalse

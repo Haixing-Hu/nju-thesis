@@ -12,7 +12,7 @@
 % and version 1.2 or later is part of all distributions of LaTeX version
 % 1999/12/01 or later.
 %
-% Home Page of the Project: https://github.com/Haixing-Hu/nju-thesis
+% Home Page of the Project: http://haixing-hu.github.io/nju-thesis/
 %
 % \fi
 %
@@ -24,7 +24,7 @@
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
 %<*cls>
- [2013/09/01 v1.1.5 Document Class for the Degree Papers of Nanjing University]
+ [2013/09/15 v1.1.6 Document Class for the Degree Papers of Nanjing University]
 %</cls>
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
@@ -124,19 +124,20 @@
 % \thispagestyle{empty}
 %
 % \begin{abstract}
-% \setlength{\parindent}{2em}
-% {\indent}宏包{\njuthesis}提供了一个南京大学学位论文的{\XeLaTeX}文档类。该文档类严格
-% 按照南京大学对学位论文的格式要求进行排版，底层通过|xeCJK|宏包支持中文。
 %
-% 目前{\njuthesis}宏包可用于排版学士学位、硕士学位论文和博士学位论文。对于学士学位论文，
+% \setlength{\parindent}{2em}
+% \noindent\hspace{2em}文档类{\njuthesis}提供了一个南京大学学位论文的{\XeLaTeX}
+% 模板。该文档类严格按照南京大学对学位论文的格式要求排版学位论文，底层通过
+% |xeCJK|宏包支持中文。
+%
+% 目前{\njuthesis}可用于排版学士学位、硕士学位论文和博士学位论文。对于学士学位论文，
 % 采用和硕士学位论文一样的格式进行排版。
 %
-% 虽然{\njuthesis}宏包主要用于排版南京大学的学位论文，但亦可经过简单的设置或修改用于排版
+% 虽然{\njuthesis}主要用于排版南京大学的学位论文，但亦可经过简单的设置或修改用于排版
 % 国内其他大学的学位论文。
 %
-% 本文档是{\njuthesis}宏包的说明文档，其中包含宏包文件的设置说明以及宏包源代码的完全注释。
+% 本文档是{\njuthesis}的说明文档，其中包含模板文件的设置说明以及其源代码的完全注释。
 % \end{abstract}
-% \clearpage
 %
 % \section*{{\hfill}修订历史{\hfill}}
 % \begin{center}
@@ -190,9 +191,10 @@
 %  v1.1.4 & 2013/09/02 & 胡海星 & 修复了附录的节编号错误\newline
 %                                按照\std{CY/T 35-2001}规范修改了图、表、公式、
 %                                定理的编号样式\\
-%  v1.1.4 & 2013/09/03 & 胡海星 & 修改了参考文献引用编号和脚注编号的样式，使其符合
+%  v1.1.5 & 2013/09/03 & 胡海星 & 修改了参考文献引用编号和脚注编号的样式，使其符合
 %                                \std{GB/T 7714-2005}规范\newline
 %                                去除了用处不大的批注功能\\
+%  v1.1.6 & 2013/09/15 & 胡海星 & 修改了项目主页网址 \\
 % \bottomrule
 % \end{tabular*}
 % \end{center}
@@ -204,18 +206,18 @@
 % \pagestyle{fancy}
 % \section{简介}
 %
-% {\njuthesis}是为了帮助南京大学的同学撰写学位论文而编写的{\XeLaTeX}文档类。该宏包提供了
-% 一个南京大学学位论文的{\XeLaTeX}文档类，用于生成符合南京大学学位论文格式要求进行的学位论
-% 文。该宏包的底层通过|xeCJK|宏包支持中文。目前该宏包可用于排版硕士学位论文和博士学位论文；
-% 对于学士学位论文，由于作者未能找到南京大学对学士学位论文的格式要求，因此目前采用和硕士学
-% 位论文一样的格式进行排版。
+% 文档类{\njuthesis}是为了帮助南京大学的同学撰写学位论文而编写的{\XeLaTeX}模板。
+% 该模板提供了一个南京大学学位论文的{\XeLaTeX}文档类，用于生成符合南京大学学位
+% 论文格式要求进行的学位论文。该宏包的底层通过|xeCJK|宏包支持中文。目前该宏包可
+% 用于排版硕士学位论文和博士学位论文；对于学士学位论文，由于作者未能找到南京大学
+% 对学士学位论文的格式要求，因此目前采用和硕士学位论文一样的格式进行排版。
 %
-% 虽然{\njuthesis}宏包主要用于排版南京大学的学位论文，但亦可经过简单的设置或修改用于排版
+% 虽然{\njuthesis}主要用于排版南京大学的学位论文，但亦可经过简单的设置或修改用于排版
 % 国内其他大学的学位论文。
 %
-% 本文档将尽量完整的介绍该文档类的使用方法，如有不清楚之处可以参考示例文档或者与作者联系。
-% 由于作者水平有限，虽然现在的这个版本基本上满足了学位论文的撰写需求，但难免还存在不足之
-% 处，欢迎大家积极反馈意见。
+% 本文档将尽量完整的介绍{\njuthesis}的使用方法，如有不清楚之处可以参考示例文档或
+% 者与作者联系。由于作者水平有限，虽然现在的这个版本基本上满足了学位论文的撰写需
+% 求，但难免还存在不足之处，欢迎大家积极反馈意见。
 %
 % 本模板的编写过程中参考了以下代码和文档，这里一并向这些代码和文档的作者表示感谢：
 %
@@ -267,10 +269,11 @@
 %
 % \subsection{下载}
 %
-% 可在{\njuthesis}项目主页下载最新版本，亦可在该主页上反馈模板的bug和意见建议：
-% \begin{center}
-% \url{https://github.com/Haixing-Hu/nju-thesis}
-% \end{center}
+% 可在{\njuthesis}项目主页上下载最新版本，亦可在代码库主页上反馈bug和意见建议：
+% \begin{itemize}
+% \item 项目主页：\url{http://haixing-hu.github.io/nju-thesis/}
+% \item 代码库主页：\url{https://github.com/Haixing-Hu/nju-thesis}
+% \end{itemize}
 %
 % \subsection{模板的组成部分}
 %

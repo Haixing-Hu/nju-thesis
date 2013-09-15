@@ -4,7 +4,7 @@
 %
 %  作者：    胡海星   南京大学计算机科学与技术系
 %  版本：    v1.0.2  2013年9月14日
-%  项目主页: https://github.com/Haixing-Hu/nju-thesis
+%  项目主页: http://haixing-hu.github.io/nju-thesis/
 %
 %
 %  参考资料:
