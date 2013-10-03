@@ -8,7 +8,9 @@
 
 ## 项目主页
 
-本项目主页地址为：[http://haixing-hu.github.io/nju-thesis/](http://haixing-hu.github.io/nju-thesis/)
+本项目主页地址为：[http://haixing-hu.github.io/nju-thesis/][homepage]
+
+[homepage]: http://haixing-hu.github.io/nju-thesis/
 
 ## 功能特色
 
@@ -20,14 +22,23 @@
 
 ## 下载
 
-* [下载tar.gz压缩包](https://github.com/Haixing-Hu/nju-thesis/tarball/master)，适合Linux/Mac用户
-* [下载zip压缩包](https://github.com/Haixing-Hu/nju-thesis/zipball/master)，适合Windows用户
+* [下载tar.gz压缩包][targz]，适合Linux/Mac用户
+* [下载zip压缩包][zip]，适合Windows用户
+
+[targz]: https://github.com/Haixing-Hu/nju-thesis/tarball/master
+[zip]: https://github.com/Haixing-Hu/nju-thesis/zipball/master
 
 ## 安装使用
 
-参见[用户手册](https://raw.github.com/Haixing-Hu/nju-thesis/master/manual/njuthesis-manual.pdf)的详细说明。
+参见[用户手册][manual]中相关章节的详细说明。
+
+[manual]: https://raw.github.com/Haixing-Hu/nju-thesis/master/manual/njuthesis-manual.pdf
 
 ## 相关项目
 
-* [符合国家标准《GB/T 7714-2005 文后参考文献着录规则》的BibTeX样式文件](https://github.com/Haixing-Hu/GBT7714-2005-BibTeX-Style)
-* [中文书刊排版相关标准和规范](https://github.com/Haixing-Hu/typesetting-standard)
+* [符合国家标准《GB/T 7714-2005 文后参考文献着录规则》的BibTeX样式文件][gbt7714-2005-bst]
+* [中文书刊排版相关标准和规范][typesetting-standard]
+
+[gbt7714-2005-bst]: https://github.com/Haixing-Hu/GBT7714-2005-BibTeX-Style
+[typesetting-standard]: https://github.com/Haixing-Hu/typesetting-standard
+
