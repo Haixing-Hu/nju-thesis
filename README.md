@@ -23,6 +23,7 @@
 
 * [【GB/T 7713.1-2006】学位论文编写规则][gbt7713.1-2006]
 * [【GB/T 7714-2005】文后参考文献着录规则][gbt7714-2005]
+* [【GB/T 6447-1986】文摘编写规则][gbt6447-1986]
 * [【GB/T 13417-2009】期刊目次表][gbt13417-2009]
 * [【CY/T 35-2001】科技文献的章节编号方法][cyt35-2001]
 * [【GB/T 3469-1983】文献类型与文献载体代码][gbt3469-1983]
@@ -34,6 +35,8 @@
 [gbt7713.1-2006]: https://github.com/Haixing-Hu/typesetting-standard/raw/master/%E5%9B%BE%E4%B9%A6%E3%80%81%E6%9C%9F%E5%88%8A%E3%80%81%E8%AE%BA%E6%96%87%E7%9A%84%E7%BC%96%E6%8E%92/%E3%80%90GB:T%207713.1-2006%E3%80%91%E5%AD%A6%E4%BD%8D%E8%AE%BA%E6%96%87%E7%BC%96%E5%86%99%E8%A7%84%E5%88%99.pdf
 
 [gbt7714-2005]: https://github.com/Haixing-Hu/typesetting-standard/raw/master/%E5%9B%BE%E4%B9%A6%E3%80%81%E6%9C%9F%E5%88%8A%E3%80%81%E8%AE%BA%E6%96%87%E7%9A%84%E7%BC%96%E6%8E%92/%E3%80%90GB:T%207714-2005%E3%80%91%E6%96%87%E5%90%8E%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E7%9D%80%E5%BD%95%E8%A7%84%E5%88%99.pdf
+
+[gbt6447-1986]: https://github.com/Haixing-Hu/typesetting-standard/raw/master/%E5%9B%BE%E4%B9%A6%E3%80%81%E6%9C%9F%E5%88%8A%E3%80%81%E8%AE%BA%E6%96%87%E7%9A%84%E7%BC%96%E6%8E%92/%E3%80%90GB:T%206447-1986%E3%80%91%E6%96%87%E6%91%98%E7%BC%96%E5%86%99%E8%A7%84%E5%88%99.pdf
 
 [gbt13417-2009]: https://github.com/Haixing-Hu/typesetting-standard/raw/master/%E5%9B%BE%E4%B9%A6%E3%80%81%E6%9C%9F%E5%88%8A%E3%80%81%E8%AE%BA%E6%96%87%E7%9A%84%E7%BC%96%E6%8E%92/%E3%80%90GB:T%2013417-2009%E3%80%91%E6%9C%9F%E5%88%8A%E7%9B%AE%E6%AC%A1%E8%A1%A8.pdf
 
