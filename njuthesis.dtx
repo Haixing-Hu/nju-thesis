@@ -24,7 +24,7 @@
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
 %<*cls>
- [2013/09/15 v1.1.6 Document Class for the Degree Papers of Nanjing University]
+ [2013/10/18 v1.1.7 Document Class for the Degree Papers of Nanjing University]
 %</cls>
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
@@ -195,6 +195,9 @@
 %                                \std{GB/T 7714-2005}规范\newline
 %                                去除了用处不大的批注功能\\
 %  v1.1.6 & 2013/09/15 & 胡海星 & 修改了项目主页网址 \\
+%  v1.1.7 & 2013/10/18 & 胡海星 & 根据相应的国家规范，将``目录''改为``目次''，
+%                                将``插图索引''改为``插图清单''，
+%                                将``表格索引''改为``附表清单''\\
 % \bottomrule
 % \end{tabular*}
 % \end{center}
@@ -1084,27 +1087,27 @@
 % \end{preface}
 % \end{example}
 %
-% \myentry{目录}
+% \myentry{目次}
 % \DescribeMacro{\tableofcontents}
-% 命令\cs{tableofcontents}用于生成论文目录。此命令必须被用在{\TeX}文档的
+% 命令\cs{tableofcontents}用于生成论文目次。此命令必须被用在{\TeX}文档的
 % \env{preface}环境之后和\cs{mainmatter}命令之前。
 %
 % \begin{example}
 % \tableofcontents
 % \end{example}
 %
-% \myentry{表格目录}
+% \myentry{附表清单}
 % \DescribeMacro{\listoftables}
-% 命令\cs{listoftables}用于生成论文表格目录。此命令为可选命令。此命令必须被用在
+% 命令\cs{listoftables}用于生成论文的附表清单。此命令为可选命令。此命令必须被用在
 % {\TeX}文档的\cs{tableofcontents}命令之后和\cs{mainmatter}命令之前。
 %
 % \begin{example}
 % \listoftables
 % \end{example}
 %
-% \myentry{插图目录}
+% \myentry{插图清单}
 % \DescribeMacro{\listoffigures}
-% 命令\cs{listoffigures}用于生成论文插图目录。此命令为可选命令。此命令必须被用在
+% 命令\cs{listoffigures}用于生成论文插图清单。此命令为可选命令。此命令必须被用在
 % {\TeX}文档的\cs{tableofcontents}命令之后和\cs{mainmatter}命令之前。
 %
 % \begin{example}
@@ -1543,12 +1546,12 @@
 %    \begin{macrocode}
 %<*cfg>
 \newcommand*{\njut@cap@abstractname}{摘\hspace{2em}要}
-\newcommand*{\njut@cap@contentsname}{目\hspace{2em}录}
+\newcommand*{\njut@cap@contentsname}{目\hspace{2em}次}
 \newcommand*{\njut@cap@revisionhistory}{修订历史}
-\newcommand*{\njut@cap@listfigurename}{插图索引}
-\newcommand*{\njut@cap@listtablename}{表格索引}
-\newcommand*{\njut@cap@listsymbolname}{符号索引}
-\newcommand*{\njut@cap@listequationname}{公式索引}
+\newcommand*{\njut@cap@listfigurename}{插图清单}
+\newcommand*{\njut@cap@listtablename}{附表清单}
+\newcommand*{\njut@cap@listsymbolname}{符号清单}
+\newcommand*{\njut@cap@listequationname}{公式清单}
 \newcommand*{\njut@cap@equationname}{公式}
 \newcommand*{\njut@cap@bibname}{参考文献}
 \newcommand*{\njut@cap@glossaryname}{术\hspace{0.5em}语\hspace{0.5em}表}
@@ -2604,16 +2607,16 @@ December\fi
                  {\endlist}
 %    \end{macrocode}
 %
-% \subsection{目录}
+% \subsection{目次}
 %
-% 前置部分的封面在后面详细介绍，首先看目录，要求为：目次页由论文的章、节、条、项、
+% 前置部分的封面在后面详细介绍，首先看目次。其具体要求为：目次页由论文的章、节、条、项、
 % 附录等的序号、名称和页码组成，另页排在序之后。目次页标注学位论文的前三级目录。
-% 标题统一用“目录”，黑体3字号字居中，段前、段后间距为1行; 各章（一级目录）名称用
+% 标题统一用“目次”，黑体3字号字居中，段前、段后间距为1行; 各章（一级目录）名称用
 % 黑体5号字，段前间距为0.5行，段后间距为0行; 其它（二、三级目录）用宋体5号字，
 % 段前、段后间距为0行。
 %
 % \begin{macro}{\nchapter}
-% 用于产生没有编号但在目录中列出的章。
+% 用于产生没有编号但在目次中列出的章。
 %    \begin{macrocode}
 \newcommand\nchapter[1]{%
   \if@mainmatter%
@@ -2628,7 +2631,7 @@ December\fi
 % \end{macro}
 %
 % \begin{macro}{\@dottedtocline}
-% 改变缺省的目录中的点线为中文习惯。
+% 改变缺省的目次中的点线为中文习惯。
 %    \begin{macrocode}
 \def\@dottedtocline#1#2#3#4#5{%
   \ifnum #1>\c@tocdepth \else
@@ -2649,7 +2652,7 @@ December\fi
 % \end{macro}
 %
 % \begin{macro}{\l@part}
-% 改变缺省的目录中的点线为中文习惯。
+% 改变缺省的目次中的点线为中文习惯。
 %    \begin{macrocode}
 \renewcommand*{\l@part}[2]{%
   \ifnum \c@tocdepth >-2\relax
@@ -2672,7 +2675,7 @@ December\fi
 % \end{macro}
 %
 % \begin{macro}{\l@chapter}
-% 改变缺省的目录中的点线为中文习惯。
+% 改变缺省的目次中的点线为中文习惯。
 %    \begin{macrocode}
 \renewcommand*{\l@chapter}[2]{%
   \ifnum \c@tocdepth >\m@ne
@@ -2695,7 +2698,7 @@ December\fi
 % \end{macro}
 %
 % \begin{macro}{\tableofcontents}
-% 修改\cs{tableofcontents}命令用于生成目录页，将目录本身也被加入目录中。
+% 修改\cs{tableofcontents}命令用于生成目次页，并将目次页本身也被加入目次中。
 %    \begin{macrocode}
 \renewcommand*{\tableofcontents}{%
     \if@twocolumn
@@ -2712,7 +2715,7 @@ December\fi
 % \end{macro}
 %
 % \begin{macro}{\listoftables}
-% 修改\cs{listoftables}命令，使得表格列表被加入目录中。
+% 修改\cs{listoftables}命令，使得附表清单被加入目次中。
 %    \begin{macrocode}
 \renewcommand*{\listoftables}{%
     \if@twocolumn
@@ -2729,7 +2732,7 @@ December\fi
 % \end{macro}
 %
 % \begin{macro}{\listoffigures}
-% 修改\cs{listoffigures}命令，使得插图列表被加入目录中。
+% 修改\cs{listoffigures}命令，使得插图清单被加入目次中。
 %    \begin{macrocode}
 \renewcommand*{\listoffigures}{%
     \if@twocolumn
@@ -2748,7 +2751,7 @@ December\fi
 % \subsection{参考文献}
 %
 % \begin{environment}{thebibliography}
-% 修改|thebibliography|环境用于在目录中加入相应条目。
+% 修改|thebibliography|环境用于在目次中加入参考文献页。
 %    \begin{macrocode}
 \renewenvironment{thebibliography}[1]
      {\nchapter{\bibname}%
@@ -3616,7 +3619,7 @@ December\fi
 \predate{\begin{center}\large}
 \postdate{\par\end{center}}
 
-% 修改\cs{tableofcontents}命令用于生成目录页。
+% 修改\cs{tableofcontents}命令用于生成目次页。
 \renewcommand{\tableofcontents}{%
     \if@twocolumn
       \@restonecoltrue\onecolumn
@@ -3687,7 +3690,7 @@ December\fi
 % 增加环境命令： \env{name} 表示名为 name 的环境
 %% \newcommand{\env}[1]{\texttt{#1}}
 
-% 修改\tableofcontents命令用于生成目录页，将目录本身也被加入目录中。
+% 修改\tableofcontents命令用于生成目次页，将目次页本身也被加入目次中。
 \makeatletter
 \renewcommand*{\tableofcontents}{%
     \if@twocolumn
