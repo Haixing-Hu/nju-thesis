@@ -1,0 +1,47 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  
+%% 文档类 NJU-Thesis 用户手册
+%%
+%% 作者：胡海星，starfish (at) gmail (dot) com
+%% 项目主页: https://github.com/Haixing-Hu/nju-thesis
+%%
+%% This file may be distributed and/or modified under the conditions of the
+%% LaTeX Project Public License, either version 1.2 of this license or (at your
+%% option) any later version. The latest version of this license is in:
+%%
+%% http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.2 or later is part of all distributions of LaTeX version
+%% 1999/12/01 or later.
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{专利文献}\label{subsec:bibtype-patent}
+
+专利文献对应的{\BibTeX}文献项类型为|patent|。它对应的\std{GB/T 3469-1983}文献类
+型单字码为|P|\cite{gbt3469-1983}。
+
+|patent|不是{\BibTeX}的标准类型，而是{\njuthesis}的扩展。
+
+\subsubsection{必需字段}
+
+\begin{itemize}
+\item |author|：表示专利的申请者或所有者，可以是个人或单位，其格式参见
+  \ref{subsec:bibfield-author}。
+\item |title|：表示专利的名称，其格式参见\ref{subsec:bibfield-title}。
+\item |country|：表示专利的国别，其格式参见\ref{subsec:bibfield-country}。
+\item |patentid|：表示专利的专利号，其格式参加\ref{subsec:bibfield-patentid}。
+\item |date|：表示专利的公告日期或公开日期，其格式参见\ref{subsec:bibfield-citedate}。
+\end{itemize}
+
+\subsubsection{可选字段}
+
+\begin{itemize}
+\item |citedate|：表示专利文献的在线版本的引用日期，其格式参见\ref{subsec:bibfield-citedate}。
+\item |url|：表示专利文献在线版本的引用URL，其格式参见\ref{subsec:bibfield-url}。
+\item |language|：表示专利文献的语言，其格式参见\ref{subsec:bibfield-language}。
+  若语言为中文，此项必须填|zh|；否则，此项可省略。
+\item 其他字段将不起作用。
+\end{itemize}
+

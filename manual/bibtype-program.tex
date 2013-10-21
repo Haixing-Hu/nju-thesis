@@ -1,0 +1,56 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  
+%% 文档类 NJU-Thesis 用户手册
+%%
+%% 作者：胡海星，starfish (at) gmail (dot) com
+%% 项目主页: https://github.com/Haixing-Hu/nju-thesis
+%%
+%% This file may be distributed and/or modified under the conditions of the
+%% LaTeX Project Public License, either version 1.2 of this license or (at your
+%% option) any later version. The latest version of this license is in:
+%%
+%% http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.2 or later is part of all distributions of LaTeX version
+%% 1999/12/01 or later.
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{计算机程序}\label{subsec:bibtype-program}
+
+计算机程序对应的{\BibTeX}文献项类型为|program|。此类型不是{\BibTeX}的标准类型，
+而是{\njuthesis}的扩展。
+
+计算机程序所对应的\std{GB/T 3469-1983}文献类型\cite{gbt3469-1983}单字码为|CP|。
+
+\subsubsection{必需字段}
+
+\begin{itemize}
+\item |title|：表示该程序的名称，其格式参见\ref{subsec:bibfield-title}。
+\item |author|：表示该程序的作者，可以是个人或单位，其格式参见
+  \ref{subsec:bibfield-author}。
+\item |year|：表示该程序的发布年，其格式参见\ref{subsec:bibfield-year}。
+\end{itemize}
+
+\subsubsection{可选字段}
+
+\begin{itemize}
+\item |address|：表示该程序的发布者（通常是某个机构）的地址，其格式参见
+  \ref{subsec:bibfield-address}。
+\item |publisher|：表示该程序的发布者，通常是某个机构，其格式参见
+  \ref{subsec:bibfield-publisher}。
+\item |citedate|：表示引用该程序的在线版的日期，其格式参见\ref{subsec:bibfield-citedate}。
+\item |url|：表示该程序的在线版的URL，其格式参见\ref{subsec:bibfield-url}。
+\item |media|：表示该程序的载体。若该程序对应的{\BibTeX}项有|url|属性，则此属性值将被忽略。
+否则，此属性值将著录该程序的载体的编码。具体的编码参见\ref{subsec:bibfield-media}。
+\item |language|：表示该程序的名称、作者、发布者等属性所采用的语言，
+其格式参见\ref{subsec:bibfield-language}。若语言为中文，此项必须填|zh|；否则，此项可省略。
+\item 其他字段将不起作用。
+\end{itemize}
+
+\begin{note}
+|language|属性不是指编写该程序的程序设计语言，而是指描述该程序的属性（名称、作者、发布者等）
+所使用的语言。
+\end{note}
+

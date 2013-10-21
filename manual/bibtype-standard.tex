@@ -1,0 +1,79 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  
+%% 文档类 NJU-Thesis 用户手册
+%%
+%% 作者：胡海星，starfish (at) gmail (dot) com
+%% 项目主页: https://github.com/Haixing-Hu/nju-thesis
+%%
+%% This file may be distributed and/or modified under the conditions of the
+%% LaTeX Project Public License, either version 1.2 of this license or (at your
+%% option) any later version. The latest version of this license is in:
+%%
+%% http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.2 or later is part of all distributions of LaTeX version
+%% 1999/12/01 or later.
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{技术标准}\label{subsec:bibtype-standard}
+
+技术标准是指由某个团体或机构所定义的技术方面的标准。它所对应的{\BibTeX}文献项类
+型为|standard|；所对应的\std{GB/T 3469-1983}文献类型单字码为|S|\cite{gbt3469-1983}。
+
+|standard|不是{\BibTeX}的标准类型，而是{\njuthesis}的扩展。
+
+\subsubsection{必需字段}
+
+\begin{itemize}
+\item |author|：表示该技术标准的制定者，通常是一个机构名称，其格式参见\ref{subsec:bibfield-author}。
+\item |title|：表示该技术标准的名称，其格式参见\ref{subsec:bibfield-title}。通常是由标准号
+ 加标准全称构成，标准号和标准全称之间应该用冒号``:''隔开。
+\item |year|：表示该技术标准的出版年，其格式参见\ref{subsec:bibfield-year}。
+\end{itemize}
+
+\subsubsection{可选字段}
+
+\begin{itemize}
+\item |translator|：表示该技术标准的翻译者，其格式参见\ref{subsec:translator}。
+\item |edition|：表示该技术标准的版本，其格式参见\ref{subsec:bibfield-edition}；
+\item |address|：表示该技术标准的出版地，其格式参见\ref{subsec:bibfield-address}。
+\item |publisher|：表示该技术标准的出版者，其格式参见\ref{subsec:bibfield-publisher}。
+\item |pages|表示引文所处的页码或页码范围，其格式参见\ref{subsec:bibfield-pages}。
+\item |citedate|：表示该技术标准的在线版本的引用日期，其格式参见\ref{subsec:bibfield-citedate}。
+\item |url|：表示该技术标准的在线版本的引用URL，其格式参见\ref{subsec:bibfield-url}。
+\item |doi|：表示技术标准的DOI编码，其格式参见\ref{subsec:bibfield-doi}
+\item |language|：表示技术标准的语言，其格式参见\ref{subsec:bibfield-language}。若语
+  言为中文，此项必须填|zh|；否则，此项可省略。
+\item 其他字段将不起作用。
+\end{itemize}
+
+\subsubsection{例子}
+
+\begin{verbatim}
+@standard{rfc2046,
+  author={{IETF}},
+  title={RFC 2046: Multipurpose Internet Mail Extensions 
+        (MIME) Part Two: Media types},
+  year={2010},
+  url={http://tools.ietf.org/html/rfc2046},
+  citedate={2013-10-20},
+}
+
+@standard{gbt7714-2005,
+  author={{中国国家标准化管理委员会}},
+  title={GB/T 7714-2005: 文后参考文献著录规则},
+  year={2005},
+  language={zh},
+}
+
+@standard{gbt7156-2003,
+  author={{中国国家标准化管理委员会}},
+  title={GB/T 7156-2003 文献保密等级代码与标识},
+  address={北京},
+  publisher={科技出版社},
+  year={2003},
+  language={zh},
+}
+\end{verbatim}
+

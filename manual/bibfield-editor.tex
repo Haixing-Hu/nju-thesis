@@ -1,0 +1,45 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  
+%% 文档类 NJU-Thesis 用户手册
+%%
+%% 作者：胡海星，starfish (at) gmail (dot) com
+%% 项目主页: https://github.com/Haixing-Hu/nju-thesis
+%%
+%% This file may be distributed and/or modified under the conditions of the
+%% LaTeX Project Public License, either version 1.2 of this license or (at your
+%% option) any later version. The latest version of this license is in:
+%%
+%% http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.2 or later is part of all distributions of LaTeX version
+%% 1999/12/01 or later.
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{editor}\label{subsec:bibfield-editor}
+
+|editor|字段表示文献的编辑者。其格式的具体要求与|author|字段类似。
+
+|editor|字段和|author|字段的区别在于：|author|是所引用的文献的主要负责人，
+|editor|则是所引用文献本身，或其所在的合集的编辑。例如：
+\begin{itemize}
+\item 如果所文献是一本书，但每个章节由不同的作者所写，而整本书由某个编辑者编辑。此时，
+  \begin{itemize}
+  \item 如果论文中引用的是全书，则应该将该文献作为|book|类型，其|editor|字段为编辑
+    者，|author|字段不填。
+  \item 如果论文中引用的是全书中由某个作者写的某个章节，则应该将文献作为
+    |inbook|或|incollection|类型（取决于该章节是否有自己的标题，详见
+    \ref{sec:bib-type}的解释），其|author|字段为该章节作者，|editor|字段为
+    专著的编辑者。
+  \end{itemize}
+\item 如果文献是会议论文集，此时：
+  \begin{itemize}
+  \item 如果论文引用的是论文集全集，则应该将文献作为|proceedings|类型，其|editor|字段
+    为该论文集的编辑，|author|字段不填；
+  \item 如果论文引用的是论文集中的某篇文章，则应该将文献作为|inproceedings|类型，
+    其|author|字段为该文章作者，|editor|字段为该论文集的编辑者。
+  \end{itemize}
+\end{itemize}
+
+关于|editor|和|author|字段的详细解释，请参见\ref{sec:bib-type}。
+

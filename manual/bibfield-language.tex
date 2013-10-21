@@ -1,0 +1,32 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  
+%% 文档类 NJU-Thesis 用户手册
+%%
+%% 作者：胡海星，starfish (at) gmail (dot) com
+%% 项目主页: https://github.com/Haixing-Hu/nju-thesis
+%%
+%% This file may be distributed and/or modified under the conditions of the
+%% LaTeX Project Public License, either version 1.2 of this license or (at your
+%% option) any later version. The latest version of this license is in:
+%%
+%% http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.2 or later is part of all distributions of LaTeX version
+%% 1999/12/01 or later.
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{language}\label{subsec:bibfield-language}
+
+|language|字段用于说明该文献项对应的文献所使用的语言。例如：
+\begin{itemize}
+\item |language = {zh}|
+\item |language = {en}|
+\end{itemize}
+
+如果是外文文献，此字段可忽略；如果是中文文献，此字段\emph{必须}填写|zh|。
+
+{\BibTeX}需要根据此字段判别文献的语言，对于中文文献和外文文献采用不同的排版方式。
+
+选择文献语言的基本原则是，若该文献本身是中文的（即使是翻译版），其对应项的语言就应该选|zh|，
+其标题、作者等也应该尽量以中文填写。

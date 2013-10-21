@@ -1,0 +1,33 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  
+%% 文档类 NJU-Thesis 用户手册
+%%
+%% 作者：胡海星，starfish (at) gmail (dot) com
+%% 项目主页: https://github.com/Haixing-Hu/nju-thesis
+%%
+%% This file may be distributed and/or modified under the conditions of the
+%% LaTeX Project Public License, either version 1.2 of this license or (at your
+%% option) any later version. The latest version of this license is in:
+%%
+%% http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.2 or later is part of all distributions of LaTeX version
+%% 1999/12/01 or later.
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{url}\label{subsec:bibfield-url}
+
+|url|字段表示文献的在线URL地址。
+
+如果某文献项有|url|字段，则该文献被认为是在线文献。{\BibTeX}处理后，会在其文献类型后增
+加``/OL''，表示其属于在线文献。
+
+如果某文献项有|url|字段，则它也应该有对应的|citedate|字段。
+
+例如：
+\begin{itemize}
+\item |url = {http://www.di.ens.fr/users/longo/download.html}|
+\item |url = {http://www.bjyouth.com.cn/20000412/GB/4216%5ED0412B1401.htm}|
+\end{itemize}
+

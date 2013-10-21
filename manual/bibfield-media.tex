@@ -1,0 +1,46 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  
+%% 文档类 NJU-Thesis 用户手册
+%%
+%% 作者：胡海星，starfish (at) gmail (dot) com
+%% 项目主页: https://github.com/Haixing-Hu/nju-thesis
+%%
+%% This file may be distributed and/or modified under the conditions of the
+%% LaTeX Project Public License, either version 1.2 of this license or (at your
+%% option) any later version. The latest version of this license is in:
+%%
+%% http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.2 or later is part of all distributions of LaTeX version
+%% 1999/12/01 or later.
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{media}\label{subsec:bibfield-media}
+
+|media|字段表示引用文献的载体。此字段不是标准的{\BibTeX}字段，而是{\njuthesis}的扩展。
+
+若引用文献对应的{\BibTeX}项有|url|或|doi|字段，此字段将被忽略，且该文献的载体将
+被自动设置为|OL|，表示联机网络。
+
+若引用文献对应的{\BibTeX}项没有|media|字段，则默认该文献的载体为一般纸质媒体。
+
+否则，引用文献对应的{\BibTeX}项的|media|字段应该按照表\ref{tab:media-code}填写。
+
+\begin{table}
+\centering
+\begin{tabular}{|C{5cm}|C{5cm}|}
+\toprule
+  \textbf{载体类型} & \textbf{标识代码} \\
+\midrule
+  磁带(magnetic tape) & MT \\
+\hline
+  磁盘(disk)  & DK \\
+\hline
+  光盘(CD-ROM) & CD \\
+\hline
+  联机网络(online) & OL \\
+\bottomrule
+\end{tabular}
+\caption{电子文献载体和标志编码}\label{tab:media-code}
+\end{table}

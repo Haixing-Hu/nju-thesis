@@ -1,0 +1,42 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  
+%% 文档类 NJU-Thesis 用户手册
+%%
+%% 作者：胡海星，starfish (at) gmail (dot) com
+%% 项目主页: https://github.com/Haixing-Hu/nju-thesis
+%%
+%% This file may be distributed and/or modified under the conditions of the
+%% LaTeX Project Public License, either version 1.2 of this license or (at your
+%% option) any later version. The latest version of this license is in:
+%%
+%% http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.2 or later is part of all distributions of LaTeX version
+%% 1999/12/01 or later.
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{address}\label{subsec:bibfield-address}
+
+|address|字段表示文献的出版地。
+
+出版地著录出版者所在地的城市名称。对同名异地或不为人们熟悉的城市名，应在城市名后
+附省名、州名或国名等限定语。例如：
+\begin{itemize}
+\item |address = {北京}|
+\item |address = {London}|
+\item |addrees = {Cambridge, Eng}|
+\item |address = {Cambridge, Mas}|
+\end{itemize}
+
+文献中载有多个出版地,只著录第一个或处于显要位置的出版地。例如：
+\begin{itemize}
+\item ``科学出版杜 北京 上海 2000''应著录为：|address = {北京}|, 
+  |publisher = {科学出版杜}|, |year = {2000}|
+\item ``Buterworths London Boston Sydney Welington Durban Toronto 1978''应著
+  录为：|address = {London}|, |publisher = {Buterworths}|, |year = {1978}|
+\end{itemize}
+
+若该类型的文献需要出版地，但其{\BibTeX}项中缺少|address|字段，则{\BibTeX}排版后
+会用``[S.l.]'' （外文文献）或``[出版地不详]''（中文文献）替代。
+

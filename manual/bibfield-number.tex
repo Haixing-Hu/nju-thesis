@@ -1,0 +1,32 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  
+%% 文档类 NJU-Thesis 用户手册
+%%
+%% 作者：胡海星，starfish (at) gmail (dot) com
+%% 项目主页: https://github.com/Haixing-Hu/nju-thesis
+%%
+%% This file may be distributed and/or modified under the conditions of the
+%% LaTeX Project Public License, either version 1.2 of this license or (at your
+%% option) any later version. The latest version of this license is in:
+%%
+%% http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.2 or later is part of all distributions of LaTeX version
+%% 1999/12/01 or later.
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{number}\label{subsec:bibfield-number}
+
+|number|字段表示文献的期号。期号用一个阿拉伯数字表示。例如：
+\begin{itemize}
+\item |number = {13}|
+\end{itemize}
+
+在|periodical|类型文献中，|number|字段可用于表示所引用的一系列连续期刊的期号的范围
+（参见\ref{subsec:bibtype-periodical}）。此时用一个短横``-''连接两个阿拉伯数字表示
+的期号，前者为起始期刊的期号，后者为结束期刊的期号。例如：
+\begin{itemize}
+\item 期号范围：|number = {13-25}|
+\end{itemize}
