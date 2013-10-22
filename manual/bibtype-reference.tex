@@ -18,7 +18,7 @@
 
 \subsection{参考工具}\label{subsec:bibtype-reference}
 
-参考工具包括年鉴、手册、百科全书、字典等\cite{gbt3469-1983}。它对应的{\BibTeX}文献项
+参考工具是专著的一种。它包括年鉴、手册、百科全书、字典等\cite{gbt3469-1983}。它对应的{\BibTeX}文献项
 类型为|reference|；所对应的\std{GB/T 3469-1983}文献类型单字码为|K|\cite{gbt3469-1983}。
 
 |reference|类型不是{\BibTeX}的标准类型，而是{\njuthesis}的扩展。
@@ -26,9 +26,6 @@
 \begin{note}
 在线版的字典、词典、百科全书等，应使用|reference|类型而非|online|类型。关于|online|类型，
 参见\cite{subsec:bibtype-online}。
-\end{note}
-
-\begin{note}
 标准{\BibTeX}对于技术手册用|manual|类型，但在{\njuthesis}中\emph{也可}使
 用|reference|类型。
 \end{note}
@@ -36,8 +33,7 @@
 \subsubsection{必需字段}
 
 \begin{itemize}
-\item |title|：表示参考工具的标题，其格式参见\ref{subsec:bibfield-title}。主标题和副
-  标题之间用冒号``:''隔开。
+\item |title|：表示参考工具的标题，其格式参见\ref{subsec:bibfield-title}。
 \end{itemize}
 
 \subsubsection{可选字段}
@@ -61,3 +57,8 @@
 \item 其他字段将不起作用。
 \end{itemize}
 
+
+\begin{note}
+若该参考工具对应的文献项有|url|或|doi|字段，则其必须也有|citedate|字段。
+若该参考工具的语言为中文，则必须将|language|字段设置为|zh|；否则可忽略|language|字段。
+\end{note}

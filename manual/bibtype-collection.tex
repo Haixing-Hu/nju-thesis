@@ -18,7 +18,7 @@
 
 \subsection{汇编}\label{subsec:bibtype-collection}
 
-汇编是指汇总编辑而成的专著\cite{zdic2013huibian}，例如关于某一主题的文章的合集，
+汇编是专著的一种。它是指汇总编辑而成的专著\cite{zdic2013huibian}，例如关于某一主题的文章的合集，
 或同一作者的文献集合之类。汇编包括论文集等\cite{gbt3469-1983}。它所对应的{\BibTeX}文献
 项类型为|collection|；所对应的\std{GB/T 3469-1983}文献类型单字码为|G|\cite{gbt3469-1983}。
 
@@ -72,6 +72,7 @@
 \begin{note}
 汇编所属丛书的标题不应出现在|title|字段中，而应填写在|series|字段中。
 汇编所属多卷书的卷号也不应出现在|title|字段中，而应填写在|volume|字段中。
+若该汇编对应的文献项有|url|或|doi|字段，则其必须也有|citedate|字段。
 若该汇编的语言为中文，则必须将|language|字段设置为|zh|；否则可忽略|language|字段。
 \end{note}
 

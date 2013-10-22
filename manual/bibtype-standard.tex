@@ -18,7 +18,7 @@
 
 \subsection{技术标准}\label{subsec:bibtype-standard}
 
-技术标准是指由某个团体或机构所定义的技术方面的标准。它所对应的{\BibTeX}文献项类
+技术标准是专著的一种。它是指由某个团体或机构所定义的技术方面的标准。它所对应的{\BibTeX}文献项类
 型为|standard|；所对应的\std{GB/T 3469-1983}文献类型单字码为|S|\cite{gbt3469-1983}。
 
 |standard|不是{\BibTeX}的标准类型，而是{\njuthesis}的扩展。
@@ -47,6 +47,12 @@
   言为中文，此项必须填|zh|；否则，此项可省略。
 \item 其他字段将不起作用。
 \end{itemize}
+
+
+\begin{note}
+若该技术标准对应的文献项有|url|或|doi|字段，则其必须也有|citedate|字段。
+若该技术标准的语言为中文，则必须将|language|字段设置为|zh|；否则可忽略|language|字段。
+\end{note}
 
 \subsubsection{例子}
 

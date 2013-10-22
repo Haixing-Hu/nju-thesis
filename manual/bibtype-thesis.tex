@@ -18,7 +18,7 @@
 
 \subsection{学位论文}\label{subsec:bibtype-thesis}
 
-学位论文是专著的一种，它所对应的{\BibTeX}文献项类型为|phdthesis|、|masterthesis|或
+学位论文是专著的一种。它所对应的{\BibTeX}文献项类型为|phdthesis|、|masterthesis|或
 |bachelorthesis|，分别表示博士学位论文，硕士学位论文和学士学位论文；它所对应的
 \std{GB/T 3469-1983}文献类型单字码为|D|\cite{gbt3469-1983}。
 
@@ -37,9 +37,6 @@
 
 \begin{itemize}
 \item |translator|：表示该学位论文的翻译者，其格式参见\ref{subsec:bibfield-translator}；
-\item |series|：表示该学位论文所属的丛书的标题，其格式参见\ref{subsec:bibfield-series}；
-\item |volume|：表示该学位论文在其所属的丛书或多卷书中的卷号，其格式参见\ref{subsec:bibfield-volume}；
-
 \item |address|：表示该学位论文所申请的学位的颁发地，其格式参见\ref{subsec:bibfield-address}；
 \item |citedate|：表示该学位论文的在线版本的引用日期，其格式参见\ref{subsec:bibfield-citedate}；
 \item |url|：表示该学位论文的在线版本的引用URL，其格式参见\ref{subsec:bibfield-url}；
@@ -49,8 +46,10 @@
 \end{itemize}
 
 \begin{note}
-学位论文所对应的文献项用“学位颁发单位”替代专著的“出版社”；用“学位颁发地”替代专著的“出版地”；
-用“学位颁发年”替代专著的“出版年”。
+学位论文所对应的文献项用“学位颁发单位”（|school|字段）替代专著的“出版社”（|publisher|字段）；
+用“学位颁发地”（|address|字段）替代专著的“出版地”（|address|字段）；用“学位颁发年”（|year|字段）
+替代专著的“出版年”（|year|字段）。
+若该学位论文对应的文献项有|url|或|doi|字段，则其必须也有|citedate|字段。
 若该学位论文的语言为中文，则必须将|language|字段设置为|zh|；否则可忽略|language|字段。
 \end{note}
 
