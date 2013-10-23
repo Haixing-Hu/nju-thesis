@@ -16,7 +16,6 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 \subsection{专利文献}\label{subsec:bibtype-patent}
 
 专利文献对应的{\BibTeX}文献项类型为|patent|。它对应的\std{GB/T 3469-1983}文献类
@@ -27,21 +26,84 @@
 \subsubsection{必需字段}
 
 \begin{itemize}
-\item |author|：表示专利的申请者或所有者，可以是个人或单位，其格式参见
-  \ref{subsec:bibfield-author}。
-\item |title|：表示专利的名称，其格式参见\ref{subsec:bibfield-title}。
-\item |country|：表示专利的国别，其格式参见\ref{subsec:bibfield-country}。
-\item |patentid|：表示专利的专利号，其格式参加\ref{subsec:bibfield-patentid}。
-\item |date|：表示专利的公告日期或公开日期，其格式参见\ref{subsec:bibfield-citedate}。
+\item |author|：表示该专利的申请者或所有者，其格式参见\ref{subsec:bibfield-author}；
+\item |title|：表示该专利的名称，其格式参见\ref{subsec:bibfield-title}；
+\item |country|：表示该专利的国别，其格式参见\ref{subsec:bibfield-country}；
+\item |number|：表示该专利的专利号，其格式参加\ref{subsec:bibfield-number}；
+\item |date|：表示该专利的公告日期或公开日期，其格式参见\ref{subsec:bibfield-date}。
 \end{itemize}
 
 \subsubsection{可选字段}
 
 \begin{itemize}
-\item |citedate|：表示专利文献的在线版本的引用日期，其格式参见\ref{subsec:bibfield-citedate}。
-\item |url|：表示专利文献在线版本的引用URL，其格式参见\ref{subsec:bibfield-url}。
-\item |language|：表示专利文献的语言，其格式参见\ref{subsec:bibfield-language}。
-  若语言为中文，此项必须填|zh|；否则，此项可省略。
+\item |citedate|：表示该专利文献的在线版本的引用日期，其格式参见\ref{subsec:bibfield-citedate}；
+\item |url|：表示该专利文献在线版本的引用URL，其格式参见\ref{subsec:bibfield-url}；
+\item |doi|：表示该专利文献的电子版的DOI编号，其格式参见\ref{subsec:bibfield-doi}；
+\item |language|：表示该专利文献的语言，其格式参见\ref{subsec:bibfield-language}；
 \item 其他字段将不起作用。
 \end{itemize}
+
+\begin{note}
+若该专利文献对应的文献项有|url|或|doi|字段，则其必须也有|citedate|字段。
+若该专利文献的语言为中文，则必须将|language|字段设置为|zh|；否则可忽略|language|字段。
+\end{note}
+
+\subsubsection{例子}
+
+\begin{verbatim}
+@patent{p6915001,
+  author={Tachibana, R. and Shimizu, S. 
+          and Kobayshi, S. and Other Authors},
+  title={Electronic watermarking method and system},
+  country={US},
+  number={6,915,001},
+  date={2002-04-25},
+}
+
+@patent{p8284102,
+  author={Koseki, A. and Momose, H. 
+          and Kawahito, M. and Other Authors},
+  title={Compiler},
+  country={US},
+  number={8,284,102},
+  date={2002-05-25},
+}
+
+@patent{p88105607.3,
+  author={姜锡洲},
+  title={一种温热外敷药制备方案},
+  country={中国},
+  number={88105607.3},
+  date={1989-07-26},
+  langauge={zh},
+}
+
+@patent{p01128777.2,
+  author={{西安电子科技大学}},
+  title={光折变自适应光外差探测方法},
+  country={中国},
+  number={01128777.2},
+  date={2002-03-06},
+  langauge={zh},
+}
+
+@patent{p92214985.2,
+  author={刘加林},
+  title={多功能一次性压舌板},
+  country={中国},
+  number={92214985.2},
+  date={1993-04-14},
+  language={zh},
+}
+
+@patent{p01129210.5,
+  author={{河北绿洲生态环境科技有限公司}},
+  title={一种荒漠化地区生态植被综合培育种植方法},
+  country={中国},
+  number={01129210.5},
+  date={2001-10-24},
+  language={zh},
+}
+\end{verbatim}
+
 

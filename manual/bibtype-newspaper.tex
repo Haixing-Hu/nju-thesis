@@ -17,3 +17,67 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{报纸}\label{subsec:bibtype-newspaper}
+
+报纸是连续出版物的一种，它与期刊类似。它所对应的{\BibTeX}文献项类型为|newspaper|；对应的
+\std{GB/T 3469-1983}文献类型单字码为|N|\cite{gbt3469-1983}。
+
+|newspaper|不是{\BibTeX}的标准类型，而是{\njuthesis}的扩展。之所以将|newspaper|和
+|periodical|区分开，是因为期刊（|periodical|）所对应的文献类型单字码为|J|，而报纸
+（|newspaper|）所对应的文献类型单字码为|N|\cite{gbt3469-1983}。
+
+\begin{note}
+如果引文是报纸的某一期或某几期，则应使用|newspaper|类型；如果引文是某一期报纸中的文章，
+请使用|news|类型，具体参见\ref{subsec:bibtype-news}。
+\end{note}
+
+\subsubsection{必需字段}
+
+\begin{itemize}
+\item |title|：表示该报纸的标题，其格式参见\ref{subsec:bibfield-title}；
+\item |publisher|：表示该报纸的出版社，其格式参见\ref{subsec:bibfield-publisher}；
+\item |address|：表示该报纸的出版地，其格式参见\ref{subsec:bibfield-address}；
+\item |year|表示所引用的报纸的出版年，或所引用的一系列连续报纸的出版年范围，其格式
+  参见\ref{subsec:bibfield-year}。
+\end{itemize}
+
+\subsubsection{可选字段}
+
+\begin{itemize}
+\item |author|：表示该报纸的发行机构或编辑，其格式参见\ref{subsec:bibfield-author}；
+\item |volume|: 表示所引用的报纸的卷号，或所引用的一系列连续报纸的卷号范围，其格式参
+  见\ref{subsec:bibfield-volume}；
+\item |number|: 表示所引用的报纸的期号，或所引用的一系列连续报纸的期号范围，其格式参
+  见\ref{subsec:bibfield-number}；
+\item |citedate|：表示所引用的报纸的在线版本的引用日期，其格式参见\ref{subsec:bibfield-citedate}；
+\item |url|：表示该报纸的在线版本的引用URL，其格式参见\ref{subsec:bibfield-url}；
+\item |doi|：表示该报纸的电子版的DOI编号，其格式参见\ref{subsec:bibfield-doi}；
+\item |language|：表示该报纸的语言，其格式参见\ref{subsec:bibfield-language}；
+\item 其他字段将不起作用。
+\end{itemize}
+
+\begin{note}
+若该报纸对应的文献项有|url|或|doi|字段，则其必须也有|citedate|字段。
+若该报纸的语言为中文，则必须将|language|字段设置为|zh|；否则可忽略|language|字段。
+\end{note}
+
+\subsubsection{例子}
+
+\begin{verbatim}
+@newspaper{financialtimes,
+  title={The Financial Times},
+  year={1888-1913},
+  volume={1-512},
+  number={1-1210}
+  address={London},
+  publisher={Pearson PLC},  
+}
+
+@newspaper{renminribao,
+  title={人民日报},
+  year={2011},
+  volume={22892},
+  address={北京},
+  publisher={人民日报出版社},
+  language={zh},
+}
+\end{verbatim}
