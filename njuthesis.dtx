@@ -290,7 +290,7 @@
 %     |njuthesis.dtx|             & 模板文档代码的混合文件\\
 %     |njuthesis.cls|             & 模板类文件\\
 %     |njuthesis.cfg|             & 模板配置文件\\
-%     |GBT7714-2005.bst|          & 符合国标\std{GB/T 7714-2005}的参考文献样式文件\\
+%     |gbt7714-2005.bst|          & 符合国标\std{GB/T 7714-2005}的参考文献样式文件\\
 %     |dtx-style.sty|             & 用户手册样式文件\\
 %     |njulogo.eps|               & 南京大学校徽图片\\
 %     |njuname.eps|               & 南京大学校名图片\\
@@ -355,7 +355,7 @@
 % 模板解压缩后生成文件夹|njuthesis-VERSION|，其中|VERSION|为版本号。该文件夹中包括：
 % \begin{itemize}
 % \item 模板源文件：|njuthesis.ins|和|njuthesis.dtx|
-% \item 参考文献样式：|GBT7714-2005.bst|
+% \item 参考文献样式：|gbt7714-2005.bst|
 % \item 南京大学校徽和校名图片：|njulogo.eps|和|njuname.eps|
 % \item 示例文档：|sample.tex|、|sample.bib|和|figure|目录
 % \end{itemize}
@@ -395,7 +395,7 @@
 % # 创建本地的BibTeX样式文件目录
 % $ mkdir -p ${TEXMFLOCAL}/bibtex/bst
 % # 复制GB/T 7714-2005参考文献样式
-% $ cp GBT7714-2005.bst ${TEXMFLOCAL}/bibtex/bst/
+% $ cp gbt7714-2005.bst ${TEXMFLOCAL}/bibtex/bst/
 % # 建立njuthesis文档类手册目录
 % $ mkdir -p ${TETEXMFLOCALXMF}/doc/latex/njuthesis
 % # 复制njuthesis文档类手册和示例文档
@@ -428,7 +428,7 @@
 %
 % \subsection{\njuthesis{} 示例文件}
 %
-% 模板核心文件只有三个：|njuthesis.cls|，|njuthesis.cfg|和 |GBT7714-2005.bst|，但
+% 模板核心文件只有三个：|njuthesis.cls|，|njuthesis.cfg|和 |gbt7714-2005.bst|，但
 % 是如果没有示例文档用户会发现很难下手。所以推荐新用户从模板自带的示例文档入手，
 % 里面包括了文档写作用到的所有命令及其使用方法，只需要用自己的内容进行相应替换就
 % 可以。对于不清楚的命令可以查阅本手册。具体内容可以参考模板附带的|sample.tex|和
@@ -2775,9 +2775,9 @@ December\fi
 %    \end{macrocode}
 % \end{environment}
 %
-% 使用|GBT7714-2005.bst|作为参考文献样式。
+% 使用|gbt7714-2005.bst|作为参考文献样式。
 %    \begin{macrocode}
-\bibliographystyle{GBT7714-2005}
+\bibliographystyle{gbt7714-2005}
 %    \end{macrocode}
 %
 % 使用符合\std{GB/T 7714-2005}规范的参考文献引用样式。

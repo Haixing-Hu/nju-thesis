@@ -134,8 +134,6 @@
 \item |author|：表示该书籍的作者，其格式参见\ref{subsec:bibfield-author}；
 \item |editor|：表示该书籍的编辑者，其格式参见\ref{subsec:bibfield-editor}；
 \item |title|：表示该书籍的标题，其格式参见\ref{subsec:bibfield-title}；
-\item |publisher|：表示该书籍的出版社，其格式参见\ref{subsec:bibfield-publisher}；
-\item |address|：表示该书籍的出版地，其格式参见\ref{subsec:bibfield-address}；
 \item |year|：表示该书籍的出版年，其格式参见\ref{subsec:bibfield-year}。
 \end{itemize}
 
@@ -155,6 +153,8 @@
 \item |series|：表示该书籍所属的丛书的标题，其格式参见\ref{subsec:bibfield-series}；
 \item |edition|：表示该书籍的版本，其格式参见\ref{subsec:bibfield-edition}；
 \item |volume|：表示该书籍所属丛书或多卷书的卷号，其格式参见\ref{subsec:bibfield-volume}；
+\item |publisher|：表示该书籍的出版社，其格式参见\ref{subsec:bibfield-publisher}；
+\item |address|：表示该书籍的出版地，其格式参见\ref{subsec:bibfield-address}；
 \item |pages|：表示引文在该书籍中所处的页码或页码范围，其格式参见\ref{subsec:bibfield-pages}；
 \item |citedate|：表示该书籍的在线版本的引用日期，其格式参见\ref{subsec:bibfield-citedate}；
 \item |url|：表示该书籍的在线版本的引用URL，其格式参见\ref{subsec:bibfield-url}；
@@ -284,8 +284,6 @@
 \item |author|：表示该汇编的作者，其格式参见\ref{subsec:bibfield-author}；
 \item |editor|：表示该汇编的编辑者，其格式参见\ref{subsec:bibfield-editor}；
 \item |title|：表示该汇编的标题，其格式参见\ref{subsec:bibfield-title}；
-\item |publisher|：表示该汇编的出版社，其格式参见\ref{subsec:bibfield-publisher}；
-\item |address|：表示该汇编的出版地，其格式参见\ref{subsec:bibfield-address}；
 \item |year|：表示该汇编的出版年，其格式参见\ref{subsec:bibfield-year}。
 \end{itemize}
 
@@ -305,6 +303,8 @@
 \item |series|：表示该汇编所属的丛书的标题，其格式参见\ref{subsec:bibfield-series}；
 \item |edition|：表示该汇编的版本，其格式参见\ref{subsec:bibfield-edition}；
 \item |volume|：表示该汇编所属丛书或多卷书的卷号，其格式参见\ref{subsec:bibfield-volume}；
+\item |publisher|：表示该汇编的出版社，其格式参见\ref{subsec:bibfield-publisher}；
+\item |address|：表示该汇编的出版地，其格式参见\ref{subsec:bibfield-address}；
 \item |pages|：表示引文在该汇编中所处的页码或页码范围，其格式参见\ref{subsec:bibfield-pages}；
 \item |citedate|：表示该汇编的在线版本的引用日期，其格式参见\ref{subsec:bibfield-citedate}；
 \item |url|：表示该汇编的在线版本的引用URL，其格式参见\ref{subsec:bibfield-url}；
@@ -558,17 +558,21 @@
 }
 
 @techreport{federal1990,
-  author={{U.S. Department of Transportation Federal Highway Administration}},
-  title={Guidelines for handling excavated acid-producing materials, PB 91-194001},
+  author={{U.S. Department of Transportation 
+           Federal Highway Administration}},
+  title={Guidelines for handling excavated acid-producing 
+        materials, PB 91-194001},
   address={Springfield},
-  institution={U.S. Department of Commerce National Information Service},
+  institution={U.S. Department of Commerce National 
+      Information Service},
   year={1990},
 }
 
 @techreport{who1970,
   author={{World Health Organization}},
-  title={Factors regulating the immune response: report of WHO Scientific Group},
-    address={Geneva},
+  title={Factors regulating the immune response: report 
+     of WHO Scientific Group},
+  address={Geneva},
   institution={WHO},
   year={1970},
 }
@@ -662,7 +666,7 @@
 
 \begin{note}
 在线版的字典、词典、百科全书等，应使用|reference|类型而非|online|类型。关于|online|类型，
-参见\cite{subsec:bibtype-online}。
+参见\ref{subsec:bibtype-online}。
 标准{\BibTeX}对于技术手册用|manual|类型，但在{\njuthesis}中\emph{也可}使
 用|reference|类型。
 \end{note}
@@ -818,8 +822,6 @@
 
 \begin{itemize}
 \item |title|：表示该期刊的标题，其格式参见\ref{subsec:bibfield-title}；
-\item |publisher|：表示该期刊的出版社，其格式参见\ref{subsec:bibfield-publisher}；
-\item |address|：表示该期刊的出版地，其格式参见\ref{subsec:bibfield-address}；
 \item |year|表示所引用的期刊的出版年，或所引用的一系列连续期刊的出版年范围，其格式
   参见\ref{subsec:bibfield-year}。
 \end{itemize}
@@ -827,18 +829,20 @@
 \subsubsection{可选字段}
 
 \begin{itemize}
-\item |author|：表示该期刊的发行机构或编辑，其格式参见\ref{subsec:bibfield-author}；
+\item |editor|：表示该期刊的编辑者，其格式参见\ref{subsec:bibfield-editor}；
+\item |translator|：表示该期刊的翻译者，其格式参见\ref{subsec:translator}；
 \item |volume|: 表示所引用的期刊的卷号，或所引用的一系列连续期刊的卷号范围，其格式参
   见\ref{subsec:bibfield-volume}；
 \item |number|: 表示所引用的期刊的期号，或所引用的一系列连续期刊的期号范围，其格式参
   见\ref{subsec:bibfield-number}；
+\item |publisher|：表示该期刊的出版者，其格式参见\ref{subsec:bibfield-publisher}；
+\item |address|：表示该期刊的出版地，其格式参见\ref{subsec:bibfield-address}；  
 \item |citedate|：表示所引用的期刊的在线版本的引用日期，其格式参见\ref{subsec:bibfield-citedate}；
 \item |url|：表示该期刊的在线版本的引用URL，其格式参见\ref{subsec:bibfield-url}；
 \item |doi|：表示该期刊的电子版的DOI编号，其格式参见\ref{subsec:bibfield-doi}；
 \item |language|：表示该期刊的语言，其格式参见\ref{subsec:bibfield-language}；
 \item 其他字段将不起作用。
 \end{itemize}
-
 
 \begin{note}
 若该期刊对应的文献项有|url|或|doi|字段，则其必须也有|citedate|字段。
@@ -849,7 +853,7 @@
 
 \begin{verbatim}
 @periodical{science1983,
-  author={{American Association for the Advancement of Science}},
+  editor={{American Association for the Advancement of Science}},
   title={Science},
   year={1883},
   volume={1},
@@ -859,7 +863,7 @@
 }
 
 @periodical{dizhipinlun1936,
-  author={{中国地质学会}},
+  editor={{中国地质学会}},
   title={地质论评},
   year={1936},
   volume={1},
@@ -870,7 +874,7 @@
 }
 
 @periodical{tushuguanxutongxun1,
-  author={{中国图书馆学会}},
+  editor={{中国图书馆学会}},
   title={图书馆学通讯},
   year={1957-1990},
   number={1-4},
@@ -880,7 +884,7 @@
 }
 
 @periodical{tushuguanxuetongxun17,
-  author={{中国图书馆学会}},
+  editor={{中国图书馆学会}},
   title={图书馆学通讯},
   year={1957-1990},
   volume={17-57},
@@ -909,8 +913,6 @@
 
 \begin{itemize}
 \item |title|：表示该报纸的标题，其格式参见\ref{subsec:bibfield-title}；
-\item |publisher|：表示该报纸的出版社，其格式参见\ref{subsec:bibfield-publisher}；
-\item |address|：表示该报纸的出版地，其格式参见\ref{subsec:bibfield-address}；
 \item |year|表示所引用的报纸的出版年，或所引用的一系列连续报纸的出版年范围，其格式
   参见\ref{subsec:bibfield-year}。
 \end{itemize}
@@ -918,11 +920,13 @@
 \subsubsection{可选字段}
 
 \begin{itemize}
-\item |author|：表示该报纸的发行机构或编辑，其格式参见\ref{subsec:bibfield-author}；
+\item |editor|：表示该期刊的编辑者，其格式参见\ref{subsec:bibfield-editor}；
 \item |volume|: 表示所引用的报纸的卷号，或所引用的一系列连续报纸的卷号范围，其格式参
   见\ref{subsec:bibfield-volume}；
 \item |number|: 表示所引用的报纸的期号，或所引用的一系列连续报纸的期号范围，其格式参
   见\ref{subsec:bibfield-number}；
+\item |publisher|：表示该报纸的出版社，其格式参见\ref{subsec:bibfield-publisher}；
+\item |address|：表示该报纸的出版地，其格式参见\ref{subsec:bibfield-address}；
 \item |citedate|：表示所引用的报纸的在线版本的引用日期，其格式参见\ref{subsec:bibfield-citedate}；
 \item |url|：表示该报纸的在线版本的引用URL，其格式参见\ref{subsec:bibfield-url}；
 \item |doi|：表示该报纸的电子版的DOI编号，其格式参见\ref{subsec:bibfield-doi}；
@@ -948,6 +952,7 @@
 }
 
 @newspaper{renminribao,
+  editor={{人民日报编辑部}},
   title={人民日报},
   year={2011},
   volume={22892},
@@ -970,7 +975,7 @@
 \item |author|：表示该专利的申请者或所有者，其格式参见\ref{subsec:bibfield-author}；
 \item |title|：表示该专利的名称，其格式参见\ref{subsec:bibfield-title}；
 \item |country|：表示该专利的国别，其格式参见\ref{subsec:bibfield-country}；
-\item |number|：表示该专利的专利号，其格式参加\ref{subsec:bibfield-number}；
+\item |patentid|：表示该专利的专利号，其格式参加\ref{subsec:bibfield-patentid}；
 \item |date|：表示该专利的公告日期或公开日期，其格式参见\ref{subsec:bibfield-date}。
 \end{itemize}
 
@@ -997,7 +1002,7 @@
           and Kobayshi, S. and Other Authors},
   title={Electronic watermarking method and system},
   country={US},
-  number={6,915,001},
+  patentid={6,915,001},
   date={2002-04-25},
 }
 
@@ -1006,7 +1011,7 @@
           and Kawahito, M. and Other Authors},
   title={Compiler},
   country={US},
-  number={8,284,102},
+  patentid={8,284,102},
   date={2002-05-25},
 }
 
@@ -1014,7 +1019,7 @@
   author={姜锡洲},
   title={一种温热外敷药制备方案},
   country={中国},
-  number={88105607.3},
+  patentid={88105607.3},
   date={1989-07-26},
   langauge={zh},
 }
@@ -1023,7 +1028,7 @@
   author={{西安电子科技大学}},
   title={光折变自适应光外差探测方法},
   country={中国},
-  number={01128777.2},
+  patentid={01128777.2},
   date={2002-03-06},
   langauge={zh},
 }
@@ -1032,7 +1037,7 @@
   author={刘加林},
   title={多功能一次性压舌板},
   country={中国},
-  number={92214985.2},
+  patentid={92214985.2},
   date={1993-04-14},
   language={zh},
 }
@@ -1041,12 +1046,11 @@
   author={{河北绿洲生态环境科技有限公司}},
   title={一种荒漠化地区生态植被综合培育种植方法},
   country={中国},
-  number={01129210.5},
+  patentid={01129210.5},
   date={2001-10-24},
   language={zh},
 }
 \end{verbatim}
-
 
 \subsection{网页}\label{subsec:bibtype-online}
 
@@ -1314,64 +1318,163 @@
 \subsubsection{必需字段}
 
 \begin{itemize}
-\item |author|：表示析出文献的作者，其格式参见\ref{subsec:bibfield-author}。
-\item |title|：表示析出文献的标题，其格式参见\ref{subsec:bibfield-title}。
-\item |booktitle|：表示书籍的标题，其格式参见\ref{subsec:bibfield-title}。
-\item |editor|：表示书籍的编辑者或作者，其格式参见\ref{subsec:bibfield-editor}。
-\item |address|：表示书籍的出版地，其格式参见\ref{subsec:bibfield-address}。如果
-  该字段不存在，{\BibTeX}排版时将会用``[S.l.]''或``[出版地不详]''替代。
-\item |publisher|：表示书籍的出版者，其格式参见\ref{subsec:bibfield-publisher}。
-  如果该字段不存在，{\BibTeX}排版时将会用``[s.n.]''或``[出版者不详]''替代。
-\item |year|：表示书籍的出版年，其格式参见\ref{subsec:bibfield-year}。
-\item |pages|：表示析出文献在书籍中所处的页码或页码范围，其格式参见\ref{subsec:bibfield-pages}。
+\item |author|：表示该析出文献的作者，其格式参见\ref{subsec:bibfield-author}；
+\item |title|：表示该析出文献的标题，其格式参见\ref{subsec:bibfield-title}；
+\item |booktitle|：表示该析出文献所属书籍的标题，其格式参见\ref{subsec:bibfield-title}；
+\item |editor|：表示该析出文献所属书籍的编辑者或作者，其格式参见\ref{subsec:bibfield-editor}；
+\item |year|：表示该析出文献所属书籍的出版年，其格式参见\ref{subsec:bibfield-year}；
+\item |pages|：表示该析出文献在其所属书籍中所处的页码或页码范围，其格式参见\ref{subsec:bibfield-pages}。
 \end{itemize}
 
 \subsubsection{可选字段}
 
 \begin{itemize}
-\item |translator|：表示析出文献的翻译者，其格式参见\ref{subsec:translator}。
-\item |edition|：表示专著的版本，其格式参见\ref{subsec:bibfield-edition}。
-\item |citedate|：表示析出文献的在线版本的引用日期，其格式参见\ref{subsec:bibfield-citedate}。
-\item |url|：表示析出文献的在线版本的引用URL，其格式参见\ref{subsec:bibfield-url}。
-\item |doi|：表示析出文献的DOI编码，其格式参见\ref{subsec:bibfield-doi}
-\item |language|：表示专著的语言，其格式参见\ref{subsec:bibfield-language}。若语
-  言为中文，此项必须填|zh|；否则，此项可省略。
+\item |translator|：表示该析出文献或其所属书籍的翻译者，其格式参见\ref{subsec:translator}；
+\item |edition|：表示该析出文献所属书籍的版本，其格式参见\ref{subsec:bibfield-edition}；
+\item |address|：表示该析出文献所属书籍的出版地，其格式参见\ref{subsec:bibfield-address}；
+\item |publisher|：表示该析出文献所属书籍的出版者，其格式参见\ref{subsec:bibfield-publisher}；
+\item |citedate|：表示该析出文献的在线版本的引用日期，其格式参见\ref{subsec:bibfield-citedate}；
+\item |url|：表示该析出文献的在线版本的引用URL，其格式参见\ref{subsec:bibfield-url}；
+\item |doi|：表示该析出文献的电子版的DOI编号，其格式参见\ref{subsec:bibfield-doi}；
+\item |language|：表示该析出文献的语言，其格式参见\ref{subsec:bibfield-language}；
 \item 其他字段将不起作用。
 \end{itemize}
 
+\begin{note}
+该书籍所属的丛书的标题不应出现在|booktitle|字段中，而应填写在|series|字段中。
+该书籍所属的多卷书的卷号也不应出现在|booktitle|字段中，而应填写在|volume|字段中。
+若该析出文献对应的文献项有|url|或|doi|字段，则其也必须有|citedate|字段。
+若该析出文献的语言为中文，则必须将|language|字段设置为|zh|；否则可忽略|language|字段。
+\end{note}
 
-\subsection{会议录中的析出文献}\label{subsec:bibtype-inproceedings}
+\subsubsection{例子}
 
-会议录中的析出文献是指收录在会议录中的论文或报告。它所对应的{\BibTeX}文献项类型为
-|inproceedings|；所对应的文献类型编码为|C|\cite{gbt3469-1983}。
+\begin{verbatim}
+@inbook{changjiang1999,
+  author={程根伟},
+  title={1998年长江洪水的成因与减灾对策},
+  editor={许厚泽 and 赵其国},
+  booktitle={长江流域洪涝灾害与科技对策},
+  address={北京},
+  publisher={科学出版社},
+  year={1999},
+  pages={32-36},
+  language={zh},
+}
 
-\subsubsection{必需字段}
+@inbook{zhendan1980,
+  author={陈晋镶 and 张惠民 and 朱士兴 and 其他作者},
+  title={蓟县震旦亚界研究},
+  editor={中国地质科学院天津地质矿产研究所},
+  booktitle={中国震旦亚界},
+  address={天津},
+  publisher={天津科学技术出版社},
+  year={1980},
+  pages={56-114},
+  language={zh},
+}
 
-\begin{itemize}
-\item |author|：表示析出文献的作者，其格式参见\ref{subsec:bibfield-author}。
-\item |title|：表示析出文献的标题，其格式参见\ref{subsec:bibfield-title}。
-\item |booktitle|：表示会议录的标题，其格式参见\ref{subsec:bibfield-title}。
-\item |editor|：表示会议录的编辑，其格式参见\ref{subsec:bibfield-editor}。
-\item |address|：表示会议录的出版地，其格式参见
-  \ref{subsec:bibfield-address}。如果该字段不存在，{\BibTeX}排版时将会用
-  ``[S.l.]''或``[出版地不详]''替代。
-\item |publisher|：表示会议录的出版者，其格式参见
-  \ref{subsec:bibfield-publisher}。如果该字段不存在，{\BibTeX}排版时将会用
-  ``[s.n.]''或``[出版者不详]''替代。
-\item |year|：表示会议录的出版年，其格式参见\ref{subsec:bibfield-year}。
-\end{itemize}
+@inbook{weinstein1974,
+  author={Weinstein, L. and Swertz, M. N.},
+  title={Pathogenic properties of invading microorganism},
+  editor={Sodeman, Jr., W. A. and Sodeman, W. A.},
+  booktitle={Pathologic physiology: mechanisms of disease},
+  address={Philadelphia},
+  publisher={Saunders},
+  year={1974},
+  pages={745-772},
+}
 
-\subsubsection{可选字段}
+@inbook{buseck1980,
+  author={Buseck, P. R. and Nord, Jr., G. L. and Veblen D. R.},
+  title={Subsolidus phenomena in pyroxenes},
+  editor={Prewitt, C. T.},
+  booktitle={Pyroxense},
+  address={Washington, D. C.},
+  publisher={Mineralogical Society of America},
+  year={c1980},
+  pages={117-211},
+}
 
-\begin{itemize}
-\item |citedate|：表示析出文献的在线版本的引用日期，其格式参见\ref{subsec:bibfield-citedate}。
-\item |url|：表示析出文献的在线版本的引用URL，其格式参见\ref{subsec:bibfield-url}。
-\item |doi|：表示析出文献的DOI编码，其格式参见\ref{subsec:bibfield-doi}
-\item |language|：表示会议录的语言，其格式参见\ref{subsec:bibfield-language}。若语
-  言为中文，此项必须填|zh|；否则，此项可省略。
-\item 其他字段将不起作用。
-\end{itemize}
+@inbook{martin1966,
+  author={Martin, G.},
+  title={Control of electronic resources in Australia},
+  editor={Pattle, L. W. and Cox, B. J.},
+  booktitle={Electronic resources: selection and 
+   bibliographic control},
+  address={New York},
+  publisher={The Haworth Press},
+  year={1966},
+  pages={85-96},
+}
 
+@inbook{winskel1995,
+  author={G. Winskel and M. Nielsen},
+  title={Models for Concurrency},
+  booktitle={Handbook of Logic in Computer Science},
+  publisher={Oxford University Press},
+  year={1995},
+  editor={S. Abramsky and D. Gabbay and T. S. E. Maibaum},
+  citedate={2013-10-20},
+  url={http://citeseer.ist.psu.edu/winskel94models.html},
+}
+
+@inbook{abramsky1994,
+  author={Samson Abramsky and Achim Jung},
+  title={Domain Theory},
+  booktitle={Semantic Structures},
+  series={Handbook of Logic in Computer Science},
+  volume={3},
+  publisher={Oxford University Press},
+  year={1994},
+  editor={Samson Abramsky and Dov M. Gabbay 
+    and T.S.E. Maibaum},
+  pages={1-168},
+}
+
+@inbook{barendregt1992,
+  author={Henk Barendregt},
+  title={Lambda Calculi with Types},
+  booktitle={Background: Computational Structures},
+  series={Handbook of Logic in Computer Science},
+  volume={2},
+  publisher={Oxford University Press},
+  year={1992},
+  editor={Samson Abramsky and Dov M. Gabbay and T.S.E. Maibaum},
+  pages={117-309},
+}
+
+@inbook{berger1995a,
+  author={Ulrich Berger and Helmut Schwichtenberg},
+  title={Program Development by Proof Transformation},
+  booktitle={Proof and Computation},
+  publisher={Springer},
+  year={1995},
+  editor={Helmut Schwichtenberg},
+  pages={1-45},
+  address={Berlin},
+}
+
+@inbook{buss1998introduction,
+  author={Samuel R. Buss},
+  title={An Introduction to Proof Theory},
+  booktitle={Handbook Proof Theory},
+  address={Amsterdam},
+  publisher={Elsevier},
+  year={1998},
+  volume={I},
+}
+
+@inbook{buss1998first,
+  author={Samuel R. Buss},
+  title={First-Order Theory of Arithmetic},
+  booktitle={Handbook Proof Theory},
+  address={Amsterdam},
+  publisher={Elsevier},
+  year={1998},
+  volume={II},
+}
+\end{verbatim}
 
 \subsection{汇编中的析出文献}\label{subsec:bibtype-incollection}
 
@@ -1386,31 +1489,195 @@
 \subsubsection{必需字段}
 
 \begin{itemize}
-\item |author|：表示析出文献的作者，其格式参见\ref{subsec:bibfield-author}。
-\item |title|：表示析出文献的标题，其格式参见\ref{subsec:bibfield-title}。
-\item |booktitle|：表示汇编的标题，其格式参见\ref{subsec:bibfield-title}。
-\item |editor|：表示汇编的编辑或作者，其格式参见\ref{subsec:bibfield-editor}。
-\item |address|：表示汇编的出版地，其格式参见\ref{subsec:bibfield-address}。如
-  果该字段不存在，{\BibTeX}排版时将会用``[S.l.]''或``[出版地不详]''替代。
-\item |publisher|：表示该汇编的出版者，其格式参见\ref{subsec:bibfield-publisher}。
-  如果该字段不存在，{\BibTeX}排版时将会用``[s.n.]''或``[出版者不详]''替代。
-\item |year|：表示该汇编的出版年，其格式参见\ref{subsec:bibfield-year}。
+\item |author|：表示该析出文献的作者，其格式参见\ref{subsec:bibfield-author}；
+\item |title|：表示该析出文献的标题，其格式参见\ref{subsec:bibfield-title}；
+\item |booktitle|：表示该析出文献所属汇编的标题，其格式参见\ref{subsec:bibfield-title}；
+\item |editor|：表示该析出文献所属汇编的编辑者或作者，其格式参见\ref{subsec:bibfield-editor}；
+\item |year|：表示该析出文献所属汇编的出版年，其格式参见\ref{subsec:bibfield-year}；
+\item |pages|：表示该析出文献在其所属汇编中所处的页码或页码范围，其格式参见\ref{subsec:bibfield-pages}。
 \end{itemize}
 
 \subsubsection{可选字段}
 
 \begin{itemize}
-\item |translator|：表示汇编的翻译者，其格式参见\ref{subsec:translator}。
-\item |edition|：表示汇编的版本，其格式参见\ref{subsec:bibfield-edition}。
-\item |pages|表示析出文献所处的页码或页码范围，其格式参见\ref{subsec:bibfield-pages}。
-\item |citedate|：表示析出文献的在线版的引用日期，其格式参见\ref{subsec:bibfield-citedate}。
-\item |url|：表示析出文献的在线版的引用URL，其格式参见\ref{subsec:bibfield-url}。
-\item |doi|：表示析出文献的DOI编码，其格式参见\ref{subsec:bibfield-doi}
-\item |language|：表示汇编的语言，其格式参见\ref{subsec:bibfield-language}。若语
-  言为中文，此项必须填|zh|；否则，此项可省略。
+\item |translator|：表示该析出文献或其所属汇编的翻译者，其格式参见\ref{subsec:translator}；
+\item |edition|：表示该析出文献所属汇编的版本，其格式参见\ref{subsec:bibfield-edition}；
+\item |address|：表示该析出文献所属汇编的出版地，其格式参见\ref{subsec:bibfield-address}；
+\item |publisher|：表示该析出文献所属汇编的出版者，其格式参见\ref{subsec:bibfield-publisher}；
+\item |citedate|：表示该析出文献的在线版本的引用日期，其格式参见\ref{subsec:bibfield-citedate}；
+\item |url|：表示该析出文献的在线版本的引用URL，其格式参见\ref{subsec:bibfield-url}；
+\item |doi|：表示该析出文献的电子版的DOI编号，其格式参见\ref{subsec:bibfield-doi}；
+\item |language|：表示该析出文献的语言，其格式参见\ref{subsec:bibfield-language}；
 \item 其他字段将不起作用。
 \end{itemize}
 
+\begin{note}
+该汇编所属的丛书的标题不应出现在|booktitle|字段中，而应填写在|series|字段中。
+该汇编所属的多卷书的卷号也不应出现在|booktitle|字段中，而应填写在|volume|字段中。
+若该析出文献对应的文献项有|url|或|doi|字段，则其也必须有|citedate|字段。
+若该析出文献的语言为中文，则必须将|language|字段设置为|zh|；否则可忽略|language|字段。
+\end{note}
+
+\subsubsection{例子}
+
+\begin{verbatim}
+@incollection{abramsky1990,
+  author={Samson Abramsky},
+  title={The Lazy Lambda Calculus},
+  booktitle={Research Topics in Functional Programming},
+  publisher={Addison-Welsey},
+  year={1990},
+  editor={D. A. Turner},
+  pages={65-116},
+  address={Reading, MA},
+  citedate={2010-01-12},
+  url={http://citeseer.nj.nec.com/abramsky90lazy.html},
+}
+
+@incollection{gongzi,
+  author={马克思},
+  title={关于《工资、价格和利润》的报告札记},
+  editor={马克思 and 恩格斯},
+  booktitle={马克思恩格斯全集},
+  volume={44},
+  address={北京},
+  publisher={人民出版社},
+  year={1982},
+  pages={505},
+  language={zh},
+}
+\end{verbatim}
+
+\subsection{会议录中的析出文献}\label{subsec:bibtype-inproceedings}
+
+会议录中的析出文献是指收录在会议录中的论文或报告。它所对应的{\BibTeX}文献项类型为
+|inproceedings|；所对应的文献类型编码为|C|\cite{gbt3469-1983}。
+
+\subsubsection{必需字段}
+
+\begin{itemize}
+\item |author|：表示该析出文献的作者，其格式参见\ref{subsec:bibfield-author}；
+\item |title|：表示该析出文献的标题，其格式参见\ref{subsec:bibfield-title}；
+\item |booktitle|：表示该析出文献所属会议录的标题，其格式参见\ref{subsec:bibfield-title}；
+\item |editor|：表示该析出文献所属会议录的编辑者或作者，其格式参见\ref{subsec:bibfield-editor}；
+\item |year|：表示该析出文献所属会议录的出版年，其格式参见\ref{subsec:bibfield-year}；
+\item |pages|：表示该析出文献在其所属会议录中所处的页码或页码范围，其格式参见\ref{subsec:bibfield-pages}。
+\end{itemize}
+
+\subsubsection{可选字段}
+
+\begin{itemize}
+\item |translator|：表示该析出文献或其所属会议录的翻译者，其格式参见\ref{subsec:translator}；
+\item |edition|：表示该析出文献所属会议录的版本，其格式参见\ref{subsec:bibfield-edition}；
+\item |address|：表示该析出文献所属会议录的出版地，其格式参见\ref{subsec:bibfield-address}；
+\item |publisher|：表示该析出文献所属会议录的出版者，其格式参见\ref{subsec:bibfield-publisher}；
+\item |citedate|：表示该析出文献的在线版本的引用日期，其格式参见\ref{subsec:bibfield-citedate}；
+\item |url|：表示该析出文献的在线版本的引用URL，其格式参见\ref{subsec:bibfield-url}；
+\item |doi|：表示该析出文献的电子版的DOI编号，其格式参见\ref{subsec:bibfield-doi}；
+\item |language|：表示该析出文献的语言，其格式参见\ref{subsec:bibfield-language}；
+\item 其他字段将不起作用。
+\end{itemize}
+
+\begin{note}
+该会议录所属的丛书的标题不应出现在|booktitle|字段中，而应填写在|series|字段中。
+该会议录所属的多卷书的卷号也不应出现在|booktitle|字段中，而应填写在|volume|字段中。
+若该析出文献对应的文献项有|url|或|doi|字段，则其也必须有|citedate|字段。
+若该析出文献的语言为中文，则必须将|language|字段设置为|zh|；否则可忽略|language|字段。
+\end{note}
+
+\subsubsection{例子}
+
+\begin{verbatim}
+@inproceedings{nonlinear1996,
+  author={钟文发},
+  title={非线性规划在可燃毒物配置中的应用},
+  editor ={赵玮},
+  booktitle={运筹学的理论与应用：中国运筹学会第五届大会论文集},
+  address={西安},
+  publisher={西安电子科技大学出版社},
+  year={1996},
+  pages={468-471},
+  language={zh},
+}
+
+@inproceedings{fourney1971,
+  author={Fourney M. E.},
+  title={Advances in holographic photoelasticity},
+  editor={{American Society of Mechanical Engineers, 
+           Applied Mechanics Division}},
+  booktitle={Symposium on Applications of Holography in Mechanics, 
+             August 23--25, 1971, University of Southern California, 
+             Los Angeles, California},
+  address={New York},
+  publisher={ASME},
+  year={c1971},
+  pages={17-38},
+}
+
+@inproceedings{aczel1998,
+  author={Peter Aczel},
+  title={On relating type theories and set theories},
+  booktitle={Types `98, the proceedings of the 1998 workshop 
+             on Types for Proofs and Programs},
+  year={1998},
+  editor={T. Altenkirch and W. Naraschewski and B. Reus},
+  volume={1657},
+  series={Lecture Notes in Computer Science},
+  pages={1-18},
+  address={Kloster Irsee},
+  publisher={Springer},
+}
+
+@inproceedings{ariola1995,
+  author={Zena M. Ariola and Matthias Felleisen 
+          and John Maraist and Martin Odersky 
+          and Philip Wadler},
+  title={A Call-by-Need Lambda Calculus},
+  booktitle={Proceedings of 22nd Annual {ACM {SIGACT}-{SIGPLAN}} 
+             Symposium on Principles of Programming Languages
+             ({POPL})},
+  year={1995},
+  pages={233-246},
+}
+
+@inproceedings{balaa2000,
+  author={Antonia Balaa and Yves Bertot},
+  title={Fix-point Equations for Well-Founded Recursion 
+         in Type Theory},
+  booktitle={Theorem Proving in Higher Order Logics},
+  year={2000},
+  editor={Mark Aagaard and John Harrison},
+  volume={1869},
+  series={Lecture Notes in Computer Science},
+  pages={1-16},
+  publisher={Springer-Verlag},
+}
+
+@inproceedings{barendregt1988,
+  author={Henk Barendregt},
+  title={Introduction to Lambda Calculus},
+  booktitle={Aspen{\ae}s Workshop on Implementation of 
+             Functional Languages, G{\"o}teborg},
+  year={1988},
+  address={G{\"o}teborg},
+  publisher={Programming Methodology Group, University 
+             of G{\"o}teborg and Chalmers
+             University of Technology},
+}
+
+@inproceedings{basin1991,
+  author={David A. Basin and Doulas J. Howe},
+  title={Some Normalization Properties of Martin-L{\"o}f's 
+         Type Theory and Applications},
+  booktitle={International Conference on Theoretical 
+         Aspects of Computer Software (TACS '91)},
+  year={1991},
+  volume={526},
+  series={Lecture Notes in Computer Science},
+  pages={475-494},
+  publisher={Springer-Verlag},
+}
+\end{verbatim}
 
 \subsection{期刊中的析出文献}\label{subsec:bibtype-article}
 
@@ -1420,31 +1687,167 @@
 \subsubsection{必需字段}
 
 \begin{itemize}
-\item |author|：表示析出文献的作者，其格式参见\ref{subsec:bibfield-author}。
-\item |title|：表示析出文献的标题，其格式参见\ref{subsec:bibfield-title}。
-\item |journal|：表示期刊的名称，其格式参见\ref{subsec:bibfield-journal}。
-\item |year|：表示析出文献所处的特定某期期刊的出版年，其格式参见\ref{subsec:bibfield-year}。
+\item |author|：表示该析出文献的作者，其格式参见\ref{subsec:bibfield-author}；
+\item |title|：表示该析出文献的标题，其格式参见\ref{subsec:bibfield-title}；
+\item |journal|：表示该析出文献所属期刊的名称，其格式参见\ref{subsec:bibfield-journal}；
+\item |year|：表示该析出文献所处的特定某期期刊的出版年，其格式参见\ref{subsec:bibfield-year}。
 \end{itemize}
 
 \subsubsection{可选字段}
 
 \begin{itemize}
-\item |volume|: 表示析出文献所处的特定某期期刊的卷号，其格式参见\ref{subsec:bibfield-volume}。
-\item |number|: 表示析出文献所处的特定某期期刊的期号，其格式参见\ref{subsec:bibfield-number}。
-\item |pages|表示析出文献在期刊中所处的页码或页码范围，其格式
-  参见\ref{subsec:bibfield-pages}。
-\item |citedate|：表示析出文献的在线版本的引用日期，其格式参见\ref{subsec:bibfield-citedate}。
-\item |url|：表示析出文献的在线版本的引用URL，其格式参见\ref{subsec:bibfield-url}。
-\item |doi|：表示析出文献的DOI编码，其格式参见\ref{subsec:bibfield-doi}
-\item |language|：表示期刊的语言，其格式参见\ref{subsec:bibfield-language}。若语
-  言为中文，此项必须填|zh|；否则，此项可省略。
+\item |volume|: 表示该析出文献所处的特定某期期刊的卷号，其格式参见\ref{subsec:bibfield-volume}；
+\item |number|: 表示该析出文献所处的特定某期期刊的期号，其格式参见\ref{subsec:bibfield-number}；
+\item |pages|表示该析出文献在其所处的特定某期期刊中的页码或页码范围，其格式参见\ref{subsec:bibfield-pages}；
+\item |citedate|：表示该析出文献的在线版本的引用日期，其格式参见\ref{subsec:bibfield-citedate}；
+\item |url|：表示该析出文献的在线版本的引用URL，其格式参见\ref{subsec:bibfield-url}；
+\item |doi|：表示该析出文献的电子版的DOI编号，其格式参见\ref{subsec:bibfield-doi}；
+\item |language|：表示该析出文献的语言，其格式参见\ref{subsec:bibfield-language}；
 \item 其他字段将不起作用。
 \end{itemize}
 
+\begin{note}
+若该析出文献对应的文献项有|url|或|doi|字段，则其也必须有|citedate|字段。
+若该析出文献的语言为中文，则必须将|language|字段设置为|zh|；否则可忽略|language|字段。
+\end{note}
+
+\subsubsection{例子}
+
+\begin{verbatim}
+@article{kanamori1998,
+  author={Kanamori, H.},
+  title={Shaking without quaking},
+  journal={Science},
+  year={1998},
+  volume={279},
+  number={5359},
+  pages={2063-2064},
+}
+
+@article{caplan1993,
+  author={Caplan, P.},
+  title={Cataloging internet resources},
+  journal={The Public Access Computer Systems Review},
+  year={1993},
+  volume={4},
+  number={2},
+  pages={61-66},
+}
+
+@article{marais1992,
+  author={des Marais, D. J. and Strauss, H. 
+          and Summons, R. E. and Other Authors},
+  title={Carbon isotope evidence for the stepwise 
+         oxidation of the Proterozoic environment},
+  journal={Nature},
+  year={1992},
+  volume={359},
+  pages={605-609},
+}
+
+@article{hewitt1984,
+  author={Hewitt, J. A.},
+  title={Technical services in 1983},
+  journal={Library Resource Services},
+  year={1984},
+  volume={28},
+  number={3},
+  pages={205-218},
+}
+
+@article{christine1998,
+  author={Christine, M.},
+  title={Plant physiology: plant biology in the Genome Era},
+  journal={Science},
+  year={1998},
+  volume={281},
+  pages={331-332},
+  url={http://www.sciencemag.org/cgi/collection/anatmorp},
+  citedate={1998-09-23},
+}
+
+@article{lixiaodong1999,
+  author={李晓东 and 张庆红 and 叶瑾琳},
+  title={气候学研究的若干理论问题},
+  journal={北京大学学报: 自然科学版},
+  year={1999},
+  volume={35},
+  number={1},
+  pages={101-106},
+  language={zh},
+}
+
+@article{liuwu1999,
+  author={刘武 and 郑良 and 姜础},
+  title={元谋古猿牙齿测量数据的统计分析及其在分类研究上的意义},
+  journal={科学通报},
+  year={1999},
+  volume={44},
+  pages={2481-2488},
+  language={zh},
+}
+
+@article{liruimu2000,
+   author={李炳穆},
+   title={理想的图书馆员和信息专家的素质与形象},
+   journal={图书情报工作},
+   year={2000},
+   number={2},
+   pages={5-8},
+   language={zh},
+}
+
+@article{moshaoqiang1999,
+  author={莫少强},
+  title={数字式中文全文文献格式的设计与研究},
+  journal={情报学报},
+  year={1999},
+  volume={18},
+  number={4},
+  pages={1-6},
+  url={http://periodical.wanfangdata.com.cn/periodical/qbxb9904/990407.htm},
+  citedate={2001-07-08},
+  language={zh},
+}
+
+@article{taorenji1984,
+  author={陶仁骥},
+  title={密码学与数学},
+  journal={自然杂志},
+  year={1984},
+  volume={7},
+  number={7},
+  pages={527},
+  language={zh},
+}
+
+@article{yazhou1978,
+  author={{亚洲地质图编目组}},
+  title={亚洲地层与地质历史概述},
+  journal={地质学报},
+  year={1978},
+  volume={3},
+  pages={104-208},
+  language={zh},
+}
+
+@article{jiangxiangdong1999,
+  author={江向东},
+  title={互联网环境下的信息处理与图书管理系统解决方案},
+  journal={情报学报},
+  year={1999},
+  volume={18},
+  number={2},
+  pages={4},
+  url={http://www.chinainfo.gov.cn/periodical/qbxb99/qbxb990203},
+  citedate={2000-01-18},
+  language={zh},
+}
+\end{verbatim}
 
 \subsection{新闻报道}\label{subsec:bibtype-news}
 
-新闻报道是指刊登在（实体）报纸上的报道。它所对应的{\BibTeX}文献项类型为|news|。
+新闻报道是指刊登在报纸上的报道。它所对应的{\BibTeX}文献项类型为|news|。
 它所对应的文献类型编码为|N|\cite{gbt3469-1983}。
 
 |news|类型不是{\BibTeX}的标准类型，而是{\njuthesis}的扩展。
@@ -1452,22 +1855,59 @@
 \subsubsection{必需字段}
 
 \begin{itemize}
-\item |author|：表示新闻报道的作者，其格式参见\ref{subsec:bibfield-author}。
-\item |title|：表示新闻报道的标题，其格式参见\ref{subsec:bibfield-title}。
-\item |journal|：表示刊登该新闻报道的报刊的名称，其格式参见\ref{subsec:bibfield-journal}。
-\item |date|：表示刊登该新闻报道的特定某期报刊的发行日期，其格式参见\ref{subsec:bibfield-date}。
-\item |number|: 表示刊登该新闻报道的特定某期报刊的期号，其格式参见\ref{subsec:bibfield-number}。
+\item |author|：表示该新闻报道的作者，其格式参见\ref{subsec:bibfield-author}；
+\item |title|：表示该新闻报道的标题，其格式参见\ref{subsec:bibfield-title}；
+\item |journal|：表示刊登该新闻报道的报刊的名称，其格式参见\ref{subsec:bibfield-journal}；
+\item |date|：表示刊登该新闻报道的特定某期报刊的发行日期，其格式参见\ref{subsec:bibfield-date}；
 \end{itemize}
 
 \subsubsection{可选字段}
 
 \begin{itemize}
-\item |citedate|：表示新闻报道的在线版本引用日期，其格式参见\ref{subsec:bibfield-citedate}。
-\item |url|：表示新闻报道的在线版本的引用URL，其格式参见\ref{subsec:bibfield-url}。
-\item |language|：表示新闻报道的语言，其格式参见\ref{subsec:bibfield-language}。
-  若语言为中文，此项必须填|zh|；否则，此项可省略。
+\item |number|: 表示刊登该新闻报道的特定某期报刊的期号，其格式参见\ref{subsec:bibfield-number}。
+\item |citedate|：表示该新闻报道的在线版本引用日期，其格式参见\ref{subsec:bibfield-citedate}；
+\item |url|：表示该新闻报道的在线版本的引用URL，其格式参见\ref{subsec:bibfield-url}；
+\item |doi|：表示该新闻报道的电子版的DOI编号，其格式参见\ref{subsec:bibfield-doi}；
+\item |language|：表示该新闻报道的语言，其格式参见\ref{subsec:bibfield-language}；
 \item 其他字段将不起作用。
 \end{itemize}
+
+\begin{note}
+若该新闻报道对应的文献项有|url|或|doi|字段，则其也必须有|citedate|字段。
+若该新闻报道的语言为中文，则必须将|language|字段设置为|zh|；否则可忽略|language|字段。
+\end{note}
+
+\subsubsection{例子}
+
+\begin{verbatim}
+@news{ding2000,
+  author={丁文祥},
+  title={数字革命与竞争国际化},
+  journal={中国青年报},
+  date={2000-11-20},
+  number={15},
+  language={zh},
+}
+
+@news{zhang2000,
+  author={张田勤},
+  title={罪犯DNA库与生命伦理学计划},
+  journal={大众科技报},
+  date={2000-11-12},
+  language={zh},
+}
+
+@news{fu2000,
+  author={傅刚 and 赵承 and 李佳路},
+  title={大风沙过后的思考},
+  journal={北京青年报},
+  date={2000-04-12},
+  number={14},
+  url={http://www.bjyouth.com.cn/Bgb/20000412/GB/4216%5ED0412B1401.htm},
+  citedate={2005-07-12},
+  language={zh},
+}
+\end{verbatim}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1561,7 +2001,7 @@
 
 关于|editor|和|author|字段的详细解释，请参见\ref{sec:bib-type}。
 
-\subsection{translator}\label{subsec:translator}
+\subsection{translator}\label{subsec:bibfield-translator}
 
 |translator|字段表示文献的翻译者。其格式的具体要求与|author|字段类似。
 
@@ -1590,6 +2030,11 @@
 \subsection{booktitle}\label{subsec:bibfield-booktitle}
 
 |booktitle|字段表示析出文献所在的专著的标题。其要求与|title|字段类似，具体
+参见\ref{subsec:bibfield-title}。
+
+\subsection{series}\label{subsec:bibfield-series}
+
+|series|字段表示文献所属丛书的标题。其要求与|title|字段类似，具体
 参见\ref{subsec:bibfield-title}。
 
 \subsection{volume}\label{subsec:bibfield-volume}
@@ -1690,7 +2135,13 @@
 若该类型的文献需要出版者，但其{\BibTeX}项中缺少|publisher|字段，则{\BibTeX}排版后
 会用``[s.n.]'' （外文文献）或``[出版者不详]''（中文文献）替代。
 
-\subsection{organization}\label{subsec:bibfield-organization}
+\subsection{school}\label{subsec:bibfield-school}
+
+|school|字段表示文献所申请学位的颁发机构。
+
+\subsection{institution}\label{subsec:bibfield-institution}
+
+|institution|表示文献作者所属机构。
 
 \subsection{year}\label{subsec:bibfield-year}
 
