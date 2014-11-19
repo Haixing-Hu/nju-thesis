@@ -13,14 +13,19 @@
 %  [3] PATASHNIK O. Designing BibTeX Styles[R/OL]. 1998[2013-08-27].
 %      ftp://tug.ctan.org/pub/tex-archive/biblio/bibtex/contrib/doc/btxhak.pdf
 %
-%  This file may be distributed and/or modified under the conditions of the
-%  LaTeX Project Public License, either version 1.2 of this license or (at your
-%  option) any later version. The latest version of this license is in:
+%    This program is free software; you can redistribute it and/or modify
+%    it under the terms of the GNU General Public License as published by
+%    the Free Software Foundation; either version 2 of the License, or
+%    (at your option) any later version.
 %
-%  http://www.latex-project.org/lppl.txt
+%    This program is distributed in the hope that it will be useful,
+%    but WITHOUT ANY WARRANTY; without even the implied warranty of
+%    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%    GNU General Public License for more details.
 %
-%  and version 1.2 or later is part of all distributions of LaTeX version
-%  1999/12/01 or later.
+%    You should have received a copy of the GNU General Public License along
+%    with this program; if not, write to the Free Software Foundation, Inc.,
+%    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
@@ -171,7 +176,7 @@ FUNCTION {log.int} {                              % int Entry::log_int(int value
                                                   %                                                                                                                                                      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
-FUNCTION {not} {                                  % int not(int x) {
+FUNCTION {not} {                                  % int Entry::not(int x) {
   {                                               %   if (x == 1) {
     false                                         %     return false;
   } {                                             %   } else {
@@ -181,7 +186,7 @@ FUNCTION {not} {                                  % int not(int x) {
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
-FUNCTION {and} {                                  % int and(int x, int y) {
+FUNCTION {and} {                                  % int Entry::and(int x, int y) {
   {                                               %   if (y == 1) {
     skip$                                         %     return x;
   } {                                             %   } else {
@@ -191,7 +196,7 @@ FUNCTION {and} {                                  % int and(int x, int y) {
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
-FUNCTION {or} {                                   % int or(int x, int y) {
+FUNCTION {or} {                                   % int Entry::or(int x, int y) {
   {                                               %   if (y == 1) {
     pop$ true                                     %     return true;
   } {                                             %   } else {
@@ -204,7 +209,7 @@ FUNCTION {or} {                                   % int or(int x, int y) {
                                                   % //  We need this function since text.length$ is NOT
                                                   % //  the length in characters.
 INTEGERS {length.i}                               % static int length_i;
-FUNCTION {length} {                               % int length(String str) {
+FUNCTION {length} {                               % int Entry::length(String str) {
   duplicate$ empty$ {                             %   if (empty(str)) {
     pop$ #0                                       %     return 0;
   } {                                             %   } else {
@@ -225,7 +230,7 @@ FUNCTION {length} {                               % int length(String str) {
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
-FUNCTION {is.digit} {                             % int is_digit(String ch) {
+FUNCTION {is.digit} {                             % int Entry::is_digit(String ch) {
   chr.to.int$                                     %   int ascii = chr_to_int(ch);
   duplicate$ "0" chr.to.int$ < {                  %   if (ascii < chr_to_int("0")) {
     pop$ false                                    %     return false;
@@ -240,7 +245,7 @@ FUNCTION {is.digit} {                             % int is_digit(String ch) {
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   % // test if str is a number
-FUNCTION {is.number} {                            % int is_number(String str) {
+FUNCTION {is.number} {                            % int Entry::is_number(String str) {
   duplicate$ empty$ not swap$                     %   int result = (! empty(str));
   { duplicate$ empty$ not} {                      %   while (! empty(str)) {
     duplicate$ #1 #1 substring$ is.digit {        %     if (is_digit(substring(str, 1, 1))) {
@@ -255,7 +260,7 @@ FUNCTION {is.number} {                            % int is_number(String str) {
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   % // extract the number prefix of str
-FUNCTION {extract.number} {                       % String extract_number(String str) {
+FUNCTION {extract.number} {                       % String Entry::extract_number(String str) {
   duplicate$                                      %   String suffix = str;
   duplicate$ length swap$                         %   int n = length(str);
   duplicate$ empty$                               %   int stop = empty(suffix);
@@ -273,7 +278,7 @@ FUNCTION {extract.number} {                       % String extract_number(String
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
-FUNCTION {get.last.chr} {                         % String get_last_chr(String str) {
+FUNCTION {get.last.chr} {                         % String Entry::get_last_chr(String str) {
   duplicate$ length                               %   int n = length(str);
   duplicate$ #0 = {                               %   if (n == 0) {
     pop$                                          %     return str;
@@ -284,7 +289,7 @@ FUNCTION {get.last.chr} {                         % String get_last_chr(String s
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
-FUNCTION {get.ordinal.suffix.en} {                % String get_ordinal_suffix_en(String ch) {
+FUNCTION {get.ordinal.suffix.en} {                % String Entry::get_ordinal_suffix_en(String ch) {
   duplicate$ "1" = {                              %   if (num == "1") {
     pop$ cap.st.en                                %     return cap_st_en;
   } {                                             %   } else {
@@ -302,7 +307,7 @@ FUNCTION {get.ordinal.suffix.en} {                % String get_ordinal_suffix_en
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
-FUNCTION {num.to.ordinal.en} {                    % String num_to_ordinal_en(String num) {
+FUNCTION {num.to.ordinal.en} {                    % String Entry::num_to_ordinal_en(String num) {
   duplicate$ empty$ {                             %   if (empty(num)) {
     skip$                                         %     return num;
   } {                                             %   } else {
@@ -316,7 +321,7 @@ FUNCTION {num.to.ordinal.en} {                    % String num_to_ordinal_en(Str
                                                   %
 STRINGS {remove.dots.result}                      % static String remove_dots_result;
                                                   %
-FUNCTION {remove.dots} {                          % String remove_dots(String str) {
+FUNCTION {remove.dots} {                          % String Entry::remove_dots(String str) {
   "" 'remove.dots.result :=                       %   remove_dots_result = "";
   { duplicate$ empty$ not } {                     %   while (! empty(str)) {
     duplicate$ #1 #2 substring$                   %     String tmp = substring(str, 1, 2);
@@ -368,7 +373,7 @@ FUNCTION {add.textbf} {                           % String Entry::add_textbf(Str
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   % // test if str contains a dash '-'
-FUNCTION {contain.dash} {                         % int contain_dash(String str) {
+FUNCTION {contain.dash} {                         % int Entry::contain_dash(String str) {
   false swap$                                     %   int result = false;
   { duplicate$ empty$ not} {                      %   while (! empty(str)) {
     duplicate$ #1 #1 substring$ "-" = {           %     if (substring(str, 1, 1) == "-") {
@@ -384,7 +389,7 @@ FUNCTION {contain.dash} {                         % int contain_dash(String str)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   % // extract the substring before the first '-'
                                                   % // returns the string itself if no '-'
-FUNCTION {extract.before.first.dash} {            % String extract_before_first_dash(String str) {
+FUNCTION {extract.before.first.dash} {            % String Entry::extract_before_first_dash(String str) {
   duplicate$                                      %   String suffix = str;
   duplicate$ length swap$                         %   int n = length(str);
   duplicate$ empty$                               %   int stop = empty(suffix);
@@ -403,7 +408,7 @@ FUNCTION {extract.before.first.dash} {            % String extract_before_first_
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   % // extract the substring after the first '-'
                                                   % // returns the string itself if no '-'
-FUNCTION {extract.after.first.dash} {             % String extract_after_first_dash(String str) {
+FUNCTION {extract.after.first.dash} {             % String Entry::extract_after_first_dash(String str) {
   duplicate$                                      %   String suffix = str;
   duplicate$ empty$                               %   int stop = empty(suffix);
   { not } {                                       %   while (! stop) {
@@ -424,7 +429,7 @@ FUNCTION {extract.after.first.dash} {             % String extract_after_first_d
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   % // extract the substring after the last '-'
                                                   % // returns the empty string if no '-'
-FUNCTION {extract.after.last.dash} {              % String extract_after_last_dash(String str) {
+FUNCTION {extract.after.last.dash} {              % String Entry::extract_after_last_dash(String str) {
   duplicate$ contain.dash not {                   %   if (! contain_dash(str)) {
     pop$ ""                                       %     return "";
   } {                                             %   } else {
@@ -437,7 +442,7 @@ FUNCTION {extract.after.last.dash} {              % String extract_after_last_da
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
-FUNCTION {trim.start} {                           % String trim_start(String str) {
+FUNCTION {trim.start} {                           % String Entry::trim_start(String str) {
   {duplicate$ #1 #1 substring$ " " =} {           %   while (substring(str, 1, 1) == " ") {
     #2 global.max$ substring$                     %     str = substring(str, 2, global_max);
   } while$                                        %   }
@@ -446,7 +451,7 @@ FUNCTION {trim.start} {                           % String trim_start(String str
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
-FUNCTION {trim.end} {                             % String trim_end(String str) {
+FUNCTION {trim.end} {                             % String Entry::trim_end(String str) {
   {duplicate$ get.last.chr " " =} {               %   while (get_last_chr(str) == " ") {
     duplicate$ length #1 -                        %     int n = length(str) - 1;
     #1 swap$ substring$                           %     str = substring(str, 1, n);
@@ -456,7 +461,7 @@ FUNCTION {trim.end} {                             % String trim_end(String str) 
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
-FUNCTION {trim} {                                 % String trim(String str) {
+FUNCTION {trim} {                                 % String Entry::trim(String str) {
   trim.start                                      %   str = trim_start(str);
   trim.end                                        %   return trim_end(str);
 }                                                 % }
@@ -1341,9 +1346,13 @@ FUNCTION {book.impl} {                            % void Entry::book_impl() {
   true output.mark                                %   output_mark(true);
   false output.translator                         %   output_translator(false);
   false output.edition                            %   output_edition(false);
-  true output.address                             %   output_address(true);
-  true output.publisher                           %   output_publisher(true);
-  cap.comma write$                                %   write(cap_comma);
+  publisher empty$ not {                          %   if (! empty(this.publisher)) {
+    true output.address                           %     output_address(true);
+    true output.publisher                         %     output_publisher(true);
+    cap.comma write$                              %     write(cap_comma);
+  } {                                             %   } else {
+    cap.period write$                             %     write(cap_period);
+  } if$                                           %   }
   true output.year                                %   output_year(true);
   false output.pages                              %   output_pages(false);
   false output.citedate                           %   output_citedate(false);
@@ -1375,9 +1384,13 @@ FUNCTION {proceedings} {                          % void Entry::proceedings() {
   true output.mark                                %   output_mark(true);
   false output.translator                         %   output_translator(false);
   false output.edition                            %   output_edition(false);
-  true output.address                             %   output_address(true);
-  true output.publisher                           %   output_publisher(true);
-  cap.comma write$                                %   write(cap_comma);
+  publisher empty$ not {                          %   if (! empty(this.publisher)) {
+    true output.address                           %     output_address(true);
+    true output.publisher                         %     output_publisher(true);
+    cap.comma write$                              %     write(cap_comma);
+  } {                                             %   } else {
+    cap.period write$                             %     write(cap_period);
+  } if$                                           %   }
   true output.year                                %   output_year(true);
   false output.pages                              %   output_pages(false);
   false output.citedate                           %   output_citedate(false);
@@ -1525,9 +1538,13 @@ FUNCTION {periodical.impl} {                      % void Entry::periodical_impl(
     false output.end.volume                       %     output_end_volume(false);
     false output.end.number                       %     output_end_number(false);
   } 'skip$ if$                                    %   }
-  true output.address                             %   output_address(true);
-  true output.publisher                           %   output_publisher(true);
-  cap.comma write$                                %   write(cap_comma);
+  publisher empty$ not {                          %   if (! empty(this.publisher)) {
+    true output.address                           %     output_address(true);
+    true output.publisher                         %     output_publisher(true);
+    cap.comma write$                              %     write(cap_comma);
+  } {                                             %   } else {
+    cap.period write$                             %     write(cap_period);
+  } if$                                           %   }
   true output.start.year                          %   output_start_year(true);
   cap.dash write$                                 %   write(cap_dash);
   year contain.dash {                             %   if (contain_dash(this.year)) {
@@ -1655,12 +1672,16 @@ FUNCTION {inbook.impl} {                          % void Entry::inbook_impl() {
   true output.mark                                %   output_mark(true);
   false output.translator                         %   output_translator(false);
   cap.double.slash write$                         %   write(cap_double_slash);
-  true output.editor                              %   output_editor(true);
+  false output.editor                             %   output_editor(false);
   true output.series.volume.booktitle             %   output_series_volume_booktitle(true);
   false output.edition                            %   output_edition(false);
-  true output.address                             %   output_address(true);
-  true output.publisher                           %   output_publisher(true);
-  cap.comma write$                                %   write(cap_comma);
+  publisher empty$ not {                          %   if (! empty(this.publisher)) {
+    true output.address                           %     output_address(true);
+    true output.publisher                         %     output_publisher(true);
+    cap.comma write$                              %     write(cap_comma);
+  } {                                             %   } else {
+    cap.period write$                             %     write(cap_period);
+  } if$                                           %   }
   true output.year                                %   output_year(true);
   false output.pages                              %   output_pages(false);
   false output.citedate                           %   output_citedate(false);
