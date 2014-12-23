@@ -3,7 +3,7 @@
 %  符合 GB/T 7714-2005 规范的 BibTeX 样式文件
 %
 %  作者：    胡海星   南京大学计算机科学与技术系
-%  版本：    v2.0.0  2013年10月18日
+%  版本：    v2.1.0  2014年12月18日
 %  项目主页: http://haixing-hu.github.io/nju-thesis/
 %
 %  参考资料:
@@ -52,6 +52,7 @@ ENTRY                                             % class Entry {
   series                                          %   String series;
   volume                                          %   String volume;
   number                                          %   String number;
+  version 										  %	  String version;
   month                                           %   String month;
   school                                          %   String school;
   institution                                     %   String institution;
@@ -93,61 +94,62 @@ STRINGS {                                         % //  declare global String va
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % define global static constants
-FUNCTION {true} {#1}
-FUNCTION {false} {#0}
-FUNCTION {debug.enabled} {true}
-FUNCTION {cap.volume.en} {"Vol~"}
-FUNCTION {cap.volume.zh} {"卷"}
-FUNCTION {cap.edition.en} {"~ed"}
-FUNCTION {cap.edition.zh} {"版"}
-FUNCTION {cap.anonymous.en} {"Anon"}
-FUNCTION {cap.anonymous.zh} {"佚名"}
-FUNCTION {cap.no.address.en} {"[S.l.]"}
-FUNCTION {cap.no.address.zh} {"[出版地不详]"}
-FUNCTION {cap.no.publisher.en} {"[s.n.]"}
-FUNCTION {cap.no.publisher.zh} {"[出版者不详]"}
-FUNCTION {cap.et.al.en} {", et~al"}
-FUNCTION {cap.et.al.zh} {", 等"}
-FUNCTION {cap.translate.en} {"~trans"}
-FUNCTION {cap.translate.zh} {"译"}
-FUNCTION {cap.doi.url} {"http://dx.doi.org/"}
-FUNCTION {cap.st.en} {"st"}
-FUNCTION {cap.nd.en} {"nd"}
-FUNCTION {cap.rd.en} {"rd"}
-FUNCTION {cap.th.en} {"th"}
+FUNCTION {true} 				{#1}
+FUNCTION {false} 				{#0}
+FUNCTION {debug.enabled} 		{true}
+FUNCTION {cap.volume.en} 		{"Vol~"}
+FUNCTION {cap.volume.zh} 		{"卷"}
+FUNCTION {cap.edition.en} 		{"~ed"}
+FUNCTION {cap.edition.zh} 		{"版"}
+FUNCTION {cap.anonymous.en} 	{"Anon"}
+FUNCTION {cap.anonymous.zh} 	{"佚名"}
+FUNCTION {cap.no.address.en} 	{"[S.l.]"}
+FUNCTION {cap.no.address.zh} 	{"[出版地不详]"}
+FUNCTION {cap.no.publisher.en} 	{"[s.n.]"}
+FUNCTION {cap.no.publisher.zh} 	{"[出版者不详]"}
+FUNCTION {cap.et.al.en} 		{", et~al"}
+FUNCTION {cap.et.al.zh} 		{", 等"}
+FUNCTION {cap.translate.en} 	{"~trans"}
+FUNCTION {cap.translate.zh} 	{"译"}
+FUNCTION {cap.doi.url} 			{"http://dx.doi.org/"}
+FUNCTION {cap.st.en} 			{"st"}
+FUNCTION {cap.nd.en} 			{"nd"}
+FUNCTION {cap.rd.en} 			{"rd"}
+FUNCTION {cap.th.en} 			{"th"}
 
-FUNCTION {cap.period} {"\@. "}
-FUNCTION {cap.comma} {"\@, "}
-FUNCTION {cap.colon} {"\thinspace{}\textnormal{: }"}
-FUNCTION {cap.double.slash} {" //\thinspace{}"}
-FUNCTION {cap.dash} {"\thinspace{}\textnormal{--}\thinspace{}"}
+FUNCTION {cap.period} 			{"\@. "}
+FUNCTION {cap.comma} 			{"\@, "}
+FUNCTION {cap.colon} 			{"\thinspace{}\textnormal{: }"}
+FUNCTION {cap.double.slash} 	{" //\thinspace{}"}
+FUNCTION {cap.dash} 			{"\thinspace{}\textnormal{--}\thinspace{}"}
 
 % Predefined latex command used to format the style of bibitems
-FUNCTION {env.bibbegin} { "\begin{thebibliography}" }
-FUNCTION {env.bibend}   { "\end{thebibliography}" }
-FUNCTION {cmd.bibauthor} { "\providecommand{\bibauthor}[1]{#1}" }
-FUNCTION {cmd.bibeditor} { "\providecommand{\bibeditor}[1]{#1}" }
-FUNCTION {cmd.bibtranslator} { "\providecommand{\bibtranslator}[1]{#1}" }
-FUNCTION {cmd.bibtitle} { "\providecommand{\bibtitle}[1]{#1}" }
-FUNCTION {cmd.bibbooktitle} { "\providecommand{\bibbooktitle}[1]{#1}" }
-FUNCTION {cmd.bibjournal} { "\providecommand{\bibjournal}[1]{#1}" }
-FUNCTION {cmd.bibmark} { "\providecommand{\bibmark}[1]{#1}" }
-FUNCTION {cmd.bibcountry} { "\providecommand{\bibcountry}[1]{#1}" }
-FUNCTION {cmd.bibpatentid} { "\providecommand{\bibpatentid}[1]{#1}" }
-FUNCTION {cmd.bibedition} { "\providecommand{\bibedition}[1]{#1}" }
-FUNCTION {cmd.biborganization} { "\providecommand{\biborganization}[1]{#1}" }
-FUNCTION {cmd.bibaddress} { "\providecommand{\bibaddress}[1]{#1}" }
-FUNCTION {cmd.bibpublisher} { "\providecommand{\bibpublisher}[1]{#1}" }
-FUNCTION {cmd.bibinstitution} { "\providecommand{\bibinstitution}[1]{#1}" }
-FUNCTION {cmd.bibschool} { "\providecommand{\bibschool}[1]{#1}" }
-FUNCTION {cmd.bibvolume} { "\providecommand{\bibvolume}[1]{#1}" }
-FUNCTION {cmd.bibnumber} { "\providecommand{\bibnumber}[1]{#1}" }
-FUNCTION {cmd.bibpages} { "\providecommand{\bibpages}[1]{#1}" }
-FUNCTION {cmd.bibmodifydate} { "\providecommand{\bibmodifydate}[1]{#1}" }
-FUNCTION {cmd.bibcitedate} { "\providecommand{\bibcitedate}[1]{#1}" }
-FUNCTION {cmd.bibyear} { "\providecommand{\bibyear}[1]{#1}" }
-FUNCTION {cmd.bibdate} { "\providecommand{\bibdate}[1]{#1}" }
-FUNCTION {cmd.biburl} { "\providecommand{\biburl}[1]{\url{#1}}" }
+FUNCTION {env.bibbegin} 		{ "\begin{thebibliography}" }
+FUNCTION {env.bibend}   		{ "\end{thebibliography}" }
+FUNCTION {cmd.bibauthor} 		{ "\providecommand{\bibauthor}[1]{#1}" }
+FUNCTION {cmd.bibeditor} 		{ "\providecommand{\bibeditor}[1]{#1}" }
+FUNCTION {cmd.bibtranslator} 	{ "\providecommand{\bibtranslator}[1]{#1}" }
+FUNCTION {cmd.bibtitle} 		{ "\providecommand{\bibtitle}[1]{#1}" }
+FUNCTION {cmd.bibbooktitle} 	{ "\providecommand{\bibbooktitle}[1]{#1}" }
+FUNCTION {cmd.bibjournal} 		{ "\providecommand{\bibjournal}[1]{#1}" }
+FUNCTION {cmd.bibmark} 			{ "\providecommand{\bibmark}[1]{#1}" }
+FUNCTION {cmd.bibcountry} 		{ "\providecommand{\bibcountry}[1]{#1}" }
+FUNCTION {cmd.bibpatentid} 		{ "\providecommand{\bibpatentid}[1]{#1}" }
+FUNCTION {cmd.bibedition} 		{ "\providecommand{\bibedition}[1]{#1}" }
+FUNCTION {cmd.biborganization} 	{ "\providecommand{\biborganization}[1]{#1}" }
+FUNCTION {cmd.bibaddress} 		{ "\providecommand{\bibaddress}[1]{#1}" }
+FUNCTION {cmd.bibpublisher} 	{ "\providecommand{\bibpublisher}[1]{#1}" }
+FUNCTION {cmd.bibinstitution}	{ "\providecommand{\bibinstitution}[1]{#1}" }
+FUNCTION {cmd.bibschool} 		{ "\providecommand{\bibschool}[1]{#1}" }
+FUNCTION {cmd.bibvolume} 		{ "\providecommand{\bibvolume}[1]{#1}" }
+FUNCTION {cmd.bibnumber} 		{ "\providecommand{\bibnumber}[1]{#1}" }
+FUNCTION {cmd.bibversion} 		{ "\providecommand{\bibversion}[1]{#1}" }
+FUNCTION {cmd.bibpages} 		{ "\providecommand{\bibpages}[1]{#1}" }
+FUNCTION {cmd.bibmodifydate}	{ "\providecommand{\bibmodifydate}[1]{#1}" }
+FUNCTION {cmd.bibcitedate} 		{ "\providecommand{\bibcitedate}[1]{#1}" }
+FUNCTION {cmd.bibyear} 			{ "\providecommand{\bibyear}[1]{#1}" }
+FUNCTION {cmd.bibdate} 			{ "\providecommand{\bibdate}[1]{#1}" }
+FUNCTION {cmd.biburl} 			{ "\providecommand{\biburl}[1]{\newline\url{#1}}" }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
@@ -173,7 +175,7 @@ FUNCTION {log.int} {                              % int Entry::log_int(int value
     pop$ pop$                                     %     return;
   } if$                                           %   }
 }                                                 % }
-                                                  %                                                                                                                                                      %
+                                                  %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
 FUNCTION {not} {                                  % int Entry::not(int x) {
@@ -809,6 +811,18 @@ FUNCTION {format.number} {                        % String Emtry::format_number(
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
+FUNCTION {format.report.number} {                 % String Emtry::format_report_number(String number) {
+  "number" format.bibinfo                         %   return format_bibinfo(number, "number");
+}                                                 % }
+                                                  %                                                  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+FUNCTION {format.version} {                       % String Emtry::format_version(String version) {
+  "version" format.bibinfo                        %   return format_bibinfo(version, "version");
+}                                                 % }
+                                                  %                                                  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
 FUNCTION {format.pages} {                         % String Emtry::format_pages(String pages) {
   "pages" format.bibinfo                          %   return format_bibinfo(pages, "pages");
 }                                                 % }
@@ -833,7 +847,7 @@ FUNCTION {format.citedate} {                      % String Emtry::format_citedat
                                                   % // since if the URL contains special symbols such
                                                   % // as '%', the \biburl{} will be broken.
 FUNCTION {format.url} {                           % String Emtry::format_url(String url) {
-  "\url{" swap$ * "}" *                           %   return "\url{" + url + "}";
+  "\newline\url{" swap$ * "}" *                   %   return "\newline\url{" + url + "}";
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1192,6 +1206,20 @@ FUNCTION {output.number} {                        % void Entry::output_number(in
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
+FUNCTION {output.report.number} {                 % void Entry::output_report_number(int required) {
+  'required :=                                    %   this.required = required;
+  number empty$ not {                             %   if (! empty(this.number)) {
+  	cap.colon write$                              %     write(cap_colon);
+    number format.report.number write$            %     write(format_report_number(this.number));
+  } {                                             %   } else {
+    required {                                    %     if (required == 1) {
+      "Require number: " cite$ * warning$         %       warning("Require number: " + this.cite);
+    } 'skip$ if$                                  %     }
+  } if$                                           %   }
+}                                                 % }
+                                                  %                                                  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
 FUNCTION {output.country} {                       % void Entry::output_country(int required) {
   'required :=                                    %   this.required = required;
   country empty$ not {                            %   if (! empty(this.country)) {
@@ -1339,6 +1367,20 @@ FUNCTION {output.url} {                           % void Entry::output_url(int r
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
+FUNCTION {output.version} {                       % void Entry::output_version(int required) {
+  'required :=                                    %   this.required = required;
+  version empty$ not {                            %   if (! empty(this.version)) {
+    cap.period write$                             %     write(cap_period);
+    version format.version write$                 %     write(format_version(this.version));
+  } {                                             %   } else {
+    required {                                    %     if (required == 1) {
+      "Require version: " cite$ * warning$        %       warning("Require version: " + this.cite);
+    } 'skip$ if$                                  %     }
+  } if$                                           %   }
+}                                                 % }
+                                                  %                                                  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
 FUNCTION {book.impl} {                            % void Entry::book_impl() {
   start.bibitem                                   %   start_bibitem();
   true output.author.or.editor                    %   output_author_or_editor(true);
@@ -1450,9 +1492,11 @@ FUNCTION {techreport} {                           % void Entry::techreport() {
   start.bibitem                                   %   start_bibitem();
   true output.author                              %   output_author(true);
   true output.title                               %   output_title(true);
+  false output.report.number                      %   output_report_number(false);
   true output.mark                                %   output_mark(true);
   false output.translator                         %   output_translator(false);
   false output.edition                            %   output_edition(false);
+  false output.version                            %   output_version(false); 
   institution empty$ not {                        %   if (! empty(this.institution)) {
     true output.address                           %     output_address(true);
     true output.institution                       %     output_institution(true);
@@ -1799,6 +1843,8 @@ FUNCTION {write.style.commands} {                 % void write_style_commands() 
   cmd.bibvolume write$                            %   write(cmd_bibvolume);
   newline$                                        %   writeln();
   cmd.bibnumber write$                            %   write(cmd_bibnumber);
+  newline$                                        %   writeln();
+  cmd.bibversion write$                           %   write(cmd_bibversion);  
   newline$                                        %   writeln();
   cmd.bibpages write$                             %   write(cmd_bibpages);
   newline$                                        %   writeln();

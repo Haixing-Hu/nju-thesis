@@ -24,7 +24,7 @@
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
 %<*cls>
- [2013/10/18 v1.1.7 Document Class for the Degree Papers of Nanjing University]
+ [2013/10/18 v1.1.8 Document Class for the Degree Papers of Nanjing University]
 %</cls>
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
@@ -198,6 +198,7 @@
 %  v1.1.7 & 2013/10/18 & 胡海星 & 根据相应的国家规范，将``目录''改为``目次''，
 %                                将``插图索引''改为``插图清单''，
 %                                将``表格索引''改为``附表清单''\\
+%  v1.1.8 & 2014/12/22 & 胡海星 & 修改|tabular|环境中的行间距为正文行间距\\
 % \bottomrule
 % \end{tabular*}
 % \end{center}
@@ -2456,10 +2457,19 @@ December\fi
 % |\renewcommand{\baselinestretch}{1.38}|就得到真正的行间距为14.5pt*1.38≈20pt。
 % 而这样定义之后，对不同尺寸的字体都会按同样的比例因子1.38放大行间距，使得全文排
 % 版能协调一致。
-%
-% 采用|setspace|宏包提供的\cs{setstretch}命令实现行距控制。
 %    \begin{macrocode}
-\setstretch{1.38}
+\renewcommand*{\baselinestretch}{1.38}
+%    \end{macrocode}
+%
+% 修改|tabular|环境，设置表格中的行间距为正文行间距。
+%    \begin{macrocode}
+\let\convertergy@oldtabular\tabular
+\let\convertergy@endoldtabular\endtabular
+\renewenvironment{tabular}%
+{\bgroup%
+\renewcommand{\arraystretch}{1.38}%
+\convertergy@oldtabular}%
+{\convertergy@endoldtabular\egroup}
 %    \end{macrocode}
 %
 % 文章用A4纸标准大小的白纸打印，页眉：2.6cm，页脚：2.4cm，页边距上下：3.5cm，左
@@ -2795,7 +2805,7 @@ December\fi
 \else #1\fi\endgroup%
 }
 %    \end{macrocode}
-% 
+%
 % 重新定义\cs{ref}命令，使其前面自动加一个``\textasciitilde''。因为|hyperref|宏包会通
 % 过\cs{AtBeginDocument}修改\cs{ref}的定义，因此我们对\cs{ref}的修改也必须使用
 % \cs{AtBeginDocument}命令进行。同时我们需要修改\cs{eqref}，使其括号前后不出现空隙。
@@ -3005,7 +3015,8 @@ December\fi
     \vskip 5mm
     {\bf\kaishu\zihao{1}（\makebox[7em][s]{\njut@cap@cover@apply}）}\\
     \vskip\stretch{1}
-    {\bf\kaishu\zihao{3}
+    {\bgroup
+    \bf\kaishu\zihao{3}
     \def\tabcolsep{1pt}
     \def\arraystretch{1.5}
     \begin{tabular}{p{7.3em}c}
@@ -3019,7 +3030,7 @@ December\fi
       & \njutunderline[310pt]{\njut@value@supervisor}\\
       \makebox[7em][s]{\njut@cap@cover@researchfield}
       & \njutunderline[310pt]{\njut@value@researchfield}\\
-    \end{tabular}}\\
+    \end{tabular}\egroup}\\
     \vskip \stretch{1}
     {\bf\kaishu\zihao{4}\njut@value@date}
   \end{center}

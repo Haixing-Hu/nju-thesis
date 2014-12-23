@@ -25,7 +25,7 @@
 %% through LaTeX.
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{njuthesis.cls}
- [2013/10/18 v1.1.7 Document Class for the Degree Papers of Nanjing University]
+ [2013/10/18 v1.1.8 Document Class for the Degree Papers of Nanjing University]
 \newif\ifnjut@adobefonts\njut@adobefontstrue
 \newif\ifnjut@winfonts\njut@winfontsfalse
 \newif\ifnjut@linuxfonts\njut@linuxfontsfalse
@@ -453,7 +453,14 @@
 \captionsetup[figure]{position=below}
 \floatstyle{plaintop}
 \restylefloat{table}
-\setstretch{1.38}
+\renewcommand*{\baselinestretch}{1.38}
+\let\convertergy@oldtabular\tabular
+\let\convertergy@endoldtabular\endtabular
+\renewenvironment{tabular}%
+{\bgroup%
+\renewcommand{\arraystretch}{1.38}%
+\convertergy@oldtabular}%
+{\convertergy@endoldtabular\egroup}
 \geometry{headheight=2.6cm,headsep=3mm,footskip=13mm}
 \geometry{top=3.5cm,bottom=3.5cm,left=3.2cm,right=3.2cm}
 \setlength{\parindent}{2em}
@@ -781,7 +788,8 @@
     \vskip 5mm
     {\bf\kaishu\zihao{1}（\makebox[7em][s]{\njut@cap@cover@apply}）}\\
     \vskip\stretch{1}
-    {\bf\kaishu\zihao{3}
+    {\bgroup
+    \bf\kaishu\zihao{3}
     \def\tabcolsep{1pt}
     \def\arraystretch{1.5}
     \begin{tabular}{p{7.3em}c}
@@ -795,7 +803,7 @@
       & \njutunderline[310pt]{\njut@value@supervisor}\\
       \makebox[7em][s]{\njut@cap@cover@researchfield}
       & \njutunderline[310pt]{\njut@value@researchfield}\\
-    \end{tabular}}\\
+    \end{tabular}\egroup}\\
     \vskip \stretch{1}
     {\bf\kaishu\zihao{4}\njut@value@date}
   \end{center}
