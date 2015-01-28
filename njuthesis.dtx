@@ -24,7 +24,7 @@
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
 %<*cls>
- [2013/10/18 v1.1.8 Document Class for the Degree Papers of Nanjing University]
+ [2015/1/28 v1.1.9 Document Class for the Degree Papers of Nanjing University]
 %</cls>
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
@@ -138,14 +138,15 @@
 %
 % 本文档是{\njuthesis}的说明文档，其中包含模板文件的设置说明以及其源代码的完全注释。
 % \end{abstract}
-%
+% \clearpage
+% \newpage
 % \section*{{\hfill}修订历史{\hfill}}
 % \begin{center}
 % \noindent
-% \begin{tabular*}{\textwidth}{C{1.1cm}
-%                              C{1.8cm}
-%                              C{1.5cm}
-%                              p{\textwidth-6.2cm}}
+% \begin{longtable}[C]{C{1.1cm}
+%                      C{1.8cm}
+%                      C{1.5cm}
+%                      p{\textwidth-6.2cm}}
 % \toprule
 %   \textbf{版本}
 %   & \textbf{日期}
@@ -199,8 +200,9 @@
 %                                将``插图索引''改为``插图清单''，
 %                                将``表格索引''改为``附表清单''\\
 %  v1.1.8 & 2014/12/22 & 胡海星 & 修改|tabular|环境中的行间距为正文行间距\\
+%  v1.1.9 & 2015/01/28 & 胡海星 & 改用|longtable|作为``修订历史''表格环境\\
 % \bottomrule
-% \end{tabular*}
+% \end{longtable}
 % \end{center}
 % \clearpage
 %
