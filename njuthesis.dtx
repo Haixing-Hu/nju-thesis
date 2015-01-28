@@ -24,7 +24,7 @@
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
 %<*cls>
- [2015/1/28 v1.1.9 Document Class for the Degree Papers of Nanjing University]
+ [2015/1/28 v1.1.10 Document Class for the Degree Papers of Nanjing University]
 %</cls>
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
@@ -201,6 +201,8 @@
 %                                将``表格索引''改为``附表清单''\\
 %  v1.1.8 & 2014/12/22 & 胡海星 & 修改|tabular|环境中的行间距为正文行间距\\
 %  v1.1.9 & 2015/01/28 & 胡海星 & 改用|longtable|作为``修订历史''表格环境\\
+%  v1.1.10 & 2015/01/28 & 胡海星 & 修复Tex Live 2014引入的|xeCJK|使用|CJKnumber|选项后
+%                                 找不到|CJKnumber|命令的bug\\
 % \bottomrule
 % \end{longtable}
 % \end{center}
@@ -330,7 +332,7 @@
 %     |multirow| & |hyperref|    & |enumitem| & |xcolor|   & |amsmath|   & |amsfonts| \\
 %     |amsthm|   & |amssymb|    & |bm|        & |mathrsfs| & |txfonts|  & |pifont|  \\
 %     |setspace| & |wasysym|    & |hypernat| & |fancyhdr| & |natbib|    & |tabularx| \\
-%     |titlesec| & |glossaries|  & |ifthen|   & |makeidx| & |footmisc| &  \\
+%     |titlesec| & |glossaries|  & |ifthen|   & |makeidx| & |footmisc| &  |CJKnumb| \\
 %   \hline
 %   \end{tabular*}
 %   \caption{{\njuthesis}用到的宏包}\label{table:dependence}
@@ -1448,9 +1450,16 @@
 %   |BoldFont|选项和|SlantFont|；否则的话，|xeCJK|会自动生成宋体的粗体和斜体，而那会
 %   非常难看。
 % \end{note}
+% \begin{note}
+% 由于TeX Live升级到2014版后，直接用|xeCJK|的|CJKnumber|选项会出现bug，我们需单独导入
+% |CJKnumb|宏包；但|xeCJK|的|CJKnumber|选项依然需要，否则在Tex Live 2012下编译会报错。
+% \end{note}
 %    \begin{macrocode}
 \RequirePackage[CJKnumber,CJKchecksingle]{xeCJK}
+\RequirePackage{CJKnumb}
 %    \end{macrocode}
+%
+%
 %
 % 让{\XeLaTeX}能够处理dash的惯例(使用"--"和"---"获得较长的dash)。
 %    \begin{macrocode}
