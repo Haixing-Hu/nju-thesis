@@ -1887,6 +1887,13 @@ December\fi
 \newcommand*{\njut@zhfn@fangsong@win}{FangSong}
 %    \end{macrocode}
 %
+% 定义Windows下英文字体的名称。默认采用Windows自带的字体。
+%    \begin{macrocode}
+\newcommand*{\njut@enfn@main@win}{Times New Roman}
+\newcommand*{\njut@enfn@sans@win}{Arial}
+\newcommand*{\njut@enfn@mono@win}{Courier New}
+%    \end{macrocode}
+%
 % 定义Linux下宋体、黑体、楷书和仿宋体四种中文字体的名称。默认采用文鼎宋体、楷体；
 % 文泉黑体；以及华文仿宋体(需要单独安装)。
 %    \begin{macrocode}
@@ -1896,12 +1903,26 @@ December\fi
 \newcommand*{\njut@zhfn@fangsong@linux}{STFangSong}
 %    \end{macrocode}
 %
+% 定义Linux下英文字体的名称。默认采用的字体若未安装请自行安装。
+%    \begin{macrocode}
+\newcommand*{\njut@enfn@main@linux}{Times}
+\newcommand*{\njut@enfn@sans@linux}{Helvetica}
+\newcommand*{\njut@enfn@mono@linux}{Courier}
+%    \end{macrocode}
+%
 % 定义Mac下宋体、黑体、楷书和仿宋体四种中文字体的名称。默认采用华文字体。
 %    \begin{macrocode}
 \newcommand*{\njut@zhfn@songti@mac}{STSong}
 \newcommand*{\njut@zhfn@heiti@mac}{STHeiti}
 \newcommand*{\njut@zhfn@kaishu@mac}{STKaiti}
 \newcommand*{\njut@zhfn@fangsong@mac}{STFangsong}
+%    \end{macrocode}
+%
+% 定义Mac下英文字体的名称。默认采用Mac自带的字体。
+%    \begin{macrocode}
+\newcommand*{\njut@enfn@main@mac}{Times}
+\newcommand*{\njut@enfn@sans@mac}{Helvetica}
+\newcommand*{\njut@enfn@mono@mac}{Courier}
 %    \end{macrocode}
 %
 % 定义Adoble提供的宋体、黑体、楷书和仿宋体四种中文字体的名称。Adoble的宋体、黑体和
@@ -1921,11 +1942,11 @@ December\fi
 \newcommand*{\njut@zhfn@fangsong@adobe}{Adobe Fangsong Std}
 %    \end{macrocode}
 %
-% 定义英文字体名称。
+% 定义英文字体的名称。默认采用Mac自带的字体。
 %    \begin{macrocode}
-\newcommand*{\njut@enfn@main}{Times}
-\newcommand*{\njut@enfn@sans}{Helvetica}
-\newcommand*{\njut@enfn@mono}{Courier}
+\newcommand*{\njut@enfn@main@adobe}{Times}
+\newcommand*{\njut@enfn@sans@adobe}{Helvetica}
+\newcommand*{\njut@enfn@mono@adobe}{Courier}
 %</cfg>
 %    \end{macrocode}
 %
@@ -1946,24 +1967,36 @@ December\fi
   \newcommand*{\njut@zhfn@heiti}{\njut@zhfn@heiti@adobe}
   \newcommand*{\njut@zhfn@kaishu}{\njut@zhfn@kaishu@adobe}
   \newcommand*{\njut@zhfn@fangsong}{\njut@zhfn@fangsong@adobe}
+  \newcommand*{\njut@enfn@main}{\njut@enfn@main@adobe}
+  \newcommand*{\njut@enfn@sans}{\njut@enfn@sans@adobe}
+  \newcommand*{\njut@enfn@mono}{\njut@enfn@mono@adobe}
 \else
   \ifnjut@winfonts
-     \newcommand*{\njut@zhfn@songti}{\njut@zhfn@songti@win}
-     \newcommand*{\njut@zhfn@heiti}{\njut@zhfn@heiti@win}
-     \newcommand*{\njut@zhfn@kaishu}{\njut@zhfn@kaishu@win}
-     \newcommand*{\njut@zhfn@fangsong}{\njut@zhfn@fangsong@win}
+      \newcommand*{\njut@zhfn@songti}{\njut@zhfn@songti@win}
+      \newcommand*{\njut@zhfn@heiti}{\njut@zhfn@heiti@win}
+      \newcommand*{\njut@zhfn@kaishu}{\njut@zhfn@kaishu@win}
+      \newcommand*{\njut@zhfn@fangsong}{\njut@zhfn@fangsong@win}
+      \newcommand*{\njut@enfn@main}{\njut@enfn@main@win}
+      \newcommand*{\njut@enfn@sans}{\njut@enfn@sans@win}
+      \newcommand*{\njut@enfn@mono}{\njut@enfn@mono@win}
   \else
     \ifnjut@linuxfonts
-       \newcommand*{\njut@zhfn@songti}{\njut@zhfn@songti@linux}
-       \newcommand*{\njut@zhfn@heiti}{\njut@zhfn@heiti@linux}
-       \newcommand*{\njut@zhfn@kaishu}{\njut@zhfn@kaishu@linux}
-       \newcommand*{\njut@zhfn@fangsong}{\njut@zhfn@fangsong@linux}
+      \newcommand*{\njut@zhfn@songti}{\njut@zhfn@songti@linux}
+      \newcommand*{\njut@zhfn@heiti}{\njut@zhfn@heiti@linux}
+      \newcommand*{\njut@zhfn@kaishu}{\njut@zhfn@kaishu@linux}
+      \newcommand*{\njut@zhfn@fangsong}{\njut@zhfn@fangsong@linux}
+      \newcommand*{\njut@enfn@main}{\njut@enfn@main@linux}
+      \newcommand*{\njut@enfn@sans}{\njut@enfn@sans@linux}
+      \newcommand*{\njut@enfn@mono}{\njut@enfn@mono@linux}
     \else
        \ifnjut@macfonts
           \newcommand*{\njut@zhfn@songti}{\njut@zhfn@songti@mac}
           \newcommand*{\njut@zhfn@heiti}{\njut@zhfn@heiti@mac}
           \newcommand*{\njut@zhfn@kaishu}{\njut@zhfn@kaishu@mac}
           \newcommand*{\njut@zhfn@fangsong}{\njut@zhfn@fangsong@mac}
+          \newcommand*{\njut@enfn@main}{\njut@enfn@main@mac}
+          \newcommand*{\njut@enfn@sans}{\njut@enfn@sans@mac}
+          \newcommand*{\njut@enfn@mono}{\njut@enfn@mono@mac}
        \else
          \ClassError{njuthesis}{No fonts was selected.}{}
        \fi

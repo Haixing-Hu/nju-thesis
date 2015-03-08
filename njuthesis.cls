@@ -129,24 +129,36 @@
   \newcommand*{\njut@zhfn@heiti}{\njut@zhfn@heiti@adobe}
   \newcommand*{\njut@zhfn@kaishu}{\njut@zhfn@kaishu@adobe}
   \newcommand*{\njut@zhfn@fangsong}{\njut@zhfn@fangsong@adobe}
+  \newcommand*{\njut@enfn@main}{\njut@enfn@main@adobe}
+  \newcommand*{\njut@enfn@sans}{\njut@enfn@sans@adobe}
+  \newcommand*{\njut@enfn@mono}{\njut@enfn@mono@adobe}
 \else
   \ifnjut@winfonts
-     \newcommand*{\njut@zhfn@songti}{\njut@zhfn@songti@win}
-     \newcommand*{\njut@zhfn@heiti}{\njut@zhfn@heiti@win}
-     \newcommand*{\njut@zhfn@kaishu}{\njut@zhfn@kaishu@win}
-     \newcommand*{\njut@zhfn@fangsong}{\njut@zhfn@fangsong@win}
+      \newcommand*{\njut@zhfn@songti}{\njut@zhfn@songti@win}
+      \newcommand*{\njut@zhfn@heiti}{\njut@zhfn@heiti@win}
+      \newcommand*{\njut@zhfn@kaishu}{\njut@zhfn@kaishu@win}
+      \newcommand*{\njut@zhfn@fangsong}{\njut@zhfn@fangsong@win}
+      \newcommand*{\njut@enfn@main}{\njut@enfn@main@win}
+      \newcommand*{\njut@enfn@sans}{\njut@enfn@sans@win}
+      \newcommand*{\njut@enfn@mono}{\njut@enfn@mono@win}
   \else
     \ifnjut@linuxfonts
-       \newcommand*{\njut@zhfn@songti}{\njut@zhfn@songti@linux}
-       \newcommand*{\njut@zhfn@heiti}{\njut@zhfn@heiti@linux}
-       \newcommand*{\njut@zhfn@kaishu}{\njut@zhfn@kaishu@linux}
-       \newcommand*{\njut@zhfn@fangsong}{\njut@zhfn@fangsong@linux}
+      \newcommand*{\njut@zhfn@songti}{\njut@zhfn@songti@linux}
+      \newcommand*{\njut@zhfn@heiti}{\njut@zhfn@heiti@linux}
+      \newcommand*{\njut@zhfn@kaishu}{\njut@zhfn@kaishu@linux}
+      \newcommand*{\njut@zhfn@fangsong}{\njut@zhfn@fangsong@linux}
+      \newcommand*{\njut@enfn@main}{\njut@enfn@main@linux}
+      \newcommand*{\njut@enfn@sans}{\njut@enfn@sans@linux}
+      \newcommand*{\njut@enfn@mono}{\njut@enfn@mono@linux}
     \else
        \ifnjut@macfonts
           \newcommand*{\njut@zhfn@songti}{\njut@zhfn@songti@mac}
           \newcommand*{\njut@zhfn@heiti}{\njut@zhfn@heiti@mac}
           \newcommand*{\njut@zhfn@kaishu}{\njut@zhfn@kaishu@mac}
           \newcommand*{\njut@zhfn@fangsong}{\njut@zhfn@fangsong@mac}
+          \newcommand*{\njut@enfn@main}{\njut@enfn@main@mac}
+          \newcommand*{\njut@enfn@sans}{\njut@enfn@sans@mac}
+          \newcommand*{\njut@enfn@mono}{\njut@enfn@mono@mac}
        \else
          \ClassError{njuthesis}{No fonts was selected.}{}
        \fi
