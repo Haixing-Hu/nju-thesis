@@ -23,12 +23,12 @@ TEXMFLOCAL=$(shell get_texmf_dir.sh)
 
 .PHONY: all clean cls doc sample
 
-all: bst cls doc sample 
+all: bst cls doc sample
 
 ###### update bst file
 bst:  $(BST_FILE)
 
-$(BST_FILE): 
+$(BST_FILE):
 	curl $(BST_URL) -o $(BST_FILE)
 
 ###### generate cls/cfg
@@ -94,5 +94,4 @@ clean:
 		*.sty \
 		*.cfg \
 		*.cls \
-		*.sty \
-		*.bst 
+		*.sty

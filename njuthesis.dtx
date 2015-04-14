@@ -24,7 +24,7 @@
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
 %<*cls>
- [2015/1/28 v1.1.10 Document Class for the Degree Papers of Nanjing University]
+ [2015/4/14 v1.1.11 Document Class for the Degree Papers of Nanjing University]
 %</cls>
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
@@ -203,6 +203,7 @@
 %  v1.1.9 & 2015/01/28 & 胡海星 & 改用|longtable|作为``修订历史''表格环境\\
 %  v1.1.10 & 2015/01/28 & 胡海星 & 修复Tex Live 2014引入的|xeCJK|使用|CJKnumber|选项后
 %                                 找不到|CJKnumber|命令的bug\\
+%  v1.1.11 & 2015/04/14 & 胡海星 & 增加|notation|环境\\
 % \bottomrule
 % \end{longtable}
 % \end{center}
@@ -1206,11 +1207,11 @@
 % \noindent\centering
 % \begin{tabular}{*{7}{l}}
 %   \hline
-%   axiom  & theorem   & definition & proposition & lemma     & conjecture &\\
-%   公理   & 定理       & 定义       & 命题        & 引理       & 猜想       &\\
+%   axiom     & theorem   & definition & proposition & lemma      & conjecture & notation \\
+%   公理       & 定理      & 定义        & 命题         & 引理       & 猜想        & 记号 \\
 %   \hline
-%   proof  & corollary & example    & exercise    & assumption & remark  & problem \\
-%   证明   & 推论       & 例子       & 练习        & 假设       & 评注       & 问题\\
+%   proof     & corollary & example    & exercise    & assumption & remark     & problem \\
+%   证明       & 推论      & 例子        & 练习         & 假设        & 评注       & 问题\\
 %   \hline
 % \end{tabular}
 % \caption{预定义的数学定理环境}\label{table:math-env}
@@ -1586,6 +1587,7 @@
 % 定义常用数学定理环境的字符串常量：
 %    \begin{macrocode}
 \newcommand*{\njut@cap@definition}{定义}
+\newcommand*{\njut@cap@notation}{记号}
 \newcommand*{\njut@cap@theorem}{定理}
 \newcommand*{\njut@cap@lemma}{引理}
 \newcommand*{\njut@cap@corollary}{推论}
@@ -2329,6 +2331,7 @@ December\fi
                 {1em}%      Space after thm head: \newline = linebreak
                 {}%         Thm head spec
 \newtheorem{definition}{\njut@cap@definition}[chapter]
+\newtheorem{notation}[definition]{\njut@cap@notation}
 \newtheorem{theorem}{\njut@cap@theorem}[chapter]
 \newtheorem{lemma}[theorem]{\njut@cap@lemma}
 \newtheorem{corollary}[theorem]{\njut@cap@corollary}

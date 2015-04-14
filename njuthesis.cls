@@ -25,7 +25,7 @@
 %% through LaTeX.
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{njuthesis.cls}
- [2015/1/28 v1.1.10 Document Class for the Degree Papers of Nanjing University]
+ [2015/4/14 v1.1.11 Document Class for the Degree Papers of Nanjing University]
 \newif\ifnjut@adobefonts\njut@adobefontstrue
 \newif\ifnjut@winfonts\njut@winfontsfalse
 \newif\ifnjut@linuxfonts\njut@linuxfontsfalse
@@ -372,6 +372,7 @@
                 {1em}%      Space after thm head: \newline = linebreak
                 {}%         Thm head spec
 \newtheorem{definition}{\njut@cap@definition}[chapter]
+\newtheorem{notation}[definition]{\njut@cap@notation}
 \newtheorem{theorem}{\njut@cap@theorem}[chapter]
 \newtheorem{lemma}[theorem]{\njut@cap@lemma}
 \newtheorem{corollary}[theorem]{\njut@cap@corollary}
