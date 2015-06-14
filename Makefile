@@ -2,7 +2,7 @@
 #
 # 	Makefile for njuthesis
 #
-# 	Copyright (C) 2013 Haixing Hu,
+# 	Copyright (C) 2013-2015 Haixing Hu,
 #   Department of Computer Science and Technology, Nanjing University.
 #
 #	Home Page of the Project: http://haixing-hu.github.io/nju-thesis/

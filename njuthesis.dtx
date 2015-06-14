@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2013, Haixing Hu.
+% Copyright (C) 2013-2015, Haixing Hu.
 % Department of Computer Science and Technology, Nanjing University.
 %
 % This file may be distributed and/or modified under the conditions of the
@@ -24,7 +24,7 @@
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
 %<*cls>
- [2015/4/14 v1.1.11 Document Class for the Degree Papers of Nanjing University]
+ [2015/6/14 v1.1.13 Document Class for the Degree Papers of Nanjing University]
 %</cls>
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
@@ -204,6 +204,8 @@
 %  v1.1.10 & 2015/01/28 & 胡海星 & 修复Tex Live 2014引入的|xeCJK|使用|CJKnumber|选项后
 %                                 找不到|CJKnumber|命令的bug\\
 %  v1.1.11 & 2015/04/14 & 胡海星 & 增加|notation|环境\\
+%  v1.1.12 & 2015/06/14 & 胡海星 & 增加情况分类列表|caseenum|环境和步骤列表|stepenum|环境\\
+%  v1.1.13 & 2015/06/14 & 胡海星 & 增加公设环境|postulate| \\
 % \bottomrule
 % \end{longtable}
 % \end{center}
@@ -1213,6 +1215,9 @@
 %   proof     & corollary & example    & exercise    & assumption & remark     & problem \\
 %   证明       & 推论      & 例子        & 练习         & 假设        & 评注       & 问题\\
 %   \hline
+%   postulate &           &            &              &           &      &  \\
+%   公设       &           &            &               &         &        & \\
+%   \hline
 % \end{tabular}
 % \caption{预定义的数学定理环境}\label{table:math-env}
 % \end{table}
@@ -1596,6 +1601,7 @@
 \newcommand*{\njut@cap@assumption}{假设}
 \newcommand*{\njut@cap@conjecture}{猜想}
 \newcommand*{\njut@cap@axiom}{公理}
+\newcommand*{\njut@cap@postulate}{公设}
 \newcommand*{\njut@cap@principle}{定律}
 \newcommand*{\njut@cap@problem}{问题}
 \newcommand*{\njut@cap@exercise}{练习}
@@ -1604,6 +1610,14 @@
 \newcommand*{\njut@cap@proof}{证明}
 \newcommand*{\njut@cap@solution}{解}
 \newcommand*{\njut@cap@algorithm}{算法}
+%    \end{macrocode}
+%
+% 定义自定义列表环境的字符串常量：
+%    \begin{macrocode}
+\newcommand*{\njut@cap@case}{情况}
+\newcommand*{\njut@cap@subcase}{子情况}
+\newcommand*{\njut@cap@step}{步骤}
+\newcommand*{\njut@cap@substep}{子步骤}
 %    \end{macrocode}
 %
 % 定义日期中的中文字符：
@@ -2340,6 +2354,7 @@ December\fi
 \newtheorem{assumption}[theorem]{\njut@cap@assumption}
 \newtheorem{conjecture}[theorem]{\njut@cap@conjecture}
 \newtheorem{axiom}{\njut@cap@axiom}[chapter]
+\newtheorem{postulate}[axiom]{\njut@cap@postulate}
 \newtheorem{principle}[axiom]{\njut@cap@principle}
 \newtheorem{problem}{\njut@cap@problem}[chapter]
 \newtheorem{exercise}{\njut@cap@exercise}[chapter]
@@ -3519,12 +3534,32 @@ December\fi
 %    \end{macrocode}
 % \end{environment}
 %
-% \begin{environment}{romanenum}
+% \begin{environment}{alphaenum}
 % 小写字母列表环境。该列表最多两层。
 %    \begin{macrocode}
 \newlist{alphaenum}{enumerate}{2}
 \setlist[alphaenum,1]{label={\textnormal{\alph*\,)}}}
 \setlist[alphaenum,2]{label={\textnormal{\alph{alphaenumi}.\arabic*\,)}}}
+%    \end{macrocode}
+% \end{environment}
+%
+% \begin{environment}{caseenum}
+% 情况分类列表环境。该列表最多两层。
+%    \begin{macrocode}
+\newlist{caseenum}{enumerate}{2}
+\setlist[caseenum,1]{label={\textnormal{\njut@cap@case\arabic*.}}}
+\setlist[caseenum,2]{label={\textnormal{\njut@cap@subcase\arabic{caseenumi}.\arabic*.}}}
+\setlist[caseenum]{leftmargin=*}
+%    \end{macrocode}
+% \end{environment}
+%
+% \begin{environment}{stepenum}
+% 步骤列表环境。该列表最多两层。
+%    \begin{macrocode}
+\newlist{stepenum}{enumerate}{2}
+\setlist[stepenum,1]{label={\textnormal{\njut@cap@step\arabic*.}}}
+\setlist[stepenum,2]{label={\textnormal{\njut@cap@substep\arabic{stepenumi}.\arabic*.}}}
+\setlist[stepenum]{leftmargin=*}
 %    \end{macrocode}
 % \end{environment}
 %

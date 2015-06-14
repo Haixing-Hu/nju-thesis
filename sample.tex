@@ -445,6 +445,29 @@
 \item 第3项
 \end{alphaenum}
 
+下面是最多两层的情况列表:
+\begin{caseenum}
+\item 第1项
+\item 第2项
+  \begin{caseenum}
+  \item 第2.1项
+  \item 第2.2项
+  \item 第2.3项
+  \end{caseenum}
+\item 第3项
+\end{caseenum}
+
+下面是最多两层的步骤列表:
+\begin{stepenum}
+\item 第1项
+\item 第2项
+  \begin{stepenum}
+  \item 第2.1项
+  \item 第2.2项
+  \item 第2.3项
+  \end{stepenum}
+\item 第3项
+\end{stepenum}
 
 下面测试一下引用环境|quote|。下面测试一下引用环境|quote|。下面测试一下引用环境|quote|。
 下面测试一下引用环境|quote|。下面测试一下引用环境|quote|。下面测试一下引用环境|quote|。
@@ -559,6 +582,13 @@
 测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下
 定理环境。测试一下定理环境。测试一下定理环境。
 \end{axiom}
+
+\blindtext
+
+\begin{postulate}
+测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下
+定理环境。测试一下定理环境。测试一下定理环境。
+\end{postulate}
 
 \blindtext
 

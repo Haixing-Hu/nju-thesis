@@ -7,7 +7,7 @@
 %% njuthesis.dtx  (with options: `cls')
 %% This is a generated file.
 %% 
-%% Copyright (C) 2013, Haixing Hu.
+%% Copyright (C) 2013-2015, Haixing Hu.
 %% Department of Computer Science and Technology, Nanjing University.
 %% 
 %% Home Page of the Project: http://haixing-hu.github.io/nju-thesis/
@@ -25,7 +25,7 @@
 %% through LaTeX.
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{njuthesis.cls}
- [2015/4/14 v1.1.11 Document Class for the Degree Papers of Nanjing University]
+ [2015/6/14 v1.1.13 Document Class for the Degree Papers of Nanjing University]
 \newif\ifnjut@adobefonts\njut@adobefontstrue
 \newif\ifnjut@winfonts\njut@winfontsfalse
 \newif\ifnjut@linuxfonts\njut@linuxfontsfalse
@@ -381,6 +381,7 @@
 \newtheorem{assumption}[theorem]{\njut@cap@assumption}
 \newtheorem{conjecture}[theorem]{\njut@cap@conjecture}
 \newtheorem{axiom}{\njut@cap@axiom}[chapter]
+\newtheorem{postulate}[axiom]{\njut@cap@postulate}
 \newtheorem{principle}[axiom]{\njut@cap@principle}
 \newtheorem{problem}{\njut@cap@problem}[chapter]
 \newtheorem{exercise}{\njut@cap@exercise}[chapter]
@@ -1078,6 +1079,14 @@
 \newlist{alphaenum}{enumerate}{2}
 \setlist[alphaenum,1]{label={\textnormal{\alph*\,)}}}
 \setlist[alphaenum,2]{label={\textnormal{\alph{alphaenumi}.\arabic*\,)}}}
+\newlist{caseenum}{enumerate}{2}
+\setlist[caseenum,1]{label={\textnormal{\njut@cap@case\arabic*.}}}
+\setlist[caseenum,2]{label={\textnormal{\njut@cap@subcase\arabic{caseenumi}.\arabic*.}}}
+\setlist[caseenum]{leftmargin=*}
+\newlist{stepenum}{enumerate}{2}
+\setlist[stepenum,1]{label={\textnormal{\njut@cap@step\arabic*.}}}
+\setlist[stepenum,2]{label={\textnormal{\njut@cap@substep\arabic{stepenumi}.\arabic*.}}}
+\setlist[stepenum]{leftmargin=*}
 \newcommand*{\njut@setpdfinfo}{\hypersetup{%
         pdftitle={\njut@value@title},
         pdfauthor={\njut@value@author},
