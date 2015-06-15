@@ -3,7 +3,7 @@
 %  符合 GB/T 7714-2005 规范的 BibTeX 样式文件
 %
 %  作者：    胡海星   南京大学计算机科学与技术系
-%  版本：    v2.1.0  2014年12月18日
+%  版本：    v2.1.1  2015年6月15日
 %  项目主页: http://haixing-hu.github.io/nju-thesis/
 %
 %  参考资料:
@@ -814,13 +814,13 @@ FUNCTION {format.number} {                        % String Emtry::format_number(
 FUNCTION {format.report.number} {                 % String Emtry::format_report_number(String number) {
   "number" format.bibinfo                         %   return format_bibinfo(number, "number");
 }                                                 % }
-                                                  %                                                  
+                                                  %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
 FUNCTION {format.version} {                       % String Emtry::format_version(String version) {
   "version" format.bibinfo                        %   return format_bibinfo(version, "version");
 }                                                 % }
-                                                  %                                                  
+                                                  %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
 FUNCTION {format.pages} {                         % String Emtry::format_pages(String pages) {
@@ -1081,6 +1081,22 @@ FUNCTION {output.publisher} {                     % void Entry::output_publisher
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
+FUNCTION {output.publisher.no.address} {          % void Entry::output_publisher_no_address(int required) {
+  'required :=                                    %   this.required = required;
+  publisher empty$ not {                          %   if (! empty(this.publisher)) {
+    cap.period write$                             %     write(cap_period);
+    publisher format.publisher write$             %     write(format_publisher(this.publisher));
+  } {                                             %   } else {
+    required {                                    %     if (required == 1) {
+      "Require publisher: " cite$ * warning$      %       warning("Require publisher: " + this.cite);
+      cap.period write$                           %       write(cap_period);
+      cap.no.publisher format.publisher write$    %       write(format_publisher(cap_no_publisher()));
+    } 'skip$ if$                                  %     }
+  } if$                                           %   }
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
 FUNCTION {output.school} {                        % void Entry::output_school(int required) {
   'required :=                                    %   this.required = required;
   school empty$ not {                             %   if (! empty(this.school)) {
@@ -1217,7 +1233,7 @@ FUNCTION {output.report.number} {                 % void Entry::output_report_nu
     } 'skip$ if$                                  %     }
   } if$                                           %   }
 }                                                 % }
-                                                  %                                                  
+                                                  %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
 FUNCTION {output.country} {                       % void Entry::output_country(int required) {
@@ -1378,7 +1394,7 @@ FUNCTION {output.version} {                       % void Entry::output_version(i
     } 'skip$ if$                                  %     }
   } if$                                           %   }
 }                                                 % }
-                                                  %                                                  
+                                                  %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
 FUNCTION {book.impl} {                            % void Entry::book_impl() {
@@ -1496,7 +1512,7 @@ FUNCTION {techreport} {                           % void Entry::techreport() {
   true output.mark                                %   output_mark(true);
   false output.translator                         %   output_translator(false);
   false output.edition                            %   output_edition(false);
-  false output.version                            %   output_version(false); 
+  false output.version                            %   output_version(false);
   institution empty$ not {                        %   if (! empty(this.institution)) {
     true output.address                           %     output_address(true);
     true output.institution                       %     output_institution(true);
@@ -1639,9 +1655,14 @@ FUNCTION {online} {                               % void Entry::online() {
   true output.title                               %   output_title(true);
   true output.mark                                %   output_mark(true);
   publisher empty$ not {                          %   if (! empty(this.publisher)) {
-    true output.address                           %     output_address(true);
-    true output.publisher                         %     output_publisher(true);
-    cap.comma write$                              %     write(cap_comma);
+    address empty$ not {                          %     if (! empty(this.address)) {
+      true output.address                         %       output_address(true);
+      true output.publisher                       %       output_publisher(true);
+      cap.comma write$                            %       write(cap_comma);
+    } {                                           %     } else {
+      true output.publisher.no.address            %       output_publisher_no_address(true);
+      cap.comma write$                            %       write(cap_comma);
+    } if$                                         %     }
   } {                                             %   } else {
     cap.period write$                             %     write(cap_period);
   } if$                                           %   }
@@ -1650,6 +1671,12 @@ FUNCTION {online} {                               % void Entry::online() {
   true output.citedate                            %   output_citedate(true);
   true output.url                                 %   output_url(true);
   end.bibitem                                     %   end_bibitem();
+}                                                 % }
+                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                  %
+FUNCTION {webpage} {                              % void Entry::online() {
+  online                                          %   online();
 }                                                 % }
                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1844,7 +1871,7 @@ FUNCTION {write.style.commands} {                 % void write_style_commands() 
   newline$                                        %   writeln();
   cmd.bibnumber write$                            %   write(cmd_bibnumber);
   newline$                                        %   writeln();
-  cmd.bibversion write$                           %   write(cmd_bibversion);  
+  cmd.bibversion write$                           %   write(cmd_bibversion);
   newline$                                        %   writeln();
   cmd.bibpages write$                             %   write(cmd_bibpages);
   newline$                                        %   writeln();
