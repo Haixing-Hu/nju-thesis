@@ -25,7 +25,7 @@
 %% through LaTeX.
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{njuthesis.cls}
- [2015/6/14 v1.1.13 Document Class for the Degree Papers of Nanjing University]
+ [2015/6/15 v1.1.14 Document Class for the Degree Papers of Nanjing University]
 \newif\ifnjut@adobefonts\njut@adobefontstrue
 \newif\ifnjut@winfonts\njut@winfontsfalse
 \newif\ifnjut@linuxfonts\njut@linuxfontsfalse
@@ -391,6 +391,7 @@
                         {\qedhere\vspace{1em}}
 \newenvironment{solution}{\noindent\textbf{{\njut@cap@solution}\hspace{1em}}}
                          {\vspace{1em}}
+\newtheorem{algorithm}{\njut@cap@algorithm}[chapter]
 \renewcommand*{\thedefinition}{\dashnumber{\thechapter}{\arabic{definition}}}
 \renewcommand*{\thetheorem}{\dashnumber{\thechapter}{\arabic{theorem}}}
 \renewcommand*{\theaxiom}{\dashnumber{\thechapter}{\arabic{axiom}}}

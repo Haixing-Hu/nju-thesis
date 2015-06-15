@@ -24,7 +24,7 @@
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
 %<*cls>
- [2015/6/14 v1.1.13 Document Class for the Degree Papers of Nanjing University]
+ [2015/6/15 v1.1.14 Document Class for the Degree Papers of Nanjing University]
 %</cls>
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
@@ -206,6 +206,7 @@
 %  v1.1.11 & 2015/04/14 & 胡海星 & 增加|notation|环境\\
 %  v1.1.12 & 2015/06/14 & 胡海星 & 增加情况分类列表|caseenum|环境和步骤列表|stepenum|环境\\
 %  v1.1.13 & 2015/06/14 & 胡海星 & 增加公设环境|postulate| \\
+%  v1.1.14 & 2015/06/14 & 胡海星 & 恢复了|algorithm|环境的定义 \\
 % \bottomrule
 % \end{longtable}
 % \end{center}
@@ -2364,6 +2365,7 @@ December\fi
                         {\qedhere\vspace{1em}}
 \newenvironment{solution}{\noindent\textbf{{\njut@cap@solution}\hspace{1em}}}
                          {\vspace{1em}}
+\newtheorem{algorithm}{\njut@cap@algorithm}[chapter]
 %    \end{macrocode}
 %
 % 修改上面定义的各定理环境的编号样式：
