@@ -25,7 +25,7 @@
 %% through LaTeX.
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{njuthesis.cls}
- [2015/6/15 v1.1.14 Document Class for the Degree Papers of Nanjing University]
+ [2015/6/16 v1.1.15 Document Class for the Degree Papers of Nanjing University]
 \newif\ifnjut@adobefonts\njut@adobefontstrue
 \newif\ifnjut@winfonts\njut@winfontsfalse
 \newif\ifnjut@linuxfonts\njut@linuxfontsfalse
@@ -99,6 +99,7 @@
 \RequirePackage{CJKfntef}
 \renewcommand*{\CJKunderlinecolor}{\color{black}}
 \RequirePackage{indentfirst}
+\RequirePackage[hyphens]{url}
 \RequirePackage{hyperref}
 \hypersetup{%
     unicode=false,

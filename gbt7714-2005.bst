@@ -117,7 +117,8 @@ FUNCTION {cap.nd.en} 			{"nd"}
 FUNCTION {cap.rd.en} 			{"rd"}
 FUNCTION {cap.th.en} 			{"th"}
 
-FUNCTION {cap.period} 			{"\@. "}
+FUNCTION {cap.space}      {" "}
+FUNCTION {cap.period} 		{"\@. "}
 FUNCTION {cap.comma} 			{"\@, "}
 FUNCTION {cap.colon} 			{"\thinspace{}\textnormal{: }"}
 FUNCTION {cap.double.slash} 	{" //\thinspace{}"}
@@ -1159,6 +1160,7 @@ FUNCTION {output.pages} {                         % void Entry::output_pages(int
 FUNCTION {output.modifydate} {                    % void Entry::output_modifydate(int required) {
   'required :=                                    %   this.required = required;
   modifydate empty$ not {                         %   if (! empty(this.modifydate)) {
+    cap.space write$                              %     write(cap_space);
     modifydate format.modifydate write$           %     write(format_modifydate(this.modifydate));
   } {                                             %   } else {
     required {                                    %     if (required == 1) {
@@ -1172,6 +1174,7 @@ FUNCTION {output.modifydate} {                    % void Entry::output_modifydat
 FUNCTION {output.citedate} {                      % void Entry::output_citedate(int required) {
   'required :=                                    %   this.required = required;
   citedate empty$ not {                           %   if (! empty(this.citedate)) {
+    cap.space write$                              %     write(cap_space);
     citedate format.citedate write$               %     write(format_citedate(this.citedate));
   } {                                             %   } else {
     required is.online or {                       %     if ((required == 1) || (is_online())) {
