@@ -24,7 +24,7 @@
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
 %<*cls>
- [2015/6/16 v1.1.15 Document Class for the Degree Papers of Nanjing University]
+ [2015/6/22 v1.1.16 Document Class for the Degree Papers of Nanjing University]
 %</cls>
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
@@ -208,6 +208,7 @@
 %  v1.1.13 & 2015/06/14 & 胡海星 & 增加公设环境|postulate| \\
 %  v1.1.14 & 2015/06/14 & 胡海星 & 恢复了|algorithm|环境的定义 \\
 %  v1.1.15 & 2015/06/16 & 胡海星 & 为|url|宏包添加|hyphens|选项 \\
+%  v1.1.16 & 2015/06/22 & 胡海星 & 增加假说环境|hypothesis| \\
 % \bottomrule
 % \end{longtable}
 % \end{center}
@@ -1218,8 +1219,8 @@
 %   proof     & corollary & example    & exercise    & assumption & remark     & problem \\
 %   证明       & 推论      & 例子        & 练习         & 假设        & 评注       & 问题\\
 %   \hline
-%   postulate &           &            &              &           &      &  \\
-%   公设       &           &            &               &         &        & \\
+%   postulate &  hypothesis  &            &              &           &      &  \\
+%   公设       &  假说       &            &               &         &        & \\
 %   \hline
 % \end{tabular}
 % \caption{预定义的数学定理环境}\label{table:math-env}
@@ -1609,6 +1610,7 @@
 \newcommand*{\njut@cap@fact}{事实}
 \newcommand*{\njut@cap@assumption}{假设}
 \newcommand*{\njut@cap@conjecture}{猜想}
+\newcommand*{\njut@cap@hypothesis}{假说}
 \newcommand*{\njut@cap@axiom}{公理}
 \newcommand*{\njut@cap@postulate}{公设}
 \newcommand*{\njut@cap@principle}{定律}
@@ -2362,6 +2364,7 @@ December\fi
 \newtheorem{fact}[theorem]{\njut@cap@fact}
 \newtheorem{assumption}[theorem]{\njut@cap@assumption}
 \newtheorem{conjecture}[theorem]{\njut@cap@conjecture}
+\newtheorem{hypothesis}{\njut@cap@hypothesis}[chapter]
 \newtheorem{axiom}{\njut@cap@axiom}[chapter]
 \newtheorem{postulate}[axiom]{\njut@cap@postulate}
 \newtheorem{principle}[axiom]{\njut@cap@principle}
