@@ -208,7 +208,9 @@
 %  v1.1.14 & 2015/06/14 & 胡海星 & 恢复了|algorithm|环境的定义 \\
 %  v1.1.15 & 2015/06/16 & 胡海星 & 为|url|宏包添加|hyphens|选项 \\
 %  v1.1.16 & 2015/06/22 & 胡海星 & 增加假说环境|hypothesis| \\
-%  v1.1.17 & 2015/06/27 & 胡海星 & 修复了段落首行缩进不是恰好两个中文字符的bug \\
+%  v1.1.17 & 2015/06/27 & 胡海星 & 修复了段落首行缩进不是恰好两个中文字符的bug，
+%                                 修正了|proof|环境最后的QED符号，
+%                                 修改了|solution|环境的实现方式 \\
 % \bottomrule
 % \end{longtable}
 % \end{center}
@@ -2372,10 +2374,20 @@ December\fi
 \newtheorem{exercise}{\njut@cap@exercise}[chapter]
 \newtheorem{example}{\njut@cap@example}[chapter]
 \newtheorem{remark}{\njut@cap@remark}[chapter]
-\renewenvironment{proof}{\noindent\textbf{{\njut@cap@proof}\hspace{1em}}}
-                        {\qedhere\vspace{1em}}
-\newenvironment{solution}{\noindent\textbf{{\njut@cap@solution}\hspace{1em}}}
-                         {\vspace{1em}}
+
+\renewenvironment{proof}[1][\njut@cap@proof]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \trivlist
+  \item[\hskip\labelsep\textbf{#1}\@addpunct{:}]\ignorespaces
+}{\popQED\endtrivlist\@endpefalse}
+
+\newenvironment{solution}[1][\njut@cap@solution]{\par
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \trivlist
+  \item[\hskip\labelsep\textbf{#1}\@addpunct{:}]\ignorespaces
+}{\endtrivlist\@endpefalse}
+
 \newtheorem{algorithm}{\njut@cap@algorithm}[chapter]
 %    \end{macrocode}
 %

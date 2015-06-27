@@ -388,10 +388,20 @@
 \newtheorem{exercise}{\njut@cap@exercise}[chapter]
 \newtheorem{example}{\njut@cap@example}[chapter]
 \newtheorem{remark}{\njut@cap@remark}[chapter]
-\renewenvironment{proof}{\noindent\textbf{{\njut@cap@proof}\hspace{1em}}}
-                        {\qedhere\vspace{1em}}
-\newenvironment{solution}{\noindent\textbf{{\njut@cap@solution}\hspace{1em}}}
-                         {\vspace{1em}}
+
+\renewenvironment{proof}[1][\njut@cap@proof]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \trivlist
+  \item[\hskip\labelsep\textbf{#1}\@addpunct{:}]\ignorespaces
+}{\popQED\endtrivlist\@endpefalse}
+
+\newenvironment{solution}[1][\njut@cap@solution]{\par
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \trivlist
+  \item[\hskip\labelsep\textbf{#1}\@addpunct{:}]\ignorespaces
+}{\endtrivlist\@endpefalse}
+
 \newtheorem{algorithm}{\njut@cap@algorithm}[chapter]
 \renewcommand*{\thedefinition}{\dashnumber{\thechapter}{\arabic{definition}}}
 \renewcommand*{\thetheorem}{\dashnumber{\thechapter}{\arabic{theorem}}}
