@@ -25,7 +25,7 @@
 %% through LaTeX.
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{njuthesis.cls}
- [2015/6/22 v1.1.16 Document Class for the Degree Papers of Nanjing University]
+ [2015/6/27 v1.1.17 Document Class for the Degree Papers of Nanjing University]
 \newif\ifnjut@adobefonts\njut@adobefontstrue
 \newif\ifnjut@winfonts\njut@winfontsfalse
 \newif\ifnjut@linuxfonts\njut@linuxfontsfalse
@@ -98,7 +98,6 @@
 \punctstyle{plain}
 \RequirePackage{CJKfntef}
 \renewcommand*{\CJKunderlinecolor}{\color{black}}
-\RequirePackage{indentfirst}
 \RequirePackage[hyphens]{url}
 \RequirePackage{hyperref}
 \hypersetup{%
@@ -481,7 +480,15 @@
 {\convertergy@endoldtabular\egroup}
 \geometry{headheight=2.6cm,headsep=3mm,footskip=13mm}
 \geometry{top=3.5cm,bottom=3.5cm,left=3.2cm,right=3.2cm}
-\setlength{\parindent}{2em}
+\def\njut@CJK@charwidth{\hskip \f@size \p@}
+\newdimen\njut@CJK@chardimen
+\settowidth\njut@CJK@chardimen{\njut@CJK@charwidth\CJKglue}
+\newcommand{\njut@CJK@setfontspace}{%
+\settowidth\njut@CJK@chardimen{\njut@CJK@charwidth\CJKglue}%
+\ifdim\parindent=0pt\relax\else\parindent2\njut@CJK@chardimen\fi%
+}
+\renewcommand*{\indent}{\njut@CJK@setfontspace\parindent2\njut@CJK@chardimen}
+\AtBeginDocument{\indent}
 \fancypagestyle{plain}{%
    \fancyhead{}                       % get rid of headers and footers
    \renewcommand{\headrulewidth}{0pt} % and the header line

@@ -24,7 +24,7 @@
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
 %<*cls>
- [2015/6/22 v1.1.16 Document Class for the Degree Papers of Nanjing University]
+ [2015/6/27 v1.1.17 Document Class for the Degree Papers of Nanjing University]
 %</cls>
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
@@ -125,7 +125,6 @@
 %
 % \begin{abstract}
 %
-% \setlength{\parindent}{2em}
 % \noindent\hspace{2em}文档类{\njuthesis}提供了一个南京大学学位论文的{\XeLaTeX}
 % 模板。该文档类严格按照南京大学对学位论文的格式要求排版学位论文，底层通过
 % |xeCJK|宏包支持中文。
@@ -209,6 +208,7 @@
 %  v1.1.14 & 2015/06/14 & 胡海星 & 恢复了|algorithm|环境的定义 \\
 %  v1.1.15 & 2015/06/16 & 胡海星 & 为|url|宏包添加|hyphens|选项 \\
 %  v1.1.16 & 2015/06/22 & 胡海星 & 增加假说环境|hypothesis| \\
+%  v1.1.17 & 2015/06/27 & 胡海星 & 修复了段落首行缩进不是恰好两个中文字符的bug \\
 % \bottomrule
 % \end{longtable}
 % \end{center}
@@ -1493,7 +1493,7 @@
 %
 % 使用|indentfirst|宏包支持首行缩进。
 %    \begin{macrocode}
-\RequirePackage{indentfirst}
+%\RequirePackage{indentfirst}
 %    \end{macrocode}
 %
 % |url|宏包支持超链接排版，我们为它提供|hyphens|选项，从而使得长链接可在连字符处自动折行。
@@ -2555,8 +2555,29 @@ December\fi
 %    \end{macrocode}
 %
 % 设置每一段的首行缩进两个汉字。
+% \begin{note}
+% 直接将|parindent|设置为|2em|并不能正确地设置段首缩进为恰好两个中文字符。因此我们采用下面的
+% 网页提供办法：\\
+% \url{https://github.com/ElegantLaTeX/ElegantLaTeX/blob/master/CJKindent.md}
+% \end{note}
+%
+% 首先，我们需要计算出当前字符的宽度：
 %    \begin{macrocode}
-\setlength{\parindent}{2em}
+\def\njut@CJK@charwidth{\hskip \f@size \p@}
+%    \end{macrocode}
+% 接下来，我们需要考虑到字符间距，计算出当前相邻两字符中心的距离：
+%    \begin{macrocode}
+\newdimen\njut@CJK@chardimen
+\settowidth\njut@CJK@chardimen{\njut@CJK@charwidth\CJKglue}
+%    \end{macrocode}
+% 最后，我们设置段首缩进长度：
+%    \begin{macrocode}
+\newcommand{\njut@CJK@setfontspace}{%
+\settowidth\njut@CJK@chardimen{\njut@CJK@charwidth\CJKglue}%
+\ifdim\parindent=0pt\relax\else\parindent2\njut@CJK@chardimen\fi%
+}
+\renewcommand*{\indent}{\njut@CJK@setfontspace\parindent2\njut@CJK@chardimen}
+\AtBeginDocument{\indent}
 %    \end{macrocode}
 %
 % \subsection{页眉页脚}
