@@ -1483,14 +1483,14 @@
 \punctstyle{plain}
 %    \end{macrocode}
 %
-% |CJKfntef|宏包提供了中文下划线命令\cs{CJKunderline}，它将在制作论文封面时用到。
+% |xeCJKfntef|宏包提供了中文下划线命令\cs{CJKunderline}，它将在制作论文封面时用到。
 %    \begin{macrocode}
-\RequirePackage{CJKfntef}
+\RequirePackage{xeCJKfntef}
 %    \end{macrocode}
 %
 % 设置中文下划线颜色为黑色。
 %    \begin{macrocode}
-\renewcommand*{\CJKunderlinecolor}{\color{black}}
+\xeCJKsetup { underline/format = \color{black} }
 %    \end{macrocode}
 %
 % 使用|indentfirst|宏包支持首行缩进。
