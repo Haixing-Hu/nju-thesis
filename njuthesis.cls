@@ -25,7 +25,7 @@
 %% through LaTeX.
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{njuthesis.cls}
- [2015/6/27 v1.1.17 Document Class for the Degree Papers of Nanjing University]
+ [2015/7/16 v1.1.18 Document Class for the Degree Papers of Nanjing University]
 \newif\ifnjut@adobefonts\njut@adobefontstrue
 \newif\ifnjut@winfonts\njut@winfontsfalse
 \newif\ifnjut@linuxfonts\njut@linuxfontsfalse
@@ -382,8 +382,8 @@
 \newtheorem{conjecture}[theorem]{\njut@cap@conjecture}
 \newtheorem{hypothesis}{\njut@cap@hypothesis}[chapter]
 \newtheorem{axiom}{\njut@cap@axiom}[chapter]
-\newtheorem{postulate}[axiom]{\njut@cap@postulate}
-\newtheorem{principle}[axiom]{\njut@cap@principle}
+\newtheorem{postulate}{\njut@cap@postulate}[chapter]
+\newtheorem{principle}{\njut@cap@principle}[chapter]
 \newtheorem{problem}{\njut@cap@problem}[chapter]
 \newtheorem{exercise}{\njut@cap@exercise}[chapter]
 \newtheorem{example}{\njut@cap@example}[chapter]
