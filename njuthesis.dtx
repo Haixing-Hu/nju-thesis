@@ -1484,14 +1484,14 @@
 \punctstyle{plain}
 %    \end{macrocode}
 %
-% |CJKfntef|宏包提供了中文下划线命令\cs{CJKunderline}，它将在制作论文封面时用到。
+% |xeCJKfntef|宏包提供了中文下划线命令\cs{CJKunderline}，它将在制作论文封面时用到。
 %    \begin{macrocode}
-\RequirePackage{CJKfntef}
+\RequirePackage{xeCJKfntef}
 %    \end{macrocode}
 %
 % 设置中文下划线颜色为黑色。
 %    \begin{macrocode}
-\renewcommand*{\CJKunderlinecolor}{\color{black}}
+\xeCJKsetup { underline/format = \color{black} }
 %    \end{macrocode}
 %
 % 使用|indentfirst|宏包支持首行缩进。
@@ -3135,10 +3135,10 @@ December\fi
       & \njutunderline[310pt]{\njut@value@author}\\
       \makebox[7em][s]{\njut@cap@cover@major}
       & \njutunderline[310pt]{\njut@value@major}\\
-      \makebox[7em][s]{\njut@cap@cover@supervisor}
-      & \njutunderline[310pt]{\njut@value@supervisor}\\
       \makebox[7em][s]{\njut@cap@cover@researchfield}
       & \njutunderline[310pt]{\njut@value@researchfield}\\
+      \makebox[7em][s]{\njut@cap@cover@supervisor}
+      & \njutunderline[310pt]{\njut@value@supervisor}\\
     \end{tabular}\egroup}\\
     \vskip \stretch{1}
     {\bf\kaishu\zihao{4}\njut@value@date}
