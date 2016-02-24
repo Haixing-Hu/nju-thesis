@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2013-2015, Haixing Hu.
+% Copyright (C) 2013-2016, Haixing Hu.
 % Department of Computer Science and Technology, Nanjing University.
 %
 % This file may be distributed and/or modified under the conditions of the
@@ -24,7 +24,7 @@
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
 %<*cls>
- [2015/7/16 v1.1.18 Document Class for the Degree Papers of Nanjing University]
+ [2016/02/24 v1.1.19 Document Class for the Degree Papers of Nanjing University]
 %</cls>
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
@@ -212,6 +212,9 @@
 %                                 修正了|proof|环境最后的QED符号，
 %                                 修改了|solution|环境的实现方式 \\
 %  v1.1.18 & 2015/07/16 & 胡海星 & 将公设环境|postulate|和定律环境单独编号\\
+%  v1.1.19 & 2016/02/24 & 胡海星 & 提供了论文标题很长时的解决方案；
+%                                 修复了新版|xeCJKfntef|中|\CJKunderline|的颜色
+%                                 设置方式不再兼容|CJKfntef|所引起的问题\\
 % \bottomrule
 % \end{longtable}
 % \end{center}
@@ -342,7 +345,7 @@
 %     |amsthm|   & |amssymb|    & |bm|        & |mathrsfs| & |txfonts|  & |pifont|  \\
 %     |setspace| & |wasysym|    & |hypernat| & |fancyhdr| & |natbib|    & |tabularx| \\
 %     |titlesec| & |glossaries|  & |ifthen|   & |makeidx| & |footmisc| &  |CJKnumb| \\
-%     |url|      &  &  &  &  & \\
+%     |url|      & |etoolbox| &  &  &  & \\
 %   \hline
 %   \end{tabular*}
 %   \caption{{\njuthesis}用到的宏包}\label{table:dependence}
@@ -717,10 +720,25 @@
 %
 % \myentry{论文标题}
 % \DescribeMacro{\title}
-% 命令\cs{title}用于设置论文的中文标题。此属性必须被设置。
+% 命令\cs{title}用于设置论文的中文标题。
 %
 % \begin{example}
 % \title{基于小世界理论的数据中心网络模型}
+% \end{example}
+%
+% \begin{note}
+% \cs{title}的参数中不可换行，也不能使用\cs{thanks}脚注。
+% \end{note}
+%
+% \myentry{论文标题分行}
+% \DescribeMacro{\titlea}
+% \DescribeMacro{\titleb}
+% 命令\cs{titlea}和\cs{titleb}用于在论文标题很长时，设置分行的论文中文标题。
+% 其中\cs{titlea}设置论文标题的第一行，\cs{titleb}设置论文标题的第二行。
+%
+% \begin{example}
+% \titlea{半轻衰变$D^+\to \omega(\phi)e^+\nu_e$的研究}
+% \titleb{和弱衰变$J/\psi \to D_s^{(*)-}e^+\nu_e$的寻找}
 % \end{example}
 %
 % \begin{note}
@@ -1472,8 +1490,6 @@
 \RequirePackage{CJKnumb}
 %    \end{macrocode}
 %
-%
-%
 % 让{\XeLaTeX}能够处理dash的惯例(使用"--"和"---"获得较长的dash)。
 %    \begin{macrocode}
 \defaultfontfeatures{Mapping=tex-text}
@@ -1484,14 +1500,14 @@
 \punctstyle{plain}
 %    \end{macrocode}
 %
-% |CJKfntef|宏包提供了中文下划线命令\cs{CJKunderline}，它将在制作论文封面时用到。
+% |xeCJKfntef|宏包提供了中文下划线命令\cs{CJKunderline}，它将在制作论文封面时用到。
 %    \begin{macrocode}
-\RequirePackage{CJKfntef}
+\RequirePackage{xeCJKfntef}
 %    \end{macrocode}
 %
 % 设置中文下划线颜色为黑色。
 %    \begin{macrocode}
-\renewcommand*{\CJKunderlinecolor}{\color{black}}
+\xeCJKsetup{ underline/format = \color{black} }
 %    \end{macrocode}
 %
 % 使用|indentfirst|宏包支持首行缩进。
@@ -1569,6 +1585,11 @@
 %    \begin{macrocode}
 \RequirePackage[perpage,symbol*]{footmisc}
 %</cls>
+%    \end{macrocode}
+%
+% |etoolbox|宏包提供了一些工具宏。
+%    \begin{macrocode}
+\RequirePackage{etoolbox}
 %    \end{macrocode}
 %
 % \subsection{字符串常量定义}
@@ -1836,6 +1857,8 @@ in\\
     \fi
 \fi
 \newcommand*{\njut@value@title}{(论文标题)}
+\newcommand*{\njut@value@titlea}{(论文长标题第一行)}
+\newcommand*{\njut@value@titleb}{(论文长标题第二行)}
 \newcommand*{\njut@value@author}{(作者姓名)}
 \newcommand*{\njut@value@telphone}{(作者电话号码)}
 \newcommand*{\njut@value@email}{(作者电子邮件)}
@@ -2987,6 +3010,10 @@ December\fi
 %    \begin{macrocode}
 \renewcommand*{\title}[1]{%
   \renewcommand{\njut@value@title}{#1}}
+\newcommand*{\titlea}[1]{%
+  \renewcommand{\njut@value@titlea}{#1}}
+\newcommand*{\titleb}[1]{%
+  \renewcommand{\njut@value@titleb}{#1}}
 \renewcommand*{\author}[1]{%
   \renewcommand{\njut@value@author}{#1}}
 \newcommand*{\telphone}[1]{%
@@ -3112,6 +3139,36 @@ December\fi
 % 重新定义{\LaTeX}提供的\cs{maketitle}命令，使其生成南京大学学术论文所需的中文封面。
 % 注意我们使用了前面修改过的\cs{cleardoublepage}命令来插入无页眉页脚的空白页。
 %    \begin{macrocode}
+\newcommand*{\njut@covertable@onelinetitle}{
+  \begin{tabular}{p{7.3em}c}
+      \makebox[7em][s]{\njut@cap@cover@title}
+      & \njutunderline[310pt]{\njut@value@title}\\
+      \makebox[7em][s]{\njut@cap@cover@author}
+      & \njutunderline[310pt]{\njut@value@author}\\
+      \makebox[7em][s]{\njut@cap@cover@major}
+      & \njutunderline[310pt]{\njut@value@major}\\
+      \makebox[7em][s]{\njut@cap@cover@supervisor}
+      & \njutunderline[310pt]{\njut@value@supervisor}\\
+      \makebox[7em][s]{\njut@cap@cover@researchfield}
+      & \njutunderline[310pt]{\njut@value@researchfield}\\
+  \end{tabular}
+}
+\newcommand*{\njut@covertable@twolinetitle}{
+  \begin{tabular}{p{7.3em}c}
+      \makebox[7em][s]{\njut@cap@cover@title}
+      & \njutunderline[310pt]{\njut@value@titlea}\\
+      \makebox[7em][s]{}
+      & \njutunderline[310pt]{\njut@value@titleb}\\
+      \makebox[7em][s]{\njut@cap@cover@author}
+      & \njutunderline[310pt]{\njut@value@author}\\
+      \makebox[7em][s]{\njut@cap@cover@major}
+      & \njutunderline[310pt]{\njut@value@major}\\
+      \makebox[7em][s]{\njut@cap@cover@supervisor}
+      & \njutunderline[310pt]{\njut@value@supervisor}\\
+      \makebox[7em][s]{\njut@cap@cover@researchfield}
+      & \njutunderline[310pt]{\njut@value@researchfield}\\
+  \end{tabular}
+}
 \renewcommand*{\maketitle}{%
   \thispagestyle{empty}
   \pdfbookmark[0]{\njut@cap@cover}{cover}
@@ -3128,18 +3185,8 @@ December\fi
     \bf\kaishu\zihao{3}
     \def\tabcolsep{1pt}
     \def\arraystretch{1.5}
-    \begin{tabular}{p{7.3em}c}
-      \makebox[7em][s]{\njut@cap@cover@title}
-      & \njutunderline[310pt]{\njut@value@title}\\
-      \makebox[7em][s]{\njut@cap@cover@author}
-      & \njutunderline[310pt]{\njut@value@author}\\
-      \makebox[7em][s]{\njut@cap@cover@major}
-      & \njutunderline[310pt]{\njut@value@major}\\
-      \makebox[7em][s]{\njut@cap@cover@supervisor}
-      & \njutunderline[310pt]{\njut@value@supervisor}\\
-      \makebox[7em][s]{\njut@cap@cover@researchfield}
-      & \njutunderline[310pt]{\njut@value@researchfield}\\
-    \end{tabular}\egroup}\\
+    \ifdefempty{\njut@cap@cover@title}{\njut@covertable@onelinetitle}{\njut@covertable@twolinetitle}
+    \egroup}\\
     \vskip \stretch{1}
     {\bf\kaishu\zihao{4}\njut@value@date}
   \end{center}

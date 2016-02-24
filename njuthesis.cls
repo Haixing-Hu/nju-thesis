@@ -7,7 +7,7 @@
 %% njuthesis.dtx  (with options: `cls')
 %% This is a generated file.
 %% 
-%% Copyright (C) 2013-2015, Haixing Hu.
+%% Copyright (C) 2013-2016, Haixing Hu.
 %% Department of Computer Science and Technology, Nanjing University.
 %% 
 %% Home Page of the Project: http://haixing-hu.github.io/nju-thesis/
@@ -25,7 +25,7 @@
 %% through LaTeX.
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{njuthesis.cls}
- [2015/7/16 v1.1.18 Document Class for the Degree Papers of Nanjing University]
+ [2016/02/24 v1.1.19 Document Class for the Degree Papers of Nanjing University]
 \newif\ifnjut@adobefonts\njut@adobefontstrue
 \newif\ifnjut@winfonts\njut@winfontsfalse
 \newif\ifnjut@linuxfonts\njut@linuxfontsfalse
@@ -96,8 +96,8 @@
 \RequirePackage{CJKnumb}
 \defaultfontfeatures{Mapping=tex-text}
 \punctstyle{plain}
-\RequirePackage{CJKfntef}
-\renewcommand*{\CJKunderlinecolor}{\color{black}}
+\RequirePackage{xeCJKfntef}
+\xeCJKsetup{ underline/format = \color{black} }
 \RequirePackage[hyphens]{url}
 \RequirePackage{hyperref}
 \hypersetup{%
@@ -123,6 +123,7 @@
 \RequirePackage{glossaries}
 \RequirePackage{ifthen}
 \RequirePackage[perpage,symbol*]{footmisc}
+\RequirePackage{etoolbox}
 \input{njuthesis.cfg}
 \ifnjut@adobefonts
   \newcommand*{\njut@zhfn@songti}{\njut@zhfn@songti@adobe}
@@ -711,6 +712,10 @@
   \renewcommand{\njut@value@nlc@date}{#1}}
 \renewcommand*{\title}[1]{%
   \renewcommand{\njut@value@title}{#1}}
+\newcommand*{\titlea}[1]{%
+  \renewcommand{\njut@value@titlea}{#1}}
+\newcommand*{\titleb}[1]{%
+  \renewcommand{\njut@value@titleb}{#1}}
 \renewcommand*{\author}[1]{%
   \renewcommand{\njut@value@author}{#1}}
 \newcommand*{\telphone}[1]{%
@@ -811,6 +816,36 @@
   }
   \cleardoublepage
 }
+\newcommand*{\njut@covertable@onelinetitle}{
+  \begin{tabular}{p{7.3em}c}
+      \makebox[7em][s]{\njut@cap@cover@title}
+      & \njutunderline[310pt]{\njut@value@title}\\
+      \makebox[7em][s]{\njut@cap@cover@author}
+      & \njutunderline[310pt]{\njut@value@author}\\
+      \makebox[7em][s]{\njut@cap@cover@major}
+      & \njutunderline[310pt]{\njut@value@major}\\
+      \makebox[7em][s]{\njut@cap@cover@supervisor}
+      & \njutunderline[310pt]{\njut@value@supervisor}\\
+      \makebox[7em][s]{\njut@cap@cover@researchfield}
+      & \njutunderline[310pt]{\njut@value@researchfield}\\
+  \end{tabular}
+}
+\newcommand*{\njut@covertable@twolinetitle}{
+  \begin{tabular}{p{7.3em}c}
+      \makebox[7em][s]{\njut@cap@cover@title}
+      & \njutunderline[310pt]{\njut@value@titlea}\\
+      \makebox[7em][s]{}
+      & \njutunderline[310pt]{\njut@value@titleb}\\
+      \makebox[7em][s]{\njut@cap@cover@author}
+      & \njutunderline[310pt]{\njut@value@author}\\
+      \makebox[7em][s]{\njut@cap@cover@major}
+      & \njutunderline[310pt]{\njut@value@major}\\
+      \makebox[7em][s]{\njut@cap@cover@supervisor}
+      & \njutunderline[310pt]{\njut@value@supervisor}\\
+      \makebox[7em][s]{\njut@cap@cover@researchfield}
+      & \njutunderline[310pt]{\njut@value@researchfield}\\
+  \end{tabular}
+}
 \renewcommand*{\maketitle}{%
   \thispagestyle{empty}
   \pdfbookmark[0]{\njut@cap@cover}{cover}
@@ -827,18 +862,8 @@
     \bf\kaishu\zihao{3}
     \def\tabcolsep{1pt}
     \def\arraystretch{1.5}
-    \begin{tabular}{p{7.3em}c}
-      \makebox[7em][s]{\njut@cap@cover@title}
-      & \njutunderline[310pt]{\njut@value@title}\\
-      \makebox[7em][s]{\njut@cap@cover@author}
-      & \njutunderline[310pt]{\njut@value@author}\\
-      \makebox[7em][s]{\njut@cap@cover@major}
-      & \njutunderline[310pt]{\njut@value@major}\\
-      \makebox[7em][s]{\njut@cap@cover@supervisor}
-      & \njutunderline[310pt]{\njut@value@supervisor}\\
-      \makebox[7em][s]{\njut@cap@cover@researchfield}
-      & \njutunderline[310pt]{\njut@value@researchfield}\\
-    \end{tabular}\egroup}\\
+    \ifdefempty{\njut@cap@cover@title}{\njut@covertable@onelinetitle}{\njut@covertable@twolinetitle}
+    \egroup}\\
     \vskip \stretch{1}
     {\bf\kaishu\zihao{4}\njut@value@date}
   \end{center}
