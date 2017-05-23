@@ -25,7 +25,7 @@
 %% through LaTeX.
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{njuthesis.cls}
- [2016/02/24 v1.1.19 Document Class for the Degree Papers of Nanjing University]
+ [2017/05/23 v1.2.0 Document Class for the Degree Papers of Nanjing University]
 \newif\ifnjut@adobefonts\njut@adobefontstrue
 \newif\ifnjut@winfonts\njut@winfontsfalse
 \newif\ifnjut@linuxfonts\njut@linuxfontsfalse
@@ -824,10 +824,10 @@
       & \njutunderline[310pt]{\njut@value@author}\\
       \makebox[7em][s]{\njut@cap@cover@major}
       & \njutunderline[310pt]{\njut@value@major}\\
-      \makebox[7em][s]{\njut@cap@cover@supervisor}
-      & \njutunderline[310pt]{\njut@value@supervisor}\\
       \makebox[7em][s]{\njut@cap@cover@researchfield}
       & \njutunderline[310pt]{\njut@value@researchfield}\\
+      \makebox[7em][s]{\njut@cap@cover@supervisor}
+      & \njutunderline[310pt]{\njut@value@supervisor}\\
   \end{tabular}
 }
 \newcommand*{\njut@covertable@twolinetitle}{
@@ -840,10 +840,10 @@
       & \njutunderline[310pt]{\njut@value@author}\\
       \makebox[7em][s]{\njut@cap@cover@major}
       & \njutunderline[310pt]{\njut@value@major}\\
-      \makebox[7em][s]{\njut@cap@cover@supervisor}
-      & \njutunderline[310pt]{\njut@value@supervisor}\\
       \makebox[7em][s]{\njut@cap@cover@researchfield}
       & \njutunderline[310pt]{\njut@value@researchfield}\\
+      \makebox[7em][s]{\njut@cap@cover@supervisor}
+      & \njutunderline[310pt]{\njut@value@supervisor}\\
   \end{tabular}
 }
 \renewcommand*{\maketitle}{%

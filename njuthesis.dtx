@@ -24,7 +24,7 @@
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
 %<*cls>
- [2016/02/24 v1.1.19 Document Class for the Degree Papers of Nanjing University]
+ [2017/05/23 v1.2.0 Document Class for the Degree Papers of Nanjing University]
 %</cls>
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
@@ -215,6 +215,8 @@
 %  v1.1.19 & 2016/02/24 & 胡海星 & 提供了论文标题很长时的解决方案；
 %                                 修复了新版|xeCJKfntef|中|\CJKunderline|的颜色
 %                                 设置方式不再兼容|CJKfntef|所引起的问题\\
+%  v1.2.0  & 2017/05/23 & 胡海星 & 修复了本科生论文封面显示``研究生毕业论文''的错误；
+%                                 将封面中的``研究方向''换到``指导老师''前面\\
 % \bottomrule
 % \end{longtable}
 % \end{center}
@@ -258,28 +260,45 @@
 %
 % {\njuthesis}所遵循的南京大学研究生院的要求如下：
 % \begin{itemize}
-% \item \textsl{南京大学硕士答辩流程及相关材料下载}，\\
-% \url{http://gs.nju.edu.cn/content/xw/ss3.htm}
-% \item \textsl{南京大学博士答辩流程及相关材料下载}，\\
-% \url{http://gs.nju.edu.cn/content/xw/bs3.htm}
-% \item \textsl{南京大学博士(硕士)学位论文编写格式规定(试行)}\\
-% \url{http://grawww.nju.edu.cn/content/xw/lwgf.doc}
+% \item \textsl{\sout{南京大学硕士答辩流程及相关材料下载}}，\\
+% \sout{\url{http://gs.nju.edu.cn/content/xw/ss3.htm}}
+% \item \textsl{\sout{南京大学博士答辩流程及相关材料下载}}，\\
+% \sout{\url{http://gs.nju.edu.cn/content/xw/bs3.htm}}
+% \item \textsl{\sout{南京大学博士(硕士)学位论文编写格式规定(试行)}}\\
+% \sout{\url{http://grawww.nju.edu.cn/content/xw/lwgf.doc}}
+% \item \textsl{硕士研究生申请学位材料下载}\\
+% \url{https://grawww.nju.edu.cn/5d/aa/c1077a89514/page.htm}
+% \item \textsl{博士(硕士)学位论文编写格式（供参考)}，\\
+% \url{https://grawww.nju.edu.cn/31/16/c1039a12566/page.htm}
 % \end{itemize}
 %
 % {\njuthesis}所遵循的中华人民共和国国家标准如下：
 % \begin{itemize}
-% \item \std{GB/T 7714-2005}\textsl{文后参考文献著录规则}
-% \item \std{GB/T 7713.1-2006}\textsl{学位论文编写规则}
-% \item \std{GB/T 7713.3-2009}\textsl{科技报告编写规则}
-% \item \std{GB/T 7713-1987}\textsl{科学技术报告、学位论文和学术论文的编写格式},
-% 该标准已被\std{GB/T 7713.1-2006}和\std{GB/T 7713.3-2009}部分替代
-% \item \std{GB/T 7156-2003}\textsl{文献保密等级代码与标识}
-% \item \std{GB/T 16159-2012}\textsl{汉语拼音正词法基本规则}，
-% 该标准取代了\std{GB/T 16159-1996}
-% \item \std{CY/T 35-2001}\textsl{科技文献的章节编号方法}
+% \item \href{https://github.com/Haixing-Hu/typesetting-standard/raw/master/%E5%9B%BE%E4%B9%A6%E3%80%81%E6%9C%9F%E5%88%8A%E3%80%81%E8%AE%BA%E6%96%87%E7%9A%84%E7%BC%96%E6%8E%92/%E3%80%90GB:T%207714-2005%E3%80%91%E6%96%87%E5%90%8E%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E8%91%97%E5%BD%95%E8%A7%84%E5%88%99.pdf}%
+% {\std{GB/T 7714-2005}\textsl{文后参考文献著录规则}}
+% \item \href{https://github.com/Haixing-Hu/typesetting-standard/raw/master/%E5%9B%BE%E4%B9%A6%E3%80%81%E6%9C%9F%E5%88%8A%E3%80%81%E8%AE%BA%E6%96%87%E7%9A%84%E7%BC%96%E6%8E%92/%E3%80%90GB:T%207713.1-2006%E3%80%91%E5%AD%A6%E4%BD%8D%E8%AE%BA%E6%96%87%E7%BC%96%E5%86%99%E8%A7%84%E5%88%99.pdf}%
+% {\std{GB/T 7713.1-2006}\textsl{学位论文编写规则}}%
+% \item \href{https://github.com/Haixing-Hu/typesetting-standard/raw/master/%E5%9B%BE%E4%B9%A6%E3%80%81%E6%9C%9F%E5%88%8A%E3%80%81%E8%AE%BA%E6%96%87%E7%9A%84%E7%BC%96%E6%8E%92/%E3%80%90GB:T%207713.3-2009%E3%80%91%E7%A7%91%E6%8A%80%E6%8A%A5%E5%91%8A%E7%BC%96%E5%86%99%E8%A7%84%E5%88%99.pdf}%
+% {\std{GB/T 7713.3-2009}\textsl{科技报告编写规则}}
+% \item \href{https://github.com/Haixing-Hu/typesetting-standard/raw/master/%E5%9B%BE%E4%B9%A6%E3%80%81%E6%9C%9F%E5%88%8A%E3%80%81%E8%AE%BA%E6%96%87%E7%9A%84%E7%BC%96%E6%8E%92/%E3%80%90GB:T%207713-1987%E3%80%91%E7%A7%91%E5%AD%A6%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A%E3%80%81%E5%AD%A6%E4%BD%8D%E8%AE%BA%E6%96%87%E5%92%8C%E5%AD%A6%E6%9C%AF%E8%AE%BA%E6%96%87%E7%9A%84%E7%BC%96%E5%86%99%E6%A0%BC%E5%BC%8F.pdf}%
+% {\std{GB/T 7713-1987}\textsl{科学技术报告、学位论文和学术论文的编写格式}},
+% 该标准已被%
+% \href{https://github.com/Haixing-Hu/typesetting-standard/raw/master/%E5%9B%BE%E4%B9%A6%E3%80%81%E6%9C%9F%E5%88%8A%E3%80%81%E8%AE%BA%E6%96%87%E7%9A%84%E7%BC%96%E6%8E%92/%E3%80%90GB:T%207713.1-2006%E3%80%91%E5%AD%A6%E4%BD%8D%E8%AE%BA%E6%96%87%E7%BC%96%E5%86%99%E8%A7%84%E5%88%99.pdf}%
+% {\std{GB/T 7713.1-2006}}和%
+% \href{https://github.com/Haixing-Hu/typesetting-standard/raw/master/%E5%9B%BE%E4%B9%A6%E3%80%81%E6%9C%9F%E5%88%8A%E3%80%81%E8%AE%BA%E6%96%87%E7%9A%84%E7%BC%96%E6%8E%92/%E3%80%90GB:T%207713.3-2009%E3%80%91%E7%A7%91%E6%8A%80%E6%8A%A5%E5%91%8A%E7%BC%96%E5%86%99%E8%A7%84%E5%88%99.pdf}%
+% {\std{GB/T 7713.3-2009}}部分替代
+% \item \href{https://github.com/Haixing-Hu/typesetting-standard/raw/master/%E5%9B%BE%E4%B9%A6%E3%80%81%E6%9C%9F%E5%88%8A%E3%80%81%E8%AE%BA%E6%96%87%E7%9A%84%E7%BC%96%E6%8E%92/%E3%80%90GB:T%207156-2003%E3%80%91%E6%96%87%E7%8C%AE%E4%BF%9D%E5%AF%86%E7%AD%89%E7%BA%A7%E4%BB%A3%E7%A0%81%E4%B8%8E%E6%A0%87%E8%AF%86.pdf}%
+% {\std{GB/T 7156-2003}\textsl{文献保密等级代码与标识}}
+% \item \href{https://github.com/Haixing-Hu/typesetting-standard/raw/master/%E6%95%B0%E5%AD%97%E6%96%87%E5%AD%97/%E3%80%90GB:T%2016159-2012%E3%80%91%E6%B1%89%E8%AF%AD%E6%8B%BC%E9%9F%B3%E6%AD%A3%E8%AF%8D%E6%B3%95%E5%9F%BA%E6%9C%AC%E8%A7%84%E5%88%99.pdf}%
+% {\std{GB/T 16159-2012}\textsl{汉语拼音正词法基本规则}}，
+% 该标准取代了%
+% \href{https://github.com/Haixing-Hu/typesetting-standard/raw/master/%E6%95%B0%E5%AD%97%E6%96%87%E5%AD%97/%E3%80%90GB:T%2016159-1996%E3%80%91%E6%B1%89%E8%AF%AD%E6%8B%BC%E9%9F%B3%E6%AD%A3%E8%AF%8D%E6%B3%95%E5%9F%BA%E6%9C%AC%E8%A7%84%E5%88%99.pdf}%
+% {\std{GB/T 16159-1996}}
+% \item \href{https://github.com/Haixing-Hu/typesetting-standard/raw/master/%E5%9B%BE%E4%B9%A6%E3%80%81%E6%9C%9F%E5%88%8A%E3%80%81%E8%AE%BA%E6%96%87%E7%9A%84%E7%BC%96%E6%8E%92/%E3%80%90CY:T%2035-2001%E3%80%91%E7%A7%91%E6%8A%80%E6%96%87%E7%8C%AE%E7%9A%84%E7%AB%A0%E8%8A%82%E7%BC%96%E5%8F%B7%E6%96%B9%E6%B3%95.pdf}%
+% {\std{CY/T 35-2001}\textsl{科技文献的章节编号方法}}
 % \end{itemize}
 %
-% 上述要求和标准的电子版可在{\njuthesis}项目主页的源码库中找到。
+% 上述要求和标准的电子版均可在对应的链接地址中找到。
 %
 % \begin{note}
 % 如南京大学研究生院对学位论文的格式要求和国家标准之间有冲突，以国家标准的要求为准。
@@ -3153,10 +3172,10 @@ December\fi
       & \njutunderline[310pt]{\njut@value@author}\\
       \makebox[7em][s]{\njut@cap@cover@major}
       & \njutunderline[310pt]{\njut@value@major}\\
-      \makebox[7em][s]{\njut@cap@cover@supervisor}
-      & \njutunderline[310pt]{\njut@value@supervisor}\\
       \makebox[7em][s]{\njut@cap@cover@researchfield}
       & \njutunderline[310pt]{\njut@value@researchfield}\\
+      \makebox[7em][s]{\njut@cap@cover@supervisor}
+      & \njutunderline[310pt]{\njut@value@supervisor}\\
   \end{tabular}
 }
 \newcommand*{\njut@covertable@twolinetitle}{
@@ -3169,10 +3188,10 @@ December\fi
       & \njutunderline[310pt]{\njut@value@author}\\
       \makebox[7em][s]{\njut@cap@cover@major}
       & \njutunderline[310pt]{\njut@value@major}\\
-      \makebox[7em][s]{\njut@cap@cover@supervisor}
-      & \njutunderline[310pt]{\njut@value@supervisor}\\
       \makebox[7em][s]{\njut@cap@cover@researchfield}
       & \njutunderline[310pt]{\njut@value@researchfield}\\
+      \makebox[7em][s]{\njut@cap@cover@supervisor}
+      & \njutunderline[310pt]{\njut@value@supervisor}\\
   \end{tabular}
 }
 \renewcommand*{\maketitle}{%
@@ -3711,6 +3730,7 @@ December\fi
 \RequirePackage[CJKnumber,CJKchecksingle]{xeCJK}
 \RequirePackage[hyphens]{url} % must be load before hypdoc package
 \RequirePackage{hypdoc} % it will load hyperref package
+\RequirePackage[normalem]{ulem}
 \RequirePackage{dtklogos}
 \hypersetup{%
     unicode=false,
@@ -3729,6 +3749,9 @@ December\fi
 }
 
 \newcommand{\env}[1]{\texttt{#1}}
+
+% 设置超链接为蓝色
+\hypersetup{colorlinks=true,urlcolor=blue}
 
 % 定义英文字体名称。
 \newcommand*{\njut@enfn@main}{Times New Roman}
