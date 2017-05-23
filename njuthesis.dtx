@@ -1668,6 +1668,9 @@
 \newcommand*{\njut@cap@phd}{博士}
 \newcommand*{\njut@cap@master}{硕士}
 \newcommand*{\njut@cap@bachelor}{学士}
+\newcommand*{\njut@cap@type@phd}{研究生}
+\newcommand*{\njut@cap@type@master}{研究生}
+\newcommand*{\njut@cap@type@bachelor}{本科生}
 \newcommand*{\njut@cap@en@phd}{Doctor of Philosophy}
 \newcommand*{\njut@cap@en@master}{Master}
 \newcommand*{\njut@cap@en@bachelor}{Bachelor}
@@ -1708,7 +1711,7 @@
 % 定义南京大学学位论文中文封面的字符串常量：
 %    \begin{macrocode}
 \newcommand*{\njut@cap@cover}{中文封面}
-\newcommand*{\njut@cap@cover@thesis}{研究生毕业论文}
+\newcommand*{\njut@cap@cover@thesis}{{\njut@value@type}毕业论文}
 \newcommand*{\njut@cap@cover@apply}{申请{\njut@value@degree}学位}
 \newcommand*{\njut@cap@cover@title}{论文题目}
 \newcommand*{\njut@cap@cover@author}{作者姓名}
@@ -1746,7 +1749,7 @@ in\\
 %    \begin{macrocode}
 \newcommand*{\njut@cap@abstract}{中文摘要}
 \newcommand*{\njut@cap@abstract@chaptername}%
-            {南京大学研究生毕业论文中文摘要首页用纸}
+            {南京大学{\njut@value@type}毕业论文中文摘要首页用纸}
 \newcommand*{\njut@cap@abstract@title}{毕业论文题目}
 \newcommand*{\njut@cap@abstract@major}{专业}
 \newcommand*{\njut@cap@abstract@author}{级{\njut@value@degree}生姓名}
@@ -1759,7 +1762,7 @@ in\\
 %    \begin{macrocode}
 \newcommand*{\njut@cap@abstract@en}{英文摘要}
 \newcommand*{\njut@cap@abstract@en@chaptername}%
-            {南京大学研究生毕业论文英文摘要首页用纸}
+            {南京大学{\njut@value@type}毕业论文英文摘要首页用纸}
 \newcommand*{\njut@cap@abstract@en@title}{THESIS}
 \newcommand*{\njut@cap@abstract@en@major}{SPECIALIZATION}
 \newcommand*{\njut@cap@abstract@en@author}{POSTGRADUATE}
@@ -1797,7 +1800,7 @@ in\\
 \newcommand*{\njut@cap@license@public}{不保密}
 \newcommand*{\njut@cap@license@secret}{保密，保密期：}
 \newcommand*{\njut@cap@license@title}{论文题名}
-\newcommand*{\njut@cap@license@studentnum}{研究生学号}
+\newcommand*{\njut@cap@license@studentnum}{{\njut@value@type}学号}
 \newcommand*{\njut@cap@license@department}{所在院系}
 \newcommand*{\njut@cap@license@grade}{学位年度}
 \newcommand*{\njut@cap@license@category}{论文级别}
@@ -1845,12 +1848,15 @@ in\\
 %    \begin{macrocode}
 \ifnjut@phd
     \newcommand*{\njut@value@degree}{\njut@cap@phd}
+    \newcommand*{\njut@value@type}{\njut@cap@type@phd}
 \else
     \ifnjut@master
         \newcommand*{\njut@value@degree}{\njut@cap@master}
+        \newcommand*{\njut@value@type}{\njut@cap@type@master}
     \else
        \ifnjut@bachelor
           \newcommand*{\njut@value@degree}{\njut@cap@bachelor}
+          \newcommand*{\njut@value@type}{\njut@cap@type@bachelor}
        \else
           \ClassError{njuthesis}{No degree was selected.}{}
        \fi
