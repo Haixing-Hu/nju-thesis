@@ -62,8 +62,9 @@
 
 ## 安装使用
 
-参见[用户手册][manual]中相关章节的详细说明。
+参见[模板手册][templatedoc]和[用户手册][manual]中相关章节的详细说明。
 
+[templatedoc]: https://raw.github.com/Haixing-Hu/nju-thesis/master/njuthesis.pdf
 [manual]: https://raw.github.com/Haixing-Hu/nju-thesis/master/manual/njuthesis-manual.pdf
 
 ## 相关项目
