@@ -25,7 +25,7 @@
 %% through LaTeX.
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{njuthesis.cls}
- [2017/05/23 v1.2.0 Document Class for the Degree Papers of Nanjing University]
+ [2017/05/23 v1.2.1 Document Class for the Degree Papers of Nanjing University]
 \newif\ifnjut@adobefonts\njut@adobefontstrue
 \newif\ifnjut@winfonts\njut@winfontsfalse
 \newif\ifnjut@linuxfonts\njut@linuxfontsfalse
@@ -482,13 +482,13 @@
 \floatstyle{plaintop}
 \restylefloat{table}
 \renewcommand*{\baselinestretch}{1.38}
-\let\convertergy@oldtabular\tabular
-\let\convertergy@endoldtabular\endtabular
+\let\njut@oldtabular\tabular
+\let\njut@endoldtabular\endtabular
 \renewenvironment{tabular}%
 {\bgroup%
 \renewcommand{\arraystretch}{1.38}%
-\convertergy@oldtabular}%
-{\convertergy@endoldtabular\egroup}
+\njut@oldtabular}%
+{\njut@endoldtabular\egroup}
 \geometry{headheight=2.6cm,headsep=3mm,footskip=13mm}
 \geometry{top=3.5cm,bottom=3.5cm,left=3.2cm,right=3.2cm}
 \def\njut@CJK@charwidth{\hskip \f@size \p@}

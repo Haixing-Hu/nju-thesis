@@ -24,7 +24,7 @@
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
 %<*cls>
- [2017/05/23 v1.2.0 Document Class for the Degree Papers of Nanjing University]
+ [2017/05/23 v1.2.1 Document Class for the Degree Papers of Nanjing University]
 %</cls>
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
@@ -111,8 +111,8 @@
 %
 % \MakeShortVerb{\|}
 % \newcommand*{\njuthesis}{\texttt{NJU-Thesis}}
-% \newcommand*{\texlive}{{\TeX}\ Live\ 2012}
-% \renewcommand*{\fileversion}{1.2.0}
+% \newcommand*{\texlive}{{\TeX}\ Live\ 2017}
+% \renewcommand*{\fileversion}{1.2.1}
 % \renewcommand*{\filedate}{\today}
 %
 % \pagestyle{empty}
@@ -219,6 +219,8 @@
 %                                 设置方式不再兼容|CJKfntef|所引起的问题\\
 %  v1.2.0  & 2017/05/23 & 胡海星 & 修复了本科生论文封面显示``研究生毕业论文''的错误；
 %                                 将封面中的``研究方向''换到``指导老师''前面\\
+%  v1.2.1  & 2017/12/24 & 胡海星 & 修正一些小问题，去除不需要的|dtxlogos|宏包；
+%                                 兼容TeX Live 2017 \\
 % \bottomrule
 % \end{longtable}
 % \end{center}
@@ -2601,13 +2603,13 @@ December\fi
 %
 % 修改|tabular|环境，设置表格中的行间距为正文行间距。
 %    \begin{macrocode}
-\let\convertergy@oldtabular\tabular
-\let\convertergy@endoldtabular\endtabular
+\let\njut@oldtabular\tabular
+\let\njut@endoldtabular\endtabular
 \renewenvironment{tabular}%
 {\bgroup%
 \renewcommand{\arraystretch}{1.38}%
-\convertergy@oldtabular}%
-{\convertergy@endoldtabular\egroup}
+\njut@oldtabular}%
+{\njut@endoldtabular\egroup}
 %    \end{macrocode}
 %
 % 文章用A4纸标准大小的白纸打印，页眉：2.6cm，页脚：2.4cm，页边距上下：3.5cm，左
@@ -3402,7 +3404,7 @@ December\fi
 % \subsection{前言章节}
 %
 % \begin{environment}{preface}
-% 该环境用于``致谢''页。
+% 该环境用于``前言''页。
 %    \begin{macrocode}
 \newenvironment{preface}{%
   \nchapter{\njut@cap@preface}
@@ -3733,7 +3735,6 @@ December\fi
 \RequirePackage[hyphens]{url} % must be load before hypdoc package
 \RequirePackage{hypdoc} % it will load hyperref package
 \RequirePackage[normalem]{ulem}
-\RequirePackage{dtklogos}
 \hypersetup{%
     unicode=false,
     hyperfootnotes=true,
