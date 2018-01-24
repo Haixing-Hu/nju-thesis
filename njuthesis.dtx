@@ -1885,9 +1885,9 @@ in\\
        \fi
     \fi
 \fi
-\newcommand*{\njut@value@title}{(论文标题)}
-\newcommand*{\njut@value@titlea}{(论文长标题第一行)}
-\newcommand*{\njut@value@titleb}{(论文长标题第二行)}
+\newcommand*{\njut@value@title}{}
+\newcommand*{\njut@value@titlea}{}
+\newcommand*{\njut@value@titleb}{}
 \newcommand*{\njut@value@author}{(作者姓名)}
 \newcommand*{\njut@value@telphone}{(作者电话号码)}
 \newcommand*{\njut@value@email}{(作者电子邮件)}
@@ -3214,7 +3214,7 @@ December\fi
     \bf\kaishu\zihao{3}
     \def\tabcolsep{1pt}
     \def\arraystretch{1.5}
-    \ifdefempty{\njut@cap@cover@title}{\njut@covertable@onelinetitle}{\njut@covertable@twolinetitle}
+    \ifdefempty{\njut@value@titleb}{\njut@covertable@onelinetitle}{\njut@covertable@twolinetitle}
     \egroup}\\
     \vskip \stretch{1}
     {\bf\kaishu\zihao{4}\njut@value@date}
@@ -3295,6 +3295,13 @@ December\fi
 % 定义中文摘要环境。该环境自动生成南京大学中文摘要页。注意我们使用了前面修改过的
 % \cs{cleardoublepage}命令来插入无页眉页脚的空白页。
 %    \begin{macrocode}
+\newcommand*{\njut@cap@abstract@onelinetitle} {
+  \njutunderline[318pt]{\njut@value@abstract@titlea}\\
+}
+\newcommand*{\njut@cap@abstract@twolinetitle} {
+  \njutunderline[318pt]{\njut@value@abstract@titlea}\\
+  \noindent\njutunderline[\textwidth]{\njut@value@abstract@titleb}\\
+}
 \newenvironment{abstract}{%
   \thispagestyle{empty}
   \pdfbookmark[0]{\njut@cap@abstract}{abstract}
@@ -3305,8 +3312,7 @@ December\fi
   \vspace{3mm}
   {\kaishu\zihao{4}%
   \noindent\njut@cap@abstract@title{：}%
-  \njutunderline[318pt]{\njut@value@abstract@titlea}\\
-  \noindent\njutunderline[\textwidth]{\njut@value@abstract@titleb}\\
+  \ifdefempty{\njut@value@abstract@titleb}{\njut@cap@abstract@onelinetitle}{\njut@cap@abstract@twolinetitle}
   \noindent\njutunderline[178pt]{\njut@value@major}%
   \njut@cap@abstract@major%
   \njutunderline[50pt]{\njut@value@grade}%
@@ -3360,6 +3366,14 @@ December\fi
 % 定义英文摘要环境。该环境自动生成南京大学英文摘要页。注意我们使用了前面修改过的
 % \cs{cleardoublepage}命令来插入无页眉页脚的空白页。
 %    \begin{macrocode}
+
+\newcommand*{\njut@cap@abstract@en@onelinetitle} {
+   \njutunderline[360pt]{\njut@value@abstract@en@titlea}\\
+}
+\newcommand*{\njut@cap@abstract@en@twolinetitle} {
+   \njutunderline[360pt]{\njut@value@abstract@en@titlea}\\
+   \njutunderline[\textwidth]{\njut@value@abstract@en@titleb}\\
+}
 \newenvironment{englishabstract}{%
   \thispagestyle{empty}
   \pdfbookmark[0]{\njut@cap@abstract@en}{englishabstract}
@@ -3369,8 +3383,7 @@ December\fi
   \end{center}
   {\zihao{4}%
    \njut@cap@abstract@en@title{:}~%
-   \njutunderline[360pt]{\njut@value@abstract@en@titlea}\\
-   \njutunderline[\textwidth]{\njut@value@abstract@en@titleb}\\
+   \ifdefempty{\njut@value@abstract@en@titleb}{\njut@cap@abstract@en@onelinetitle}{\njut@cap@abstract@en@twolinetitle}
    \njut@cap@abstract@en@major{:}~%
    \njutunderline[298pt]{\njut@value@en@major}\\
    \njut@cap@abstract@en@author{:}~%
