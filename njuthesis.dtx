@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2013-2017, Haixing Hu.
+% Copyright (C) 2013-2018, Haixing Hu.
 % Department of Computer Science and Technology, Nanjing University.
 %
 % This file may be distributed and/or modified under the conditions of the
@@ -24,7 +24,7 @@
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
 %<*cls>
- [2017/05/23 v1.2.1 Document Class for the Degree Papers of Nanjing University]
+ [2018/08/07 v1.2.2 Document Class for the Degree Papers of Nanjing University]
 %</cls>
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
@@ -112,7 +112,7 @@
 % \MakeShortVerb{\|}
 % \newcommand*{\njuthesis}{\texttt{NJU-Thesis}}
 % \newcommand*{\texlive}{{\TeX}\ Live\ 2017}
-% \renewcommand*{\fileversion}{1.2.1}
+% \renewcommand*{\fileversion}{1.2.2}
 % \renewcommand*{\filedate}{\today}
 %
 % \pagestyle{empty}
@@ -221,6 +221,7 @@
 %                                 将封面中的``研究方向''换到``指导老师''前面\\
 %  v1.2.1  & 2017/12/24 & 胡海星 & 修正一些小问题，去除不需要的|dtxlogos|宏包；
 %                                 兼容TeX Live 2017 \\
+%  v1.2.2 & 2018/08/07 & 胡海星 & 更新中文字体下载链接 \\
 % \bottomrule
 % \end{longtable}
 % \end{center}
@@ -489,14 +490,8 @@
 % \end{example}
 %   表\ref{table:fontnames}中列出了默认配置下使用不同字体选项时所采用的实际字体
 %   名称。系统中必须正确安装了相应的字体才能正常编译文档。\\
-%   Adobe的宋体和黑体可以在其公司网站免费下载：
-%   \begin{center}
-%   \url{http://www.adobe.com/support/downloads/detail.jsp?ftpID=4421}
-%   \end{center}
-%   楷体无免费下载，但在网上可以找到。下面的网址提供了一个打包下载的地址：
-%   \begin{center}
-%   \url{http://tinker-bot.googlecode.com/files/cfonts.tar.gz}
-%   \end{center}
+%   模板用到的字体可以在下面的代码库下载：\\
+%   \url{https://github.com/Haixing-Hu/latex-chinese-fonts}\\
 %   \begin{table}
 %     \centering\noindent
 %     \begin{tabular}[t]{ccccc}
@@ -506,7 +501,10 @@
 %     \textbf{宋体} & {Adobe Song Std}  & {SimSun} & {AR PL SungtiL GB} &  {STSong} \\
 %     \textbf{黑体} & {Adobe Heiti Std} & {SimHei} & {WenQuanYi Zen Hei Mono} &  {STHeiti} \\
 %     \textbf{楷书} & {Adobe Kaiti Std} & {KaiTi}  & {AR PL KaitiM GB} & {STKaiti} \\
-%     \textbf{仿宋体} & {Adobe Fangsong Std} & {FangSong} & {STFangSong} & {STFangSong} \\
+%     \textbf{仿宋体} & {Adobe Fangsong Std} & {FangSong} & {STFangsong} & {STFangsong} \\
+%     \textbf{英文衬线字体(Serif)} & {Times} & {Times New Roman} & {Times} & {Times} \\
+%     \textbf{英文非衬线字体(Sans Serif)} & {Helvetica} & {Arial} & {Helvetica} & {Helvetica} \\
+%     \textbf{英文等宽字体(Monospace)} & {Courier} & {Courier New} & {Courier} & {Courier} \\
 %     \bottomrule
 %     \end{tabular}
 %     \caption{默认配置下不同字体选项所使用的实际字体名称}
@@ -2007,16 +2005,17 @@ December\fi
 \newcommand*{\njut@enfn@mono@mac}{Courier}
 %    \end{macrocode}
 %
-% 定义Adoble提供的宋体、黑体、楷书和仿宋体四种中文字体的名称。Adoble的宋体、黑体和
-% 仿宋体可以在其网站免费下载，地址为
+% 定义Adoble提供的宋体、黑体、楷书和仿宋体四种中文字体的名称。Adoble的宋体、黑体和仿宋体
+% 可以在其网站免费下载，地址为
 % \begin{center}
-%  \url{http://www.adobe.com/support/downloads/detail.jsp?ftpID=4421}
+%   \url{https://supportdownloads.adobe.com/detail.jsp?ftpID=4883}
 % \end{center}
 % 但Adobe的楷体只随Adobe Creative Suite软件提供。不过，所有Adobe中文字体都可以在这里
-% 打包下载：
+% 下载：
 % \begin{center}
-% \url{http://tinker-bot.googlecode.com/files/cfonts.tar.gz}
+%   \url{https://github.com/Haixing-Hu/latex-chinese-fonts}
 % \end{center}
+%
 %    \begin{macrocode}
 \newcommand*{\njut@zhfn@songti@adobe}{Adobe Song Std}
 \newcommand*{\njut@zhfn@heiti@adobe}{Adobe Heiti Std}

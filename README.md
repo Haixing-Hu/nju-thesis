@@ -62,6 +62,8 @@
 
 ## 安装使用
 
+编译此模板前需在系统中安装Adobe中文字体：<https://github.com/Haixing-Hu/font/tree/master/unicode>
+
 参见[模板文档][templatedoc]和[用户手册][manual]中相关章节的详细说明。
 
 [templatedoc]: https://raw.github.com/Haixing-Hu/nju-thesis/master/njuthesis.pdf
