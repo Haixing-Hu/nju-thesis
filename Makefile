@@ -57,17 +57,6 @@ $(SAMPLE).pdf: $(CLS) $(INSTITUTE_LOGO) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE).
 	xelatex $(SAMPLE).tex
 	xelatex $(SAMPLE).tex
 
-###### install
-
-install: $(SOURCE) $(CLS) $(INSTITUTE_LOGO) $(INSTITUTE_NAME) $(BST_FILE) $(PACKAGE).pdf $(SAMPLE).pdf
-	mkdir -p $(TEXMFLOCAL)/tex/latex/njuthesis
-	cp -rvf $(SOURCES) $(CLS) $(INSTITUTE_LOGO) $(INSTITUTE_NAME) $(TEXMFLOCAL)/tex/latex/njuthesis/
-	mkdir -p $(TEXMFLOCAL)/doc/latex/njuthesis
-	cp -rvf $(PACKAGE).pdf $(SAMPLE).pdf $(TEXMFLOCAL)/doc/latex/njuthesis/
-	mkdir -p $(TEXMFLOCAL)/bibtex/bst
-	cp -rvf $(BST_FILE) $(TEXMFLOCAL)/bibtex/bst/
-	texhash
-
 ###### clean
 
 clean:

@@ -1,3 +1,7 @@
+dtx-style.sty
+njuthesis.cfg
+njuthesis.cls
+*.pdf
 *.hd
 *.cmds
 *.acn
