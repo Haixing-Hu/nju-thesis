@@ -480,11 +480,12 @@
 %
 % 本文档类提供了一些选项以方便使用：
 % \begin{description}
-% \item[winfonts, linuxfonts, macfonts, adobefonts] |winfonts|选项使得文档使
+% \item[winfonts, linuxfonts, macfonts, adobefonts, fandolfonts] |winfonts|选项使得文档使
 %   用Windows系统提供的字体；|linuxfonts|选项使得文档使用Linux系统提供的字
 %   体；|macfonts|选项使得文档使用Mac系统提供的字体；|adobefonts|选项使得文档使
 %   用Adobe提供的OTF中文字体，一般来说OTF字体的显示效果要优于ttf字体。
-%   默认选项是|adobefonts|。
+%   默认选项是|adobefonts|。由于以上四种字体不提供粗体，
+%   另外提供了|fandolfonts|选项调用 texlive 2018 套件自带的开源字体。
 % \begin{example}
 % \documentclass[winfonts]{njuthesis}
 % \end{example}
@@ -1312,6 +1313,7 @@
 % {\njuthesis}宏包的默认选项为|adobefonts|。
 %    \begin{macrocode}
 %<*cls>
+\newif\ifnjut@fandolfonts\njut@fandolfontsfalse
 \newif\ifnjut@adobefonts\njut@adobefontstrue
 \newif\ifnjut@winfonts\njut@winfontsfalse
 \newif\ifnjut@linuxfonts\njut@linuxfontsfalse
@@ -1320,6 +1322,7 @@
 \newif\ifnjut@phd\njut@phdfalse
 \newif\ifnjut@master\njut@masterfalse
 \newif\ifnjut@bachelor\njut@bachelorfalse
+\DeclareOption{fandolfonts}{\njut@fandolfontstrue}
 \DeclareOption{adobefonts}{\njut@adobefontstrue
   \njut@winfontsfalse
   \njut@linuxfontsfalse
@@ -1737,13 +1740,13 @@
 %
 % 定义南京大学学位论文中文封面的字符串常量：
 %    \begin{macrocode}
-\newcommand*{\njut@cap@cover}{中文封面}
+\newcommand*{\njut@cap@cover}{南大封面}
 \newcommand*{\njut@cap@cover@thesis}{{\njut@value@type}毕业论文}
 \newcommand*{\njut@cap@cover@apply}{申请{\njut@value@degree}学位}
 \newcommand*{\njut@cap@cover@title}{论文题目}
 \newcommand*{\njut@cap@cover@author}{作者姓名}
 \newcommand*{\njut@cap@cover@supervisor}{指导教师}
-\newcommand*{\njut@cap@cover@major}{学科、专业方向}
+\newcommand*{\njut@cap@cover@major}{学科、专业名称}
 \newcommand*{\njut@cap@cover@researchfield}{研究方向}
 \newcommand*{\njut@cap@cover@department}{院系}
 \newcommand*{\njut@cap@cover@institute}{南京大学}
@@ -1794,8 +1797,8 @@ in\\
 \newcommand*{\njut@cap@abstract@en@major}{SPECIALIZATION}
 \newcommand*{\njut@cap@abstract@en@author}{POSTGRADUATE}
 \newcommand*{\njut@cap@abstract@en@supervisor}{MENTOR}
-\newcommand*{\njut@cap@abstract@en@abstractname}{Abstract}
-\newcommand*{\njut@cap@abstract@en@keywordsname}{keywords}
+\newcommand*{\njut@cap@abstract@en@abstractname}{ABSTRACT}
+\newcommand*{\njut@cap@abstract@en@keywordsname}{KEYWORDS}
 %    \end{macrocode}
 %
 % 定义南京大学学位论文中论文作者简历与科研成果页的字符串常量：
@@ -2034,6 +2037,14 @@ December\fi
 \newcommand*{\njut@enfn@main@adobe}{Times}
 \newcommand*{\njut@enfn@sans@adobe}{Helvetica}
 \newcommand*{\njut@enfn@mono@adobe}{Courier}
+%    \end{macrocode}
+%
+% 定义texlive 2018自带Fandol字库宋体、黑体、楷书和仿宋体四种中文字体的名称。
+%    \begin{macrocode}
+\newcommand*{\njut@zhfn@songti@fandol}{FandolSong}
+\newcommand*{\njut@zhfn@heiti@fandol}{FandolHei}
+\newcommand*{\njut@zhfn@kaishu@fandol}{FandolKai}
+\newcommand*{\njut@zhfn@fangsong@fandol}{FandolFang}
 %</cfg>
 %    \end{macrocode}
 %
@@ -2090,6 +2101,12 @@ December\fi
     \fi
   \fi
 \fi
+\ifnjut@fandolfonts
+  \renewcommand*{\njut@zhfn@songti}{\njut@zhfn@songti@fandol}
+  \renewcommand*{\njut@zhfn@heiti}{\njut@zhfn@heiti@fandol}
+  \renewcommand*{\njut@zhfn@kaishu}{\njut@zhfn@kaishu@fandol}
+  \renewcommand*{\njut@zhfn@fangsong}{\njut@zhfn@fangsong@fandol}
+\fi
 %    \end{macrocode}
 %
 % 接下来定义文档使用的中文字体：
@@ -2098,9 +2115,14 @@ December\fi
 \setCJKfamilyfont{hei}{\njut@zhfn@heiti}
 \setCJKfamilyfont{kai}{\njut@zhfn@kaishu}
 \setCJKfamilyfont{fangsong}{\njut@zhfn@fangsong}
-\setCJKmainfont[BoldFont={\njut@zhfn@heiti},%
-                ItalicFont={\njut@zhfn@kaishu}]%
-               {\njut@zhfn@songti}
+\ifnjut@fandolfonts
+  \setCJKmainfont[ItalicFont={\njut@zhfn@kaishu}]%
+                 {\njut@zhfn@songti}
+\else
+  \setCJKmainfont[BoldFont={\njut@zhfn@heiti},%
+                  ItalicFont={\njut@zhfn@kaishu}]%
+                 {\njut@zhfn@songti}
+\fi
 \setCJKsansfont{\njut@zhfn@heiti}
 \setCJKmonofont{\njut@zhfn@fangsong}
 %    \end{macrocode}
@@ -2507,7 +2529,7 @@ December\fi
 %
 % 设置章节格式如下：
 % \begin{description}
-% \item[零级节标题] 命令为\cs{chapter}，格式为一号黑体，居中排列，段前空4ex，段后空3ex；
+% \item[零级节标题] 命令为\cs{chapter}，格式为小一号黑体，居中排列，段前空0ex，段后空5ex；
 % \item[一级节标题] 命令为\cs{section}，格式为小二号黑体，左排列，段前空3.5ex，段后空2.3ex；
 % \item[二级节标题] 命令为\cs{subsection}，格式为三号黑体，左排列，段前空3.0ex，段后空1.5ex；
 % \item[三级节标题] 命令为\cs{subsubsection}，格式为小三号黑体，左排列，段前空2.5ex，段后空1.5ex；
@@ -2519,12 +2541,12 @@ December\fi
 % 的样式：
 %    \begin{macrocode}
 \titleformat{\chapter}[hang]
-            {\centering\zihao{1}\bfseries}
+            {\centering\zihao{-1}\bfseries}
             {\chaptertitlename}{1em}{}
 \titlespacing{\chapter}
              {0pt}
-             {*4}
-             {*3}
+             {*0}
+             {*5}
 \titleformat{\section}[hang]
             {\zihao{-2}\bfseries}
             {\thesection}{1em}{}
@@ -2617,11 +2639,9 @@ December\fi
 {\njut@endoldtabular\egroup}
 %    \end{macrocode}
 %
-% 文章用A4纸标准大小的白纸打印，页眉：2.6cm，页脚：2.4cm，页边距上下：3.5cm，左
-% 右：3.2cm。
+% 文章用A4纸标准大小的白纸打印，页边距设定如下。
 %    \begin{macrocode}
-\geometry{headheight=2.6cm,headsep=3mm,footskip=13mm}
-\geometry{top=3.5cm,bottom=3.5cm,left=3.2cm,right=3.2cm}
+\geometry{top=2.5cm,bottom=2.5cm,left=3.6cm,right=2.8cm}
 %    \end{macrocode}
 %
 % 设置每一段的首行缩进两个汉字。
@@ -2657,16 +2677,7 @@ December\fi
 % 格，而章节的后继页面的页眉页脚将使用|fancy|风格的默认定义或用户通过
 % \cs{fancyhead}或\cs{fancyfoot}命令定义的样式。
 %
-% 首先，我们需要修改|plain|风格的页眉页脚，将其页脚默认的页码去掉。
-%    \begin{macrocode}
-\fancypagestyle{plain}{%
-   \fancyhead{}                       % get rid of headers and footers
-   \renewcommand{\headrulewidth}{0pt} % and the header line
-   \renewcommand{\footrulewidth}{0pt} % and the footer line
-}
-%    \end{macrocode}
-%
-% 接下来我们按照如下规则修改|fancy|风格的页眉页脚设置，注意学位论文始终是双面打印的：
+% 我们按照如下规则修改|fancy|风格的页眉页脚设置，注意学位论文始终是双面打印的：
 % \begin{itemize}
 %    \item 令偶数页的页眉如下：
 %      \begin{itemize}
@@ -2720,7 +2731,7 @@ December\fi
 % 在第一次调用|\pagestyle{fancy}|之后，因为第一次调用该命令会设置\cs{chaptermark}。
 %    \begin{macrocode}
 \renewcommand{\chaptermark}[1]{\markboth{%
- \bfseries\if@mainmatter\chaptertitlename\hspace{1em}\fi{#1}%
+ \kaishu\if@mainmatter\chaptertitlename\hspace{1em}\fi{#1}%
 }{}}
 %    \end{macrocode}
 %
@@ -2728,7 +2739,7 @@ December\fi
 % |\pagestyle{fancy}|之后，因为第一次调用该命令会设置\cs{sectionmark}。
 %    \begin{macrocode}
 \renewcommand{\sectionmark}[1]{\markright{%
- \bfseries\if@mainmatter\thesection\hspace{1em}\fi{#1}%
+ \kaishu\if@mainmatter\thesection\hspace{1em}\fi{#1}%
 }}
 %    \end{macrocode}
 %
@@ -2883,7 +2894,8 @@ December\fi
       \@restonecolfalse
     \fi
     \nchapter{\contentsname}%
-    \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
+    \@mkboth{\kaishu\MakeUppercase\contentsname}%
+            {\kaishu\MakeUppercase\contentsname}%
     \@starttoc{toc}%
     \if@restonecol\twocolumn\fi
 }
@@ -2900,7 +2912,8 @@ December\fi
       \@restonecolfalse
     \fi
     \nchapter{\listtablename}%
-    \@mkboth{\MakeUppercase\listtablename}{\MakeUppercase\listtablename}%
+    \@mkboth{\kaishu\MakeUppercase\listtablename}%
+            {\kaishu\MakeUppercase\listtablename}%
     \@starttoc{lot}%
     \if@restonecol\twocolumn\fi
 }
@@ -2917,7 +2930,8 @@ December\fi
       \@restonecolfalse
     \fi
     \nchapter{\listfigurename}%
-    \@mkboth{\MakeUppercase\listfigurename}{\MakeUppercase\listfigurename}%
+    \@mkboth{\kaishu\MakeUppercase\listfigurename}%
+            {\kaishu\MakeUppercase\listfigurename}%
     \@starttoc{lof}%
     \if@restonecol\twocolumn\fi
 }
@@ -2931,7 +2945,7 @@ December\fi
 %    \begin{macrocode}
 \renewenvironment{thebibliography}[1]
      {\nchapter{\bibname}%
-      \@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
+      \@mkboth{\kaishu\bibname}{\kaishu\bibname}%
       \list{\@biblabel{\@arabic\c@enumiv}}%
            {\settowidth\labelwidth{\@biblabel{#1}}%
             \leftmargin\labelwidth
@@ -3301,17 +3315,18 @@ December\fi
 % \cs{cleardoublepage}命令来插入无页眉页脚的空白页。
 %    \begin{macrocode}
 \newenvironment{abstract}{%
-  \thispagestyle{empty}
-  \pdfbookmark[0]{\njut@cap@abstract}{abstract}
+  \chapter[\njut@cap@abstract]{}
+  \vspace{-16.8ex}
   \begin{center}
     {\bf\kaishu\zihao{-2}%
-     \njutunderline{\njut@cap@abstract@chaptername}}
+     \uuline{\njut@cap@abstract@chaptername}}
   \end{center}
   \vspace{3mm}
   {\kaishu\zihao{4}%
   \noindent\njut@cap@abstract@title{：}%
   \njutunderline[318pt]{\njut@value@abstract@titlea}\\
-  \noindent\njutunderline[\textwidth]{\njut@value@abstract@titleb}\\
+  \ifdefempty{\njut@value@abstract@titleb}{}{%
+    \noindent\njutunderline[\textwidth]{\njut@value@abstract@titleb}\\}
   \noindent\njutunderline[178pt]{\njut@value@major}%
   \njut@cap@abstract@major%
   \njutunderline[50pt]{\njut@value@grade}%
@@ -3366,16 +3381,17 @@ December\fi
 % \cs{cleardoublepage}命令来插入无页眉页脚的空白页。
 %    \begin{macrocode}
 \newenvironment{englishabstract}{%
-  \thispagestyle{empty}
-  \pdfbookmark[0]{\njut@cap@abstract@en}{englishabstract}
+  \chapter[\njut@cap@abstract@en]{}
+  \vspace{-16.8ex}
   \begin{center}
     {\bf\kaishu\zihao{-2}%
-     \njutunderline{\njut@cap@abstract@en@chaptername}}
+     \uuline{\njut@cap@abstract@en@chaptername}}
   \end{center}
   {\zihao{4}%
    \njut@cap@abstract@en@title{:}~%
    \njutunderline[360pt]{\njut@value@abstract@en@titlea}\\
-   \njutunderline[\textwidth]{\njut@value@abstract@en@titleb}\\
+   \ifdefempty{\njut@value@abstract@en@titleb}{}{%
+     \njutunderline[\textwidth]{\njut@value@abstract@en@titleb}\\}
    \njut@cap@abstract@en@major{:}~%
    \njutunderline[298pt]{\njut@value@en@major}\\
    \njut@cap@abstract@en@author{:}~%
@@ -3574,8 +3590,8 @@ December\fi
 % 档属性自动填写。
 %    \begin{macrocode}
 \newcommand*{\makelicense}{%
-  \thispagestyle{empty}
   \nchapter{\njut@cap@license@chaptername}
+  \thispagestyle{empty}
   \njut@license@makedeclaration
   \par\vspace{1em}
   \njut@license@maketable
@@ -3700,7 +3716,7 @@ December\fi
         pdftitle={\ifdefempty{\njut@value@title}%
           {\njut@value@titlea\njut@value@titleb}{\njut@value@title}},
         pdfauthor={\njut@value@author},
-        pdfsubject={\njut@cap@cover@apply},
+        pdfsubject={\njut@value@institute\njut@cap@cover@thesis},
         pdfkeywords={\njut@value@abstract@keywords},
         pdfcreator={\njut@value@author},
         pdfproducer={XeLaTeX with the NJU-Thesis document class}}
