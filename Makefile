@@ -35,7 +35,7 @@ $(BST_FILE):
 cls:  $(CLS)
 
 $(CLS): $(SOURCES)
-	latex $(PACKAGE).ins
+	xelatex $(PACKAGE).ins
 
 ###### generate doc
 

@@ -65,6 +65,9 @@
 \LoadClass[12pt,a4paper,doubleside]{book}
 \RequirePackage{ifxetex}
 \RequireXeTeX
+\RequirePackage[no-math]{fontspec}
+\RequirePackage[CJKnumber,CJKchecksingle]{xeCJK}
+\RequirePackage{CJKnumb}
 \RequirePackage{lastpage}
 \RequirePackage{geometry}
 \RequirePackage{titlesec}
@@ -92,8 +95,6 @@
 \RequirePackage{fancyhdr}
 \RequirePackage{shortvrb}
 \RequirePackage{xltxtra}
-\RequirePackage[CJKnumber,CJKchecksingle]{xeCJK}
-\RequirePackage{CJKnumb}
 \defaultfontfeatures{Mapping=tex-text}
 \punctstyle{plain}
 \RequirePackage{xeCJKfntef}
@@ -862,7 +863,7 @@
     \bf\kaishu\zihao{3}
     \def\tabcolsep{1pt}
     \def\arraystretch{1.5}
-    \ifdefempty{\njut@cap@cover@title}{\njut@covertable@onelinetitle}{\njut@covertable@twolinetitle}
+    \ifdefempty{\njut@value@title}{\njut@covertable@twolinetitle}{\njut@covertable@onelinetitle}
     \egroup}\\
     \vskip \stretch{1}
     {\bf\kaishu\zihao{4}\njut@value@date}
@@ -1133,7 +1134,8 @@
 \setlist[stepenum,2]{label={\textnormal{\njut@cap@substep\arabic{stepenumi}.\arabic*.}}}
 \setlist[stepenum]{leftmargin=*}
 \newcommand*{\njut@setpdfinfo}{\hypersetup{%
-        pdftitle={\njut@value@title},
+        pdftitle={\ifdefempty{\njut@value@title}%
+          {\njut@value@titlea\njut@value@titleb}{\njut@value@title}},
         pdfauthor={\njut@value@author},
         pdfsubject={\njut@cap@cover@apply},
         pdfkeywords={\njut@value@abstract@keywords},

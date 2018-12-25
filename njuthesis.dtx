@@ -763,6 +763,11 @@
 % \end{example}
 %
 % \begin{note}
+% 由于在 \njuthesis{} 中定义了默认论文标题，如需输入双行标题，
+% 需要对在导言区利用|\title{}|先重置论文标题。
+% \end{note}
+%
+% \begin{note}
 % \cs{title}的参数中不可换行，也不能使用\cs{thanks}脚注。
 % \end{note}
 %
@@ -1370,6 +1375,24 @@
 \RequireXeTeX
 %    \end{macrocode}
 %
+% 使用|xeCJK|宏包处理中文。宏包选项|CJKnumber|表示调用|CJKnumber|宏包处理中文数
+% 字；|CJKchecksingle|表示避免单个汉字单独占一行。调入|xeCJK|前先用|no-math|
+% 选项调入|fontspec|宏包，以使数学字体宏包起作用。
+% \begin{note}
+%   因为我们将使用黑体作为粗体，使用楷体作为斜体，因此载入|xeCJK|宏包时不需要开启
+%   |BoldFont|选项和|SlantFont|；否则的话，|xeCJK|会自动生成宋体的粗体和斜体，而那会
+%   非常难看。
+% \end{note}
+% \begin{note}
+% 由于TeX Live升级到2014版后，直接用|xeCJK|的|CJKnumber|选项会出现bug，我们需单独导入
+% |CJKnumb|宏包；但|xeCJK|的|CJKnumber|选项依然需要，否则在Tex Live 2012下编译会报错。
+% \end{note}
+%    \begin{macrocode}
+\RequirePackage[no-math]{fontspec}
+\RequirePackage[CJKnumber,CJKchecksingle]{xeCJK}
+\RequirePackage{CJKnumb}
+%    \end{macrocode}
+%
 % 使用|lastpage|宏包来获得最后一页的页码，从而生成“第3页，共20页”这样的页码标签。
 %    \begin{macrocode}
 \RequirePackage{lastpage}
@@ -1492,23 +1515,6 @@
 % 使用|xltxtra|宏包来获取{\XeLaTeX}的符号。
 %    \begin{macrocode}
 \RequirePackage{xltxtra}
-%    \end{macrocode}
-%
-% 使用|xeCJK|宏包处理中文。宏包选项|CJKnumber|表示调用|CJKnumber|宏包处理中文数
-% 字；|CJKchecksingle|表示避免单个汉字单独占一行。|xeCJK|宏包必须放在|amssymb|之后，
-% 否则会有冲突。
-% \begin{note}
-%   因为我们将使用黑体作为粗体，使用楷体作为斜体，因此载入|xeCJK|宏包时不需要开启
-%   |BoldFont|选项和|SlantFont|；否则的话，|xeCJK|会自动生成宋体的粗体和斜体，而那会
-%   非常难看。
-% \end{note}
-% \begin{note}
-% 由于TeX Live升级到2014版后，直接用|xeCJK|的|CJKnumber|选项会出现bug，我们需单独导入
-% |CJKnumb|宏包；但|xeCJK|的|CJKnumber|选项依然需要，否则在Tex Live 2012下编译会报错。
-% \end{note}
-%    \begin{macrocode}
-\RequirePackage[CJKnumber,CJKchecksingle]{xeCJK}
-\RequirePackage{CJKnumb}
 %    \end{macrocode}
 %
 % 让{\XeLaTeX}能够处理dash的惯例(使用"--"和"---"获得较长的dash)。
@@ -3213,7 +3219,7 @@ December\fi
     \bf\kaishu\zihao{3}
     \def\tabcolsep{1pt}
     \def\arraystretch{1.5}
-    \ifdefempty{\njut@cap@cover@title}{\njut@covertable@onelinetitle}{\njut@covertable@twolinetitle}
+    \ifdefempty{\njut@value@title}{\njut@covertable@twolinetitle}{\njut@covertable@onelinetitle}
     \egroup}\\
     \vskip \stretch{1}
     {\bf\kaishu\zihao{4}\njut@value@date}
@@ -3691,7 +3697,8 @@ December\fi
 % 此命令设置PDF文档属性，依赖于|hyperref|宏包。
 %    \begin{macrocode}
 \newcommand*{\njut@setpdfinfo}{\hypersetup{%
-        pdftitle={\njut@value@title},
+        pdftitle={\ifdefempty{\njut@value@title}%
+          {\njut@value@titlea\njut@value@titleb}{\njut@value@title}},
         pdfauthor={\njut@value@author},
         pdfsubject={\njut@cap@cover@apply},
         pdfkeywords={\njut@value@abstract@keywords},
