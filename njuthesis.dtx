@@ -1527,7 +1527,7 @@
 %
 % 设置中文标点格式，使用|plain|方案。其他可选方案参见|xeCJK|文档。
 %    \begin{macrocode}
-\punctstyle{plain}
+\punctstyle{quanjiao}
 %    \end{macrocode}
 %
 % |xeCJKfntef|宏包提供了中文下划线命令\cs{CJKunderline}，它将在制作论文封面时用到。
@@ -2198,39 +2198,41 @@ December\fi
 %
 % 下面定义中文字号对应的大小，其标准参见表\ref{table:fontsize:standard}和
 % 表\ref{table:fontsize:word}。
+% （经Zachary Cao测试，对于小四号字体Word中的磅数与pt单位1:1换算即可，
+% 因此所有字体大小都用Word磅数不进行换算）
 %    \begin{macrocode}
-\newcommand*{\njut@fs@eight}{5.02} % 八号字 5bp
-\newcommand*{\njut@fs@eightskip}{6.02}
-\newcommand*{\njut@fs@seven}{5.52} % 七号字 5.5bp
-\newcommand*{\njut@fs@sevenskip}{6.62}
-\newcommand*{\njut@fs@ssix}{6.52} % 小六号 6.5bp
-\newcommand*{\njut@fs@ssixskip}{7.83}
-\newcommand*{\njut@fs@six}{7.53} % 六号字 7.5bp
-\newcommand*{\njut@fs@sixskip}{9.03}
-\newcommand*{\njut@fs@sfive}{9.03} % 小五号 9bp
-\newcommand*{\njut@fs@sfiveskip}{10.84}
-\newcommand*{\njut@fs@five}{10.54} % 五号 10bp
-\newcommand*{\njut@fs@fiveskip}{12.65}
-\newcommand*{\njut@fs@sfour}{12.05} % 小四号 12bp
-\newcommand*{\njut@fs@sfourskip}{14.45}
-\newcommand*{\njut@fs@four}{14.05} % 四号字 14bp
-\newcommand*{\njut@fs@fourskip}{16.86}
-\newcommand*{\njut@fs@sthree}{15.06} % 小三号 15bp
-\newcommand*{\njut@fs@sthreeskip}{18.07}
-\newcommand*{\njut@fs@three}{16.06} % 三号字 16bp
-\newcommand*{\njut@fs@threeskip}{19.27}
-\newcommand*{\njut@fs@stwo}{18.07} % 小二号 18bp
-\newcommand*{\njut@fs@stwoskip}{21.68}
-\newcommand*{\njut@fs@two}{22.08} % 二号字 22bp
-\newcommand*{\njut@fs@twoskip}{26.50}
-\newcommand*{\njut@fs@sone}{24.09} % 小一号 24bp
-\newcommand*{\njut@fs@soneskip}{28.91}
-\newcommand*{\njut@fs@one}{26.10} % 一号字 26bp
-\newcommand*{\njut@fs@oneskip}{31.32}
-\newcommand*{\njut@fs@szero}{36.14} % 小初号 36bp
-\newcommand*{\njut@fs@szeroskip}{43.36}
-\newcommand*{\njut@fs@zero}{42.16} % 初号字 42bp
-\newcommand*{\njut@fs@zeroskip}{50.59}
+\newcommand*{\njut@fs@eight}{5} % 八号字 5bp
+\newcommand*{\njut@fs@eightskip}{6}
+\newcommand*{\njut@fs@seven}{5.5} % 七号字 5.5bp
+\newcommand*{\njut@fs@sevenskip}{6.6}
+\newcommand*{\njut@fs@ssix}{6.5} % 小六号 6.5bp
+\newcommand*{\njut@fs@ssixskip}{7.8}
+\newcommand*{\njut@fs@six}{7.5} % 六号字 7.5bp
+\newcommand*{\njut@fs@sixskip}{9}
+\newcommand*{\njut@fs@sfive}{9} % 小五号 9bp
+\newcommand*{\njut@fs@sfiveskip}{10.8}
+\newcommand*{\njut@fs@five}{10.5} % 五号 10.5bp
+\newcommand*{\njut@fs@fiveskip}{12.6}
+\newcommand*{\njut@fs@sfour}{12} % 小四号 12bp
+\newcommand*{\njut@fs@sfourskip}{14.4}
+\newcommand*{\njut@fs@four}{14} % 四号字 14bp
+\newcommand*{\njut@fs@fourskip}{16.8}
+\newcommand*{\njut@fs@sthree}{15} % 小三号 15bp
+\newcommand*{\njut@fs@sthreeskip}{18}
+\newcommand*{\njut@fs@three}{16} % 三号字 16bp
+\newcommand*{\njut@fs@threeskip}{19.2}
+\newcommand*{\njut@fs@stwo}{18} % 小二号 18bp
+\newcommand*{\njut@fs@stwoskip}{21.6}
+\newcommand*{\njut@fs@two}{22} % 二号字 22bp
+\newcommand*{\njut@fs@twoskip}{26.4}
+\newcommand*{\njut@fs@sone}{24} % 小一号 24bp
+\newcommand*{\njut@fs@soneskip}{28.8}
+\newcommand*{\njut@fs@one}{26} % 一号字 26bp
+\newcommand*{\njut@fs@oneskip}{31.2}
+\newcommand*{\njut@fs@szero}{36} % 小初号 36bp
+\newcommand*{\njut@fs@szeroskip}{43.2}
+\newcommand*{\njut@fs@zero}{42} % 初号字 42bp
+\newcommand*{\njut@fs@zeroskip}{50.4}
 %    \end{macrocode}
 %
 % 声明不同字号下的数学字体大小。
@@ -2614,18 +2616,19 @@ December\fi
 %
 % \subsection{页幅设置}
 %
-% 正文统一用小四号字，间距为固定值20pt。\cs{linestrech}的值为$1$时为单倍行距， $1.2$时是
-% 一倍半行距， 而为$1.6$时是双倍行距。其实不同尺寸的字体行间距都不相同，而是成比例关系。这
-% 个20pt是对正文主要字体来说的。
-%
-% 在{\TeX}中基本的行间距是\cs{baselineskip}, 对于12pt的字体，这个值等于14.5pt,
+% Word中单倍行距的系数是1.3，而1.5倍行距即为两者乘积1.95,
+% 对于小四号字（12磅），等效于固定行距为23.4磅。
+% 而{\TeX}中基本的行间距是\cs{baselineskip}, 对于12pt的字体，这个值等于14.4pt,
+% 即单倍行距的系数是1.2。
+
 % 而真正的行间距是\cs{baselineskip}$\times$\cs{baselinestretch}，
-% \cs{baselinestretch}默认为$1$, 但我们可以重新设置它的值，如
-% |\renewcommand{\baselinestretch}{1.38}|就得到真正的行间距为14.5pt*1.38≈20pt。
-% 而这样定义之后，对不同尺寸的字体都会按同样的比例因子1.38放大行间距，使得全文排
+% \cs{baselinestretch}默认为$1$, 但我们可以重新设置它的值。
+% 为了正文的排版效果与 Word 小四号字体1.5倍行距的效果接近。
+% 换算得设置|\renewcommand{\baselinestretch}{1.625}|（$\frac{1.5\times 1.3}{1.2}$）。
+% 而这样定义之后，对不同尺寸的字体都会按同样的比例因子1.625放大行间距，使得全文排
 % 版能协调一致。
 %    \begin{macrocode}
-\renewcommand*{\baselinestretch}{1.38}
+\renewcommand*{\baselinestretch}{1.625}
 %    \end{macrocode}
 %
 % 修改|tabular|环境，设置表格中的行间距为正文行间距。
