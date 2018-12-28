@@ -1836,7 +1836,7 @@ in\\
 \newcommand*{\njut@cap@license@category}{论文级别}
 \newcommand*{\njut@cap@license@telphone}{作者电话}
 \newcommand*{\njut@cap@license@email}{作者Email}
-\newcommand*{\njut@cap@license@supervisorname}{第一导师姓名}
+\newcommand*{\njut@cap@license@supervisorname}{导师姓名}
 \newcommand*{\njut@cap@license@supervisortelphone}{导师电话}
 \newcommand*{\njut@cap@license@categoryhint}{（请在方框内画勾）}
 \newcommand*{\njut@cap@license@categorymaster}{硕士}
@@ -2547,7 +2547,7 @@ December\fi
             {\chaptertitlename}{1em}{}
 \titlespacing{\chapter}
              {0pt}
-             {*0}
+             {*-3}
              {*5}
 \titleformat{\section}[hang]
             {\zihao{-2}\bfseries}
@@ -2891,6 +2891,7 @@ December\fi
 % 修改\cs{tableofcontents}命令用于生成目次页，并将目次页本身也被加入目次中。
 %    \begin{macrocode}
 \renewcommand*{\tableofcontents}{%
+   {\setstretch{1.3}
     \if@twocolumn
       \@restonecoltrue\onecolumn
     \else
@@ -2901,7 +2902,7 @@ December\fi
             {\kaishu\MakeUppercase\contentsname}%
     \@starttoc{toc}%
     \if@restonecol\twocolumn\fi
-}
+}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2909,6 +2910,7 @@ December\fi
 % 修改\cs{listoftables}命令，使得附表清单被加入目次中。
 %    \begin{macrocode}
 \renewcommand*{\listoftables}{%
+   {\setstretch{1.3}
     \if@twocolumn
       \@restonecoltrue\onecolumn
     \else
@@ -2919,7 +2921,7 @@ December\fi
             {\kaishu\MakeUppercase\listtablename}%
     \@starttoc{lot}%
     \if@restonecol\twocolumn\fi
-}
+}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2927,6 +2929,7 @@ December\fi
 % 修改\cs{listoffigures}命令，使得插图清单被加入目次中。
 %    \begin{macrocode}
 \renewcommand*{\listoffigures}{%
+   {\setstretch{1.3}
     \if@twocolumn
       \@restonecoltrue\onecolumn
     \else
@@ -2937,7 +2940,7 @@ December\fi
             {\kaishu\MakeUppercase\listfigurename}%
     \@starttoc{lof}%
     \if@restonecol\twocolumn\fi
-}
+}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2946,8 +2949,9 @@ December\fi
 % \begin{environment}{thebibliography}
 % 修改|thebibliography|环境用于在目次中加入参考文献页。
 %    \begin{macrocode}
-\renewenvironment{thebibliography}[1]
-     {\nchapter{\bibname}%
+\renewenvironment{thebibliography}[1]{%
+      \setstretch{1.3}
+      \nchapter{\bibname}%
       \@mkboth{\kaishu\bibname}{\kaishu\bibname}%
       \list{\@biblabel{\@arabic\c@enumiv}}%
            {\settowidth\labelwidth{\@biblabel{#1}}%
@@ -2986,17 +2990,6 @@ December\fi
   \if*#2*\else#2\NAT@spacechar\fi%
   \unskip\kern\p@\textsuperscript{\NAT@@open#1\NAT@@close#3}%
 \else #1\fi\endgroup%
-}
-%    \end{macrocode}
-%
-% 重新定义\cs{ref}命令，使其前面自动加一个``\textasciitilde''。因为|hyperref|宏包会通
-% 过\cs{AtBeginDocument}修改\cs{ref}的定义，因此我们对\cs{ref}的修改也必须使用
-% \cs{AtBeginDocument}命令进行。同时我们需要修改\cs{eqref}，使其括号前后不出现空隙。
-%    \begin{macrocode}
-\AtBeginDocument{%
-\let\oldref\ref%
-\renewcommand*{\ref}[1]{\thinspace\oldref{#1}}%
-\renewcommand*{\eqref}[1]{(\oldref{#1})}
 }
 %    \end{macrocode}
 %
@@ -3129,6 +3122,7 @@ December\fi
 % 无页眉页脚的空白页。
 %    \begin{macrocode}
 \newcommand*{\makenlctitle}{%
+ {\setstretch{1.3}
   \thispagestyle{empty}
   \pdfbookmark[0]{\njut@cap@nlc}{nlc}
   {\songti\zihao{-4}
@@ -3182,7 +3176,7 @@ December\fi
     \noindent\hfill\njutunderline[9em]{\njut@value@nlc@reviewerd}\par
   }
   \cleardoublepage
-}
+}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3221,12 +3215,12 @@ December\fi
   \end{tabular}
 }
 \renewcommand*{\maketitle}{%
+ {\setstretch{1.3}
   \thispagestyle{empty}
   \pdfbookmark[0]{\njut@cap@cover}{cover}
   \begin{center}
-    \vskip 10mm
-    \includegraphics[width=1.96cm]{\njut@cap@institute@logo} \\
-    \includegraphics[height=2cm]{\njut@cap@institute@name} \\
+    \vspace*{15mm}
+    \includegraphics[width=6cm]{\njut@cap@institute@name} \\
     \vskip 8mm
     {\bf\kaishu\zihao{1}\makebox[10em][s]{\njut@cap@cover@thesis}}\\
     \vskip 5mm
@@ -3240,6 +3234,7 @@ December\fi
     \egroup}\\
     \vskip \stretch{1}
     {\bf\kaishu\zihao{4}\njut@value@date}
+    \vspace*{10mm}
   \end{center}
   \ifnjut@backinfo
     \clearpage
@@ -3252,11 +3247,12 @@ December\fi
     \makebox[6em][s]{\njut@cap@coverback@defenddate}： &\njut@value@defenddate\\
     \makebox[6em][s]{\njut@cap@coverback@supervisor}： &\njut@cap@coverback@sign\\
     \end{tabular}}
+    \vspace*{10mm}
     \clearpage
   \else
     \cleardoublepage
   \fi
-}
+}}
 %    \end{macrocode}
 %  \end{macro}
 %
@@ -3265,9 +3261,10 @@ December\fi
 % 页脚的空白页。
 %    \begin{macrocode}
 \newcommand*{\makeenglishtitle}{%
+ {\setstretch{1.2}
   \thispagestyle{empty}
   \begin{center}
-    \vspace*{20pt}
+    \vspace*{10mm}
     \bf\sffamily\zihao{2}\njut@value@en@title
     \vskip \stretch{1}
     \normalfont\rmfamily\zihao{4}\njut@cap@cover@en@by
@@ -3286,10 +3283,11 @@ December\fi
     \njut@value@en@institute
     \vskip 30pt
     \normalfont\normalsize\njut@value@en@date
+    \vspace*{10mm}
   \end{center}
   \normalfont
   \cleardoublepage
-}
+}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3318,8 +3316,9 @@ December\fi
 % \cs{cleardoublepage}命令来插入无页眉页脚的空白页。
 %    \begin{macrocode}
 \newenvironment{abstract}{%
+ {\setstretch{1.3}
   \chapter[\njut@cap@abstract]{}
-  \vspace{-16.8ex}
+  \vspace{-12ex}
   \begin{center}
     {\bf\kaishu\zihao{-2}%
      \uuline{\njut@cap@abstract@chaptername}}
@@ -3337,7 +3336,7 @@ December\fi
   \njutunderline[61pt]{\njut@value@author}\\
   \noindent\njut@cap@abstract@supervisor{：}%
   \njutunderline[248pt]{\njut@value@supervisor}\\
-  }
+  }}
   \vspace{5mm}
   \begin{center}
     {\heiti\zihao{-3}\njut@cap@abstract@abstractname}
@@ -3384,8 +3383,9 @@ December\fi
 % \cs{cleardoublepage}命令来插入无页眉页脚的空白页。
 %    \begin{macrocode}
 \newenvironment{englishabstract}{%
+ {\setstretch{1.3}
   \chapter[\njut@cap@abstract@en]{}
-  \vspace{-16.8ex}
+  \vspace{-12ex}
   \begin{center}
     {\bf\kaishu\zihao{-2}%
      \uuline{\njut@cap@abstract@en@chaptername}}
@@ -3401,7 +3401,7 @@ December\fi
    \njutunderline[299pt]{\njut@value@en@author}\\
    \njut@cap@abstract@en@supervisor{:}~%
    \njutunderline[348pt]{\njut@value@en@supervisor}\\
-  }
+  }}
   \vspace{5mm}
   \begin{center}
     {\bf\zihao{-3}\njut@cap@abstract@en@abstractname}
@@ -3573,15 +3573,11 @@ December\fi
   & \multicolumn{3}{c|}{%
     \raisebox{-1em}{\njut@cap@license@categoryhint}}\\
   \hline
-  \cell{2.2cm}{1cm}{\njut@cap@license@telphone}
-  & \multicolumn{2}{c|}{{\njut@value@telphone}}
-  & {\njut@cap@license@email}
-  & \multicolumn{3}{c|}{{\njut@value@email}}  \\
+  \cell{2.2cm}{1cm}{\njut@cap@license@email}
+  & \multicolumn{6}{c|}{{\njut@value@email}}  \\
   \hline
   \cell{2.2cm}{1cm}{\njut@cap@license@supervisorname}
-  & \multicolumn{2}{c|}{{\njut@value@supervisor}}
-  & {\njut@cap@license@supervisortelphone}
-  & \multicolumn{3}{c|}{{\njut@value@supervisortelphone}} \\
+  & \multicolumn{6}{c|}{{\njut@value@supervisor}} \\
   \hline
 \end{tabular*}
 }
