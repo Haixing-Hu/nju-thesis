@@ -345,8 +345,8 @@
 %     |njuthesis.ins|             & 模板驱动文件 \\
 %     |njuthesis.dtx|             & 模板文档代码的混合文件\\
 %     |gbt7714-2005.bst|          & 符合国标\std{GB/T 7714-2005}的参考文献样式文件\\
-%     |njulogo.eps|               & 南京大学校徽图片\\
-%     |njuname.eps|               & 南京大学校名图片\\
+%     |njulogo.pdf|               & 南京大学校徽图片\\
+%     |njuname.pdf|               & 南京大学校名图片\\
 %     \hline
 %     |sample.tex|                & 示例文档，亦可作为学位论文的基本模板 \\
 %     |sample.bib|                & 示例文档的参考文献数据库 \\
@@ -402,7 +402,7 @@
 % \begin{itemize}
 % \item 模板源文件：|njuthesis.ins|和|njuthesis.dtx|
 % \item 参考文献样式：|gbt7714-2005.bst|
-% \item 南京大学校徽和校名图片：|njulogo.eps|和|njuname.eps|
+% \item 南京大学校徽和校名图片：|njulogo.pdf|和|njuname.pdf|
 % \item 示例文档：|sample.tex|和|sample.bib|
 % \end{itemize}
 %
@@ -1291,7 +1291,7 @@
 % 调入|ctex|前先用|no-math|选项调入|fontspec|宏包，以使数学字体宏包起作用。
 %    \begin{macrocode}
 \RequirePackage[no-math]{fontspec}
-\RequirePackage[fontset=fandol]{ctex}
+\RequirePackage[fontset=fandol,zihao=-4]{ctex}
 \RequirePackage{CJKnumb}
 %    \end{macrocode}
 %
@@ -1734,8 +1734,8 @@ in\\
 %
 % 定义学位颁发机构的校徽和校名图片文件名：
 %    \begin{macrocode}
-\newcommand*{\njut@cap@institute@logo}{njulogo.eps}
-\newcommand*{\njut@cap@institute@name}{njuname.eps}
+\newcommand*{\njut@cap@institute@logo}{njulogo.pdf}
+\newcommand*{\njut@cap@institute@name}{njuname.pdf}
 %    \end{macrocode}
 %
 % \subsection{字段默认值定义}

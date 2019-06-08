@@ -1,7 +1,8 @@
 dtx-style.sty
 njuthesis.cfg
 njuthesis.cls
-*.pdf
+njuthesis.pdf
+sample.pdf
 *.hd
 *.cmds
 *.acn

@@ -17,8 +17,8 @@ CLS=$(PACKAGE).cls $(PACKAGE).cfg dtx-style.sty
 SAMPLE=sample
 SAMPLECONTENTS=$(SAMPLE).tex
 SAMPLEBIB=$(SAMPLE).bib
-INSTITUTE_LOGO=njulogo.eps
-INSTITUTE_NAME=njuname.eps
+INSTITUTE_LOGO=njulogo.pdf
+INSTITUTE_NAME=njuname.pdf
 
 .PHONY: all clean cls doc sample
 
