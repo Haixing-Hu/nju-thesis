@@ -1,5 +1,12 @@
 # NJU-Thesis
 
+## Overleaf 模板
+
+[Overleaf](https://www.overleaf.com) 可以提供免费的在线 LaTeX 文档编辑编译服务，本项目已在 Overleaf 上传[模板](https://www.overleaf.com/latex/templates/nan-jing-da-xue-yan-jiu-sheng-bi-ye-lun-wen-mo-ban/mddmfkgsnhxq
+)。经测试，编译毕业论文体量的文档速度还不错，支持双向跳转，支持版本历史管理，唯一的问题是 PDF 文件的预览速度略慢。Overleaf 关于 LaTeX 以及平台本身也提供非常详细的[文档](https://www.overleaf.com/learn)。有兴趣的同学可以尝试。
+
+注意：菜单里请设置编译器为 XeLaTeX，并对主文档做必要设置。
+
 ## 定制说明
 
 这是在 [Haixing Hu](http://haixing-hu.github.io/nju-thesis/) 原项目基础上的个人定制模板，需要原版的可查看项目的 origin 分支。除了对原项目的一些 bug 做了修复，也根据个人审美和一些统一性要求对模板作出改动，包括：
