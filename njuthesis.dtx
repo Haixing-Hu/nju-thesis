@@ -26,7 +26,7 @@
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
 %<*cls>
- [2019/06/08 v2.0.3 Document Class for the Degree Papers of Nanjing University]
+ [2019/06/26 v2.0.4 Document Class for the Degree Papers of Nanjing University]
 %</cls>
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
@@ -114,13 +114,13 @@
 % \MakeShortVerb{\|}
 % \newcommand*{\njuthesis}{\texttt{NJU-Thesis}}
 % \newcommand*{\texlive}{{\TeX}\ Live\ 2019}
-% \renewcommand*{\fileversion}{2.0.3}
-% \renewcommand*{\filedate}{2019年6月8日}
+% \renewcommand*{\fileversion}{2.0.4}
+% \renewcommand*{\filedate}{2019年6月26日}
 %
 % \pagestyle{empty}
 % \title{\njuthesis：南京大学学位论文\\
 %        {\XeLaTeX}模板}
-% \author{{胡海星}\thanks{由曹增乐修改}\\
+% \author{{胡海星}\thanks{由曹增乐修改 caozengle@outlook.com}\\
 %         {\texttt{starfish.hu@gmail.com}}\\
 %         {南京大学计算机科学与技术系}}
 % \date{\fileversion\ (\filedate)}
@@ -227,16 +227,19 @@
 %  v2.0.0 & 2018/12/05 & 曹增乐 &  修复了论文短标题无法正常显示的错误；
 %                                  修正了公式内数字不是 Times 字体的错误；
 %                                 使用长论文标题时，也可以正确生成 pdf 文件标题信息；
-%                       修改 Makefile 文件，解决了 win 平台 texlive 2018 无法正确执行安装的问题。\\
-%  v2.0.1 & 2018/12/26 & 曹增乐 &  新增了 fandolfonts 开源字体，使得粗体不必用黑体代替；
+%                                 修改 |Makefile| 文件，解决了 win 平台
+%                                 texlive 2018 无法正确执行安装的问题。\\
+%  v2.0.1 & 2018/12/26 & 曹增乐 &  新增了 |fandolfonts| 开源字体，使得粗体不必用黑体代替；
 %                                  修正了一些封面字段；对版面格式做了一些修改；修改页眉中文字体为楷书；
 %                                  添加中英文摘要纸到目录；中英文摘要纸字样双下划线；
 %                                  中英文摘要纸自动去掉多余的空行；修改了生成pdf文件的主题字段。 \\
 %  v2.0.2 & 2018/12/28 & 曹增乐 &  重新计算了等效的行距缩放系数，与 Word 单倍行距保持一致；
 %                                 授权书表格信息修改；中文封面图标使用官方一体化 logo;
 %                                 修改了各字号的字体大小；修改标点符号处理方式为全角。 \\
-%  v2.0.3 & 2019/06/08 & 曹增乐 & 用 ctex 宏包代替 xeCJK 宏包作为中文的底层支持，
-%                                默认使用 Fandol 字体，以实现完全不用移植字体跨平台使用。 \\
+%  v2.0.3 & 2019/06/08 & 曹增乐 & 用 |ctex| 宏包代替 |xeCJK| 宏包作为中文的底层支持，
+%                                 默认使用 Fandol 字体，以实现完全不用移植字体跨平台使用。 \\
+%  v2.0.4 & 2019/06/26 & 曹增乐 & 废弃了 |hypernat| 宏包，因为它被 MikTeX 2.9 废弃，
+%                                 它的功能已经被 |natbib| 宏包取代。 \\
 % \bottomrule
 % \end{longtable}
 % \end{center}
@@ -365,7 +368,9 @@
 %
 % \subsection{准备工作}
 %
-% 表\ref{table:dependence}列出了{\njuthesis}模板用到的宏包。这些包在常见的{\TeX}系
+% 表\ref{table:dependence}列出了{\njuthesis}模板用到的宏包。
+% 其中 |hypernat| 在 2.0.4 版本中被删除，这并不影响任何功能，
+% 它的功能和 |natbib| 包重合。这些包在常见的{\TeX}系
 % 统中都有（推荐使用{\texlive}），如果没有请到\url{www.ctan.org}下载。
 %
 % \begin{table}
@@ -375,8 +380,8 @@
 %     |ifxetex|  & |indentfirst| & |xeCJK|    & |lastpage| & |geometry|  & |graphicx| \\
 %     |subfig|   & |caption|     & |float|    & |array|    & |longtable| & |booktabs| \\
 %     |multirow| & |hyperref|    & |enumitem| & |xcolor|   & |amsmath|   & |amsfonts| \\
-%     |amsthm|   & |amssymb|    & |bm|        & |mathrsfs| & |txfonts|  & |pifont|  \\
-%     |setspace| & |wasysym|    & |hypernat| & |fancyhdr| & |natbib|    & |tabularx| \\
+%     |amsthm|   & |amssymb|     & |bm|       & |mathrsfs| & |txfonts|  & |pifont|  \\
+%     |setspace| & |wasysym| & \sout{|hypernat|} & |fancyhdr| & |natbib|    & |tabularx| \\
 %     |titlesec| & |glossaries|  & |ifthen|   & |makeidx| & |footmisc| &  |CJKnumb| \\
 %     |url|      & |etoolbox| &  &  &  & \\
 %   \hline
@@ -1467,11 +1472,6 @@
 % 美化参考文献排序和引用格式的宏包|natbib|。
 %    \begin{macrocode}
 \RequirePackage[sort&compress,numbers]{natbib}
-%    \end{macrocode}
-%
-% |hypernat|可以让|hyperref|和|natbib|混合使用，但它需要放在这两者之后。
-%    \begin{macrocode}
-\RequirePackage{hypernat}
 %    \end{macrocode}
 %
 % |tabularx|宏包支持自动扩展的列宽，但它需要在|hyperref|之后引入才不会导致正文
@@ -2800,7 +2800,7 @@ December\fi
   }}
   \vspace{5mm}
   \begin{center}
-    {\heiti\zihao{-3}\njut@cap@abstract@abstractname}
+    {\bf\zihao{-3}\njut@cap@abstract@abstractname}
   \end{center}%
   \normalsize\par%
 }{%

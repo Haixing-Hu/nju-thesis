@@ -51,14 +51,13 @@ $(PACKAGE).pdf: $(CLS)
 sample:	 $(SAMPLE).pdf
 
 $(SAMPLE).pdf: $(CLS) $(INSTITUTE_LOGO) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE).tex $(SAMPLEBIB)
-	xelatex $(SAMPLE).tex
-	bibtex $(SAMPLE)
-	xelatex $(SAMPLE).tex
-	xelatex $(SAMPLE).tex
+	latexmk -xelatex -synctex=1 $(SAMPLE).tex
 
 ###### clean
 
 clean:
+	latexmk -c $(SAMPLE).tex
+	latexmk -c $(PACKAGE).dtx
 	-@rm -f \
 		*.aux \
 		*.bak \
@@ -74,12 +73,20 @@ clean:
 		*.log \
 		*.out \
 		*.ps \
+		*.synctex \
+		*.synctex.gz \
 		*.thm \
 		*.toc \
 		*.lof \
 		*.lot \
 		*.loe \
-		*.sty \
+		*.hd \
+		*.xdv
+
+cleanall: clean
+	-@rm -f \
+		$(SAMPLE).pdf \
+		$(PACKAGE).pdf \
 		*.cfg \
 		*.cls \
 		*.sty
