@@ -26,7 +26,7 @@
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
 %<*cls>
- [2019/06/26 v2.0.4 Document Class for the Degree Papers of Nanjing University]
+ [2019/08/29 v2.0.5 Document Class for the Degree Papers of Nanjing University]
 %</cls>
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
@@ -114,8 +114,8 @@
 % \MakeShortVerb{\|}
 % \newcommand*{\njuthesis}{\texttt{NJU-Thesis}}
 % \newcommand*{\texlive}{{\TeX}\ Live\ 2019}
-% \renewcommand*{\fileversion}{2.0.4}
-% \renewcommand*{\filedate}{2019年6月26日}
+% \renewcommand*{\fileversion}{2.0.5}
+% \renewcommand*{\filedate}{2019年8月29日}
 %
 % \pagestyle{empty}
 % \title{\njuthesis：南京大学学位论文\\
@@ -131,7 +131,7 @@
 %
 % \noindent\hspace{2em}文档类{\njuthesis}提供了一个南京大学学位论文的{\XeLaTeX}
 % 模板。该文档类严格按照南京大学对学位论文的格式要求排版学位论文，底层通过
-% |xeCJK|宏包支持中文。
+% |ctex|宏包支持中文。
 %
 % 目前{\njuthesis}可用于排版学士学位、硕士学位论文和博士学位论文。对于学士学位论文，
 % 采用和硕士学位论文一样的格式进行排版。
@@ -240,6 +240,7 @@
 %                                 默认使用 Fandol 字体，以实现完全不用移植字体跨平台使用。 \\
 %  v2.0.4 & 2019/06/26 & 曹增乐 & 废弃了 |hypernat| 宏包，因为它被 MikTeX 2.9 废弃，
 %                                 它的功能已经被 |natbib| 宏包取代。 \\
+%  v2.0.5 & 2019/08/29 & 曹增乐 & 启用伪粗体，使加粗的楷体正常显示。 \\
 % \bottomrule
 % \end{longtable}
 % \end{center}
@@ -253,7 +254,7 @@
 %
 % 文档类{\njuthesis}是为了帮助南京大学的同学撰写学位论文而编写的{\XeLaTeX}模板。
 % 该模板提供了一个南京大学学位论文的{\XeLaTeX}文档类，用于生成符合南京大学学位
-% 论文格式要求进行的学位论文。该宏包的底层通过|xeCJK|宏包支持中文。目前该宏包可
+% 论文格式要求进行的学位论文。该宏包的底层通过|ctex|宏包支持中文。目前该宏包可
 % 用于排版硕士学位论文和博士学位论文；对于学士学位论文，由于作者未能找到南京大学
 % 对学士学位论文的格式要求，因此目前采用和硕士学位论文一样的格式进行排版。
 %
@@ -377,7 +378,7 @@
 %   \centering\noindent
 %   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}*{6}{l}}
 %   \hline
-%     |ifxetex|  & |indentfirst| & |xeCJK|    & |lastpage| & |geometry|  & |graphicx| \\
+%     |ifxetex|  & |indentfirst| & |ctex|    & |lastpage| & |geometry|  & |graphicx| \\
 %     |subfig|   & |caption|     & |float|    & |array|    & |longtable| & |booktabs| \\
 %     |multirow| & |hyperref|    & |enumitem| & |xcolor|   & |amsmath|   & |amsfonts| \\
 %     |amsthm|   & |amssymb|     & |bm|       & |mathrsfs| & |txfonts|  & |pifont|  \\
@@ -1296,6 +1297,7 @@
 % 调入|ctex|前先用|no-math|选项调入|fontspec|宏包，以使数学字体宏包起作用。
 %    \begin{macrocode}
 \RequirePackage[no-math]{fontspec}
+\RequirePackage[AutoFakeBold=true]{xeCJK}
 \RequirePackage[fontset=fandol,zihao=-4]{ctex}
 \RequirePackage{CJKnumb}
 %    \end{macrocode}
@@ -2647,31 +2649,31 @@ December\fi
 %    \begin{macrocode}
 \newcommand*{\njut@covertable@onelinetitle}{
   \begin{tabular}{p{7.3em}c}
-      \makebox[7em][s]{\njut@cap@cover@title}
+      \makebox[7em][s]{\bfseries\njut@cap@cover@title}
       & \njutunderline[310pt]{\njut@value@title}\\
-      \makebox[7em][s]{\njut@cap@cover@author}
+      \makebox[7em][s]{\bfseries\njut@cap@cover@author}
       & \njutunderline[310pt]{\njut@value@author}\\
-      \makebox[7em][s]{\njut@cap@cover@major}
+      \makebox[7em][s]{\bfseries\njut@cap@cover@major}
       & \njutunderline[310pt]{\njut@value@major}\\
-      \makebox[7em][s]{\njut@cap@cover@researchfield}
+      \makebox[7em][s]{\bfseries\njut@cap@cover@researchfield}
       & \njutunderline[310pt]{\njut@value@researchfield}\\
-      \makebox[7em][s]{\njut@cap@cover@supervisor}
+      \makebox[7em][s]{\bfseries\njut@cap@cover@supervisor}
       & \njutunderline[310pt]{\njut@value@supervisor}\\
   \end{tabular}
 }
 \newcommand*{\njut@covertable@twolinetitle}{
   \begin{tabular}{p{7.3em}c}
-      \makebox[7em][s]{\njut@cap@cover@title}
+      \makebox[7em][s]{\bfseries\njut@cap@cover@title}
       & \njutunderline[310pt]{\njut@value@titlea}\\
       \makebox[7em][s]{}
       & \njutunderline[310pt]{\njut@value@titleb}\\
-      \makebox[7em][s]{\njut@cap@cover@author}
+      \makebox[7em][s]{\bfseries\njut@cap@cover@author}
       & \njutunderline[310pt]{\njut@value@author}\\
-      \makebox[7em][s]{\njut@cap@cover@major}
+      \makebox[7em][s]{\bfseries\njut@cap@cover@major}
       & \njutunderline[310pt]{\njut@value@major}\\
-      \makebox[7em][s]{\njut@cap@cover@researchfield}
+      \makebox[7em][s]{\bfseries\njut@cap@cover@researchfield}
       & \njutunderline[310pt]{\njut@value@researchfield}\\
-      \makebox[7em][s]{\njut@cap@cover@supervisor}
+      \makebox[7em][s]{\bfseries\njut@cap@cover@supervisor}
       & \njutunderline[310pt]{\njut@value@supervisor}\\
   \end{tabular}
 }
@@ -2688,10 +2690,11 @@ December\fi
     {\bf\kaishu\zihao{1}（\makebox[7em][s]{\njut@cap@cover@apply}）}\\
     \vskip\stretch{1}
     {\bgroup
-    \bf\kaishu\zihao{3}
+    \kaishu\zihao{3}
     \def\tabcolsep{1pt}
     \def\arraystretch{1.5}
-    \ifdefempty{\njut@value@title}{\njut@covertable@twolinetitle}{\njut@covertable@onelinetitle}
+    \ifdefempty{\njut@value@title}{\njut@covertable@twolinetitle}%
+                                  {\njut@covertable@onelinetitle}
     \egroup}\\
     \vskip \stretch{1}
     {\bf\kaishu\zihao{4}\njut@value@date}
@@ -2701,12 +2704,15 @@ December\fi
     \clearpage
     \thispagestyle{empty}
     \vspace*{\stretch{1}}
-    {\bf\kaishu\zihao{-3}
+    {\kaishu\zihao{-3}
     \noindent
     \begin{tabular}{p{6.2em}l}
-    \makebox[6em][s]{\njut@cap@coverback@studentnum}： &\njut@value@studentnum\\
-    \makebox[6em][s]{\njut@cap@coverback@defenddate}： &\njut@value@defenddate\\
-    \makebox[6em][s]{\njut@cap@coverback@supervisor}： &\njut@cap@coverback@sign\\
+    \makebox[6em][s]{\bfseries\njut@cap@coverback@studentnum}：
+    & \njut@value@studentnum\\
+    \makebox[6em][s]{\bfseries\njut@cap@coverback@defenddate}：
+    & \njut@value@defenddate\\
+    \makebox[6em][s]{\bfseries\njut@cap@coverback@supervisor}：
+    & \bfseries\njut@cap@coverback@sign\\
     \end{tabular}}
     \vspace*{10mm}
     \clearpage
