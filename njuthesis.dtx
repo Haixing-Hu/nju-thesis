@@ -26,7 +26,7 @@
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
 %<*cls>
- [2019/08/29 v2.0.5 Document Class for the Degree Papers of Nanjing University]
+ [2019/09/01 v2.0.6 Document Class for the Degree Papers of Nanjing University]
 %</cls>
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
@@ -114,8 +114,8 @@
 % \MakeShortVerb{\|}
 % \newcommand*{\njuthesis}{\texttt{NJU-Thesis}}
 % \newcommand*{\texlive}{{\TeX}\ Live\ 2019}
-% \renewcommand*{\fileversion}{2.0.5}
-% \renewcommand*{\filedate}{2019年8月29日}
+% \renewcommand*{\fileversion}{2.0.6}
+% \renewcommand*{\filedate}{2019年9月1日}
 %
 % \pagestyle{empty}
 % \title{\njuthesis：南京大学学位论文\\
@@ -241,6 +241,7 @@
 %  v2.0.4 & 2019/06/26 & 曹增乐 & 废弃了 |hypernat| 宏包，因为它被 MikTeX 2.9 废弃，
 %                                 它的功能已经被 |natbib| 宏包取代。 \\
 %  v2.0.5 & 2019/08/29 & 曹增乐 & 启用伪粗体，使加粗的楷体正常显示。 \\
+%  v2.0.6 & 2019/09/01 & 曹增乐 & 用|gbt7714|宏包替换了|gbt7714-2005.bst|文件。 \\
 % \bottomrule
 % \end{longtable}
 % \end{center}
@@ -348,7 +349,6 @@
 %     \midrule
 %     |njuthesis.ins|             & 模板驱动文件 \\
 %     |njuthesis.dtx|             & 模板文档代码的混合文件\\
-%     |gbt7714-2005.bst|          & 符合国标\std{GB/T 7714-2005}的参考文献样式文件\\
 %     |njulogo.pdf|               & 南京大学校徽图片\\
 %     |njuname.pdf|               & 南京大学校名图片\\
 %     \hline
@@ -382,9 +382,9 @@
 %     |subfig|   & |caption|     & |float|    & |array|    & |longtable| & |booktabs| \\
 %     |multirow| & |hyperref|    & |enumitem| & |xcolor|   & |amsmath|   & |amsfonts| \\
 %     |amsthm|   & |amssymb|     & |bm|       & |mathrsfs| & |txfonts|  & |pifont|  \\
-%     |setspace| & |wasysym| & \sout{|hypernat|} & |fancyhdr| & |natbib|    & |tabularx| \\
+%     |setspace| & |wasysym|  & \sout{|hypernat|} & |fancyhdr| & \sout{|natbib|}    & |tabularx| \\
 %     |titlesec| & |glossaries|  & |ifthen|   & |makeidx| & |footmisc| &  |CJKnumb| \\
-%     |url|      & |etoolbox| &  &  &  & \\
+%     |url|      & |etoolbox|    & |gbt7714| &  &  & \\
 %   \hline
 %   \end{tabular*}
 %   \caption{{\njuthesis}用到的宏包}\label{table:dependence}
@@ -407,7 +407,6 @@
 % 项目文件夹中包括：
 % \begin{itemize}
 % \item 模板源文件：|njuthesis.ins|和|njuthesis.dtx|
-% \item 参考文献样式：|gbt7714-2005.bst|
 % \item 南京大学校徽和校名图片：|njulogo.pdf|和|njuname.pdf|
 % \item 示例文档：|sample.tex|和|sample.bib|
 % \end{itemize}
@@ -435,8 +434,8 @@
 %
 % \subsection{\njuthesis{} 示例文件}
 %
-% 模板核心文件只有三个：|njuthesis.cls|，|njuthesis.cfg|和 |gbt7714-2005.bst|，但
-% 是如果没有示例文档用户会发现很难下手。所以推荐新用户从模板自带的示例文档入手，
+% 模板核心文件只有两个：|njuthesis.cls| 和 |njuthesis.cfg|，
+% 但是如果没有示例文档用户会发现很难下手。所以推荐新用户从模板自带的示例文档入手，
 % 里面包括了文档写作用到的所有命令及其使用方法，只需要用自己的内容进行相应替换就
 % 可以。对于不清楚的命令可以查阅本手册。具体内容可以参考模板附带的|sample.tex|和
 % |sample.bib|。
@@ -1471,15 +1470,15 @@
 \urlstyle{same}
 %    \end{macrocode}
 %
-% 美化参考文献排序和引用格式的宏包|natbib|。
-%    \begin{macrocode}
-\RequirePackage[sort&compress,numbers]{natbib}
-%    \end{macrocode}
-%
 % |tabularx|宏包支持自动扩展的列宽，但它需要在|hyperref|之后引入才不会导致正文
 % 的footnote的超链接失效。
 %    \begin{macrocode}
 \RequirePackage{tabularx}
+%    \end{macrocode}
+%
+% 使用|gbt7714|宏包产生符合 GB/T 7714-2015 国家标准的文献引用。
+%    \begin{macrocode}
+\RequirePackage{gbt7714}
 %    \end{macrocode}
 %
 % |makeidx|宏包支持建立索引。
@@ -2434,27 +2433,6 @@ December\fi
       \endlist}
 %    \end{macrocode}
 % \end{environment}
-%
-% 使用|gbt7714-2005.bst|作为参考文献样式。
-%    \begin{macrocode}
-\bibliographystyle{gbt7714-2005}
-%    \end{macrocode}
-%
-% 使用符合\std{GB/T 7714-2005}规范的参考文献引用样式。
-%    \begin{macrocode}
-\setcitestyle{super,square}
-%    \end{macrocode}
-%
-% 修改|natbib|内部的\cs{NAT@citesuper}命令，使其生成的上标引用编号可以正确地把
-% \cs{cite}命令的可选参数（通常是引文页码）也作为上标放在引文编号方框之后。
-%    \begin{macrocode}
-\renewcommand\NAT@citesuper[3]{%
-\ifNAT@swa%
-  \if*#2*\else#2\NAT@spacechar\fi%
-  \unskip\kern\p@\textsuperscript{\NAT@@open#1\NAT@@close#3}%
-\else #1\fi\endgroup%
-}
-%    \end{macrocode}
 %
 % \subsection{脚注}
 %

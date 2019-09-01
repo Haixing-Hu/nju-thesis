@@ -10,8 +10,6 @@
 ###############################################################################
 
 PACKAGE=njuthesis
-BST_FILE=gbt7714-2005.bst
-BST_URL=https://raw.githubusercontent.com/Haixing-Hu/GBT7714-2005-BibTeX-Style/master/gbt7714-2005.bst
 SOURCES=$(PACKAGE).dtx $(PACKAGE).ins
 CLS=$(PACKAGE).cls $(PACKAGE).cfg dtx-style.sty
 SAMPLE=sample
@@ -22,13 +20,7 @@ INSTITUTE_NAME=njuname.pdf
 
 .PHONY: all clean cls doc sample
 
-all: bst cls doc sample
-
-###### update bst file
-bst:  $(BST_FILE)
-
-$(BST_FILE):
-	curl $(BST_URL) -o $(BST_FILE)
+all: cls doc sample
 
 ###### generate cls/cfg
 cls:  $(CLS)
@@ -50,7 +42,7 @@ $(PACKAGE).pdf: $(CLS)
 
 sample:	 $(SAMPLE).pdf
 
-$(SAMPLE).pdf: $(CLS) $(INSTITUTE_LOGO) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE).tex $(SAMPLEBIB)
+$(SAMPLE).pdf: $(CLS) $(INSTITUTE_LOGO) $(INSTITUTE_NAME) $(SAMPLE).tex $(SAMPLEBIB)
 	latexmk -xelatex -synctex=1 $(SAMPLE).tex
 
 ###### clean
