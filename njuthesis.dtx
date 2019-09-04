@@ -26,7 +26,7 @@
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
 %<*cls>
- [2019/09/01 v2.0.6 Document Class for the Degree Papers of Nanjing University]
+ [2019/09/05 v2.0.7 Document Class for the Degree Papers of Nanjing University]
 %</cls>
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
@@ -114,8 +114,8 @@
 % \MakeShortVerb{\|}
 % \newcommand*{\njuthesis}{\texttt{NJU-Thesis}}
 % \newcommand*{\texlive}{{\TeX}\ Live\ 2019}
-% \renewcommand*{\fileversion}{2.0.6}
-% \renewcommand*{\filedate}{2019年9月1日}
+% \renewcommand*{\fileversion}{2.0.7}
+% \renewcommand*{\filedate}{2019年9月5日}
 %
 % \pagestyle{empty}
 % \title{\njuthesis：南京大学学位论文\\
@@ -242,6 +242,7 @@
 %                                 它的功能已经被 |natbib| 宏包取代。 \\
 %  v2.0.5 & 2019/08/29 & 曹增乐 & 启用伪粗体，使加粗的楷体正常显示。 \\
 %  v2.0.6 & 2019/09/01 & 曹增乐 & 用|gbt7714|宏包替换了|gbt7714-2005.bst|文件。 \\
+%  v2.0.7 & 2019/09/05 & 曹增乐 & 修正封面与摘要页下划线对齐问题。 \\
 % \bottomrule
 % \end{longtable}
 % \end{center}
@@ -2567,13 +2568,13 @@ December\fi
   \thispagestyle{empty}
   \pdfbookmark[0]{\njut@cap@nlc}{nlc}
   {\songti\zihao{-4}
-    \makebox[40pt][l]{\njut@cap@nlc@classification}
+    \noindent\makebox[40pt][l]{\njut@cap@nlc@classification}
     \njutunderline[150pt]{\njut@value@nlc@classification}
     \hfill
     \makebox[40pt][r]{\njut@cap@nlc@securitylevel}
     \njutunderline[150pt]{\njut@value@nlc@securitylevel}
     \vskip 10pt
-    \makebox[40pt][l]{\njut@cap@nlc@udc}
+    \noindent\makebox[40pt][l]{\njut@cap@nlc@udc}
     \njutunderline[150pt]{\njut@value@nlc@udc}
   }
   \vskip\stretch{2}
@@ -2600,14 +2601,14 @@ December\fi
     \noindent\njutunderline[\textwidth]{%
       \njut@value@nlc@supervisorinfo}\par
     \noindent\njut@cap@nlc@degree%
-    \njutunderline[8em]{\njut@value@degree}%
+    \njutunderline[9em]{\njut@value@degree}%
     \noindent\njut@cap@nlc@major%
-    \njutunderline[164pt]{\njut@value@major}\par
+    \njutunderline[148pt]{\njut@value@major}\par
     \noindent\njut@cap@nlc@submitdate%
-    \njutunderline[8em]{\njut@value@submitdate}%
+    \njutunderline[9em]{\njut@value@submitdate}%
     \njut@cap@nlc@defenddate%
-    \njutunderline[134pt]{\njut@value@defenddate}\par
-    \noindent\njut@cap@nlc@institute\njutunderline[290pt]{}\par
+    \njutunderline[120pt]{\njut@value@defenddate}\par
+    \noindent\njut@cap@nlc@institute\njutunderline[289pt]{}\par
     \noindent\hfill\njut@cap@nlc@chairman%
     \njutunderline[9em]{\njut@value@nlc@chairman}\par
     \noindent\hfill\njut@cap@nlc@reviwer%
@@ -2628,31 +2629,31 @@ December\fi
 \newcommand*{\njut@covertable@onelinetitle}{
   \begin{tabular}{p{7.3em}c}
       \makebox[7em][s]{\bfseries\njut@cap@cover@title}
-      & \njutunderline[310pt]{\njut@value@title}\\
+      & \njutunderline[260pt]{\njut@value@title}\\
       \makebox[7em][s]{\bfseries\njut@cap@cover@author}
-      & \njutunderline[310pt]{\njut@value@author}\\
+      & \njutunderline[260pt]{\njut@value@author}\\
       \makebox[7em][s]{\bfseries\njut@cap@cover@major}
-      & \njutunderline[310pt]{\njut@value@major}\\
+      & \njutunderline[260pt]{\njut@value@major}\\
       \makebox[7em][s]{\bfseries\njut@cap@cover@researchfield}
-      & \njutunderline[310pt]{\njut@value@researchfield}\\
+      & \njutunderline[260pt]{\njut@value@researchfield}\\
       \makebox[7em][s]{\bfseries\njut@cap@cover@supervisor}
-      & \njutunderline[310pt]{\njut@value@supervisor}\\
+      & \njutunderline[260pt]{\njut@value@supervisor}\\
   \end{tabular}
 }
 \newcommand*{\njut@covertable@twolinetitle}{
   \begin{tabular}{p{7.3em}c}
       \makebox[7em][s]{\bfseries\njut@cap@cover@title}
-      & \njutunderline[310pt]{\njut@value@titlea}\\
+      & \njutunderline[260pt]{\njut@value@titlea}\\
       \makebox[7em][s]{}
-      & \njutunderline[310pt]{\njut@value@titleb}\\
+      & \njutunderline[260pt]{\njut@value@titleb}\\
       \makebox[7em][s]{\bfseries\njut@cap@cover@author}
-      & \njutunderline[310pt]{\njut@value@author}\\
+      & \njutunderline[260pt]{\njut@value@author}\\
       \makebox[7em][s]{\bfseries\njut@cap@cover@major}
-      & \njutunderline[310pt]{\njut@value@major}\\
+      & \njutunderline[260pt]{\njut@value@major}\\
       \makebox[7em][s]{\bfseries\njut@cap@cover@researchfield}
-      & \njutunderline[310pt]{\njut@value@researchfield}\\
+      & \njutunderline[260pt]{\njut@value@researchfield}\\
       \makebox[7em][s]{\bfseries\njut@cap@cover@supervisor}
-      & \njutunderline[310pt]{\njut@value@supervisor}\\
+      & \njutunderline[260pt]{\njut@value@supervisor}\\
   \end{tabular}
 }
 \renewcommand*{\maketitle}{%
@@ -2774,13 +2775,13 @@ December\fi
   \njutunderline[318pt]{\njut@value@abstract@titlea}\\
   \ifdefempty{\njut@value@abstract@titleb}{}{%
     \noindent\njutunderline[\textwidth]{\njut@value@abstract@titleb}\\}
-  \noindent\njutunderline[178pt]{\njut@value@major}%
+  \noindent\njutunderline[180pt]{\njut@value@major}%
   \njut@cap@abstract@major%
   \njutunderline[50pt]{\njut@value@grade}%
   \njut@cap@abstract@author{：}%
-  \njutunderline[61pt]{\njut@value@author}\\
+  \njutunderline[60pt]{\njut@value@author}\\
   \noindent\njut@cap@abstract@supervisor{：}%
-  \njutunderline[248pt]{\njut@value@supervisor}\\
+  \njutunderline[270pt]{\njut@value@supervisor}\\
   }}
   \vspace{5mm}
   \begin{center}
@@ -2841,9 +2842,9 @@ December\fi
    \ifdefempty{\njut@value@abstract@en@titleb}{}{%
      \njutunderline[\textwidth]{\njut@value@abstract@en@titleb}\\}
    \njut@cap@abstract@en@major{:}~%
-   \njutunderline[298pt]{\njut@value@en@major}\\
+   \njutunderline[296pt]{\njut@value@en@major}\\
    \njut@cap@abstract@en@author{:}~%
-   \njutunderline[299pt]{\njut@value@en@author}\\
+   \njutunderline[298pt]{\njut@value@en@author}\\
    \njut@cap@abstract@en@supervisor{:}~%
    \njutunderline[348pt]{\njut@value@en@supervisor}\\
   }}

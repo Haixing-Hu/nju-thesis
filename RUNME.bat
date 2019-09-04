@@ -15,7 +15,7 @@ xelatex sample.tex
 xelatex sample.tex
 :: 删除辅助文件
 del *.aux *.bak *.bbl *.blg *.dvi *.glo *.gls *.idx *.ilg *.ind *.ist ^
-    *.log *.out *.ps *.thm *.toc *.lof *.lot *.loe
+    *.log *.out *.ps *.thm *.toc *.lof *.lot *.loe *.hd
 cls
 echo 恭喜！您已生成其他的基本文件和说明文档，这说明您的写作环境没有问题!
 pause
