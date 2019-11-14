@@ -26,7 +26,7 @@
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
 %<*cls>
- [2019/09/05 v2.0.7 Document Class for the Degree Papers of Nanjing University]
+ [2019/11/14 v2.0.8 Document Class for the Degree Papers of Nanjing University]
 %</cls>
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
@@ -114,8 +114,8 @@
 % \MakeShortVerb{\|}
 % \newcommand*{\njuthesis}{\texttt{NJU-Thesis}}
 % \newcommand*{\texlive}{{\TeX}\ Live\ 2019}
-% \renewcommand*{\fileversion}{2.0.7}
-% \renewcommand*{\filedate}{2019年9月5日}
+% \renewcommand*{\fileversion}{2.0.8}
+% \renewcommand*{\filedate}{2019年11月14日}
 %
 % \pagestyle{empty}
 % \title{\njuthesis：南京大学学位论文\\
@@ -243,6 +243,7 @@
 %  v2.0.5 & 2019/08/29 & 曹增乐 & 启用伪粗体，使加粗的楷体正常显示。 \\
 %  v2.0.6 & 2019/09/01 & 曹增乐 & 用|gbt7714|宏包替换了|gbt7714-2005.bst|文件。 \\
 %  v2.0.7 & 2019/09/05 & 曹增乐 & 修正封面与摘要页下划线对齐问题。 \\
+%  v2.0.8 & 2019/11/14 & 曹增乐 & 修正数学字体加粗后不是 Times 字体的问题。 \\
 % \bottomrule
 % \end{longtable}
 % \end{center}
@@ -1383,11 +1384,10 @@
 \RequirePackage{amsthm}
 %    \end{macrocode}
 %
-% |amsfonts|宏包、|amssymb|宏包、|bm|宏包和|mathrsfs|宏包提供数学符号和字体支持。
+% |amsfonts|宏包、|amssymb|宏包和|mathrsfs|宏包提供数学符号和字体支持。
 %    \begin{macrocode}
 \RequirePackage{amsfonts}
 \RequirePackage{amssymb}
-\RequirePackage{bm}
 \RequirePackage{mathrsfs}
 %    \end{macrocode}
 %
@@ -1401,9 +1401,10 @@
 \RequirePackage{pifont}
 %    \end{macrocode}
 %
-% Times风格的正文字体和公式字体。
+% Times风格的正文字体和公式字体，|bm|宏包用于数学符号加粗必须在前者之后引入。
 %    \begin{macrocode}
 \RequirePackage{newtxtext,newtxmath}
+\RequirePackage{bm}
 %    \end{macrocode}
 %
 % |setspace|宏包支持行距控制。它需要在|hyperref|宏包之前加载，避免脚注超链接失效。
