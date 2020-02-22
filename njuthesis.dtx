@@ -2986,7 +2986,8 @@ December\fi
     {|C{2.2cm}|C{2cm}|C{1.5cm}|C{2.1cm}|C{1.42cm}C{1.5cm}|C{1.25cm}|}
   \hline
   \cell{2.2cm}{1cm}{\njut@cap@license@title}
-  & \multicolumn{6}{c|}{\njut@value@title} \\
+  & \multicolumn{6}{c|}{\ifdefempty{\njut@value@title}%
+  {\njut@value@titlea\njut@value@titleb}{\njut@value@title}} \\
   \hline
   \cell{2.2cm}{1cm}{\njut@cap@license@studentnum}
   & {\njut@value@studentnum}
