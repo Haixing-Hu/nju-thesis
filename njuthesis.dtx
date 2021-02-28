@@ -2,6 +2,8 @@
 %
 % Copyright (C) 2013-2018, Haixing Hu.
 % Department of Computer Science and Technology, Nanjing University.
+% Copyright (C) 2018-\the\year, Zachary Cao.
+% School of Physics, Nanjing University.
 %
 % This file may be distributed and/or modified under the conditions of the
 % LaTeX Project Public License, either version 1.2 of this license or (at your
@@ -24,7 +26,7 @@
 %<cls>\ProvidesClass{njuthesis.cls}
 %<cfg>\ProvidesFile{njuthesis.cfg}
 %<*cls>
- [2018/08/07 v1.2.2 Document Class for the Degree Papers of Nanjing University]
+ [2020/11/05 v2.0.9 Document Class for the Degree Papers of Nanjing University]
 %</cls>
 %<*driver>
 \documentclass[10pt,a4paper,oneside]{ltxdoc}
@@ -111,14 +113,14 @@
 %
 % \MakeShortVerb{\|}
 % \newcommand*{\njuthesis}{\texttt{NJU-Thesis}}
-% \newcommand*{\texlive}{{\TeX}\ Live\ 2017}
-% \renewcommand*{\fileversion}{1.2.2}
-% \renewcommand*{\filedate}{\today}
+% \newcommand*{\texlive}{{\TeX}\ Live\ 2020}
+% \renewcommand*{\fileversion}{2.0.9}
+% \renewcommand*{\filedate}{2020年11月5日}
 %
 % \pagestyle{empty}
 % \title{\njuthesis：南京大学学位论文\\
 %        {\XeLaTeX}模板}
-% \author{{胡海星}\\
+% \author{{胡海星}\thanks{由曹增乐修改 caozengle@outlook.com}\\
 %         {\texttt{starfish.hu@gmail.com}}\\
 %         {南京大学计算机科学与技术系}}
 % \date{\fileversion\ (\filedate)}
@@ -129,7 +131,7 @@
 %
 % \noindent\hspace{2em}文档类{\njuthesis}提供了一个南京大学学位论文的{\XeLaTeX}
 % 模板。该文档类严格按照南京大学对学位论文的格式要求排版学位论文，底层通过
-% |xeCJK|宏包支持中文。
+% |ctex|宏包支持中文。
 %
 % 目前{\njuthesis}可用于排版学士学位、硕士学位论文和博士学位论文。对于学士学位论文，
 % 采用和硕士学位论文一样的格式进行排版。
@@ -222,6 +224,27 @@
 %  v1.2.1  & 2017/12/24 & 胡海星 & 修正一些小问题，去除不需要的|dtxlogos|宏包；
 %                                 兼容TeX Live 2017 \\
 %  v1.2.2 & 2018/08/07 & 胡海星 & 更新中文字体下载链接 \\
+%  v2.0.0 & 2018/12/05 & 曹增乐 &  修复了论文短标题无法正常显示的错误；
+%                                  修正了公式内数字不是 Times 字体的错误；
+%                                 使用长论文标题时，也可以正确生成 pdf 文件标题信息；
+%                                 修改 |Makefile| 文件，解决了 win 平台
+%                                 texlive 2018 无法正确执行安装的问题。\\
+%  v2.0.1 & 2018/12/26 & 曹增乐 &  新增了 |fandolfonts| 开源字体，使得粗体不必用黑体代替；
+%                                  修正了一些封面字段；对版面格式做了一些修改；修改页眉中文字体为楷书；
+%                                  添加中英文摘要纸到目录；中英文摘要纸字样双下划线；
+%                                  中英文摘要纸自动去掉多余的空行；修改了生成pdf文件的主题字段。 \\
+%  v2.0.2 & 2018/12/28 & 曹增乐 &  重新计算了等效的行距缩放系数，与 Word 单倍行距保持一致；
+%                                 授权书表格信息修改；中文封面图标使用官方一体化 logo;
+%                                 修改了各字号的字体大小；修改标点符号处理方式为全角。 \\
+%  v2.0.3 & 2019/06/08 & 曹增乐 & 用 |ctex| 宏包代替 |xeCJK| 宏包作为中文的底层支持，
+%                                 默认使用 Fandol 字体，以实现完全不用移植字体跨平台使用。 \\
+%  v2.0.4 & 2019/06/26 & 曹增乐 & 废弃了 |hypernat| 宏包，因为它被 MikTeX 2.9 废弃，
+%                                 它的功能已经被 |natbib| 宏包取代。 \\
+%  v2.0.5 & 2019/08/29 & 曹增乐 & 启用伪粗体，使加粗的楷体正常显示。 \\
+%  v2.0.6 & 2019/09/01 & 曹增乐 & 用|gbt7714|宏包替换了|gbt7714-2005.bst|文件。 \\
+%  v2.0.7 & 2019/09/05 & 曹增乐 & 修正封面与摘要页下划线对齐问题。 \\
+%  v2.0.8 & 2019/11/14 & 曹增乐 & 修正数学字体加粗后不是 Times 字体的问题。 \\
+%  v2.0.9 & 2020/11/05 & 曹增乐 & 修正英文封面自动日期格式问题。 \\
 % \bottomrule
 % \end{longtable}
 % \end{center}
@@ -235,7 +258,7 @@
 %
 % 文档类{\njuthesis}是为了帮助南京大学的同学撰写学位论文而编写的{\XeLaTeX}模板。
 % 该模板提供了一个南京大学学位论文的{\XeLaTeX}文档类，用于生成符合南京大学学位
-% 论文格式要求进行的学位论文。该宏包的底层通过|xeCJK|宏包支持中文。目前该宏包可
+% 论文格式要求进行的学位论文。该宏包的底层通过|ctex|宏包支持中文。目前该宏包可
 % 用于排版硕士学位论文和博士学位论文；对于学士学位论文，由于作者未能找到南京大学
 % 对学士学位论文的格式要求，因此目前采用和硕士学位论文一样的格式进行排版。
 %
@@ -329,47 +352,42 @@
 %     \midrule
 %     |njuthesis.ins|             & 模板驱动文件 \\
 %     |njuthesis.dtx|             & 模板文档代码的混合文件\\
-%     |njuthesis.cls|             & 模板类文件\\
-%     |njuthesis.cfg|             & 模板配置文件\\
-%     |gbt7714-2005.bst|          & 符合国标\std{GB/T 7714-2005}的参考文献样式文件\\
-%     |dtx-style.sty|             & 用户手册样式文件\\
-%     |njulogo.eps|               & 南京大学校徽图片\\
-%     |njuname.eps|               & 南京大学校名图片\\
+%     |njulogo.pdf|               & 南京大学校徽图片\\
+%     |njuname.pdf|               & 南京大学校名图片\\
 %     \hline
 %     |sample.tex|                & 示例文档，亦可作为学位论文的基本模板 \\
 %     |sample.bib|                & 示例文档的参考文献数据库 \\
-%     |figures/|                  & 示例文档图片目录\\
 %     \hline
 %     |Makefile|                  & make 脚本 \\
-%     |get_texmf_dir.sh|          & 获取本地|textmf|目录路径的脚本\\
-%     \hline
+%     |RUNME.bat|                 & Windows 一键脚本 \\
 %     |README.md|                 & 说明文件 \\
-%     |njuthesis.pdf|             & 用户手册（本文档）\\
 %     \bottomrule
 %   \end{tabular*}
 %   \caption{{\njuthesis}的主要文件及其功能}\label{table:component}
 % \end{table}
 %
-% 表\ref{table:component}列出了{\njuthesis}的主要文件及其功能。其中|njuthesis.cls|,
-% |njuthesis.cfg|和|dtx-sty.sty|可以由|njuthesis.ins|和|njuthesis.dtx|生成，但为
-% 了降低新手用户的使用难度，故将其一起发布。
+% 表\ref{table:component}列出了{\njuthesis}的主要文件及其功能。
+% 项目只包含了最必要的原始文件，论文模板|njuthesis.cls|和|njuthesis.cfg|，
+% 以及文档手册|njuthesis.pdf|，示例文档|sample.pdf|均需要自行编译产生。
 %
 % \subsection{准备工作}
 %
-% 表\ref{table:dependence}列出了{\njuthesis}模板用到的宏包。这些包在常见的{\TeX}系
+% 表\ref{table:dependence}列出了{\njuthesis}模板用到的宏包。
+% 其中 |hypernat| 在 2.0.4 版本中被删除，这并不影响任何功能，
+% 它的功能和 |natbib| 包重合。这些包在常见的{\TeX}系
 % 统中都有（推荐使用{\texlive}），如果没有请到\url{www.ctan.org}下载。
 %
 % \begin{table}
 %   \centering\noindent
 %   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}*{6}{l}}
 %   \hline
-%     |ifxetex|  & |indentfirst| & |xeCJK|    & |lastpage| & |geometry|  & |graphicx| \\
+%     |ifxetex|  & |indentfirst| & |ctex|    & |lastpage| & |geometry|  & |graphicx| \\
 %     |subfig|   & |caption|     & |float|    & |array|    & |longtable| & |booktabs| \\
 %     |multirow| & |hyperref|    & |enumitem| & |xcolor|   & |amsmath|   & |amsfonts| \\
-%     |amsthm|   & |amssymb|    & |bm|        & |mathrsfs| & |txfonts|  & |pifont|  \\
-%     |setspace| & |wasysym|    & |hypernat| & |fancyhdr| & |natbib|    & |tabularx| \\
+%     |amsthm|   & |amssymb|     & |bm|       & |mathrsfs| & |txfonts|  & |pifont|  \\
+%     |setspace| & |wasysym|  & \sout{|hypernat|} & |fancyhdr| & \sout{|natbib|}    & |tabularx| \\
 %     |titlesec| & |glossaries|  & |ifthen|   & |makeidx| & |footmisc| &  |CJKnumb| \\
-%     |url|      & |etoolbox| &  &  &  & \\
+%     |url|      & |etoolbox|    & |gbt7714| &  &  & \\
 %   \hline
 %   \end{tabular*}
 %   \caption{{\njuthesis}用到的宏包}\label{table:dependence}
@@ -387,26 +405,21 @@
 % 由于本模板采用{\XeLaTeX}引擎处理，所以{\TeX}源文件应使用\textbf{UTF-8}编码。
 % \end{note}
 %
-% \subsection{开始安装}
+% \subsection{生成模板}
 %
-% \subsubsection{生成模板}
-%
-% 默认的发行包中已经包含了所有文件，可以直接使用。如果对如何由|*.dtx|生成模板文件以及模板文
-% 档不感兴趣，请跳过本小节。
-%
-% 模板解压缩后生成文件夹|njuthesis-VERSION|，其中|VERSION|为版本号。该文件夹中包括：
+% 项目文件夹中包括：
 % \begin{itemize}
 % \item 模板源文件：|njuthesis.ins|和|njuthesis.dtx|
-% \item 参考文献样式：|gbt7714-2005.bst|
-% \item 南京大学校徽和校名图片：|njulogo.eps|和|njuname.eps|
-% \item 示例文档：|sample.tex|、|sample.bib|和|figure|目录
+% \item 南京大学校徽和校名图片：|njulogo.pdf|和|njuname.pdf|
+% \item 示例文档：|sample.tex|和|sample.bib|
 % \end{itemize}
 %
-% 在使用之前需要先生成模板文件和配置文件，具体命令细节请参考|README|和|Makefile|。下面是
-% 在Linux或Mac系统中生成模板所需执行的|shell|命令：
+% 在使用之前需要先生成模板文件和配置文件，具体命令细节请参考|README|和|Makefile|。
+% Windows新手用户可直接运行一键生成脚本|RUNME.bat|，
+% 下面是在Linux或Mac系统中生成模板所需执行的|shell|命令：
 %
 % \begin{shell}
-% $ cd njuthesis-VERSION
+% $ cd njuthesis
 % # 清理以前执行make生成的旧文件
 % $ make clean
 % # 生成 njuthesis.cls 和 njuthesis.cfg
@@ -417,52 +430,6 @@
 % $ make sample
 % \end{shell}
 %
-% \subsubsection{安装到{\TeX}系统中}
-%
-% 假设当前{\TeX}系统的texmf-local目录为|${TEXMFLOCAL}|。下面是在Linux或Mac系统中将模
-% 板安装到本机的{\TeX}系统中所需执行的|shell|命令：
-%
-% \begin{shell}
-% $ cd njuthesis-VERSION
-% # 建立njuthesis文档类目录
-% $ mkdir -p ${TEXMFLOCAL}/tex/latex/njuthesis
-% # 复制njuthesis文档类文件
-% $ cp njuthesis.cls ${TEXMFLOCAL}/tex/latex/njuthesis/
-% $ cp njuthesis.cfg ${TEXMFLOCAL}/tex/latex/njuthesis/
-% $ cp njulogo.eps  ${TEXMFLOCAL}/tex/latex/njuthesis/
-% $ cp njuname.eps  ${TEXMFLOCAL}/tex/latex/njuthesis/
-% # 复制njuthesis文档类的源码，此过程可选
-% $ cp njuthesis.ins ${TEXMFLOCAL}/tex/latex/njuthesis/
-% $ cp njuthesis.dtx ${TEXMFLOCAL}/tex/latex/njuthesis/
-% # 创建本地的BibTeX样式文件目录
-% $ mkdir -p ${TEXMFLOCAL}/bibtex/bst
-% # 复制GB/T 7714-2005参考文献样式
-% $ cp gbt7714-2005.bst ${TEXMFLOCAL}/bibtex/bst/
-% # 建立njuthesis文档类手册目录
-% $ mkdir -p ${TETEXMFLOCALXMF}/doc/latex/njuthesis
-% # 复制njuthesis文档类手册和示例文档
-% $ cp njuthesis.pdf ${TEXMFLOCAL}/doc/latex/njuthesis/
-% $ cp sample.pdf ${TEXMFLOCAL}/doc/latex/njuthesis/
-% # 刷新tex文件名数据库
-% $ texhash
-% \end{shell}
-%
-% \begin{note}
-% 上面的某些命令可能需要管理员权限，或通过|sudo|执行。
-% \end{note}
-%
-% 当然，也可以直接使用|Makefile|提供的|install|操作进行安装：
-% \begin{shell}
-% $ sudo make install
-% \end{shell}
-%
-% \begin{note}
-% |Makefile|使用了脚本|get_texmf_dir.sh|来获取当前机器上所安装的{\TeX}系统的本地
-% |textmf|目录（通常是{\TeX}安装目录下的|textmf-local|目录）。用户最好在执行
-% |make install|之前先执行一下|get_texmf_dir.sh|脚本，看看输出的目录路径是否正确。
-% 如不正确，可以手工修改|Makefile|中对|TEXMFLOCAL|变量的定义。
-% \end{note}
-%
 % \section{使用说明}
 %
 % 本手册假定用户已经能处理一般的{\LaTeX}文档，并对{\BibTeX}有一定了解。如果你从来没有接
@@ -470,8 +437,8 @@
 %
 % \subsection{\njuthesis{} 示例文件}
 %
-% 模板核心文件只有三个：|njuthesis.cls|，|njuthesis.cfg|和 |gbt7714-2005.bst|，但
-% 是如果没有示例文档用户会发现很难下手。所以推荐新用户从模板自带的示例文档入手，
+% 模板核心文件只有两个：|njuthesis.cls| 和 |njuthesis.cfg|，
+% 但是如果没有示例文档用户会发现很难下手。所以推荐新用户从模板自带的示例文档入手，
 % 里面包括了文档写作用到的所有命令及其使用方法，只需要用自己的内容进行相应替换就
 % 可以。对于不清楚的命令可以查阅本手册。具体内容可以参考模板附带的|sample.tex|和
 % |sample.bib|。
@@ -480,49 +447,23 @@
 %
 % 本文档类提供了一些选项以方便使用：
 % \begin{description}
-% \item[winfonts, linuxfonts, macfonts, adobefonts] |winfonts|选项使得文档使
-%   用Windows系统提供的字体；|linuxfonts|选项使得文档使用Linux系统提供的字
-%   体；|macfonts|选项使得文档使用Mac系统提供的字体；|adobefonts|选项使得文档使
-%   用Adobe提供的OTF中文字体，一般来说OTF字体的显示效果要优于ttf字体。
-%   默认选项是|adobefonts|。
-% \begin{example}
-% \documentclass[winfonts]{njuthesis}
-% \end{example}
-%   表\ref{table:fontnames}中列出了默认配置下使用不同字体选项时所采用的实际字体
-%   名称。系统中必须正确安装了相应的字体才能正常编译文档。\\
-%   模板用到的字体可以在下面的代码库下载：\\
-%   \url{https://github.com/Haixing-Hu/latex-chinese-fonts}\\
-%   \begin{table}
-%     \centering\noindent
-%     \begin{tabular}[t]{ccccc}
-%     \toprule
-%           & \textbf{adobefonts} &  \textbf{winfonts} & \textbf{linuxfonts} & \textbf{macfonts} \\
-%     \midrule
-%     \textbf{宋体} & {Adobe Song Std}  & {SimSun} & {AR PL SungtiL GB} &  {STSong} \\
-%     \textbf{黑体} & {Adobe Heiti Std} & {SimHei} & {WenQuanYi Zen Hei Mono} &  {STHeiti} \\
-%     \textbf{楷书} & {Adobe Kaiti Std} & {KaiTi}  & {AR PL KaitiM GB} & {STKaiti} \\
-%     \textbf{仿宋体} & {Adobe Fangsong Std} & {FangSong} & {STFangsong} & {STFangsong} \\
-%     \textbf{英文衬线字体(Serif)} & {Times} & {Times New Roman} & {Times} & {Times} \\
-%     \textbf{英文非衬线字体(Sans Serif)} & {Helvetica} & {Arial} & {Helvetica} & {Helvetica} \\
-%     \textbf{英文等宽字体(Monospace)} & {Courier} & {Courier New} & {Courier} & {Courier} \\
-%     \bottomrule
-%     \end{tabular}
-%     \caption{默认配置下不同字体选项所使用的实际字体名称}
-%     \label{table:fontnames}
-%   \end{table}
+% \item[\CJKsout{winfonts, linuxfonts, macfonts, adobefonts, fandolfonts}]
+%   为了满足跨平台需求，载入底层宏包时直接调用|fandolfonts|选项以使用 texlive 套件自带的开源字体。
+%   同时这一字体还可以满足宋体字加粗的需求。如果执意要指定其他字体，
+%   请参考ctex宏包文档在|njuthesis.cls|中找到相关命令自行修改。
 %
 % \item[nobackinfo] 该选项用于控制是否在封面背面打印导师签名信息。如果设置了此选
 %   项，则不在封面背面打印导师签名信息。此选项默认不被设置，一般情况下也无需设置
 %   该选项。
 % \begin{example}
-% \documentclass[winfonts,nobackinfo]{njuthesis}
+% \documentclass[nobackinfo]{njuthesis}
 % \end{example}
 %
 % \item[phd, master, bachelor] 用于设置申请的学位级别。当选择|phd|时，生成南京大学博
 % 士学位论文，包含国家图书馆格式的封面，但不包括书脊，书脊需要单独制作；选择|master|时，
 % 生成南京大学硕士学位论文；选择|bachelor|时，生成南京大学学士学位论文。
 % \begin{example}
-% \documentclass[winfonts,phd]{njuthesis}
+% \documentclass[phd]{njuthesis}
 % \end{example}
 % \begin{note}
 % 这三个选项必须设置一个且只能设置一个。
@@ -763,6 +704,11 @@
 % \end{example}
 %
 % \begin{note}
+% 由于在 \njuthesis{} 中定义了默认论文标题，如需输入双行标题，
+% 需要对在导言区利用|\title{}|先重置论文标题。
+% \end{note}
+%
+% \begin{note}
 % \cs{title}的参数中不可换行，也不能使用\cs{thanks}脚注。
 % \end{note}
 %
@@ -780,7 +726,7 @@
 %
 % \myentry{作者电话}
 % \DescribeMacro{\telphone}
-% 命令\cs{telphone}用于设置论文作者的电话号码。此属性必须被设置。
+% 命令\cs{telphone}用于设置论文作者的电话号码。
 %
 % \begin{example}
 % \telphone{13671413272}
@@ -821,7 +767,7 @@
 %
 % \myentry{导师电话}
 % \DescribeMacro{\supervisortelphone}
-% 命令\cs{supervisortelphone}用于设置论文作者的导师的姓名和职称。此属性必须被设置。
+% 命令\cs{supervisortelphone}用于设置论文作者的导师的姓名和职称。
 %
 % \begin{example}
 % \supervisortelphone{13671607471}
@@ -1304,33 +1250,12 @@
 %
 % \subsection{定义选项}
 %
-% {\njuthesis}宏包的默认选项为|adobefonts|。
 %    \begin{macrocode}
 %<*cls>
-\newif\ifnjut@adobefonts\njut@adobefontstrue
-\newif\ifnjut@winfonts\njut@winfontsfalse
-\newif\ifnjut@linuxfonts\njut@linuxfontsfalse
-\newif\ifnjut@macfonts\njut@macfontsfalse
 \newif\ifnjut@backinfo\njut@backinfotrue
 \newif\ifnjut@phd\njut@phdfalse
 \newif\ifnjut@master\njut@masterfalse
 \newif\ifnjut@bachelor\njut@bachelorfalse
-\DeclareOption{adobefonts}{\njut@adobefontstrue
-  \njut@winfontsfalse
-  \njut@linuxfontsfalse
-  \njut@macfontsfalse}
-\DeclareOption{winfonts}{\njut@winfontstrue
-  \njut@adobefontsfalse
-  \njut@linuxfontsfalse
-  \njut@macfontsfalse}
-\DeclareOption{linuxfonts}{\njut@linuxfontstrue
-  \njut@adobefontsfalse
-  \njut@winfontsfalse
-  \njut@macfontsfalse}
-\DeclareOption{macfonts}{\njut@macfontstrue
-  \njut@adobefontsfalse
-  \njut@winfontsfalse
-  \njut@linuxfontsfalse}
 \DeclareOption{nobackinfo}{\njut@backinfofalse}
 \DeclareOption{phd}{\njut@phdtrue
   \njut@masterfalse
@@ -1368,6 +1293,15 @@
 %    \begin{macrocode}
 \RequirePackage{ifxetex}
 \RequireXeTeX
+%    \end{macrocode}
+%
+% 使用|ctex|宏包处理中文，默认使用 Fandol 字体。
+% 调入|ctex|前先用|no-math|选项调入|fontspec|宏包，以使数学字体宏包起作用。
+%    \begin{macrocode}
+\RequirePackage[no-math]{fontspec}
+\RequirePackage[AutoFakeBold=true]{xeCJK}
+\RequirePackage[fontset=fandol,zihao=-4]{ctex}
+\RequirePackage{CJKnumb}
 %    \end{macrocode}
 %
 % 使用|lastpage|宏包来获得最后一页的页码，从而生成“第3页，共20页”这样的页码标签。
@@ -1451,11 +1385,10 @@
 \RequirePackage{amsthm}
 %    \end{macrocode}
 %
-% |amsfonts|宏包、|amssymb|宏包、|bm|宏包和|mathrsfs|宏包提供数学符号和字体支持。
+% |amsfonts|宏包、|amssymb|宏包和|mathrsfs|宏包提供数学符号和字体支持。
 %    \begin{macrocode}
 \RequirePackage{amsfonts}
 \RequirePackage{amssymb}
-\RequirePackage{bm}
 \RequirePackage{mathrsfs}
 %    \end{macrocode}
 %
@@ -1469,9 +1402,10 @@
 \RequirePackage{pifont}
 %    \end{macrocode}
 %
-% |txfonts|宏包用自己的typewriter字体替换系统Courier字体，它必须在{\AmSTeX}之后引入。
+% Times风格的正文字体和公式字体，|bm|宏包用于数学符号加粗必须在前者之后引入。
 %    \begin{macrocode}
-\RequirePackage{txfonts}
+\RequirePackage{newtxtext,newtxmath}
+\RequirePackage{bm}
 %    \end{macrocode}
 %
 % |setspace|宏包支持行距控制。它需要在|hyperref|宏包之前加载，避免脚注超链接失效。
@@ -1494,41 +1428,9 @@
 \RequirePackage{xltxtra}
 %    \end{macrocode}
 %
-% 使用|xeCJK|宏包处理中文。宏包选项|CJKnumber|表示调用|CJKnumber|宏包处理中文数
-% 字；|CJKchecksingle|表示避免单个汉字单独占一行。|xeCJK|宏包必须放在|amssymb|之后，
-% 否则会有冲突。
-% \begin{note}
-%   因为我们将使用黑体作为粗体，使用楷体作为斜体，因此载入|xeCJK|宏包时不需要开启
-%   |BoldFont|选项和|SlantFont|；否则的话，|xeCJK|会自动生成宋体的粗体和斜体，而那会
-%   非常难看。
-% \end{note}
-% \begin{note}
-% 由于TeX Live升级到2014版后，直接用|xeCJK|的|CJKnumber|选项会出现bug，我们需单独导入
-% |CJKnumb|宏包；但|xeCJK|的|CJKnumber|选项依然需要，否则在Tex Live 2012下编译会报错。
-% \end{note}
-%    \begin{macrocode}
-\RequirePackage[CJKnumber,CJKchecksingle]{xeCJK}
-\RequirePackage{CJKnumb}
-%    \end{macrocode}
-%
 % 让{\XeLaTeX}能够处理dash的惯例(使用"--"和"---"获得较长的dash)。
 %    \begin{macrocode}
 \defaultfontfeatures{Mapping=tex-text}
-%    \end{macrocode}
-%
-% 设置中文标点格式，使用|plain|方案。其他可选方案参见|xeCJK|文档。
-%    \begin{macrocode}
-\punctstyle{plain}
-%    \end{macrocode}
-%
-% |xeCJKfntef|宏包提供了中文下划线命令\cs{CJKunderline}，它将在制作论文封面时用到。
-%    \begin{macrocode}
-\RequirePackage{xeCJKfntef}
-%    \end{macrocode}
-%
-% 设置中文下划线颜色为黑色。
-%    \begin{macrocode}
-\xeCJKsetup{ underline/format = \color{black} }
 %    \end{macrocode}
 %
 % 使用|indentfirst|宏包支持首行缩进。
@@ -1571,20 +1473,15 @@
 \urlstyle{same}
 %    \end{macrocode}
 %
-% 美化参考文献排序和引用格式的宏包|natbib|。
-%    \begin{macrocode}
-\RequirePackage[sort&compress,numbers]{natbib}
-%    \end{macrocode}
-%
-% |hypernat|可以让|hyperref|和|natbib|混合使用，但它需要放在这两者之后。
-%    \begin{macrocode}
-\RequirePackage{hypernat}
-%    \end{macrocode}
-%
 % |tabularx|宏包支持自动扩展的列宽，但它需要在|hyperref|之后引入才不会导致正文
 % 的footnote的超链接失效。
 %    \begin{macrocode}
 \RequirePackage{tabularx}
+%    \end{macrocode}
+%
+% 使用|gbt7714|宏包产生符合 GB/T 7714-2015 国家标准的文献引用。
+%    \begin{macrocode}
+\RequirePackage{gbt7714}
 %    \end{macrocode}
 %
 % |makeidx|宏包支持建立索引。
@@ -1731,13 +1628,13 @@
 %
 % 定义南京大学学位论文中文封面的字符串常量：
 %    \begin{macrocode}
-\newcommand*{\njut@cap@cover}{中文封面}
+\newcommand*{\njut@cap@cover}{南大封面}
 \newcommand*{\njut@cap@cover@thesis}{{\njut@value@type}毕业论文}
 \newcommand*{\njut@cap@cover@apply}{申请{\njut@value@degree}学位}
 \newcommand*{\njut@cap@cover@title}{论文题目}
 \newcommand*{\njut@cap@cover@author}{作者姓名}
 \newcommand*{\njut@cap@cover@supervisor}{指导教师}
-\newcommand*{\njut@cap@cover@major}{学科、专业方向}
+\newcommand*{\njut@cap@cover@major}{学科、专业名称}
 \newcommand*{\njut@cap@cover@researchfield}{研究方向}
 \newcommand*{\njut@cap@cover@department}{院系}
 \newcommand*{\njut@cap@cover@institute}{南京大学}
@@ -1788,8 +1685,8 @@ in\\
 \newcommand*{\njut@cap@abstract@en@major}{SPECIALIZATION}
 \newcommand*{\njut@cap@abstract@en@author}{POSTGRADUATE}
 \newcommand*{\njut@cap@abstract@en@supervisor}{MENTOR}
-\newcommand*{\njut@cap@abstract@en@abstractname}{Abstract}
-\newcommand*{\njut@cap@abstract@en@keywordsname}{keywords}
+\newcommand*{\njut@cap@abstract@en@abstractname}{ABSTRACT}
+\newcommand*{\njut@cap@abstract@en@keywordsname}{KEYWORDS}
 %    \end{macrocode}
 %
 % 定义南京大学学位论文中论文作者简历与科研成果页的字符串常量：
@@ -1827,7 +1724,7 @@ in\\
 \newcommand*{\njut@cap@license@category}{论文级别}
 \newcommand*{\njut@cap@license@telphone}{作者电话}
 \newcommand*{\njut@cap@license@email}{作者Email}
-\newcommand*{\njut@cap@license@supervisorname}{第一导师姓名}
+\newcommand*{\njut@cap@license@supervisorname}{导师姓名}
 \newcommand*{\njut@cap@license@supervisortelphone}{导师电话}
 \newcommand*{\njut@cap@license@categoryhint}{（请在方框内画勾）}
 \newcommand*{\njut@cap@license@categorymaster}{硕士}
@@ -1841,8 +1738,8 @@ in\\
 %
 % 定义学位颁发机构的校徽和校名图片文件名：
 %    \begin{macrocode}
-\newcommand*{\njut@cap@institute@logo}{njulogo.eps}
-\newcommand*{\njut@cap@institute@name}{njuname.eps}
+\newcommand*{\njut@cap@institute@logo}{njulogo.pdf}
+\newcommand*{\njut@cap@institute@name}{njuname.pdf}
 %    \end{macrocode}
 %
 % \subsection{字段默认值定义}
@@ -1939,7 +1836,7 @@ September\or
 October\or
 November\or
 December\fi
-\number\day, \number\year%
+~\number\day, \number\year%
 }
 %    \end{macrocode}
 %
@@ -1955,79 +1852,6 @@ December\fi
 \newcommand*{\njut@value@abstract@en@titlea}{\njut@value@en@title}
 \newcommand*{\njut@value@abstract@en@titleb}{}
 \newcommand*{\njut@value@abstract@en@keywords}{}
-%    \end{macrocode}
-%
-% \subsection{格式控制常量定义}
-%
-% 定义Windows下宋体、黑体、楷书和仿宋体四种中文字体的名称。默认采用微软字体。
-%    \begin{macrocode}
-\newcommand*{\njut@zhfn@songti@win}{SimSun}
-\newcommand*{\njut@zhfn@heiti@win}{SimHei}
-\newcommand*{\njut@zhfn@kaishu@win}{KaiTi}
-\newcommand*{\njut@zhfn@fangsong@win}{FangSong}
-%    \end{macrocode}
-%
-% 定义Windows下英文字体的名称。默认采用Windows自带的字体。
-%    \begin{macrocode}
-\newcommand*{\njut@enfn@main@win}{Times New Roman}
-\newcommand*{\njut@enfn@sans@win}{Arial}
-\newcommand*{\njut@enfn@mono@win}{Courier New}
-%    \end{macrocode}
-%
-% 定义Linux下宋体、黑体、楷书和仿宋体四种中文字体的名称。默认采用文鼎宋体、楷体；
-% 文泉黑体；以及华文仿宋体(需要单独安装)。
-%    \begin{macrocode}
-\newcommand*{\njut@zhfn@songti@linux}{AR PL SungtiL GB}
-\newcommand*{\njut@zhfn@heiti@linux}{WenQuanYi Zen Hei Mono}
-\newcommand*{\njut@zhfn@kaishu@linux}{AR PL KaitiM GB}
-\newcommand*{\njut@zhfn@fangsong@linux}{STFangSong}
-%    \end{macrocode}
-%
-% 定义Linux下英文字体的名称。默认采用的字体若未安装请自行安装。
-%    \begin{macrocode}
-\newcommand*{\njut@enfn@main@linux}{Times}
-\newcommand*{\njut@enfn@sans@linux}{Helvetica}
-\newcommand*{\njut@enfn@mono@linux}{Courier}
-%    \end{macrocode}
-%
-% 定义Mac下宋体、黑体、楷书和仿宋体四种中文字体的名称。默认采用华文字体。
-%    \begin{macrocode}
-\newcommand*{\njut@zhfn@songti@mac}{STSong}
-\newcommand*{\njut@zhfn@heiti@mac}{STHeiti}
-\newcommand*{\njut@zhfn@kaishu@mac}{STKaiti}
-\newcommand*{\njut@zhfn@fangsong@mac}{STFangsong}
-%    \end{macrocode}
-%
-% 定义Mac下英文字体的名称。默认采用Mac自带的字体。
-%    \begin{macrocode}
-\newcommand*{\njut@enfn@main@mac}{Times}
-\newcommand*{\njut@enfn@sans@mac}{Helvetica}
-\newcommand*{\njut@enfn@mono@mac}{Courier}
-%    \end{macrocode}
-%
-% 定义Adoble提供的宋体、黑体、楷书和仿宋体四种中文字体的名称。Adoble的宋体、黑体和仿宋体
-% 可以在其网站免费下载，地址为
-% \begin{center}
-%   \url{https://supportdownloads.adobe.com/detail.jsp?ftpID=4883}
-% \end{center}
-% 但Adobe的楷体只随Adobe Creative Suite软件提供。不过，所有Adobe中文字体都可以在这里
-% 下载：
-% \begin{center}
-%   \url{https://github.com/Haixing-Hu/latex-chinese-fonts}
-% \end{center}
-%
-%    \begin{macrocode}
-\newcommand*{\njut@zhfn@songti@adobe}{Adobe Song Std}
-\newcommand*{\njut@zhfn@heiti@adobe}{Adobe Heiti Std}
-\newcommand*{\njut@zhfn@kaishu@adobe}{Adobe Kaiti Std}
-\newcommand*{\njut@zhfn@fangsong@adobe}{Adobe Fangsong Std}
-%    \end{macrocode}
-%
-% 定义英文字体的名称。默认采用Mac自带的字体。
-%    \begin{macrocode}
-\newcommand*{\njut@enfn@main@adobe}{Times}
-\newcommand*{\njut@enfn@sans@adobe}{Helvetica}
-\newcommand*{\njut@enfn@mono@adobe}{Courier}
 %</cfg>
 %    \end{macrocode}
 %
@@ -2037,335 +1861,6 @@ December\fi
 %    \begin{macrocode}
 %<*cls>
 \input{njuthesis.cfg}
-%    \end{macrocode}
-%
-% \subsection{字体设置}
-%
-% 首先根据文档选项选择正确的中文字体名称。
-%    \begin{macrocode}
-\ifnjut@adobefonts
-  \newcommand*{\njut@zhfn@songti}{\njut@zhfn@songti@adobe}
-  \newcommand*{\njut@zhfn@heiti}{\njut@zhfn@heiti@adobe}
-  \newcommand*{\njut@zhfn@kaishu}{\njut@zhfn@kaishu@adobe}
-  \newcommand*{\njut@zhfn@fangsong}{\njut@zhfn@fangsong@adobe}
-  \newcommand*{\njut@enfn@main}{\njut@enfn@main@adobe}
-  \newcommand*{\njut@enfn@sans}{\njut@enfn@sans@adobe}
-  \newcommand*{\njut@enfn@mono}{\njut@enfn@mono@adobe}
-\else
-  \ifnjut@winfonts
-      \newcommand*{\njut@zhfn@songti}{\njut@zhfn@songti@win}
-      \newcommand*{\njut@zhfn@heiti}{\njut@zhfn@heiti@win}
-      \newcommand*{\njut@zhfn@kaishu}{\njut@zhfn@kaishu@win}
-      \newcommand*{\njut@zhfn@fangsong}{\njut@zhfn@fangsong@win}
-      \newcommand*{\njut@enfn@main}{\njut@enfn@main@win}
-      \newcommand*{\njut@enfn@sans}{\njut@enfn@sans@win}
-      \newcommand*{\njut@enfn@mono}{\njut@enfn@mono@win}
-  \else
-    \ifnjut@linuxfonts
-      \newcommand*{\njut@zhfn@songti}{\njut@zhfn@songti@linux}
-      \newcommand*{\njut@zhfn@heiti}{\njut@zhfn@heiti@linux}
-      \newcommand*{\njut@zhfn@kaishu}{\njut@zhfn@kaishu@linux}
-      \newcommand*{\njut@zhfn@fangsong}{\njut@zhfn@fangsong@linux}
-      \newcommand*{\njut@enfn@main}{\njut@enfn@main@linux}
-      \newcommand*{\njut@enfn@sans}{\njut@enfn@sans@linux}
-      \newcommand*{\njut@enfn@mono}{\njut@enfn@mono@linux}
-    \else
-       \ifnjut@macfonts
-          \newcommand*{\njut@zhfn@songti}{\njut@zhfn@songti@mac}
-          \newcommand*{\njut@zhfn@heiti}{\njut@zhfn@heiti@mac}
-          \newcommand*{\njut@zhfn@kaishu}{\njut@zhfn@kaishu@mac}
-          \newcommand*{\njut@zhfn@fangsong}{\njut@zhfn@fangsong@mac}
-          \newcommand*{\njut@enfn@main}{\njut@enfn@main@mac}
-          \newcommand*{\njut@enfn@sans}{\njut@enfn@sans@mac}
-          \newcommand*{\njut@enfn@mono}{\njut@enfn@mono@mac}
-       \else
-         \ClassError{njuthesis}{No fonts was selected.}{}
-       \fi
-    \fi
-  \fi
-\fi
-%    \end{macrocode}
-%
-% 接下来定义文档使用的中文字体：
-%    \begin{macrocode}
-\setCJKfamilyfont{song}{\njut@zhfn@songti}
-\setCJKfamilyfont{hei}{\njut@zhfn@heiti}
-\setCJKfamilyfont{kai}{\njut@zhfn@kaishu}
-\setCJKfamilyfont{fangsong}{\njut@zhfn@fangsong}
-\setCJKmainfont[BoldFont={\njut@zhfn@heiti},%
-                ItalicFont={\njut@zhfn@kaishu}]%
-               {\njut@zhfn@songti}
-\setCJKsansfont{\njut@zhfn@heiti}
-\setCJKmonofont{\njut@zhfn@fangsong}
-%    \end{macrocode}
-%
-% 定义文档使用的英文字体。
-%    \begin{macrocode}
-\setmainfont{\njut@enfn@main}
-\setsansfont{\njut@enfn@sans}
-\setmonofont{\njut@enfn@mono}
-%    \end{macrocode}
-%
-% 定义中文字体选择命令。
-%    \begin{macrocode}
-\newcommand*{\songti}{\CJKfamily{song}}
-\newcommand*{\heiti}{\CJKfamily{hei}}
-\newcommand*{\kaishu}{\CJKfamily{kai}}
-\newcommand*{\fangsong}{\CJKfamily{fangsong}}
-%    \end{macrocode}
-%
-% \begin{table}
-%   \centering
-%   \subtable[科学出版社编写的《著译编辑手册》(1994年)中定义的中文字号大小]{
-%     \label{table:fontsize:standard}
-%     \noindent
-%     \begin{tabular}{ccc}
-%       \toprule
-%       \textbf{字号}  &   \textbf{大小(pt)} & \textbf{大小(mm)}   \\
-%       \midrule
-%       七号  &    5.25  &    1.845 \\
-%       六号  &    7.875 &    2.768 \\
-%       小五  &    9     &    3.163 \\
-%       五号  &    10.5  &    3.69  \\
-%       小四  &    12    &    4.2175 \\
-%       四号  &    13.75 &    4.83   \\
-%       三号  &    15.75 &    5.53  \\
-%       二号  &    21    &    7.38  \\
-%       一号  &    27.5  &    9.48  \\
-%       小初  &    36    &    12.65 \\
-%       初号  &    42    &    14.76 \\
-%       \bottomrule
-%     \end{tabular}
-%   }
-%   \qquad
-%   \subtable[Microsoft Word中定义的中文字号大小，其中$1$bp=$72.27/72$pt]{
-%     \label{table:fontsize:word}
-%     \noindent
-%     \begin{tabular}{cccc}
-%       \toprule
-%       \textbf{字号}  & \textbf{大小(bp)} & \textbf{大小(mm)} & \textbf{大小(pt)}   \\
-%       \midrule
-%       初号  & 42     & 14.82 & 42.1575  \\
-%       小初  & 36     & 12.70 & 36.135   \\
-%       一号  & 26     & 9.17  & 26.0975  \\
-%       小一  & 24     & 8.47  & 24.09    \\
-%       二号  & 22     & 7.76  & 22.0825  \\
-%       小二  & 18     & 6.35  & 18.0675  \\
-%       三号  & 16     & 5.64  & 16.06    \\
-%       小三  & 15     & 5.29  & 15.05625 \\
-%       四号  & 14     & 4.94  & 14.0525  \\
-%       小四  & 12     & 4.23  & 12.045   \\
-%       五号  & 10.5   & 3.70  & 10.59375 \\
-%       小五  & 9      & 3.18  & 9.03375  \\
-%       六号  & 7.5    & 2.56  &            \\
-%       小六  & 6.5    & 2.29  &            \\
-%       七号  & 5.5    & 1.94  &            \\
-%       八号  & 5      & 1.76  &            \\
-%       \bottomrule
-%     \end{tabular}
-%   }
-%   \caption{中文字号对应的字体大小}
-%   \label{table:fontsize}
-% \end{table}
-%
-% 下面定义中文字号对应的大小，其标准参见表\ref{table:fontsize:standard}和
-% 表\ref{table:fontsize:word}。
-%    \begin{macrocode}
-\newcommand*{\njut@fs@eight}{5.02} % 八号字 5bp
-\newcommand*{\njut@fs@eightskip}{6.02}
-\newcommand*{\njut@fs@seven}{5.52} % 七号字 5.5bp
-\newcommand*{\njut@fs@sevenskip}{6.62}
-\newcommand*{\njut@fs@ssix}{6.52} % 小六号 6.5bp
-\newcommand*{\njut@fs@ssixskip}{7.83}
-\newcommand*{\njut@fs@six}{7.53} % 六号字 7.5bp
-\newcommand*{\njut@fs@sixskip}{9.03}
-\newcommand*{\njut@fs@sfive}{9.03} % 小五号 9bp
-\newcommand*{\njut@fs@sfiveskip}{10.84}
-\newcommand*{\njut@fs@five}{10.54} % 五号 10bp
-\newcommand*{\njut@fs@fiveskip}{12.65}
-\newcommand*{\njut@fs@sfour}{12.05} % 小四号 12bp
-\newcommand*{\njut@fs@sfourskip}{14.45}
-\newcommand*{\njut@fs@four}{14.05} % 四号字 14bp
-\newcommand*{\njut@fs@fourskip}{16.86}
-\newcommand*{\njut@fs@sthree}{15.06} % 小三号 15bp
-\newcommand*{\njut@fs@sthreeskip}{18.07}
-\newcommand*{\njut@fs@three}{16.06} % 三号字 16bp
-\newcommand*{\njut@fs@threeskip}{19.27}
-\newcommand*{\njut@fs@stwo}{18.07} % 小二号 18bp
-\newcommand*{\njut@fs@stwoskip}{21.68}
-\newcommand*{\njut@fs@two}{22.08} % 二号字 22bp
-\newcommand*{\njut@fs@twoskip}{26.50}
-\newcommand*{\njut@fs@sone}{24.09} % 小一号 24bp
-\newcommand*{\njut@fs@soneskip}{28.91}
-\newcommand*{\njut@fs@one}{26.10} % 一号字 26bp
-\newcommand*{\njut@fs@oneskip}{31.32}
-\newcommand*{\njut@fs@szero}{36.14} % 小初号 36bp
-\newcommand*{\njut@fs@szeroskip}{43.36}
-\newcommand*{\njut@fs@zero}{42.16} % 初号字 42bp
-\newcommand*{\njut@fs@zeroskip}{50.59}
-%    \end{macrocode}
-%
-% 声明不同字号下的数学字体大小。
-%    \begin{macrocode}
-\DeclareMathSizes{\njut@fs@eight}
-                 {\njut@fs@eight}
-                 {5}
-                 {5}
-\DeclareMathSizes{\njut@fs@seven}
-                 {\njut@fs@seven}
-                 {5}
-                 {5}
-\DeclareMathSizes{\njut@fs@ssix}
-                 {\njut@fs@ssix}
-                 {5}
-                 {5}
-\DeclareMathSizes{\njut@fs@six}
-                 {\njut@fs@six}
-                 {5}
-                 {5}
-\DeclareMathSizes{\njut@fs@sfive}
-                 {\njut@fs@sfive}
-                 {6}
-                 {5}
-\DeclareMathSizes{\njut@fs@five}
-                 {\njut@fs@five}
-                 {7}
-                 {5}
-\DeclareMathSizes{\njut@fs@sfour}
-                 {\njut@fs@sfour}
-                 {8}
-                 {6}
-\DeclareMathSizes{\njut@fs@four}
-                 {\njut@fs@four}
-                 {\njut@fs@five}
-                 {\njut@fs@six}
-\DeclareMathSizes{\njut@fs@sthree}
-                 {\njut@fs@sthree}
-                 {\njut@fs@sfour}
-                 {\njut@fs@sfive}
-\DeclareMathSizes{\njut@fs@three}
-                 {\njut@fs@three}
-                 {\njut@fs@four}
-                 {\njut@fs@five}
-\DeclareMathSizes{\njut@fs@stwo}
-                 {\njut@fs@stwo}
-                 {\njut@fs@sthree}
-                 {\njut@fs@sfour}
-\DeclareMathSizes{\njut@fs@two}
-                 {\njut@fs@two}
-                 {\njut@fs@three}
-                 {\njut@fs@four}
-\DeclareMathSizes{\njut@fs@sone}
-                 {\njut@fs@sone}
-                 {\njut@fs@stwo}
-                 {\njut@fs@sthree}
-\DeclareMathSizes{\njut@fs@one}
-                 {\njut@fs@one}
-                 {\njut@fs@two}
-                 {\njut@fs@three}
-\DeclareMathSizes{\njut@fs@szero}
-                 {\njut@fs@szero}
-                 {\njut@fs@sone}
-                 {\njut@fs@stwo}
-\DeclareMathSizes{\njut@fs@zero}
-                 {\njut@fs@zero}
-                 {\njut@fs@one}
-                 {\njut@fs@two}
-%    \end{macrocode}
-%
-% 定义字号选择命令。字号前面加负号表示采用对应的小体字号，例如|\zihao{-3}|表示小
-% 三号。
-% \begin{note}
-% 为了让|\zihao{-0}|能正确表示小初号，在判断参数正负的时候把参数后面再接一个字符`1'，从
-% 而将``-0''变为``-01''，而``-01''转换为数字为$-1$，故可正确判断其是否小于零。
-% \end{note}
-%    \begin{macrocode}
-\def\njut@zihao{}
-\DeclareRobustCommand*{\zihao}[1]{%
-  \def\njut@zihao{#1}%
-  \ifnum #11<0%
-    \@tempcnta=-#1
-    \ifcase\@tempcnta%
-        \fontsize\njut@fs@szero\njut@fs@szeroskip%
-    \or \fontsize\njut@fs@sone\njut@fs@soneskip%
-    \or \fontsize\njut@fs@stwo\njut@fs@stwoskip%
-    \or \fontsize\njut@fs@sthree\njut@fs@sthreeskip%
-    \or \fontsize\njut@fs@sfour\njut@fs@sfourskip%
-    \or \fontsize\njut@fs@sfive\njut@fs@sfiveskip%
-    \or \fontsize\njut@fs@ssix\njut@fs@ssixskip%
-    \else \ClassError{njuthesis}{%
-            Undefined Chinese font size in command \protect\zihao}{%
-            The old font size is used if you continue.}%
-    \fi%
-  \else%
-    \@tempcnta=#1
-    \ifcase\@tempcnta%
-        \fontsize\njut@fs@zero\njut@fs@zeroskip%
-    \or \fontsize\njut@fs@one\njut@fs@oneskip%
-    \or \fontsize\njut@fs@two\njut@fs@twoskip%
-    \or \fontsize\njut@fs@three\njut@fs@threeskip%
-    \or \fontsize\njut@fs@four\njut@fs@fourskip%
-    \or \fontsize\njut@fs@five\njut@fs@fiveskip%
-    \or \fontsize\njut@fs@six\njut@fs@sixskip%
-    \or \fontsize\njut@fs@seven\njut@fs@sevenskip%
-    \or \fontsize\njut@fs@eight\njut@fs@eightskip%
-    \else \ClassError{njuthesis}{%
-            Undefined Chinese font size in command \protect\zihao}{%
-            The old font size is used if you continue.}%
-    \fi%
-  \fi%
-  \selectfont\ignorespaces}
-%    \end{macrocode}
-%
-% 修改常用字体大小选择命令。
-%
-%    \begin{macrocode}
-\renewcommand{\tiny}{% 小六号 6.5bp
-  \@setfontsize\tiny{\njut@fs@ssix}{\njut@fs@ssixskip}}
-\renewcommand{\scriptsize}{% 六号字 7.5bp
-  \@setfontsize\scriptsize{\njut@fs@six}{\njut@fs@sixskip}}
-\renewcommand{\footnotesize}{% 小五号 9bp
-  \@setfontsize\footnotesize{\njut@fs@sfive}{\njut@fs@sfiveskip}%
-  \abovedisplayskip 6\p@ \@plus2\p@ \@minus4\p@
-  \abovedisplayshortskip \z@ \@plus\p@
-  \belowdisplayshortskip 3\p@ \@plus\p@ \@minus2\p@
-  \def\@listi{\leftmargin\leftmargini
-    \topsep 3\p@ \@plus\p@ \@minus\p@
-    \parsep 2\p@ \@plus\p@ \@minus\p@
-    \itemsep \parsep}%
-  \belowdisplayskip \abovedisplayskip}
-\renewcommand{\small}{% 五号 10bp
-  \@setfontsize\small{\njut@fs@five}{\njut@fs@fiveskip}%
-  \abovedisplayskip 8.5\p@ \@plus3\p@ \@minus4\p@
-  \abovedisplayshortskip \z@ \@plus2\p@
-  \belowdisplayshortskip 4\p@ \@plus2\p@ \@minus2\p@
-  \def\@listi{\leftmargin\leftmargini
-    \topsep 4\p@ \@plus2\p@ \@minus2\p@
-    \parsep 2\p@ \@plus\p@ \@minus\p@
-    \itemsep \parsep}%
-  \belowdisplayskip \abovedisplayskip}
-\renewcommand{\normalsize}{% 小四号 12bp
-  \@setfontsize\normalsize{\njut@fs@sfour}{\njut@fs@sfourskip}%
-  \abovedisplayskip 10\p@ \@plus2\p@ \@minus5\p@
-  \abovedisplayshortskip \z@ \@plus3\p@
-  \belowdisplayshortskip 6\p@ \@plus3\p@ \@minus3\p@
-  \belowdisplayskip \abovedisplayskip
-  \let\@listi\@listI}
-\renewcommand{\large}{% 小三号 15bp
-  \@setfontsize\large{\njut@fs@sthree}{\njut@fs@sthreeskip}}
-\renewcommand{\Large}{% 小二号 18bp
-  \@setfontsize\Large{\njut@fs@stwo}{\njut@fs@stwoskip}}
-\renewcommand{\LARGE}{% 小一号 24bp
-  \@setfontsize\LARGE{\njut@fs@sone}{\njut@fs@soneskip}}
-\renewcommand{\huge}{% 一号 26bp
-  \@setfontsize\huge{\njut@fs@one}{\njut@fs@oneskip}}
-\renewcommand{\Huge}{% 小初号 36bp
-  \@setfontsize\Huge{\njut@fs@szero}{\njut@fs@szeroskip}}
-%    \end{macrocode}
-%
-% 定义中文字距修改命令，直接修改\cs{CJKglue}即可。
-%    \begin{macrocode}
-\newcommand*{\ziju}[1]{\renewcommand*{\CJKglue}{\hskip {#1}}}
 %    \end{macrocode}
 %
 % 修改\cs{textsc}命令，使其可在中文编码下正常工作。
@@ -2481,7 +1976,7 @@ December\fi
 %
 % 设置常见的中文标题名称。
 %    \begin{macrocode}
-\newcommand*{\abstractname}{\njut@cap@abstractname}
+\renewcommand*{\abstractname}{\njut@cap@abstractname}
 \renewcommand*{\contentsname}{\njut@cap@contentsname}
 \renewcommand*{\listfigurename}{\njut@cap@listfigurename}
 \renewcommand*{\listtablename}{\njut@cap@listtablename}
@@ -2501,7 +1996,7 @@ December\fi
 %
 % 设置章节格式如下：
 % \begin{description}
-% \item[零级节标题] 命令为\cs{chapter}，格式为一号黑体，居中排列，段前空4ex，段后空3ex；
+% \item[零级节标题] 命令为\cs{chapter}，格式为小一号黑体，居中排列，段前空0ex，段后空5ex；
 % \item[一级节标题] 命令为\cs{section}，格式为小二号黑体，左排列，段前空3.5ex，段后空2.3ex；
 % \item[二级节标题] 命令为\cs{subsection}，格式为三号黑体，左排列，段前空3.0ex，段后空1.5ex；
 % \item[三级节标题] 命令为\cs{subsubsection}，格式为小三号黑体，左排列，段前空2.5ex，段后空1.5ex；
@@ -2513,12 +2008,12 @@ December\fi
 % 的样式：
 %    \begin{macrocode}
 \titleformat{\chapter}[hang]
-            {\centering\zihao{1}\bfseries}
+            {\centering\zihao{-1}\bfseries}
             {\chaptertitlename}{1em}{}
 \titlespacing{\chapter}
              {0pt}
-             {*4}
-             {*3}
+             {*-3}
+             {*5}
 \titleformat{\section}[hang]
             {\zihao{-2}\bfseries}
             {\thesection}{1em}{}
@@ -2586,18 +2081,19 @@ December\fi
 %
 % \subsection{页幅设置}
 %
-% 正文统一用小四号字，间距为固定值20pt。\cs{linestrech}的值为$1$时为单倍行距， $1.2$时是
-% 一倍半行距， 而为$1.6$时是双倍行距。其实不同尺寸的字体行间距都不相同，而是成比例关系。这
-% 个20pt是对正文主要字体来说的。
-%
-% 在{\TeX}中基本的行间距是\cs{baselineskip}, 对于12pt的字体，这个值等于14.5pt,
+% Word中单倍行距的系数是1.3，而1.5倍行距即为两者乘积1.95,
+% 对于小四号字（12磅），等效于固定行距为23.4磅。
+% 而{\TeX}中基本的行间距是\cs{baselineskip}, 对于12pt的字体，这个值等于14.4pt,
+% 即单倍行距的系数是1.2。
+
 % 而真正的行间距是\cs{baselineskip}$\times$\cs{baselinestretch}，
-% \cs{baselinestretch}默认为$1$, 但我们可以重新设置它的值，如
-% |\renewcommand{\baselinestretch}{1.38}|就得到真正的行间距为14.5pt*1.38≈20pt。
-% 而这样定义之后，对不同尺寸的字体都会按同样的比例因子1.38放大行间距，使得全文排
+% \cs{baselinestretch}默认为$1$, 但我们可以重新设置它的值。
+% 为了正文的排版效果与 Word 小四号字体1.5倍行距的效果接近。
+% 换算得设置|\renewcommand{\baselinestretch}{1.625}|（$1.5\times 1.3/1.2$）。
+% 而这样定义之后，对不同尺寸的字体都会按同样的比例因子1.625放大行间距，使得全文排
 % 版能协调一致。
 %    \begin{macrocode}
-\renewcommand*{\baselinestretch}{1.38}
+\renewcommand*{\baselinestretch}{1.625}
 %    \end{macrocode}
 %
 % 修改|tabular|环境，设置表格中的行间距为正文行间距。
@@ -2611,11 +2107,9 @@ December\fi
 {\njut@endoldtabular\egroup}
 %    \end{macrocode}
 %
-% 文章用A4纸标准大小的白纸打印，页眉：2.6cm，页脚：2.4cm，页边距上下：3.5cm，左
-% 右：3.2cm。
+% 文章用A4纸标准大小的白纸打印，页边距设定如下。
 %    \begin{macrocode}
-\geometry{headheight=2.6cm,headsep=3mm,footskip=13mm}
-\geometry{top=3.5cm,bottom=3.5cm,left=3.2cm,right=3.2cm}
+\geometry{top=2.5cm,bottom=2.5cm,left=3.6cm,right=2.8cm}
 %    \end{macrocode}
 %
 % 设置每一段的首行缩进两个汉字。
@@ -2651,16 +2145,7 @@ December\fi
 % 格，而章节的后继页面的页眉页脚将使用|fancy|风格的默认定义或用户通过
 % \cs{fancyhead}或\cs{fancyfoot}命令定义的样式。
 %
-% 首先，我们需要修改|plain|风格的页眉页脚，将其页脚默认的页码去掉。
-%    \begin{macrocode}
-\fancypagestyle{plain}{%
-   \fancyhead{}                       % get rid of headers and footers
-   \renewcommand{\headrulewidth}{0pt} % and the header line
-   \renewcommand{\footrulewidth}{0pt} % and the footer line
-}
-%    \end{macrocode}
-%
-% 接下来我们按照如下规则修改|fancy|风格的页眉页脚设置，注意学位论文始终是双面打印的：
+% 我们按照如下规则修改|fancy|风格的页眉页脚设置，注意学位论文始终是双面打印的：
 % \begin{itemize}
 %    \item 令偶数页的页眉如下：
 %      \begin{itemize}
@@ -2714,7 +2199,7 @@ December\fi
 % 在第一次调用|\pagestyle{fancy}|之后，因为第一次调用该命令会设置\cs{chaptermark}。
 %    \begin{macrocode}
 \renewcommand{\chaptermark}[1]{\markboth{%
- \bfseries\if@mainmatter\chaptertitlename\hspace{1em}\fi{#1}%
+ \kaishu\if@mainmatter\chaptertitlename\hspace{1em}\fi{#1}%
 }{}}
 %    \end{macrocode}
 %
@@ -2722,7 +2207,7 @@ December\fi
 % |\pagestyle{fancy}|之后，因为第一次调用该命令会设置\cs{sectionmark}。
 %    \begin{macrocode}
 \renewcommand{\sectionmark}[1]{\markright{%
- \bfseries\if@mainmatter\thesection\hspace{1em}\fi{#1}%
+ \kaishu\if@mainmatter\thesection\hspace{1em}\fi{#1}%
 }}
 %    \end{macrocode}
 %
@@ -2871,16 +2356,18 @@ December\fi
 % 修改\cs{tableofcontents}命令用于生成目次页，并将目次页本身也被加入目次中。
 %    \begin{macrocode}
 \renewcommand*{\tableofcontents}{%
+   {\setstretch{1.3}
     \if@twocolumn
       \@restonecoltrue\onecolumn
     \else
       \@restonecolfalse
     \fi
     \nchapter{\contentsname}%
-    \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
+    \@mkboth{\kaishu\MakeUppercase\contentsname}%
+            {\kaishu\MakeUppercase\contentsname}%
     \@starttoc{toc}%
     \if@restonecol\twocolumn\fi
-}
+}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2888,16 +2375,18 @@ December\fi
 % 修改\cs{listoftables}命令，使得附表清单被加入目次中。
 %    \begin{macrocode}
 \renewcommand*{\listoftables}{%
+   {\setstretch{1.3}
     \if@twocolumn
       \@restonecoltrue\onecolumn
     \else
       \@restonecolfalse
     \fi
     \nchapter{\listtablename}%
-    \@mkboth{\MakeUppercase\listtablename}{\MakeUppercase\listtablename}%
+    \@mkboth{\kaishu\MakeUppercase\listtablename}%
+            {\kaishu\MakeUppercase\listtablename}%
     \@starttoc{lot}%
     \if@restonecol\twocolumn\fi
-}
+}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2905,16 +2394,18 @@ December\fi
 % 修改\cs{listoffigures}命令，使得插图清单被加入目次中。
 %    \begin{macrocode}
 \renewcommand*{\listoffigures}{%
+   {\setstretch{1.3}
     \if@twocolumn
       \@restonecoltrue\onecolumn
     \else
       \@restonecolfalse
     \fi
     \nchapter{\listfigurename}%
-    \@mkboth{\MakeUppercase\listfigurename}{\MakeUppercase\listfigurename}%
+    \@mkboth{\kaishu\MakeUppercase\listfigurename}%
+            {\kaishu\MakeUppercase\listfigurename}%
     \@starttoc{lof}%
     \if@restonecol\twocolumn\fi
-}
+}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2923,9 +2414,10 @@ December\fi
 % \begin{environment}{thebibliography}
 % 修改|thebibliography|环境用于在目次中加入参考文献页。
 %    \begin{macrocode}
-\renewenvironment{thebibliography}[1]
-     {\nchapter{\bibname}%
-      \@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
+\renewenvironment{thebibliography}[1]{%
+      \setstretch{1.3}
+      \nchapter{\bibname}%
+      \@mkboth{\kaishu\bibname}{\kaishu\bibname}%
       \list{\@biblabel{\@arabic\c@enumiv}}%
            {\settowidth\labelwidth{\@biblabel{#1}}%
             \leftmargin\labelwidth
@@ -2944,38 +2436,6 @@ December\fi
       \endlist}
 %    \end{macrocode}
 % \end{environment}
-%
-% 使用|gbt7714-2005.bst|作为参考文献样式。
-%    \begin{macrocode}
-\bibliographystyle{gbt7714-2005}
-%    \end{macrocode}
-%
-% 使用符合\std{GB/T 7714-2005}规范的参考文献引用样式。
-%    \begin{macrocode}
-\setcitestyle{super,square}
-%    \end{macrocode}
-%
-% 修改|natbib|内部的\cs{NAT@citesuper}命令，使其生成的上标引用编号可以正确地把
-% \cs{cite}命令的可选参数（通常是引文页码）也作为上标放在引文编号方框之后。
-%    \begin{macrocode}
-\renewcommand\NAT@citesuper[3]{%
-\ifNAT@swa%
-  \if*#2*\else#2\NAT@spacechar\fi%
-  \unskip\kern\p@\textsuperscript{\NAT@@open#1\NAT@@close#3}%
-\else #1\fi\endgroup%
-}
-%    \end{macrocode}
-%
-% 重新定义\cs{ref}命令，使其前面自动加一个``\textasciitilde''。因为|hyperref|宏包会通
-% 过\cs{AtBeginDocument}修改\cs{ref}的定义，因此我们对\cs{ref}的修改也必须使用
-% \cs{AtBeginDocument}命令进行。同时我们需要修改\cs{eqref}，使其括号前后不出现空隙。
-%    \begin{macrocode}
-\AtBeginDocument{%
-\let\oldref\ref%
-\renewcommand*{\ref}[1]{\thinspace\oldref{#1}}%
-\renewcommand*{\eqref}[1]{(\oldref{#1})}
-}
-%    \end{macrocode}
 %
 % \subsection{脚注}
 %
@@ -3106,16 +2566,17 @@ December\fi
 % 无页眉页脚的空白页。
 %    \begin{macrocode}
 \newcommand*{\makenlctitle}{%
+ {\setstretch{1.3}
   \thispagestyle{empty}
   \pdfbookmark[0]{\njut@cap@nlc}{nlc}
   {\songti\zihao{-4}
-    \makebox[40pt][l]{\njut@cap@nlc@classification}
+    \noindent\makebox[40pt][l]{\njut@cap@nlc@classification}
     \njutunderline[150pt]{\njut@value@nlc@classification}
     \hfill
     \makebox[40pt][r]{\njut@cap@nlc@securitylevel}
     \njutunderline[150pt]{\njut@value@nlc@securitylevel}
     \vskip 10pt
-    \makebox[40pt][l]{\njut@cap@nlc@udc}
+    \noindent\makebox[40pt][l]{\njut@cap@nlc@udc}
     \njutunderline[150pt]{\njut@value@nlc@udc}
   }
   \vskip\stretch{2}
@@ -3142,14 +2603,14 @@ December\fi
     \noindent\njutunderline[\textwidth]{%
       \njut@value@nlc@supervisorinfo}\par
     \noindent\njut@cap@nlc@degree%
-    \njutunderline[8em]{\njut@value@degree}%
+    \njutunderline[9em]{\njut@value@degree}%
     \noindent\njut@cap@nlc@major%
-    \njutunderline[164pt]{\njut@value@major}\par
+    \njutunderline[148pt]{\njut@value@major}\par
     \noindent\njut@cap@nlc@submitdate%
-    \njutunderline[8em]{\njut@value@submitdate}%
+    \njutunderline[9em]{\njut@value@submitdate}%
     \njut@cap@nlc@defenddate%
-    \njutunderline[134pt]{\njut@value@defenddate}\par
-    \noindent\njut@cap@nlc@institute\njutunderline[290pt]{}\par
+    \njutunderline[120pt]{\njut@value@defenddate}\par
+    \noindent\njut@cap@nlc@institute\njutunderline[289pt]{}\par
     \noindent\hfill\njut@cap@nlc@chairman%
     \njutunderline[9em]{\njut@value@nlc@chairman}\par
     \noindent\hfill\njut@cap@nlc@reviwer%
@@ -3159,7 +2620,7 @@ December\fi
     \noindent\hfill\njutunderline[9em]{\njut@value@nlc@reviewerd}\par
   }
   \cleardoublepage
-}
+}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3169,71 +2630,77 @@ December\fi
 %    \begin{macrocode}
 \newcommand*{\njut@covertable@onelinetitle}{
   \begin{tabular}{p{7.3em}c}
-      \makebox[7em][s]{\njut@cap@cover@title}
-      & \njutunderline[310pt]{\njut@value@title}\\
-      \makebox[7em][s]{\njut@cap@cover@author}
-      & \njutunderline[310pt]{\njut@value@author}\\
-      \makebox[7em][s]{\njut@cap@cover@major}
-      & \njutunderline[310pt]{\njut@value@major}\\
-      \makebox[7em][s]{\njut@cap@cover@researchfield}
-      & \njutunderline[310pt]{\njut@value@researchfield}\\
-      \makebox[7em][s]{\njut@cap@cover@supervisor}
-      & \njutunderline[310pt]{\njut@value@supervisor}\\
+      \makebox[7em][s]{\bfseries\njut@cap@cover@title}
+      & \njutunderline[260pt]{\njut@value@title}\\
+      \makebox[7em][s]{\bfseries\njut@cap@cover@author}
+      & \njutunderline[260pt]{\njut@value@author}\\
+      \makebox[7em][s]{\bfseries\njut@cap@cover@major}
+      & \njutunderline[260pt]{\njut@value@major}\\
+      \makebox[7em][s]{\bfseries\njut@cap@cover@researchfield}
+      & \njutunderline[260pt]{\njut@value@researchfield}\\
+      \makebox[7em][s]{\bfseries\njut@cap@cover@supervisor}
+      & \njutunderline[260pt]{\njut@value@supervisor}\\
   \end{tabular}
 }
 \newcommand*{\njut@covertable@twolinetitle}{
   \begin{tabular}{p{7.3em}c}
-      \makebox[7em][s]{\njut@cap@cover@title}
-      & \njutunderline[310pt]{\njut@value@titlea}\\
+      \makebox[7em][s]{\bfseries\njut@cap@cover@title}
+      & \njutunderline[260pt]{\njut@value@titlea}\\
       \makebox[7em][s]{}
-      & \njutunderline[310pt]{\njut@value@titleb}\\
-      \makebox[7em][s]{\njut@cap@cover@author}
-      & \njutunderline[310pt]{\njut@value@author}\\
-      \makebox[7em][s]{\njut@cap@cover@major}
-      & \njutunderline[310pt]{\njut@value@major}\\
-      \makebox[7em][s]{\njut@cap@cover@researchfield}
-      & \njutunderline[310pt]{\njut@value@researchfield}\\
-      \makebox[7em][s]{\njut@cap@cover@supervisor}
-      & \njutunderline[310pt]{\njut@value@supervisor}\\
+      & \njutunderline[260pt]{\njut@value@titleb}\\
+      \makebox[7em][s]{\bfseries\njut@cap@cover@author}
+      & \njutunderline[260pt]{\njut@value@author}\\
+      \makebox[7em][s]{\bfseries\njut@cap@cover@major}
+      & \njutunderline[260pt]{\njut@value@major}\\
+      \makebox[7em][s]{\bfseries\njut@cap@cover@researchfield}
+      & \njutunderline[260pt]{\njut@value@researchfield}\\
+      \makebox[7em][s]{\bfseries\njut@cap@cover@supervisor}
+      & \njutunderline[260pt]{\njut@value@supervisor}\\
   \end{tabular}
 }
 \renewcommand*{\maketitle}{%
+ {\setstretch{1.3}
   \thispagestyle{empty}
   \pdfbookmark[0]{\njut@cap@cover}{cover}
   \begin{center}
-    \vskip 10mm
-    \includegraphics[width=1.96cm]{\njut@cap@institute@logo} \\
-    \includegraphics[height=2cm]{\njut@cap@institute@name} \\
+    \vspace*{15mm}
+    \includegraphics[width=6cm]{\njut@cap@institute@name} \\
     \vskip 8mm
     {\bf\kaishu\zihao{1}\makebox[10em][s]{\njut@cap@cover@thesis}}\\
     \vskip 5mm
     {\bf\kaishu\zihao{1}（\makebox[7em][s]{\njut@cap@cover@apply}）}\\
     \vskip\stretch{1}
     {\bgroup
-    \bf\kaishu\zihao{3}
+    \kaishu\zihao{3}
     \def\tabcolsep{1pt}
     \def\arraystretch{1.5}
-    \ifdefempty{\njut@cap@cover@title}{\njut@covertable@onelinetitle}{\njut@covertable@twolinetitle}
+    \ifdefempty{\njut@value@title}{\njut@covertable@twolinetitle}%
+                                  {\njut@covertable@onelinetitle}
     \egroup}\\
     \vskip \stretch{1}
     {\bf\kaishu\zihao{4}\njut@value@date}
+    \vspace*{10mm}
   \end{center}
   \ifnjut@backinfo
     \clearpage
     \thispagestyle{empty}
     \vspace*{\stretch{1}}
-    {\bf\kaishu\zihao{-3}
+    {\kaishu\zihao{-3}
     \noindent
     \begin{tabular}{p{6.2em}l}
-    \makebox[6em][s]{\njut@cap@coverback@studentnum}： &\njut@value@studentnum\\
-    \makebox[6em][s]{\njut@cap@coverback@defenddate}： &\njut@value@defenddate\\
-    \makebox[6em][s]{\njut@cap@coverback@supervisor}： &\njut@cap@coverback@sign\\
+    \makebox[6em][s]{\bfseries\njut@cap@coverback@studentnum}：
+    & \njut@value@studentnum\\
+    \makebox[6em][s]{\bfseries\njut@cap@coverback@defenddate}：
+    & \njut@value@defenddate\\
+    \makebox[6em][s]{\bfseries\njut@cap@coverback@supervisor}：
+    & \bfseries\njut@cap@coverback@sign\\
     \end{tabular}}
+    \vspace*{10mm}
     \clearpage
   \else
     \cleardoublepage
   \fi
-}
+}}
 %    \end{macrocode}
 %  \end{macro}
 %
@@ -3242,10 +2709,11 @@ December\fi
 % 页脚的空白页。
 %    \begin{macrocode}
 \newcommand*{\makeenglishtitle}{%
+ {\setstretch{1.2}
   \thispagestyle{empty}
   \begin{center}
-    \vspace*{20pt}
-    \bf\sffamily\zihao{2}\njut@value@en@title
+    \vspace*{10mm}
+    \bf\sffamily\zihao{1}\njut@value@en@title
     \vskip \stretch{1}
     \normalfont\rmfamily\zihao{4}\njut@cap@cover@en@by
     \vskip 3pt
@@ -3263,10 +2731,11 @@ December\fi
     \njut@value@en@institute
     \vskip 30pt
     \normalfont\normalsize\njut@value@en@date
+    \vspace*{10mm}
   \end{center}
   \normalfont
   \cleardoublepage
-}
+}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3295,28 +2764,30 @@ December\fi
 % \cs{cleardoublepage}命令来插入无页眉页脚的空白页。
 %    \begin{macrocode}
 \newenvironment{abstract}{%
-  \thispagestyle{empty}
-  \pdfbookmark[0]{\njut@cap@abstract}{abstract}
+ {\setstretch{1.3}
+  \chapter[\njut@cap@abstract]{}
+  \vspace{-12ex}
   \begin{center}
     {\bf\kaishu\zihao{-2}%
-     \njutunderline{\njut@cap@abstract@chaptername}}
+     \CJKunderdblline{\njut@cap@abstract@chaptername}}
   \end{center}
   \vspace{3mm}
   {\kaishu\zihao{4}%
   \noindent\njut@cap@abstract@title{：}%
   \njutunderline[318pt]{\njut@value@abstract@titlea}\\
-  \noindent\njutunderline[\textwidth]{\njut@value@abstract@titleb}\\
-  \noindent\njutunderline[178pt]{\njut@value@major}%
+  \ifdefempty{\njut@value@abstract@titleb}{}{%
+    \noindent\njutunderline[\textwidth]{\njut@value@abstract@titleb}\\}
+  \noindent\njutunderline[180pt]{\njut@value@major}%
   \njut@cap@abstract@major%
   \njutunderline[50pt]{\njut@value@grade}%
   \njut@cap@abstract@author{：}%
-  \njutunderline[61pt]{\njut@value@author}\\
+  \njutunderline[60pt]{\njut@value@author}\\
   \noindent\njut@cap@abstract@supervisor{：}%
-  \njutunderline[248pt]{\njut@value@supervisor}\\
-  }
+  \njutunderline[270pt]{\njut@value@supervisor}\\
+  }}
   \vspace{5mm}
   \begin{center}
-    {\heiti\zihao{-3}\njut@cap@abstract@abstractname}
+    {\bf\zihao{-3}\njut@cap@abstract@abstractname}
   \end{center}%
   \normalsize\par%
 }{%
@@ -3360,23 +2831,25 @@ December\fi
 % \cs{cleardoublepage}命令来插入无页眉页脚的空白页。
 %    \begin{macrocode}
 \newenvironment{englishabstract}{%
-  \thispagestyle{empty}
-  \pdfbookmark[0]{\njut@cap@abstract@en}{englishabstract}
+ {\setstretch{1.3}
+  \chapter[\njut@cap@abstract@en]{}
+  \vspace{-12ex}
   \begin{center}
     {\bf\kaishu\zihao{-2}%
-     \njutunderline{\njut@cap@abstract@en@chaptername}}
+     \CJKunderdblline{\njut@cap@abstract@en@chaptername}}
   \end{center}
   {\zihao{4}%
    \njut@cap@abstract@en@title{:}~%
    \njutunderline[360pt]{\njut@value@abstract@en@titlea}\\
-   \njutunderline[\textwidth]{\njut@value@abstract@en@titleb}\\
+   \ifdefempty{\njut@value@abstract@en@titleb}{}{%
+     \njutunderline[\textwidth]{\njut@value@abstract@en@titleb}\\}
    \njut@cap@abstract@en@major{:}~%
-   \njutunderline[298pt]{\njut@value@en@major}\\
+   \njutunderline[296pt]{\njut@value@en@major}\\
    \njut@cap@abstract@en@author{:}~%
-   \njutunderline[299pt]{\njut@value@en@author}\\
+   \njutunderline[298pt]{\njut@value@en@author}\\
    \njut@cap@abstract@en@supervisor{:}~%
    \njutunderline[348pt]{\njut@value@en@supervisor}\\
-  }
+  }}
   \vspace{5mm}
   \begin{center}
     {\bf\zihao{-3}\njut@cap@abstract@en@abstractname}
@@ -3514,7 +2987,8 @@ December\fi
     {|C{2.2cm}|C{2cm}|C{1.5cm}|C{2.1cm}|C{1.42cm}C{1.5cm}|C{1.25cm}|}
   \hline
   \cell{2.2cm}{1cm}{\njut@cap@license@title}
-  & \multicolumn{6}{c|}{\njut@value@title} \\
+  & \multicolumn{6}{c|}{\ifdefempty{\njut@value@title}%
+  {\njut@value@titlea\njut@value@titleb}{\njut@value@title}} \\
   \hline
   \cell{2.2cm}{1cm}{\njut@cap@license@studentnum}
   & {\njut@value@studentnum}
@@ -3548,15 +3022,11 @@ December\fi
   & \multicolumn{3}{c|}{%
     \raisebox{-1em}{\njut@cap@license@categoryhint}}\\
   \hline
-  \cell{2.2cm}{1cm}{\njut@cap@license@telphone}
-  & \multicolumn{2}{c|}{{\njut@value@telphone}}
-  & {\njut@cap@license@email}
-  & \multicolumn{3}{c|}{{\njut@value@email}}  \\
+  \cell{2.2cm}{1cm}{\njut@cap@license@email}
+  & \multicolumn{6}{c|}{{\njut@value@email}}  \\
   \hline
   \cell{2.2cm}{1cm}{\njut@cap@license@supervisorname}
-  & \multicolumn{2}{c|}{{\njut@value@supervisor}}
-  & {\njut@cap@license@supervisortelphone}
-  & \multicolumn{3}{c|}{{\njut@value@supervisortelphone}} \\
+  & \multicolumn{6}{c|}{{\njut@value@supervisor}} \\
   \hline
 \end{tabular*}
 }
@@ -3568,8 +3038,8 @@ December\fi
 % 档属性自动填写。
 %    \begin{macrocode}
 \newcommand*{\makelicense}{%
-  \thispagestyle{empty}
   \nchapter{\njut@cap@license@chaptername}
+  \thispagestyle{empty}
   \njut@license@makedeclaration
   \par\vspace{1em}
   \njut@license@maketable
@@ -3691,9 +3161,10 @@ December\fi
 % 此命令设置PDF文档属性，依赖于|hyperref|宏包。
 %    \begin{macrocode}
 \newcommand*{\njut@setpdfinfo}{\hypersetup{%
-        pdftitle={\njut@value@title},
+        pdftitle={\ifdefempty{\njut@value@title}%
+          {\njut@value@titlea\njut@value@titleb}{\njut@value@title}},
         pdfauthor={\njut@value@author},
-        pdfsubject={\njut@cap@cover@apply},
+        pdfsubject={\njut@value@institute\njut@cap@cover@thesis},
         pdfkeywords={\njut@value@abstract@keywords},
         pdfcreator={\njut@value@author},
         pdfproducer={XeLaTeX with the NJU-Thesis document class}}
@@ -3718,7 +3189,6 @@ December\fi
 \RequirePackage{array,longtable}
 \RequirePackage{fancybox,fancyvrb}
 \RequirePackage{xcolor}
-\RequirePackage{txfonts}
 \RequirePackage{xltxtra}
 \RequirePackage{subfigure}
 \RequirePackage{marvosym}
@@ -3730,7 +3200,8 @@ December\fi
 \RequirePackage{fancyhdr}
 \RequirePackage{geometry}
 \RequirePackage{indentfirst}
-\RequirePackage[CJKnumber,CJKchecksingle]{xeCJK}
+\RequirePackage[fontset=fandol]{ctex}
+\RequirePackage{newtxtext,newtxmath}
 \RequirePackage[hyphens]{url} % must be load before hypdoc package
 \RequirePackage{hypdoc} % it will load hyperref package
 \RequirePackage[normalem]{ulem}
@@ -3754,39 +3225,6 @@ December\fi
 
 % 设置超链接为蓝色
 \hypersetup{colorlinks=true,urlcolor=blue}
-
-% 定义英文字体名称。
-\newcommand*{\njut@enfn@main}{Times New Roman}
-\newcommand*{\njut@enfn@sans}{Arial}
-\newcommand*{\njut@enfn@mono}{Courier New}
-
-% 选择中文字体
-\newcommand*{\njut@zhfn@songti}{Adobe Song Std}
-\newcommand*{\njut@zhfn@heiti}{Adobe Heiti Std}
-\newcommand*{\njut@zhfn@kaishu}{Adobe Kaiti Std}
-\newcommand*{\njut@zhfn@fangsong}{Adobe Fangsong Std}
-
-% 定义中文字体
-\setCJKfamilyfont{song}{\njut@zhfn@songti}
-\setCJKfamilyfont{hei}{\njut@zhfn@heiti}
-\setCJKfamilyfont{kai}{\njut@zhfn@kaishu}
-\setCJKfamilyfont{fangsong}{\njut@zhfn@fangsong}
-
-\setCJKmainfont[BoldFont={\njut@zhfn@heiti},
-                ItalicFont={\njut@zhfn@kaishu}]{\njut@zhfn@songti}
-\setCJKsansfont{\njut@zhfn@heiti}
-\setCJKmonofont{\njut@zhfn@fangsong}
-
-% 定义文档使用的英文字体
-\setmainfont{\njut@enfn@main}
-\setsansfont{\njut@enfn@sans}
-\setmonofont{\njut@enfn@mono}
-
-% 定义中文字体选择命令
-\newcommand*{\songti}{\CJKfamily{song}}
-\newcommand*{\heiti}{\CJKfamily{hei}}
-\newcommand*{\kaishu}{\CJKfamily{kai}}
-\newcommand*{\fangsong}{\CJKfamily{fangsong}}
 
 \renewcommand{\contentsname}{目\hspace{2em}录}
 \renewcommand{\abstractname}{摘\hspace{2em}要}

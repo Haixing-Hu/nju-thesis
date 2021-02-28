@@ -10,32 +10,23 @@
 ###############################################################################
 
 PACKAGE=njuthesis
-BST_FILE=gbt7714-2005.bst
-BST_URL=https://raw.githubusercontent.com/Haixing-Hu/GBT7714-2005-BibTeX-Style/master/gbt7714-2005.bst
 SOURCES=$(PACKAGE).dtx $(PACKAGE).ins
 CLS=$(PACKAGE).cls $(PACKAGE).cfg dtx-style.sty
 SAMPLE=sample
 SAMPLECONTENTS=$(SAMPLE).tex
 SAMPLEBIB=$(SAMPLE).bib
-INSTITUTE_LOGO=njulogo.eps
-INSTITUTE_NAME=njuname.eps
-TEXMFLOCAL=$(shell get_texmf_dir.sh)
+INSTITUTE_LOGO=njulogo.pdf
+INSTITUTE_NAME=njuname.pdf
 
 .PHONY: all clean cls doc sample
 
-all: bst cls doc sample
-
-###### update bst file
-bst:  $(BST_FILE)
-
-$(BST_FILE):
-	curl $(BST_URL) -o $(BST_FILE)
+all: cls doc sample
 
 ###### generate cls/cfg
 cls:  $(CLS)
 
 $(CLS): $(SOURCES)
-	latex $(PACKAGE).ins
+	xelatex $(PACKAGE).ins
 
 ###### generate doc
 
@@ -51,26 +42,14 @@ $(PACKAGE).pdf: $(CLS)
 
 sample:	 $(SAMPLE).pdf
 
-$(SAMPLE).pdf: $(CLS) $(INSTITUTE_LOGO) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE).tex $(SAMPLEBIB)
-	xelatex $(SAMPLE).tex
-	bibtex $(SAMPLE)
-	xelatex $(SAMPLE).tex
-	xelatex $(SAMPLE).tex
-
-###### install
-
-install: $(SOURCE) $(CLS) $(INSTITUTE_LOGO) $(INSTITUTE_NAME) $(BST_FILE) $(PACKAGE).pdf $(SAMPLE).pdf
-	mkdir -p $(TEXMFLOCAL)/tex/latex/njuthesis
-	cp -rvf $(SOURCES) $(CLS) $(INSTITUTE_LOGO) $(INSTITUTE_NAME) $(TEXMFLOCAL)/tex/latex/njuthesis/
-	mkdir -p $(TEXMFLOCAL)/doc/latex/njuthesis
-	cp -rvf $(PACKAGE).pdf $(SAMPLE).pdf $(TEXMFLOCAL)/doc/latex/njuthesis/
-	mkdir -p $(TEXMFLOCAL)/bibtex/bst
-	cp -rvf $(BST_FILE) $(TEXMFLOCAL)/bibtex/bst/
-	texhash
+$(SAMPLE).pdf: $(CLS) $(INSTITUTE_LOGO) $(INSTITUTE_NAME) $(SAMPLE).tex $(SAMPLEBIB)
+	latexmk -xelatex -synctex=1 $(SAMPLE).tex
 
 ###### clean
 
 clean:
+	latexmk -c $(SAMPLE).tex
+	latexmk -c $(PACKAGE).dtx
 	-@rm -f \
 		*.aux \
 		*.bak \
@@ -86,12 +65,20 @@ clean:
 		*.log \
 		*.out \
 		*.ps \
+		*.synctex \
+		*.synctex.gz \
 		*.thm \
 		*.toc \
 		*.lof \
 		*.lot \
 		*.loe \
-		*.sty \
+		*.hd \
+		*.xdv
+
+cleanall: clean
+	-@rm -f \
+		$(SAMPLE).pdf \
+		$(PACKAGE).pdf \
 		*.cfg \
 		*.cls \
 		*.sty

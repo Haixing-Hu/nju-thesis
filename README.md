@@ -1,5 +1,52 @@
 # NJU-Thesis
 
+## Overleaf 模板
+
+[Overleaf](https://www.overleaf.com) 可以提供免费的在线 LaTeX 文档编辑编译服务，本项目已在 Overleaf 上传[模板](https://www.overleaf.com/latex/templates/nan-jing-da-xue-yan-jiu-sheng-bi-ye-lun-wen-mo-ban/mddmfkgsnhxq
+)。经测试，编译毕业论文体量的文档速度还不错，支持双向跳转，支持版本历史管理，唯一的问题是 PDF 文件的预览速度略慢。Overleaf 关于 LaTeX 以及平台本身也提供非常详细的[文档](https://www.overleaf.com/learn)。有兴趣的同学可以尝试。
+
+注意：菜单里请设置编译器为 XeLaTeX，并对主文档做必要设置。
+
+## 定制说明
+
+这是在 [Haixing Hu](http://haixing-hu.github.io/nju-thesis/) 原项目基础上的个人定制模板，需要原版的可查看项目的 origin 分支。除了对原项目的一些 bug 做了修复，也根据个人审美和一些统一性要求对模板作出改动，包括：
+
+* 修复了论文短标题无法正常显示的错误；
+* 版面设计：
+    1. 添加中英文摘要纸到目录；
+    1. 中英文摘要纸字样双下划线;
+    1. 中英文摘要纸自动去掉多余的空行;
+    1. 修改标点符号处理方式为全角；
+    1. 计算了等效 Word 1.5 倍行距的缩放系数；
+* 字体字号：
+    1. 修改了底层中文宏包支持为 ctex；
+    1. 修正了公式内数字不是 Times 字体的错误；
+    1. 默认改用 Fandol 开源字体，使得宋体加粗不必用黑体代替，可跨平台使用；
+    1. 修改了各字号的字体大小，不再对磅 (Word) 和 pt (TeX) 进行换算；
+    1. 修改页眉中文字体为楷书；
+* 字段信息：
+    1. 使用新的南大官方高清 logo 替换了原 logo；
+    1. 封面和授权书表格信息字段修改；
+    1. 修改了生成 pdf 文件的主题字段;
+    1. 使用长论文标题时，也可以正确生成 pdf 文件标题信息;
+* 修改 `Makefile` 文件，解决了 win 平台部分 texlive 版本可能无法正确编译 `.ins` 的问题。
+
+本版本仅保留最必要的文件，所有可由其他命令生成的文件均不默认提供，因此使用前需自行编译顺便测试编译环境。Windows 用户执行 `RUNME.bat` 文件即可，Linux 和 Mac 用户则需要用到 `make` 工具：
+
+```sh
+$ cd njuthesis
+# 清理以前执行make生成的旧文件
+$ make clean
+# 生成 njuthesis.cls 和 njuthesis.cfg
+$ make cls
+# 生成文档类手册
+$ make doc
+# 生成样例文档
+$ make sample
+```
+
+*********
+
 本项目提供了一个用于排版南京大学学位论文的XeLaTeX模板。该模板严格遵循南京大学学术委员会对学位论文的排版格式要求以及相应的国家标准规范，可帮助南京大学的同学们方便地排版出漂亮的学位论文。
 
 目前该模板支持排版博士、硕士和学士的学位论文。
